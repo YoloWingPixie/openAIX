@@ -1,0 +1,65 @@
+{
+  "$schema": "urn:openaix:schema:tst:0.1.0-draft.1",
+  "kind": "tst",
+  "meta": {
+    "id": "oir-tst",
+    "issued_at": "2026-10-02T12:00:00Z",
+    "revision": "1",
+    "title": "OIR time-sensitive targets"
+  },
+  "resources_ref": {
+    "id": "oir-resources",
+    "revision": "1"
+  },
+  "schema_version": "0.1.0-draft.1",
+  "targets": [
+    {
+      "activity_window": {
+        "end": "2026-10-02T14:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "authorized_engagement_means": [
+        {
+          "scl": "f16-sead",
+          "store": "agm-88c",
+          "system": "F-16C"
+        },
+        {
+          "scl": "f15e-scar",
+          "store": "gbu-38",
+          "system": "F-15E"
+        },
+        {
+          "scl": "a10-cas",
+          "store": "agm-65d",
+          "system": "A-10C"
+        }
+      ],
+      "category": "air defense",
+      "engagement_authority": "caoc",
+      "expected_locations": [
+        {
+          "name": "Gainful search box centre",
+          "position": {
+            "latitude": 35.215,
+            "longitude": 40.265
+          }
+        },
+        {
+          "name": "Road junction north of Cobalt",
+          "position": {
+            "latitude": 35.175,
+            "longitude": 40.325
+          }
+        }
+      ],
+      "expiration_criteria": "Battery assessed destroyed.",
+      "expires_at": "2026-10-02T14:00:00Z",
+      "priority": 1,
+      "roe_constraints": "Positive identification by two sources; no strikes within 500 m of the Lantern village.",
+      "target": "gainful-battery",
+      "target_description": "Captured SA-6 battery that relocates along the river road after it emits.",
+      "tst_number": "TST-01"
+    }
+  ]
+}

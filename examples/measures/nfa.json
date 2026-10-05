@@ -1,0 +1,25 @@
+{
+  "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "description": "No-fire area that protects a civilian water pumping station between the FLOT and the FSCL.",
+  "geometry": {
+    "center": {
+      "latitude": 34.935,
+      "longitude": 40.324
+    },
+    "kind": "circle",
+    "radius": {
+      "unit": "m",
+      "value": 1000
+    }
+  },
+  "id": "quarry-nfa",
+  "name": "Quarry Springs NFA",
+  "restrictions": [
+    "No fires or effects into the area unless the establishing headquarters approves each mission."
+  ],
+  "type": "NFA"
+}

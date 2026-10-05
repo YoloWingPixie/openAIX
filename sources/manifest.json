@@ -1,0 +1,58 @@
+{
+  "sources/dcs/aircraft-stations.json": {
+    "revision": "dc7d15e8e34150441b109346eea4ca18eb0104a7",
+    "snapshot_sha256": "ac2e4bcfe802a52e268735cd0086dedc484e8bf0b9128c849c126ce76db56ee7",
+    "source": "_G/db/Units (A-10C_2, AH-64D_BLK_II, F-15C, F-15ESE, F-16C_50)",
+    "source_sha256": "645e72a6d7ca7972a45c17cf537d5c72f2c3665284a7c440e5fef303ce5e26fe",
+    "upstream": "dcs-lua-datamine"
+  },
+  "sources/opord-builder/ato-0.2.model.json": {
+    "revision": "e71739454f6ccd1ebae7e223726a83ab65b0ffde",
+    "snapshot_sha256": "56246f7ac110c55167fd04440f36442d5693cca6daa2b4c5e0bd541a4ca428df",
+    "source": "docs/complete-schema.html",
+    "source_sha256": "ea25558f6366708cb3a789eb0c0f53cd225cda320e2c9c75ce4ac8b3f13c523b",
+    "upstream": "opord-builder"
+  },
+  "sources/opord-builder/frago.model.json": {
+    "revision": "e71739454f6ccd1ebae7e223726a83ab65b0ffde",
+    "snapshot_sha256": "cf14377092d4252e7d66524da3433c5b55e07d728674b29c167427c91ae04499",
+    "source": "docs/complete-schema.html",
+    "source_sha256": "ea25558f6366708cb3a789eb0c0f53cd225cda320e2c9c75ce4ac8b3f13c523b",
+    "upstream": "opord-builder"
+  },
+  "sources/opord-builder/hpt.model.json": {
+    "revision": "e71739454f6ccd1ebae7e223726a83ab65b0ffde",
+    "snapshot_sha256": "1f6e4b7ee0e83aafb292d366c17dd6313c8ffc20df8727cefa92f0c6f8cbc54c",
+    "source": "schemas/hpt.schema.json",
+    "source_sha256": "188ee8ffe8ca9241710999116c6654f6124eabe591df4e2161e6a5c3fdd62c47",
+    "upstream": "opord-builder"
+  },
+  "sources/opord-builder/jpitl.model.json": {
+    "revision": "e71739454f6ccd1ebae7e223726a83ab65b0ffde",
+    "snapshot_sha256": "10001dd491e14ddb1e5a921f5304d75fd927f93255b8392ee3f3b3b5c96f2b7b",
+    "source": "schemas/jpitl.schema.json",
+    "source_sha256": "63fb4dfa99d03a9cc6625b5c954bf3a8a3f5de4eb0b595a62544336449e42e4a",
+    "upstream": "opord-builder"
+  },
+  "sources/opord-builder/opord.model.json": {
+    "revision": "e71739454f6ccd1ebae7e223726a83ab65b0ffde",
+    "snapshot_sha256": "afad47c799c5bcfea58954faac3fcae58d73a0c8b83d2a0ecdec42f9184694df",
+    "source": "schemas/opord.schema.json",
+    "source_sha256": "b8bb2b92ace2fcc32f1a820905267b3d1a6b8cf0062a9f855a1fbeffe2287019",
+    "upstream": "opord-builder"
+  },
+  "sources/opord-builder/spins.model.json": {
+    "revision": "e71739454f6ccd1ebae7e223726a83ab65b0ffde",
+    "snapshot_sha256": "04f7a4f66e00bf3291b50b9da805c8a8d82f12a69d5b3809338ccd76a07b74b6",
+    "source": "schemas/spins.schema.json",
+    "source_sha256": "8dcf1c3c346511f454416edd4b576646b0b7d944aa675300a52472b478bae8c0",
+    "upstream": "opord-builder"
+  },
+  "sources/opord-builder/tst.model.json": {
+    "revision": "e71739454f6ccd1ebae7e223726a83ab65b0ffde",
+    "snapshot_sha256": "9f1e00cae27985a4380e48c2757a6d238ec82ef02050ba0d478734a1d954ce43",
+    "source": "schemas/tst.schema.json",
+    "source_sha256": "d2423b73798b07a7d9f86eb2ae5a0ef1440a1dca503250c49fa293a02bdd40ab",
+    "upstream": "opord-builder"
+  }
+}

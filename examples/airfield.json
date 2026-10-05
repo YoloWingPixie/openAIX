@@ -1,0 +1,551 @@
+{
+  "$schema": "urn:openaix:schema:airfield:0.1.0-draft.1",
+  "atis": {
+    "remarks": [
+      "Read back all runway hold-short instructions."
+    ],
+    "runway_in_use": "16R",
+    "transition_level": {
+      "reference": "FL",
+      "unit": "flight_level",
+      "value": 180
+    }
+  },
+  "calm_wind_runway": "16R",
+  "coalition": "blue",
+  "elevation": {
+    "reference": "MSL",
+    "unit": "ft",
+    "value": 5434
+  },
+  "extensions": {
+    "org.openaix.examples": {
+      "scenario_fields": [
+        "coalition",
+        "frequencies",
+        "atis",
+        "calm_wind_runway",
+        "traffic_pattern",
+        "navaids",
+        "taxi"
+      ]
+    }
+  },
+  "frequencies": [
+    {
+      "callsign": "Denver Arrival Information",
+      "frequency": {
+        "band": "vhf",
+        "modulation": "AM",
+        "unit": "MHz",
+        "value": 125.6
+      },
+      "role": "atis"
+    },
+    {
+      "callsign": "Denver Clearance",
+      "frequency": {
+        "band": "vhf",
+        "modulation": "AM",
+        "unit": "MHz",
+        "value": 118.75
+      },
+      "role": "clearance_delivery"
+    },
+    {
+      "callsign": "Denver Ground",
+      "frequency": {
+        "band": "vhf",
+        "modulation": "AM",
+        "unit": "MHz",
+        "value": 121.85
+      },
+      "role": "ground"
+    },
+    {
+      "callsign": "Denver Tower",
+      "frequency": {
+        "band": "vhf",
+        "modulation": "AM",
+        "unit": "MHz",
+        "value": 133.3
+      },
+      "role": "tower"
+    },
+    {
+      "callsign": "Denver Approach",
+      "frequency": {
+        "band": "vhf",
+        "modulation": "AM",
+        "unit": "MHz",
+        "value": 119.3
+      },
+      "role": "approach"
+    },
+    {
+      "callsign": "Denver Departure",
+      "frequency": {
+        "band": "vhf",
+        "modulation": "AM",
+        "unit": "MHz",
+        "value": 128.25
+      },
+      "role": "departure"
+    }
+  ],
+  "id": "kden",
+  "ident": "KDEN",
+  "kind": "airfield",
+  "localizers": [
+    "kden-idqq"
+  ],
+  "magnetic_variation_deg": 8.0,
+  "name": "Denver Intl",
+  "navaids": [
+    {
+      "id": "dvv",
+      "kind": "control_measure"
+    }
+  ],
+  "position": {
+    "latitude": 39.8616666667,
+    "longitude": -104.6731666667
+  },
+  "procedures": [
+    "kden-i16r"
+  ],
+  "resources_ref": {
+    "id": "kden-navigation",
+    "revision": "2610"
+  },
+  "runways": [
+    {
+      "designator": "07/25",
+      "ends": [
+        {
+          "designator": "07",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 82.0
+          },
+          "threshold": {
+            "latitude": 39.8409444444,
+            "longitude": -104.7266555556
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 55
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5350
+          }
+        },
+        {
+          "designator": "25",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 263.0
+          },
+          "threshold": {
+            "latitude": 39.8406583333,
+            "longitude": -104.6839361111
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 55
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5355
+          }
+        }
+      ],
+      "id": "kden-rw07-25",
+      "kind": "runway",
+      "length": {
+        "unit": "ft",
+        "value": 12000
+      },
+      "name": "KDEN runway 07/25",
+      "source": "FAA CIFP cycle 2610",
+      "width": {
+        "unit": "ft",
+        "value": 150
+      }
+    },
+    {
+      "designator": "08/26",
+      "ends": [
+        {
+          "designator": "08",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 83.0
+          },
+          "threshold": {
+            "latitude": 39.8775555556,
+            "longitude": -104.6622305556
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 52
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5354
+          }
+        },
+        {
+          "designator": "26",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 263.0
+          },
+          "threshold": {
+            "latitude": 39.8772444444,
+            "longitude": -104.6194861111
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 55
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5294
+          }
+        }
+      ],
+      "id": "kden-rw08-26",
+      "kind": "runway",
+      "length": {
+        "unit": "ft",
+        "value": 12000
+      },
+      "name": "KDEN runway 08/26",
+      "source": "FAA CIFP cycle 2610",
+      "width": {
+        "unit": "ft",
+        "value": 150
+      }
+    },
+    {
+      "designator": "16L/34R",
+      "ends": [
+        {
+          "designator": "16L",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 173.0
+          },
+          "threshold": {
+            "latitude": 39.8970361111,
+            "longitude": -104.6868055556
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 56
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5350
+          }
+        },
+        {
+          "designator": "34R",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 353.0
+          },
+          "threshold": {
+            "latitude": 39.8641027778,
+            "longitude": -104.6871888889
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 55
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5354
+          }
+        }
+      ],
+      "id": "kden-rw16l-34r",
+      "kind": "runway",
+      "length": {
+        "unit": "ft",
+        "value": 12000
+      },
+      "name": "KDEN runway 16L/34R",
+      "source": "FAA CIFP cycle 2610",
+      "width": {
+        "unit": "ft",
+        "value": 150
+      }
+    },
+    {
+      "designator": "16R/34L",
+      "ends": [
+        {
+          "designator": "16R",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 173.0
+          },
+          "localizer": "kden-idqq",
+          "threshold": {
+            "latitude": 39.8957972222,
+            "longitude": -104.6960833333
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 55
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5322
+          }
+        },
+        {
+          "designator": "34L",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 353.0
+          },
+          "threshold": {
+            "latitude": 39.8518861111,
+            "longitude": -104.6965888889
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 55
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5327
+          }
+        }
+      ],
+      "id": "kden-rw16r-34l",
+      "kind": "runway",
+      "length": {
+        "unit": "ft",
+        "value": 16000
+      },
+      "name": "KDEN runway 16R/34L",
+      "source": "FAA CIFP cycle 2610",
+      "width": {
+        "unit": "ft",
+        "value": 200
+      }
+    },
+    {
+      "designator": "17L/35R",
+      "ends": [
+        {
+          "designator": "17L",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 173.0
+          },
+          "threshold": {
+            "latitude": 39.8649527778,
+            "longitude": -104.6413055556
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 55
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5328
+          }
+        },
+        {
+          "designator": "35R",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 353.0
+          },
+          "threshold": {
+            "latitude": 39.8320194444,
+            "longitude": -104.6417111111
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 55
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5370
+          }
+        }
+      ],
+      "id": "kden-rw17l-35r",
+      "kind": "runway",
+      "length": {
+        "unit": "ft",
+        "value": 12000
+      },
+      "name": "KDEN runway 17L/35R",
+      "source": "FAA CIFP cycle 2610",
+      "width": {
+        "unit": "ft",
+        "value": 150
+      }
+    },
+    {
+      "designator": "17R/35L",
+      "ends": [
+        {
+          "designator": "17R",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 173.0
+          },
+          "threshold": {
+            "latitude": 39.8612444444,
+            "longitude": -104.6601555556
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 55
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5378
+          }
+        },
+        {
+          "designator": "35L",
+          "heading": {
+            "declination_deg": 8.0,
+            "reference": "magnetic",
+            "value": 353.0
+          },
+          "threshold": {
+            "latitude": 39.8283138889,
+            "longitude": -104.66055
+          },
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 53
+          },
+          "threshold_elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5434
+          }
+        }
+      ],
+      "id": "kden-rw17r-35l",
+      "kind": "runway",
+      "length": {
+        "unit": "ft",
+        "value": 12000
+      },
+      "name": "KDEN runway 17R/35L",
+      "source": "FAA CIFP cycle 2610",
+      "width": {
+        "unit": "ft",
+        "value": 150
+      }
+    }
+  ],
+  "source": "FAA CIFP cycle 2610, position N39514200W104402340 (PackedDMS)",
+  "taxi": {
+    "edges": [
+      {
+        "from": "junction-16r",
+        "taxiway": "Z1",
+        "to": "hold-16r"
+      },
+      {
+        "from": "hold-16r",
+        "taxiway": "Z2",
+        "to": "entry-16r"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "entry-16r",
+        "kind": "runway_connection",
+        "position": {
+          "latitude": 39.8957972222,
+          "longitude": -104.6960833333
+        },
+        "runway_end": "16R"
+      },
+      {
+        "id": "hold-16r",
+        "kind": "hold_short",
+        "name": "Hold short 16R",
+        "position": {
+          "latitude": 39.895811,
+          "longitude": -104.697138
+        },
+        "runway_end": "16R"
+      },
+      {
+        "id": "junction-16r",
+        "kind": "intersection",
+        "position": {
+          "latitude": 39.895836,
+          "longitude": -104.699013
+        }
+      }
+    ]
+  },
+  "traffic_pattern": {
+    "altitude": {
+      "reference": "AGL",
+      "unit": "ft",
+      "value": 1000
+    },
+    "categories": {
+      "heavy": {
+        "altitude": {
+          "reference": "AGL",
+          "unit": "ft",
+          "value": 1500
+        }
+      },
+      "helicopter": {
+        "altitude": {
+          "reference": "AGL",
+          "unit": "ft",
+          "value": 500
+        }
+      }
+    },
+    "direction": "left"
+  },
+  "transition_altitude": {
+    "reference": "MSL",
+    "unit": "ft",
+    "value": 18000
+  }
+}

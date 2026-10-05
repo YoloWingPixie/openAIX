@@ -1,0 +1,111 @@
+{
+  "$schema": "urn:openaix:schema:procedure:0.1.0-draft.1",
+  "airfield": "ojms",
+  "extensions": {
+    "sim": {
+      "dcs": {
+        "bindings": [
+          {
+            "closed": true,
+            "kind": "drawing",
+            "layer": "Blue",
+            "line_mode": "segments",
+            "mission_id": "oir-syria",
+            "name": "OIR I31 approach",
+            "object_id": 44,
+            "primitive_type": "Line",
+            "style": {
+              "color": "0x3366FFFF",
+              "fill_color": "0x3366FF20",
+              "thickness": 2,
+              "visible": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "id": "ojms-i31",
+  "ident": "I31",
+  "kind": "procedure",
+  "name": "Muwaffaq Salti ILS runway 31 approach (I31)",
+  "procedure_type": "approach",
+  "resources_ref": {
+    "id": "oir-resources",
+    "revision": "1"
+  },
+  "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+  "transitions": [
+    {
+      "ident": "I31",
+      "legs": [
+        {
+          "altitude": {
+            "kind": "at",
+            "lower": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 3300
+            }
+          },
+          "approach_fix": "final_approach_fix",
+          "arc_center": {
+            "id": "ghi",
+            "kind": "control_measure"
+          },
+          "arc_radius": {
+            "unit": "nm",
+            "value": 10
+          },
+          "distance": {
+            "unit": "nm",
+            "value": 5
+          },
+          "fix": {
+            "ident": "FAF31",
+            "position": {
+              "latitude": 31.767214,
+              "longitude": 36.869855
+            }
+          },
+          "fly_over": true,
+          "leg_type": "initial_fix",
+          "recommended_navaid": {
+            "id": "ghi",
+            "kind": "control_measure"
+          },
+          "speed": {
+            "kind": "at_or_below",
+            "value": {
+              "unit": "kt",
+              "value": 210
+            }
+          },
+          "time": {
+            "unit": "min",
+            "value": 1.0
+          },
+          "turn_direction": "right",
+          "vertical_angle_deg": -3.0
+        },
+        {
+          "altitude": {
+            "kind": "at_or_above",
+            "lower": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 5000
+            }
+          },
+          "course": {
+            "declination_deg": 5.0,
+            "reference": "magnetic",
+            "value": 307.2
+          },
+          "leg_type": "course_to_altitude",
+          "missed_approach": true
+        }
+      ]
+    }
+  ]
+}

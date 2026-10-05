@@ -1,0 +1,927 @@
+{
+  "version": 1,
+  "review_date": "2026-10-02",
+  "scope": "Public planning concepts and ACMREQ set-level coverage. No complete APP-11, ADatP-3 or USMTF field-dictionary conformance is claimed.",
+  "acmreq": {
+    "source": "nato-ajp-3-3-5",
+    "edition": "Edition C Version 1, March 2024",
+    "locator": "Annex C, C-2 through C-4",
+    "level": "message_set_inventory",
+    "complete_field_dictionary": false,
+    "sets": [
+      {
+        "set": "EXER",
+        "sequence": 1,
+        "status": "partial",
+        "path": "meta.operation",
+        "gap": "An exercise-specific discriminator is not represented."
+      },
+      {
+        "set": "OPER",
+        "sequence": 2,
+        "status": "partial",
+        "path": "meta.operation",
+        "gap": "Operation codeword can be preserved; EXER/OPER exclusivity is not encoded."
+      },
+      {
+        "set": "MSGID",
+        "sequence": 3,
+        "status": "partial",
+        "path": "meta",
+        "gap": "Document identity is represented; formal message originator/addressing fields are not."
+      },
+      {
+        "set": "REF",
+        "sequence": 4,
+        "status": "mapped_concept",
+        "path": "references",
+        "gap": "Uses openAIX DocumentRef, not APP-11 serialization."
+      },
+      {
+        "set": "POC",
+        "sequence": 5,
+        "status": "unmapped",
+        "path": null,
+        "gap": "Requesting-unit point-of-contact fields are not modeled as a formal message header."
+      },
+      {
+        "set": "ACMSTAT",
+        "sequence": 6,
+        "status": "partial",
+        "path": "assignments[].state",
+        "gap": "Activation/deactivation differs from ADD/CHANGE/DELETE request semantics."
+      },
+      {
+        "set": "ACMID",
+        "sequence": 7,
+        "status": "mapped_concept",
+        "path": "assignments[].measure",
+        "gap": "Stable measure reference."
+      },
+      {
+        "set": "GEODATIM",
+        "sequence": 8,
+        "status": "partial",
+        "path": "resources.control_measures.*",
+        "gap": "Custom geometry uses geographic coordinates; arbitrary source-datum transformation is not provided."
+      },
+      {
+        "set": "POLYARC",
+        "sequence": 9,
+        "status": "mapped_concept",
+        "path": "resources.control_measures.*.geometry",
+        "gap": "Custom DCS-oriented geometry, not the NATO shape-field encoding."
+      },
+      {
+        "set": "RADARC",
+        "sequence": 10,
+        "status": "mapped_concept",
+        "path": "resources.control_measures.*.geometry",
+        "gap": "Custom DCS-oriented geometry, not the NATO shape-field encoding."
+      },
+      {
+        "set": "AIRTRACK",
+        "sequence": 11,
+        "status": "mapped_concept",
+        "path": "resources.control_measures.*.geometry",
+        "gap": "Custom DCS-oriented geometry, not the NATO shape-field encoding."
+      },
+      {
+        "set": "POLYGON",
+        "sequence": 12,
+        "status": "mapped_concept",
+        "path": "resources.control_measures.*.geometry",
+        "gap": "Custom DCS-oriented geometry, not the NATO shape-field encoding."
+      },
+      {
+        "set": "CIRCLE",
+        "sequence": 13,
+        "status": "mapped_concept",
+        "path": "resources.control_measures.*.geometry",
+        "gap": "Custom DCS-oriented geometry, not the NATO shape-field encoding."
+      },
+      {
+        "set": "CORRIDOR",
+        "sequence": 14,
+        "status": "mapped_concept",
+        "path": "resources.control_measures.*.geometry",
+        "gap": "Custom DCS-oriented geometry, not the NATO shape-field encoding."
+      },
+      {
+        "set": "APOINT",
+        "sequence": 15,
+        "status": "mapped_concept",
+        "path": "resources.control_measures.*.geometry",
+        "gap": "Custom DCS-oriented geometry, not the NATO shape-field encoding."
+      },
+      {
+        "set": "AORBIT",
+        "sequence": 16,
+        "status": "mapped_concept",
+        "path": "resources.control_measures.*.geometry",
+        "gap": "Custom DCS-oriented geometry, not the NATO shape-field encoding."
+      },
+      {
+        "set": "GEOLINE",
+        "sequence": 17,
+        "status": "mapped_concept",
+        "path": "resources.control_measures.*.geometry",
+        "gap": "Custom DCS-oriented geometry, not the NATO shape-field encoding."
+      },
+      {
+        "set": "EFFLEVEL",
+        "sequence": 18,
+        "status": "mapped_concept",
+        "path": "resources.control_measures.*.altitude / components[]",
+        "gap": "Referenced vertical limits; selected shape determines ownership."
+      },
+      {
+        "set": "APERIOD",
+        "sequence": 19,
+        "status": "mapped_concept",
+        "path": "assignments[].effective",
+        "gap": "Order interval and standing measure availability remain distinct."
+      },
+      {
+        "set": "CNTRLPT",
+        "sequence": 20,
+        "status": "mapped_concept",
+        "path": "assignments[].control_points",
+        "gap": "Shared point-measure references."
+      },
+      {
+        "set": "CONTAUTH",
+        "sequence": 21,
+        "status": "mapped_concept",
+        "path": "assignments[].controlling_agency",
+        "gap": "Shared agency reference."
+      },
+      {
+        "set": "GENTEXT PURPOSE",
+        "sequence": 22,
+        "status": "mapped_concept",
+        "path": "assignments[].purpose",
+        "gap": "Purpose scoped to assignment."
+      },
+      {
+        "set": "GENTEXT TRANSIT INSTRUCTIONS",
+        "sequence": 23,
+        "status": "mapped_concept",
+        "path": "assignments[].transit_instructions",
+        "gap": "Instruction list scoped to assignment."
+      },
+      {
+        "set": "UNDLKTN",
+        "sequence": 24,
+        "status": "unmapped",
+        "path": null,
+        "gap": "Link 16 dissemination track number not modeled."
+      },
+      {
+        "set": "DECL",
+        "sequence": 25,
+        "status": "unmapped",
+        "path": null,
+        "gap": "Message declassification header is outside the flight-simulation minimum."
+      }
+    ]
+  },
+  "documents": [
+    {
+      "schema": "ato",
+      "source": "joint-jp-3-30-2019",
+      "locator": "Glossary, GL-6 (air tasking order); Chapter III, paragraph 6.b, page III-19 (execution period, normally 24 hours); paragraph 6.d, page III-20; paragraph 6.e(4), page III-25 (ATO, SPINS and ACO production)",
+      "evidence": "doctrine_definition_and_contents",
+      "represented": [
+        "period",
+        "missions",
+        "missions[].flights[].aircraft_type",
+        "missions[].flights[].callsign",
+        "missions[].flights[].identification",
+        "aco",
+        "spins",
+        "missions[].tasking.brief",
+        "missions[].tasking.assignments[].weaponeering",
+        "missions[].tasking.assignments[].target_list_entry"
+      ],
+      "gaps": [
+        "All imported twelve families are application contracts, not an exhaustive joint mission taxonomy.",
+        "All national mission codes, aircraft codes and formal tasking-message element mappings remain unverified.",
+        "PreplannedAttack role `dead` is an openAIX value with no doctrinal source.",
+        "Desired-effect values DESTROY, NEUTRALIZE, SUPPRESS, DISRUPT, DEGRADE, DENY and DIVERT are openAIX values with no doctrinal source.",
+        "Mission briefs are typed planning data for crews; target categories of the SCAR brief, refuelling rendezvous types and recovery survivor conditions are openAIX values with no doctrinal source."
+      ],
+      "references": [
+        {
+          "source": "joint-jp-3-30-2019",
+          "locator": "Chapter II, paragraph 6.d(1)(b), page II-17",
+          "note": "The ATO includes all scheduled and prospective aircraft, for example alert, medical evacuation and personnel recovery aircraft."
+        },
+        {
+          "source": "joint-jp-3-30-2019",
+          "locator": "Chapter II, paragraph 3.a, page II-4; paragraph 3.d, page II-6",
+          "note": "The ACO is published as part of the ATO or as a separate document and carries airspace coordinating measures, air defense measures and FSCMs."
+        },
+        {
+          "source": "joint-jp-3-09-3-2014",
+          "locator": "Chapter III, paragraph 27.b(5)(b), page III-132",
+          "note": "Minimum CAS mission data: mission number, call sign, number and type of aircraft, ordnance, estimated TOT, control point, initial contact, and call sign and frequency of the final control agency."
+        },
+        {
+          "source": "rcaf-shape-ch5",
+          "locator": "Air battle rhythm and air tasking cycle",
+          "note": "Secondary concept reference only."
+        },
+        {
+          "source": "joint-jp-3-09-3-2014",
+          "locator": "Chapter V, Figure V-4, page V-16; Chapter III, page III-77",
+          "note": "CAS check-in briefing (MNPOPCA) and target marks; source of the CAS brief check-in items and mark values."
+        }
+      ]
+    },
+    {
+      "schema": "aco",
+      "source": "nato-ajp-3-3-5",
+      "locator": "Paragraphs 3.10-3.11; Annex C sets 7, 19-23",
+      "evidence": "doctrine_and_related_request_set_inventory",
+      "represented": [
+        "period",
+        "assignments[].measure",
+        "assignments[].effective",
+        "assignments[].controlling_agency",
+        "assignments[].control_points",
+        "assignments[].purpose",
+        "assignments[].transit_instructions",
+        "references",
+        "assignments[].usage"
+      ],
+      "gaps": [
+        "ACMREQ inventory is a request-message mapping, not an ACO message dictionary.",
+        "Usage values are openAIX filter categories, not a USMTF code list.",
+        "Tanker and surveillance service data are owned by ATO taskings, not ACO assignments.",
+        "Conflict resolution and cross-document revision resolution belong to consumers."
+      ]
+    },
+    {
+      "schema": "spins",
+      "source": "nato-ajp-3-3-5",
+      "locator": "Paragraph 3.5, positive and procedural control",
+      "evidence": "concept_only",
+      "represented": [
+        "scope",
+        "period",
+        "orders",
+        "base",
+        "changes",
+        "rules_of_engagement",
+        "communications",
+        "identification",
+        "personnel_recovery",
+        "divert_and_abort",
+        "airspace_notes",
+        "check_in",
+        "tanker_procedures",
+        "remarks",
+        "references"
+      ],
+      "gaps": [
+        "No complete normative SPINS topic or field list verified; the sections follow the owner's list of SPINS content for DCS operations.",
+        "Typed sections preserve instructions but do not execute them.",
+        "IFF mode 4 and mode 5 keys are names only; no cryptographic data."
+      ]
+    },
+    {
+      "schema": "opord",
+      "source": "army-fm-5-0-2024",
+      "locator": "Appendix D, Figure D-2, pages 204-208 (base order and annex list); Appendix E, Figures E-1 to E-22, pages 229-337 (annex formats)",
+      "evidence": "public_document_template",
+      "represented": [
+        "order_number",
+        "operation_name",
+        "issuing_headquarters",
+        "date_time",
+        "time_zone",
+        "effective_time",
+        "task_organization",
+        "situation",
+        "mission",
+        "execution",
+        "sustainment",
+        "command_and_signal",
+        "acknowledgement",
+        "authentication",
+        "annexes.A-H",
+        "annexes.J-N",
+        "annexes.P-S",
+        "annexes.U-W",
+        "annexes.Z"
+      ],
+      "gaps": [
+        "Annex I (Air and Missile Defense) of FM 5-0 (2024) is not used; its content is Appendix 7 of Annex D, as in FM 6-0 (2022). Letters O, T, X and Y are spares.",
+        "Each annex carries the meaningful typed content of its format and main appendices; the repeated five-paragraph text of each annex is not modelled.",
+        "Print furniture (logo, page icon, watermark, classification banner and caveats, copy number, number of copies, place of issue, message reference number) is opord-builder extension data."
+      ],
+      "references": [
+        {
+          "source": "army-fm-6-0-2022",
+          "locator": "Chapter 2, paragraphs 2-50 to 2-140; paragraph 2-83, page 2-18",
+          "note": "Staff responsibility for each annex, including Annex W and Appendix 7 (Air and Missile Defense) of Annex D."
+        },
+        {
+          "source": "joint-jp-3-09-3-2014",
+          "locator": "Chapter III, paragraph 12.c, pages III-49 to III-50",
+          "note": "9-line CAS brief of Annex D, Appendix 5."
+        }
+      ]
+    },
+    {
+      "schema": "frago",
+      "source": "army-fm-5-0-2024",
+      "locator": "Appendix D, Figure D-5, page 219 (fragmentary order format)",
+      "evidence": "public_document_template",
+      "represented": [
+        "frago_number",
+        "issuing_headquarters",
+        "date_time",
+        "time_zone",
+        "effective_time",
+        "base_order",
+        "summary",
+        "mission",
+        "commanders_intent",
+        "changes",
+        "references",
+        "acknowledgement",
+        "authentication"
+      ],
+      "gaps": [
+        "Typed JSON Pointer changes to an OPORD, ATO, ACO or SPINS revision are an openAIX adaptation of the Army template, which repeats only the changed paragraphs.",
+        "Applying changes, no-change semantics and checking that a change keeps references valid remain consumer responsibilities; validation checks the structure only.",
+        "Print data (copy number, place of issue, message reference number) is opord-builder extension data."
+      ]
+    },
+    {
+      "schema": "jiptl",
+      "source": "usaf-afdp-3-60-2021",
+      "locator": "Chapter 1, page 8 (JIPTL in target development and prioritization); target development, pages 47-49",
+      "evidence": "definition_and_process",
+      "represented": [
+        "targets",
+        "meta",
+        "targets[].target",
+        "targets[].authorized_engagement_means[]",
+        "resources_ref"
+      ],
+      "gaps": [
+        "Entries are trimmed to the fields units coordinate on; complete target-data standard not verified.",
+        "JIPTL cut line not modelled.",
+        "Components exclude information operations, a staff capability rather than a joint force component.",
+        "Desired-effect values DESTROY, NEUTRALIZE, SUPPRESS, DISRUPT, DEGRADE, DENY and DIVERT are openAIX values with no doctrinal source."
+      ],
+      "references": [
+        {
+          "source": "usaf-afdp-3-60-2021",
+          "locator": "Basic Encyclopedia Number System, page 36",
+          "note": "Target identifiers and the BEN plan; mobile targets need theater identifiers."
+        },
+        {
+          "source": "usaf-afdp-3-60-2021",
+          "locator": "Page 49",
+          "note": "The draft JIPTL cut line reflects the ATO, space tasking order and cyberspace tasking order cycles; supports the SPACE and CYBER component values."
+        }
+      ]
+    },
+    {
+      "schema": "tst",
+      "source": "usaf-afdp-3-03-2020",
+      "locator": "Page 29, time-sensitive targets (joint TST definition)",
+      "evidence": "definition_only",
+      "represented": [
+        "targets",
+        "meta",
+        "targets[].target",
+        "targets[].authorized_engagement_means[]",
+        "resources_ref",
+        "targets[].expires_at",
+        "targets[].engagement_authority"
+      ],
+      "gaps": [
+        "Entries are trimmed to the fields units coordinate on; complete target-data standard not verified.",
+        "Priority and category values are openAIX values, not joint doctrine."
+      ],
+      "references": [
+        {
+          "source": "usaf-afdp-3-60-2021",
+          "locator": "Chapter 3, pages 25-27",
+          "note": "Dynamic target categories and the F2T2EA kill chain."
+        },
+        {
+          "source": "usaf-afdp-3-60-2021",
+          "locator": "Chapter 3, page 30",
+          "note": "TST engagement authority and its delegation."
+        }
+      ]
+    },
+    {
+      "schema": "fac",
+      "source": "joint-jp-3-09-3-2014",
+      "locator": "Chapter III, paragraph 12.a, page III-42 (types of terminal attack control); paragraph 12.c(1)-(9), pages III-49 to III-50 (9-line CAS brief); paragraph 14.c(3)(a), page III-73 (control point, IP and BP selection)",
+      "evidence": "doctrine_and_application_values",
+      "represented": [
+        "terminal_control",
+        "initial_points",
+        "egress_points",
+        "coordinate_source",
+        "laser_codes",
+        "default_laser_code",
+        "observers",
+        "equipment"
+      ],
+      "references": [
+        {
+          "source": "joint-jp-3-09-3-2014",
+          "locator": "Chapter III, paragraph 11.c(4), Figure III-5, pages III-34 to III-35",
+          "note": "TLE categories: CAT I 0-6 m, CAT II 7-15 m, CAT III 16-30 m, CAT IV 31-91 m, CAT V 92-305 m, CAT VI over 305 m (circular error). Per 11.c(4)(a), a TLE category is not required to approve a mission or to engage a target with CAS."
+        }
+      ],
+      "gaps": [
+        "coordinate_source values (lrf, visual, exact) are openAIX values from the Vox Bellica coordinate model; they are not TLE categories.",
+        "No TLE category field is defined; no consuming application uses one.",
+        "The 9-line CAS brief is the NineLineCAS definition in the OPORD and FRAGO schemas; its line order (IP or BP, heading and offset, distance, target elevation, target description, target location, mark, friendlies, egress) follows paragraph 12.c(1)-(9)."
+      ]
+    }
+  ],
+  "mission_type_mapping": [
+    {
+      "mission_type": "search_and_rescue",
+      "source": "dod-civil-sar-2017",
+      "locator": "Glossary, page 12, civil SAR",
+      "family": "personnel_recovery",
+      "values": {
+        "role": "search_and_rescue"
+      },
+      "status": "added_typed_role",
+      "gap": "Activity represented in tasking; complete civil search planning and coordination procedures remain outside the current typed inventory."
+    },
+    {
+      "mission_type": "combat_search_and_rescue",
+      "source": "usaf-afdp-3-50-csar-2020",
+      "locator": "Page 15, Combat Search and Rescue",
+      "family": "personnel_recovery",
+      "values": {
+        "role": "combat_search_and_rescue"
+      },
+      "status": "added_typed_role",
+      "gap": "Activity represented in tasking; this role does not imply civil SAR and combat recovery command procedures are interchangeable."
+    },
+    {
+      "mission_type": "offensive_counterair_attack",
+      "source": "usaf-afdp-3-01-2019",
+      "locator": "Offensive counterair, Attack operations, page 8",
+      "family": "preplanned_attack",
+      "values": {
+        "role": "strike"
+      },
+      "status": "existing_generic_role",
+      "gap": "Mission objective and target assignments identify the counterair purpose; a dedicated attack-purpose enum is not supplied."
+    },
+    {
+      "mission_type": "suppression_of_enemy_air_defenses",
+      "source": "usaf-afdp-3-01-2019",
+      "locator": "Offensive counterair, SEAD, pages 8-9",
+      "family": "preplanned_attack",
+      "values": {
+        "role": "sead"
+      },
+      "status": "existing_typed_role",
+      "gap": "AOR/JOA air defense system suppression, localized suppression and opportune suppression are described in doctrine; dynamic opportune retasking is not a complete typed workflow."
+    },
+    {
+      "mission_type": "fighter_escort",
+      "source": "usaf-afdp-3-01-2019",
+      "locator": "Offensive counterair, Fighter escort, page 9",
+      "family": "escort",
+      "values": {},
+      "status": "existing_family",
+      "gap": "Doctrine purpose maps to supported_missions; no claim of complete national escort message fields."
+    },
+    {
+      "mission_type": "fighter_sweep",
+      "source": "usaf-afdp-3-01-2019",
+      "locator": "Offensive counterair, Fighter sweep, page 9",
+      "family": "counterair",
+      "values": {
+        "mission_type": "fighter_sweep"
+      },
+      "status": "added_typed_role",
+      "gap": "Assigned area is required; controller tactics and execution remain consumer responsibilities."
+    },
+    {
+      "mission_type": "air_interception",
+      "source": "joint-jp-3-01-2012",
+      "locator": "Chapter V, paragraph 11.f(2), page V-26, air-to-air fighter interception",
+      "family": "counterair",
+      "values": {
+        "mission_type": "interception"
+      },
+      "status": "added_typed_role",
+      "gap": "An area or mobile target is required. MobileTarget has no air/land/sea discriminator, so the guard cannot prove the target is an aircraft. Fighters on counterair missions may be tasked to intercept hostile, potentially hostile or unknown tracks; interception does not by itself authorise engagement.",
+      "verified": false,
+      "references": [
+        {
+          "source": "usaf-afdp-3-01-2019",
+          "locator": "Defensive counterair, Fighter aircraft, page 36",
+          "note": "DCA fighters on combat air patrol intercept and destroy hostile aircraft and missiles."
+        },
+        {
+          "source": "alssa-brevity-2023",
+          "locator": "COMMIT, page 11",
+          "note": "Brevity: intercept the group of interest, or set briefed intercept geometry."
+        }
+      ],
+      "note": "The JP 3-01 (2012) locator was not re-read; the current JP 3-01 edition was not retrieved."
+    },
+    {
+      "mission_type": "airlift",
+      "source": "usaf-afdp-3-36-2024",
+      "locator": "Air mobility core functions, Airlift",
+      "family": "transport",
+      "values": {
+        "role": "airlift"
+      },
+      "status": "added_typed_role",
+      "gap": "Existing delivery_method and manifest remain separate; role does not encode national mission codes."
+    },
+    {
+      "mission_type": "aeromedical_evacuation",
+      "source": "usaf-afdp-3-36-2024",
+      "locator": "Air mobility core functions, Aeromedical Evacuation",
+      "family": "transport",
+      "values": {
+        "role": "aeromedical_evacuation"
+      },
+      "status": "added_typed_role",
+      "gap": "Mission purpose is typed; patient category, en-route care team and medical equipment manifests are not fully typed."
+    },
+    {
+      "mission_type": "noncombatant_evacuation",
+      "source": "usaf-afdp-3-36-airlift-effects-2019",
+      "locator": "Page 44, Airlift Effects",
+      "family": "transport",
+      "values": {
+        "role": "noncombatant_evacuation"
+      },
+      "status": "added_typed_role",
+      "gap": "Airlift portion represented; evacuation-control-center and civilian processing workflows are not modeled."
+    },
+    {
+      "mission_type": "humanitarian_assistance_airlift",
+      "source": "usaf-afdp-3-36-airlift-effects-2019",
+      "locator": "Page 44, Airlift Effects",
+      "family": "transport",
+      "values": {
+        "role": "humanitarian_assistance"
+      },
+      "status": "added_typed_role",
+      "gap": "Transport purpose represented; not the full humanitarian-assistance operation."
+    },
+    {
+      "mission_type": "air_refueling",
+      "source": "usaf-afdp-3-36-2024",
+      "locator": "Air mobility core functions, Air Refueling",
+      "family": "refueling",
+      "values": {},
+      "status": "existing_family",
+      "gap": "Nuclear/global-strike/airbridge/deployment/theater/special-operations support contexts are not a typed mission-purpose enum."
+    },
+    {
+      "mission_type": "air_mobility_support",
+      "source": "usaf-afdp-3-36-2024",
+      "locator": "Air mobility core functions, Air Mobility Support",
+      "family": null,
+      "values": {},
+      "status": "outside_aircraft_sortie_contract",
+      "gap": "Ground command-and-control, aerial-port and maintenance services cannot be honestly represented as an aircraft tasking family."
+    },
+    {
+      "mission_type": "air_interdiction",
+      "source": "joint-dod-dictionary-2021",
+      "locator": "Page 11, air interdiction (JP 3-03)",
+      "family": "preplanned_attack",
+      "values": {
+        "role": "air_interdiction"
+      },
+      "status": "added_typed_role",
+      "gap": "Scheduled AI only; on-call ground or airborne alert AI uses the same role with alert launch data.",
+      "references": [
+        {
+          "source": "usaf-afdp-3-03-2020",
+          "locator": "Types of air interdiction and close air support, page 10",
+          "note": "AI, GAI and XAI mission types."
+        }
+      ]
+    },
+    {
+      "mission_type": "strike_coordination_and_reconnaissance",
+      "source": "joint-dod-dictionary-2021",
+      "locator": "Page 203, strike coordination and reconnaissance (JP 3-03)",
+      "family": "counterland_control",
+      "values": {
+        "mission_type": "scar"
+      },
+      "status": "added_typed_role",
+      "gap": "Target categories and priorities are openAIX values.",
+      "references": [
+        {
+          "source": "usaf-afdp-3-03-2020",
+          "locator": "Pages 11 and 13-14",
+          "note": "SCAR mission description."
+        }
+      ]
+    },
+    {
+      "mission_type": "forward_air_controller_airborne",
+      "source": "joint-dod-dictionary-2021",
+      "locator": "Page 88, forward air controller (airborne) (JP 3-09.3)",
+      "family": "counterland_control",
+      "values": {
+        "mission_type": "fac_a"
+      },
+      "status": "added_typed_role",
+      "gap": "TAC(A) is not a separate value.",
+      "references": [
+        {
+          "source": "joint-jp-3-09-3-2014",
+          "locator": "Chapter II, page II-18",
+          "note": "FAC(A) as an airborne extension of the TACP."
+        },
+        {
+          "source": "usaf-afdp-3-03-2020",
+          "locator": "Page 13",
+          "note": "FAC(A) and TAC(A) missions."
+        }
+      ]
+    },
+    {
+      "mission_type": "air_assault",
+      "source": "joint-dod-dictionary-2021",
+      "locator": "Page 9, air assault (JP 3-18)",
+      "family": "transport",
+      "values": {
+        "role": "air_assault"
+      },
+      "status": "added_typed_role",
+      "gap": "Bump plans and loading diagrams are not typed.",
+      "references": [
+        {
+          "source": "army-fm-3-99-2025",
+          "locator": "Paragraphs 12-35 to 12-37, page 12-9",
+          "note": "Air movement table."
+        }
+      ]
+    },
+    {
+      "mission_type": "airdrop",
+      "source": "joint-dod-dictionary-2021",
+      "locator": "Page 11, airdrop (JP 3-36); page 67, drop zone (JP 3-36)",
+      "family": "transport",
+      "values": {
+        "role": "airdrop"
+      },
+      "status": "added_typed_role",
+      "gap": "The HARP value names a high-altitude release point for HALO and HAHO drops; FM 3-99 names the techniques but no public source read for this draft defines HARP.",
+      "references": [
+        {
+          "source": "army-fm-3-99-2025",
+          "locator": "Paragraphs 5-18 and 5-19, page 5-4",
+          "note": "Airdrop loads and the CARP."
+        },
+        {
+          "source": "army-fm-3-21-38-2006",
+          "locator": "Chapter 6, pages 6-4 and 6-12",
+          "note": "CARP, GMRS and VIRS."
+        }
+      ]
+    }
+  ],
+  "tasking_families": [
+    {
+      "kind": "preplanned_attack",
+      "represented": [
+        "role",
+        "assignments",
+        "objective",
+        "success_criteria",
+        "brief",
+        "assignments[].weaponeering",
+        "assignments[].target_list_entry"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established. Role values strike, sead, scheduled_cas, maritime_attack and air_interdiction name doctrinal missions; dead is an openAIX value with no doctrinal source.",
+      "references": [
+        {
+          "source": "joint-jp-3-09-3-2014",
+          "locator": "Chapter III, paragraph 27, pages III-127 to III-128",
+          "note": "Preplanned CAS requests are resourced by scheduled or on-call missions; the role value scheduled_cas is a preplanned scheduled CAS mission."
+        },
+        {
+          "source": "usaf-afdp-3-03-2020",
+          "locator": "Types of air interdiction and close air support, page 10",
+          "note": "AI is a mission scheduled to strike particular targets in response to JFC or component target nominations; role value air_interdiction."
+        }
+      ]
+    },
+    {
+      "kind": "on_call_cas",
+      "represented": [
+        "area",
+        "availability",
+        "supported_force",
+        "tasking_agency",
+        "terminal_control",
+        "brief"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established.",
+      "references": [
+        {
+          "source": "joint-jp-3-09-3-2014",
+          "locator": "Chapter III, paragraph 27, pages III-127 to III-128",
+          "note": "On-call CAS covers preplanned on-call and immediate CAS requests."
+        },
+        {
+          "source": "joint-jp-3-09-3-2014",
+          "locator": "Chapter III, paragraph 12.a, page III-42",
+          "note": "Types of terminal attack control 1, 2 and 3."
+        },
+        {
+          "source": "joint-jp-3-09-3-2014",
+          "locator": "Chapter V, Figure V-4, page V-16",
+          "note": "CAS check-in briefing items of the CAS brief."
+        }
+      ]
+    },
+    {
+      "kind": "cap",
+      "represented": [
+        "area",
+        "station_window",
+        "altitude",
+        "engagement_instructions",
+        "brief"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established."
+    },
+    {
+      "kind": "escort",
+      "represented": [
+        "supported_missions",
+        "rendezvous",
+        "rendezvous_time",
+        "protection_window",
+        "brief"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established."
+    },
+    {
+      "kind": "refueling",
+      "represented": [
+        "area",
+        "method",
+        "receivers",
+        "planned_offload",
+        "station_window",
+        "brief"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established."
+    },
+    {
+      "kind": "airborne_control",
+      "represented": [
+        "area",
+        "control_responsibilities",
+        "datalink",
+        "supported_missions",
+        "brief"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established."
+    },
+    {
+      "kind": "reconnaissance",
+      "represented": [
+        "requirements",
+        "reporting_procedure",
+        "brief"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established."
+    },
+    {
+      "kind": "electromagnetic",
+      "represented": [
+        "area",
+        "assigned_effect",
+        "equipment_requirements",
+        "restrictions",
+        "brief"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established."
+    },
+    {
+      "kind": "transport",
+      "represented": [
+        "pickup",
+        "destination",
+        "manifest",
+        "delivery_method",
+        "role",
+        "brief",
+        "brief.airdrop",
+        "brief.air_assault"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established.",
+      "references": [
+        {
+          "source": "army-fm-3-99-2025",
+          "locator": "Paragraphs 12-35 to 12-37, page 12-9; paragraphs 13-15 to 13-21, page 13-5",
+          "note": "Air movement table lines, lifts, serials and chalks of the air assault brief."
+        },
+        {
+          "source": "army-fm-3-99-2025",
+          "locator": "Paragraphs 5-18 and 5-19, page 5-4",
+          "note": "Container delivery system, heavy drop, door bundles, precision airdrop and the CARP."
+        },
+        {
+          "source": "army-fm-3-21-38-2006",
+          "locator": "Chapter 6, pages 6-4, 6-12, 6-21 and 6-30",
+          "note": "CARP, GMRS and VIRS release methods, raised angle marker and clear-to-drop signals."
+        }
+      ]
+    },
+    {
+      "kind": "personnel_recovery",
+      "represented": [
+        "role",
+        "incident",
+        "search_area",
+        "recovery_method",
+        "recognition_procedure",
+        "brief"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established."
+    },
+    {
+      "kind": "training",
+      "represented": [
+        "events",
+        "exercise_window",
+        "restrictions",
+        "brief"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established."
+    },
+    {
+      "kind": "custom",
+      "represented": [
+        "name",
+        "assigned_actions",
+        "required_capabilities",
+        "brief"
+      ],
+      "status": "application_contract_retained",
+      "gap": "A complete edition-specific doctrinal field inventory has not been established."
+    },
+    {
+      "kind": "counterland_control",
+      "represented": [
+        "mission_type",
+        "area",
+        "altitude",
+        "operating_window",
+        "brief"
+      ],
+      "status": "added_family",
+      "gap": "SCAR and FAC(A) are kept in one family because both control other attack flights in an area; target categories are openAIX values.",
+      "references": [
+        {
+          "source": "usaf-afdp-3-03-2020",
+          "locator": "Derivative missions associated with counterland, pages 13-14",
+          "note": "FAC(A) gives terminal attack control; SCAR detects targets for AI and coordinates attack flights; SCAR aircrew have no terminal attack control authority."
+        },
+        {
+          "source": "joint-jp-3-09-3-2014",
+          "locator": "Chapter II, paragraph on the forward air controller (airborne), page II-18",
+          "note": "FAC(A) duties."
+        }
+      ]
+    }
+  ]
+}

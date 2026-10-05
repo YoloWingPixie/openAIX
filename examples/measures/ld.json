@@ -1,0 +1,31 @@
+{
+  "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "coordination_instructions": [
+    "Task Force Bastion crosses PL BRASS at 1330Z after the Cobalt kill box opens."
+  ],
+  "description": "Phase line BRASS, designated as the line of departure of Task Force Bastion; it follows the FLOT at the start of the period.",
+  "geometry": {
+    "kind": "line",
+    "points": [
+      {
+        "latitude": 34.845,
+        "longitude": 40.127
+      },
+      {
+        "latitude": 34.85,
+        "longitude": 40.305
+      },
+      {
+        "latitude": 34.845,
+        "longitude": 40.476
+      }
+    ]
+  },
+  "id": "pl-brass",
+  "name": "PL BRASS",
+  "type": "LD"
+}

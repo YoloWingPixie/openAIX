@@ -1,0 +1,62 @@
+{
+  "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "kind": "polygon",
+        "rings": [
+          [
+            {
+              "latitude": 33.0,
+              "longitude": 38.85
+            },
+            {
+              "latitude": 33.0,
+              "longitude": 39.25
+            },
+            {
+              "latitude": 33.12,
+              "longitude": 39.25
+            },
+            {
+              "latitude": 33.12,
+              "longitude": 38.85
+            },
+            {
+              "latitude": 33.0,
+              "longitude": 38.85
+            }
+          ]
+        ]
+      },
+      "id": "shell-block",
+      "lower_limit": {
+        "reference": "FL",
+        "unit": "flight_level",
+        "value": 170
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "FL",
+        "unit": "flight_level",
+        "value": 210
+      }
+    }
+  ],
+  "description": "Air-to-air refuelling area over the Syria-Iraq-Jordan border triangle, around the Shell tanker track.",
+  "id": "shell-aara",
+  "name": "Shell refuelling area",
+  "purpose": "Reserve a block for tanker and receiver join-ups.",
+  "restrictions": [
+    "Non-refuelling traffic remains clear unless coordinated with Darkstar."
+  ],
+  "type": "AARA"
+}

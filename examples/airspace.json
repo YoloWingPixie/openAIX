@@ -1,0 +1,89 @@
+{
+  "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T18:00:00Z",
+    "start": "2026-10-02T06:00:00Z"
+  },
+  "airspace_class_code": "B",
+  "airspace_type": "ClassB",
+  "components": [
+    {
+      "geometry": {
+        "center": {
+          "latitude": 37.1,
+          "longitude": -115.5
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 5
+        }
+      },
+      "id": "surface",
+      "lower_limit": {
+        "reference": "AGL",
+        "unit": "ft",
+        "value": 0
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 10000
+      }
+    },
+    {
+      "geometry": {
+        "center": {
+          "latitude": 37.1,
+          "longitude": -115.5
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 10
+        }
+      },
+      "id": "inner-shelf",
+      "lower_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 2500
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 10000
+      }
+    },
+    {
+      "geometry": {
+        "center": {
+          "latitude": 37.1,
+          "longitude": -115.5
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 20
+        }
+      },
+      "id": "outer-shelf",
+      "lower_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 5000
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 9000
+      }
+    }
+  ],
+  "id": "airspace-demo",
+  "name": "Demonstration Airspace",
+  "type": "AIRSPACE"
+}

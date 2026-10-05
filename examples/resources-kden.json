@@ -1,0 +1,1323 @@
+{
+  "$schema": "urn:openaix:schema:resources:0.1.0-draft.1",
+  "kind": "resources",
+  "meta": {
+    "id": "kden-navigation",
+    "revision": "2610",
+    "title": "KDEN navigation records from FAA CIFP cycle 2610, with authored scenario data"
+  },
+  "resources": {
+    "control_measures": {
+      "dvv": {
+        "airfield": "kden",
+        "class": "VORTAC",
+        "dme_position": {
+          "latitude": 39.8946888889,
+          "longitude": -104.6243361111
+        },
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 5279
+        },
+        "frequency": {
+          "unit": "MHz",
+          "value": 114.7
+        },
+        "id": "dvv",
+        "ident": "DVV",
+        "magnetic_variation_deg": 8.0,
+        "name": "Mile High VORTAC",
+        "position": {
+          "latitude": 39.8946888889,
+          "longitude": -104.6243361111
+        },
+        "source": "FAA CIFP cycle 2610, position N39534088W104372761 (PackedDMS)",
+        "tacan": {
+          "band": "X",
+          "channel": 94
+        },
+        "type": "NAVAID"
+      }
+    },
+    "instrument_procedures": {
+      "kden-i16r": {
+        "airfield": "kden",
+        "id": "kden-i16r",
+        "ident": "I16R",
+        "kind": "procedure",
+        "name": "KDEN ILS runway 16R approach (I16R)",
+        "procedure_type": "approach",
+        "source": "FAA CIFP cycle 2610",
+        "transitions": [
+          {
+            "ident": "KAILE",
+            "legs": [
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 11000
+                  }
+                },
+                "approach_fix": "initial_approach_fix",
+                "fix": {
+                  "ident": "KAILE",
+                  "position": {
+                    "latitude": 40.2634305556,
+                    "longitude": -104.7684361111
+                  }
+                },
+                "leg_type": "initial_fix",
+                "speed": {
+                  "kind": "at_or_below",
+                  "value": {
+                    "unit": "kt",
+                    "value": 210
+                  }
+                }
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10400
+                  }
+                },
+                "fix": {
+                  "ident": "SHROM",
+                  "position": {
+                    "latitude": 40.2451444444,
+                    "longitude": -104.7124444444
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10000
+                  }
+                },
+                "fix": {
+                  "ident": "SHRED",
+                  "position": {
+                    "latitude": 40.2072583333,
+                    "longitude": -104.6924666667
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10000
+                  }
+                },
+                "approach_fix": "intermediate_fix",
+                "course": {
+                  "reference": "magnetic",
+                  "value": 172.5
+                },
+                "distance": {
+                  "unit": "nm",
+                  "value": 2.7
+                },
+                "fix": {
+                  "ident": "SAKIC",
+                  "position": {
+                    "latitude": 40.1617138889,
+                    "longitude": -104.6929972222
+                  }
+                },
+                "leg_type": "course_to_fix",
+                "recommended_navaid": {
+                  "ident": "IDQQ",
+                  "position": {
+                    "latitude": 39.8491055556,
+                    "longitude": -104.6966194444
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "ident": "KIPPR",
+            "legs": [
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 12000
+                  }
+                },
+                "approach_fix": "initial_approach_fix",
+                "fix": {
+                  "ident": "KIPPR",
+                  "position": {
+                    "latitude": 40.3495333333,
+                    "longitude": -104.5633305556
+                  }
+                },
+                "leg_type": "initial_fix",
+                "speed": {
+                  "kind": "at_or_below",
+                  "value": {
+                    "unit": "kt",
+                    "value": 210
+                  }
+                }
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 12000
+                  }
+                },
+                "fix": {
+                  "ident": "HAYLY",
+                  "position": {
+                    "latitude": 40.3314861111,
+                    "longitude": -104.6615027778
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 11500
+                  }
+                },
+                "fix": {
+                  "ident": "SKIMJ",
+                  "position": {
+                    "latitude": 40.2927472222,
+                    "longitude": -104.6914694444
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10600
+                  }
+                },
+                "fix": {
+                  "ident": "SEEYU",
+                  "position": {
+                    "latitude": 40.2427111111,
+                    "longitude": -104.6920527778
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10000
+                  }
+                },
+                "fix": {
+                  "ident": "SHRED",
+                  "position": {
+                    "latitude": 40.2072583333,
+                    "longitude": -104.6924666667
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10000
+                  }
+                },
+                "approach_fix": "intermediate_fix",
+                "course": {
+                  "reference": "magnetic",
+                  "value": 172.5
+                },
+                "distance": {
+                  "unit": "nm",
+                  "value": 2.7
+                },
+                "fix": {
+                  "ident": "SAKIC",
+                  "position": {
+                    "latitude": 40.1617138889,
+                    "longitude": -104.6929972222
+                  }
+                },
+                "leg_type": "course_to_fix",
+                "recommended_navaid": {
+                  "ident": "IDQQ",
+                  "position": {
+                    "latitude": 39.8491055556,
+                    "longitude": -104.6966194444
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "ident": "SHRED",
+            "legs": [
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10000
+                  }
+                },
+                "approach_fix": "initial_approach_fix",
+                "fix": {
+                  "ident": "SHRED",
+                  "position": {
+                    "latitude": 40.2072583333,
+                    "longitude": -104.6924666667
+                  }
+                },
+                "leg_type": "initial_fix",
+                "speed": {
+                  "kind": "at_or_below",
+                  "value": {
+                    "unit": "kt",
+                    "value": 210
+                  }
+                }
+              },
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10000
+                  }
+                },
+                "approach_fix": "intermediate_fix",
+                "course": {
+                  "reference": "magnetic",
+                  "value": 172.5
+                },
+                "distance": {
+                  "unit": "nm",
+                  "value": 2.7
+                },
+                "fix": {
+                  "ident": "SAKIC",
+                  "position": {
+                    "latitude": 40.1617138889,
+                    "longitude": -104.6929972222
+                  }
+                },
+                "leg_type": "course_to_fix",
+                "recommended_navaid": {
+                  "ident": "IDQQ",
+                  "position": {
+                    "latitude": 39.8491055556,
+                    "longitude": -104.6966194444
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "ident": "TSHNR",
+            "legs": [
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 13000
+                  }
+                },
+                "approach_fix": "initial_approach_fix",
+                "fix": {
+                  "ident": "TSHNR",
+                  "position": {
+                    "latitude": 40.3558694444,
+                    "longitude": -104.7477055556
+                  }
+                },
+                "leg_type": "initial_fix",
+                "speed": {
+                  "kind": "at_or_below",
+                  "value": {
+                    "unit": "kt",
+                    "value": 210
+                  }
+                }
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 11500
+                  }
+                },
+                "fix": {
+                  "ident": "SKIMJ",
+                  "position": {
+                    "latitude": 40.2927472222,
+                    "longitude": -104.6914694444
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10600
+                  }
+                },
+                "fix": {
+                  "ident": "SEEYU",
+                  "position": {
+                    "latitude": 40.2427111111,
+                    "longitude": -104.6920527778
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10000
+                  }
+                },
+                "fix": {
+                  "ident": "SHRED",
+                  "position": {
+                    "latitude": 40.2072583333,
+                    "longitude": -104.6924666667
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10000
+                  }
+                },
+                "approach_fix": "intermediate_fix",
+                "course": {
+                  "reference": "magnetic",
+                  "value": 172.5
+                },
+                "distance": {
+                  "unit": "nm",
+                  "value": 2.7
+                },
+                "fix": {
+                  "ident": "SAKIC",
+                  "position": {
+                    "latitude": 40.1617138889,
+                    "longitude": -104.6929972222
+                  }
+                },
+                "leg_type": "course_to_fix",
+                "recommended_navaid": {
+                  "ident": "IDQQ",
+                  "position": {
+                    "latitude": 39.8491055556,
+                    "longitude": -104.6966194444
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "legs": [
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10000
+                  }
+                },
+                "approach_fix": "final_approach_course_fix",
+                "fix": {
+                  "ident": "SAKIC",
+                  "position": {
+                    "latitude": 40.1617138889,
+                    "longitude": -104.6929972222
+                  }
+                },
+                "leg_type": "initial_fix",
+                "recommended_navaid": {
+                  "ident": "IDQQ",
+                  "position": {
+                    "latitude": 39.8491055556,
+                    "longitude": -104.6966194444
+                  }
+                },
+                "speed": {
+                  "kind": "at_or_below",
+                  "value": {
+                    "unit": "kt",
+                    "value": 210
+                  }
+                }
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 9000
+                  }
+                },
+                "course": {
+                  "reference": "magnetic",
+                  "value": 173.0
+                },
+                "distance": {
+                  "unit": "nm",
+                  "value": 3.9
+                },
+                "fix": {
+                  "ident": "NEWLN",
+                  "position": {
+                    "latitude": 40.0967777778,
+                    "longitude": -104.6937527778
+                  }
+                },
+                "leg_type": "course_to_fix",
+                "recommended_navaid": {
+                  "ident": "IDQQ",
+                  "position": {
+                    "latitude": 39.8491055556,
+                    "longitude": -104.6966194444
+                  }
+                }
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 8000
+                  }
+                },
+                "course": {
+                  "reference": "magnetic",
+                  "value": 173.0
+                },
+                "distance": {
+                  "unit": "nm",
+                  "value": 3.8
+                },
+                "fix": {
+                  "ident": "MERYN",
+                  "position": {
+                    "latitude": 40.0333972222,
+                    "longitude": -104.6944888889
+                  }
+                },
+                "leg_type": "course_to_fix",
+                "recommended_navaid": {
+                  "ident": "IDQQ",
+                  "position": {
+                    "latitude": 39.8491055556,
+                    "longitude": -104.6966194444
+                  }
+                }
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 7000
+                  }
+                },
+                "approach_fix": "final_approach_fix",
+                "course": {
+                  "reference": "magnetic",
+                  "value": 173.0
+                },
+                "distance": {
+                  "unit": "nm",
+                  "value": 3.2
+                },
+                "fix": {
+                  "ident": "JETSN",
+                  "position": {
+                    "latitude": 39.9807861111,
+                    "longitude": -104.6951
+                  }
+                },
+                "leg_type": "course_to_fix",
+                "recommended_navaid": {
+                  "ident": "IDQQ",
+                  "position": {
+                    "latitude": 39.8491055556,
+                    "longitude": -104.6966194444
+                  }
+                }
+              },
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 5377
+                  }
+                },
+                "approach_fix": "missed_approach_point",
+                "course": {
+                  "reference": "magnetic",
+                  "value": 173.0
+                },
+                "distance": {
+                  "unit": "nm",
+                  "value": 5.1
+                },
+                "fix": {
+                  "ident": "RW16R",
+                  "position": {
+                    "latitude": 39.8957972222,
+                    "longitude": -104.6960833333
+                  }
+                },
+                "fly_over": true,
+                "leg_type": "course_to_fix",
+                "recommended_navaid": {
+                  "ident": "IDQQ",
+                  "position": {
+                    "latitude": 39.8491055556,
+                    "longitude": -104.6966194444
+                  }
+                },
+                "vertical_angle_deg": -3.0
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 5900
+                  }
+                },
+                "course": {
+                  "reference": "magnetic",
+                  "value": 172.5
+                },
+                "leg_type": "course_to_altitude",
+                "missed_approach": true
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 10000
+                  }
+                },
+                "course": {
+                  "reference": "magnetic",
+                  "value": 229.1
+                },
+                "distance": {
+                  "unit": "nm",
+                  "value": 21.6
+                },
+                "fix": {
+                  "ident": "ZOOKS",
+                  "position": {
+                    "latitude": 39.6603527778,
+                    "longitude": -105.0911916667
+                  }
+                },
+                "fly_over": true,
+                "leg_type": "course_to_fix",
+                "missed_approach": true,
+                "recommended_navaid": {
+                  "ident": "DVV",
+                  "position": {
+                    "latitude": 39.8946888889,
+                    "longitude": -104.6243361111
+                  }
+                }
+              },
+              {
+                "hold": {
+                  "altitude": {
+                    "kind": "at_or_above",
+                    "lower": {
+                      "reference": "MSL",
+                      "unit": "ft",
+                      "value": 10000
+                    }
+                  },
+                  "fix": {
+                    "ident": "ZOOKS",
+                    "position": {
+                      "latitude": 39.6603527778,
+                      "longitude": -105.0911916667
+                    }
+                  },
+                  "inbound_course": {
+                    "reference": "magnetic",
+                    "value": 229.1
+                  },
+                  "leg_time": {
+                    "unit": "min",
+                    "value": 1.0
+                  },
+                  "turn_direction": "right"
+                },
+                "leg_type": "hold_to_manual_termination",
+                "missed_approach": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "localizers": {
+      "kden-idqq": {
+        "airfield": "kden",
+        "course": {
+          "declination_deg": 8.0,
+          "reference": "magnetic",
+          "value": 172.5
+        },
+        "frequency": {
+          "unit": "MHz",
+          "value": 111.9
+        },
+        "glide_slope": {
+          "angle_deg": 3.0,
+          "elevation": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5317
+          },
+          "position": {
+            "latitude": 39.8930055556,
+            "longitude": -104.6975777778
+          }
+        },
+        "id": "kden-idqq",
+        "ident": "IDQQ",
+        "ils_category": "I",
+        "kind": "localizer",
+        "name": "KDEN ILS runway 16R localizer IDQQ",
+        "position": {
+          "latitude": 39.8491055556,
+          "longitude": -104.6966194444
+        },
+        "runway": "16R",
+        "source": "FAA CIFP cycle 2610, position N39505678W104414783 (PackedDMS)",
+        "threshold_crossing_height": {
+          "unit": "ft",
+          "value": 55
+        }
+      }
+    },
+    "places": {
+      "kden": {
+        "atis": {
+          "remarks": [
+            "Read back all runway hold-short instructions."
+          ],
+          "runway_in_use": "16R",
+          "transition_level": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 180
+          }
+        },
+        "calm_wind_runway": "16R",
+        "coalition": "blue",
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 5434
+        },
+        "extensions": {
+          "org.openaix.examples": {
+            "scenario_fields": [
+              "coalition",
+              "frequencies",
+              "atis",
+              "calm_wind_runway",
+              "traffic_pattern",
+              "navaids",
+              "taxi"
+            ]
+          }
+        },
+        "frequencies": [
+          {
+            "callsign": "Denver Arrival Information",
+            "frequency": {
+              "band": "vhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 125.6
+            },
+            "role": "atis"
+          },
+          {
+            "callsign": "Denver Clearance",
+            "frequency": {
+              "band": "vhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 118.75
+            },
+            "role": "clearance_delivery"
+          },
+          {
+            "callsign": "Denver Ground",
+            "frequency": {
+              "band": "vhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 121.85
+            },
+            "role": "ground"
+          },
+          {
+            "callsign": "Denver Tower",
+            "frequency": {
+              "band": "vhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 133.3
+            },
+            "role": "tower"
+          },
+          {
+            "callsign": "Denver Approach",
+            "frequency": {
+              "band": "vhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 119.3
+            },
+            "role": "approach"
+          },
+          {
+            "callsign": "Denver Departure",
+            "frequency": {
+              "band": "vhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 128.25
+            },
+            "role": "departure"
+          }
+        ],
+        "id": "kden",
+        "ident": "KDEN",
+        "kind": "airfield",
+        "localizers": [
+          "kden-idqq"
+        ],
+        "magnetic_variation_deg": 8.0,
+        "name": "Denver Intl",
+        "navaids": [
+          {
+            "id": "dvv",
+            "kind": "control_measure"
+          }
+        ],
+        "position": {
+          "latitude": 39.8616666667,
+          "longitude": -104.6731666667
+        },
+        "procedures": [
+          "kden-i16r"
+        ],
+        "runways": [
+          {
+            "designator": "07/25",
+            "ends": [
+              {
+                "designator": "07",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 82.0
+                },
+                "threshold": {
+                  "latitude": 39.8409444444,
+                  "longitude": -104.7266555556
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 55
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5350
+                }
+              },
+              {
+                "designator": "25",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 263.0
+                },
+                "threshold": {
+                  "latitude": 39.8406583333,
+                  "longitude": -104.6839361111
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 55
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5355
+                }
+              }
+            ],
+            "id": "kden-rw07-25",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 12000
+            },
+            "name": "KDEN runway 07/25",
+            "source": "FAA CIFP cycle 2610",
+            "width": {
+              "unit": "ft",
+              "value": 150
+            }
+          },
+          {
+            "designator": "08/26",
+            "ends": [
+              {
+                "designator": "08",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 83.0
+                },
+                "threshold": {
+                  "latitude": 39.8775555556,
+                  "longitude": -104.6622305556
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 52
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5354
+                }
+              },
+              {
+                "designator": "26",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 263.0
+                },
+                "threshold": {
+                  "latitude": 39.8772444444,
+                  "longitude": -104.6194861111
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 55
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5294
+                }
+              }
+            ],
+            "id": "kden-rw08-26",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 12000
+            },
+            "name": "KDEN runway 08/26",
+            "source": "FAA CIFP cycle 2610",
+            "width": {
+              "unit": "ft",
+              "value": 150
+            }
+          },
+          {
+            "designator": "16L/34R",
+            "ends": [
+              {
+                "designator": "16L",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 173.0
+                },
+                "threshold": {
+                  "latitude": 39.8970361111,
+                  "longitude": -104.6868055556
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 56
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5350
+                }
+              },
+              {
+                "designator": "34R",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 353.0
+                },
+                "threshold": {
+                  "latitude": 39.8641027778,
+                  "longitude": -104.6871888889
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 55
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5354
+                }
+              }
+            ],
+            "id": "kden-rw16l-34r",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 12000
+            },
+            "name": "KDEN runway 16L/34R",
+            "source": "FAA CIFP cycle 2610",
+            "width": {
+              "unit": "ft",
+              "value": 150
+            }
+          },
+          {
+            "designator": "16R/34L",
+            "ends": [
+              {
+                "designator": "16R",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 173.0
+                },
+                "localizer": "kden-idqq",
+                "threshold": {
+                  "latitude": 39.8957972222,
+                  "longitude": -104.6960833333
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 55
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5322
+                }
+              },
+              {
+                "designator": "34L",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 353.0
+                },
+                "threshold": {
+                  "latitude": 39.8518861111,
+                  "longitude": -104.6965888889
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 55
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5327
+                }
+              }
+            ],
+            "id": "kden-rw16r-34l",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 16000
+            },
+            "name": "KDEN runway 16R/34L",
+            "source": "FAA CIFP cycle 2610",
+            "width": {
+              "unit": "ft",
+              "value": 200
+            }
+          },
+          {
+            "designator": "17L/35R",
+            "ends": [
+              {
+                "designator": "17L",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 173.0
+                },
+                "threshold": {
+                  "latitude": 39.8649527778,
+                  "longitude": -104.6413055556
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 55
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5328
+                }
+              },
+              {
+                "designator": "35R",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 353.0
+                },
+                "threshold": {
+                  "latitude": 39.8320194444,
+                  "longitude": -104.6417111111
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 55
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5370
+                }
+              }
+            ],
+            "id": "kden-rw17l-35r",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 12000
+            },
+            "name": "KDEN runway 17L/35R",
+            "source": "FAA CIFP cycle 2610",
+            "width": {
+              "unit": "ft",
+              "value": 150
+            }
+          },
+          {
+            "designator": "17R/35L",
+            "ends": [
+              {
+                "designator": "17R",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 173.0
+                },
+                "threshold": {
+                  "latitude": 39.8612444444,
+                  "longitude": -104.6601555556
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 55
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5378
+                }
+              },
+              {
+                "designator": "35L",
+                "heading": {
+                  "declination_deg": 8.0,
+                  "reference": "magnetic",
+                  "value": 353.0
+                },
+                "threshold": {
+                  "latitude": 39.8283138889,
+                  "longitude": -104.66055
+                },
+                "threshold_crossing_height": {
+                  "unit": "ft",
+                  "value": 53
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 5434
+                }
+              }
+            ],
+            "id": "kden-rw17r-35l",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 12000
+            },
+            "name": "KDEN runway 17R/35L",
+            "source": "FAA CIFP cycle 2610",
+            "width": {
+              "unit": "ft",
+              "value": 150
+            }
+          }
+        ],
+        "source": "FAA CIFP cycle 2610, position N39514200W104402340 (PackedDMS)",
+        "taxi": {
+          "edges": [
+            {
+              "from": "junction-16r",
+              "taxiway": "Z1",
+              "to": "hold-16r"
+            },
+            {
+              "from": "hold-16r",
+              "taxiway": "Z2",
+              "to": "entry-16r"
+            }
+          ],
+          "nodes": [
+            {
+              "id": "entry-16r",
+              "kind": "runway_connection",
+              "position": {
+                "latitude": 39.8957972222,
+                "longitude": -104.6960833333
+              },
+              "runway_end": "16R"
+            },
+            {
+              "id": "hold-16r",
+              "kind": "hold_short",
+              "name": "Hold short 16R",
+              "position": {
+                "latitude": 39.895811,
+                "longitude": -104.697138
+              },
+              "runway_end": "16R"
+            },
+            {
+              "id": "junction-16r",
+              "kind": "intersection",
+              "position": {
+                "latitude": 39.895836,
+                "longitude": -104.699013
+              }
+            }
+          ]
+        },
+        "traffic_pattern": {
+          "altitude": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 1000
+          },
+          "categories": {
+            "heavy": {
+              "altitude": {
+                "reference": "AGL",
+                "unit": "ft",
+                "value": 1500
+              }
+            },
+            "helicopter": {
+              "altitude": {
+                "reference": "AGL",
+                "unit": "ft",
+                "value": 500
+              }
+            }
+          },
+          "direction": "left"
+        },
+        "transition_altitude": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 18000
+        }
+      }
+    }
+  },
+  "schema_version": "0.1.0-draft.1"
+}

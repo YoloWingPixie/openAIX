@@ -1,0 +1,45 @@
+{
+  "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "airspace_type": "TFR",
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "center": {
+          "latitude": 36.95,
+          "longitude": -114.98
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 5
+        }
+      },
+      "id": "mesquite-tfr-volume",
+      "lower_limit": {
+        "surface": true
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 8000
+      }
+    }
+  ],
+  "description": "Temporary flight restriction under 14 CFR 91.137 around a wildfire east of Juniper Field.",
+  "designator": "FDC 6/0213",
+  "id": "mesquite-tfr",
+  "name": "Mesquite fire TFR",
+  "restrictions": [
+    "Only aircraft that support the fire suppression enter the TFR."
+  ],
+  "type": "AIRSPACE"
+}

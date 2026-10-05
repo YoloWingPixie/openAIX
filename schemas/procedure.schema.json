@@ -1,0 +1,804 @@
+{
+  "$defs": {
+    "Duration": {
+      "additionalProperties": false,
+      "description": "A time interval is a time interval in minutes.",
+      "properties": {
+        "unit": {
+          "const": "min",
+          "description": "This field gives the unit of the time interval: minutes."
+        },
+        "value": {
+          "description": "This field gives the number of minutes.",
+          "exclusiveMinimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "type": "object"
+    },
+    "Fix": {
+      "description": "A fix is a navigation fix: its published identifier and position, or a reference to a point or a navigation aid in the resource catalogue.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "ident": {
+              "description": "This field identifies this fix as published. An example is `ZOOKS`.",
+              "minLength": 1,
+              "type": "string"
+            },
+            "position": {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+              "description": "This field gives the geographic position of the fix, as latitude and longitude."
+            }
+          },
+          "required": [
+            "ident",
+            "position"
+          ],
+          "type": "object"
+        },
+        {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "x-measure-kinds": [
+            "POINT",
+            "NAVAID"
+          ]
+        }
+      ]
+    },
+    "Hold": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "leg_length"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "leg_time"
+              ]
+            }
+          }
+        }
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "leg_length"
+          ]
+        },
+        {
+          "required": [
+            "leg_time"
+          ]
+        }
+      ],
+      "description": "A hold is a holding pattern with a fix, an inbound course, a turn direction, and a leg length or a leg time. Altitude constraints and speed constraints are optional.",
+      "properties": {
+        "altitude": {
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "between"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "required": [
+                  "lower",
+                  "upper"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "at",
+                      "at_or_above"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "not": {
+                  "required": [
+                    "upper"
+                  ]
+                },
+                "required": [
+                  "lower"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "at_or_below"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "not": {
+                  "required": [
+                    "lower"
+                  ]
+                },
+                "required": [
+                  "upper"
+                ]
+              }
+            }
+          ],
+          "description": "This field gives the altitude constraint for the hold.",
+          "properties": {
+            "kind": {
+              "description": "This field gives the type of the altitude constraint for the hold, as one of the enumerated values. The type tells which of the fields `lower` and `upper` the altitude constraint has.",
+              "enum": [
+                "at",
+                "at_or_above",
+                "at_or_below",
+                "between"
+              ],
+              "x-enum-descriptions": {
+                "at": "The aircraft is at the `lower` altitude at the fix.",
+                "at_or_above": "The aircraft is at or above the `lower` altitude at the fix.",
+                "at_or_below": "The aircraft is at or below the `upper` altitude at the fix.",
+                "between": "The aircraft is between the `lower` altitude and the `upper` altitude at the fix."
+              }
+            },
+            "lower": {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude",
+              "description": "This field gives the lower altitude of the altitude constraint, as an altitude with its unit and reference. It is the crossing altitude for `at`, and the minimum for `at_or_above` and `between`."
+            },
+            "upper": {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude",
+              "description": "This field gives the higher altitude of the altitude constraint, as an altitude with its unit and reference. It is the maximum for `at_or_below` and `between`."
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "type": "object"
+        },
+        "fix": {
+          "$ref": "#/$defs/Fix",
+          "description": "This field gives the fix of the holding pattern."
+        },
+        "inbound_course": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+          "description": "This field gives the course of the inbound leg to the holding fix, as a bearing with its unit and reference."
+        },
+        "leg_length": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "description": "This field gives the length of each holding leg, as a length with its unit. When the hold has this length, it does not have a leg time."
+        },
+        "leg_time": {
+          "$ref": "#/$defs/Duration",
+          "description": "This field gives the flight time of each holding leg, in minutes. When the hold has this time, it does not have a leg length."
+        },
+        "speed": {
+          "$ref": "#/$defs/SpeedConstraint",
+          "description": "This field gives the speed constraint for the hold."
+        },
+        "turn_direction": {
+          "description": "This field gives the direction of the turns in the holding pattern, as one of the enumerated values.",
+          "enum": [
+            "left",
+            "right"
+          ],
+          "x-enum-descriptions": {
+            "left": "Each turn is a left turn. This is not the standard holding pattern.",
+            "right": "Each turn is a right turn. This is the standard holding pattern."
+          }
+        }
+      },
+      "required": [
+        "fix",
+        "inbound_course",
+        "turn_direction"
+      ],
+      "type": "object"
+    },
+    "Leg": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "leg_type": {
+                "enum": [
+                  "initial_fix",
+                  "track_to_fix",
+                  "course_to_fix",
+                  "direct_to_fix",
+                  "radius_to_fix",
+                  "arc_to_fix",
+                  "fix_to_altitude",
+                  "track_from_fix_for_distance",
+                  "track_from_fix_to_dme_distance",
+                  "fix_to_manual_termination",
+                  "procedure_turn"
+                ]
+              }
+            },
+            "required": [
+              "leg_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "fix"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "leg_type": {
+                "enum": [
+                  "course_to_altitude",
+                  "course_to_dme_distance",
+                  "course_to_fix",
+                  "course_to_intercept",
+                  "course_to_radial",
+                  "fix_to_altitude",
+                  "track_from_fix_for_distance",
+                  "track_from_fix_to_dme_distance",
+                  "fix_to_manual_termination",
+                  "heading_to_altitude",
+                  "heading_to_dme_distance",
+                  "heading_to_intercept",
+                  "heading_to_manual_termination",
+                  "heading_to_radial",
+                  "procedure_turn"
+                ]
+              }
+            },
+            "required": [
+              "leg_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "course"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "leg_type": {
+                "enum": [
+                  "course_to_altitude",
+                  "fix_to_altitude",
+                  "heading_to_altitude"
+                ]
+              }
+            },
+            "required": [
+              "leg_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "altitude"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "leg_type": {
+                "enum": [
+                  "radius_to_fix"
+                ]
+              }
+            },
+            "required": [
+              "leg_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "arc_center",
+              "arc_radius"
+            ]
+          }
+        },
+        {
+          "else": {
+            "not": {
+              "required": [
+                "hold"
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "leg_type": {
+                "enum": [
+                  "hold_to_altitude",
+                  "hold_to_fix",
+                  "hold_to_manual_termination"
+                ]
+              }
+            },
+            "required": [
+              "leg_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "hold"
+            ]
+          }
+        }
+      ],
+      "description": "A leg is one leg of a procedure: a path and the point at the end of the path. For each leg type, conditional rules make sure that the leg has the necessary data.",
+      "properties": {
+        "altitude": {
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "between"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "required": [
+                  "lower",
+                  "upper"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "at",
+                      "at_or_above"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "not": {
+                  "required": [
+                    "upper"
+                  ]
+                },
+                "required": [
+                  "lower"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "at_or_below"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "not": {
+                  "required": [
+                    "lower"
+                  ]
+                },
+                "required": [
+                  "upper"
+                ]
+              }
+            }
+          ],
+          "description": "This field gives the altitude constraint at the end of the leg.",
+          "properties": {
+            "kind": {
+              "description": "This field gives the type of the altitude constraint at the end of the leg, as one of the enumerated values. The type tells which of the fields `lower` and `upper` the altitude constraint has.",
+              "enum": [
+                "at",
+                "at_or_above",
+                "at_or_below",
+                "between"
+              ],
+              "x-enum-descriptions": {
+                "at": "The aircraft is at the `lower` altitude at the fix.",
+                "at_or_above": "The aircraft is at or above the `lower` altitude at the fix.",
+                "at_or_below": "The aircraft is at or below the `upper` altitude at the fix.",
+                "between": "The aircraft is between the `lower` altitude and the `upper` altitude at the fix."
+              }
+            },
+            "lower": {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude",
+              "description": "This field gives the lower altitude of the altitude constraint, as an altitude with its unit and reference. It is the crossing altitude for `at`, and the minimum for `at_or_above` and `between`."
+            },
+            "upper": {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude",
+              "description": "This field gives the higher altitude of the altitude constraint, as an altitude with its unit and reference. It is the maximum for `at_or_below` and `between`."
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "type": "object"
+        },
+        "approach_fix": {
+          "description": "This field gives the approach function of the fix of the leg, as one of the enumerated values.",
+          "enum": [
+            "initial_approach_fix",
+            "intermediate_fix",
+            "final_approach_course_fix",
+            "final_approach_fix",
+            "missed_approach_point"
+          ],
+          "x-enum-descriptions": {
+            "final_approach_course_fix": "This value identifies a fix on the extension of the final approach course, before the final approach fix.",
+            "final_approach_fix": "This value identifies the fix at the start of the final approach segment, where the descent to the runway starts.",
+            "initial_approach_fix": "This value identifies the fix at the start of the initial approach segment.",
+            "intermediate_fix": "This value identifies the fix at the end of the initial approach segment and the start of the intermediate approach segment.",
+            "missed_approach_point": "This value identifies the point at or before which the aircraft starts the missed approach procedure. This keeps the minimum obstacle clearance."
+          }
+        },
+        "arc_center": {
+          "$ref": "#/$defs/Fix",
+          "description": "This field gives the fix at the centre of the constant-radius arc of a `radius_to_fix` leg. A `radius_to_fix` leg shall have this field."
+        },
+        "arc_radius": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "description": "This field gives the radius of the constant-radius arc of a `radius_to_fix` leg, as a length with its unit. A `radius_to_fix` leg shall have this field."
+        },
+        "course": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+          "description": "This field gives the course, the track or the heading of the aircraft on the leg, as a bearing with its unit and reference. The reference is magnetic north or true north."
+        },
+        "distance": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "description": "This field gives the published distance of the leg, as a length with its unit."
+        },
+        "fix": {
+          "$ref": "#/$defs/Fix",
+          "description": "This field gives the fix at the end of the leg. For `fix_to_altitude`, `track_from_fix_for_distance`, `track_from_fix_to_dme_distance`, `fix_to_manual_termination` and `procedure_turn` legs, it is the fix at the start of the leg."
+        },
+        "fly_over": {
+          "description": "The value is `true` when the aircraft is above the fix before it turns onto the next leg. The value is `false` when the aircraft starts the turn before the fix, as at a fly-by fix.",
+          "type": "boolean"
+        },
+        "hold": {
+          "$ref": "#/$defs/Hold",
+          "description": "This field gives the holding pattern that the aircraft flies on a `hold_to_altitude`, `hold_to_fix` or `hold_to_manual_termination` leg. The hold has the fix, the course, the altitude constraint and the speed constraint of the leg. Other leg types shall not have this field."
+        },
+        "leg_type": {
+          "description": "This field gives the type of the leg, as one of the enumerated values. The type gives the path that the aircraft flies and the point at the end of the leg. Each value is a path terminator, and the text of the value gives its code of two letters. An example is `track_to_fix`, which has the code `TF`.",
+          "enum": [
+            "initial_fix",
+            "track_to_fix",
+            "course_to_fix",
+            "direct_to_fix",
+            "fix_to_altitude",
+            "track_from_fix_for_distance",
+            "track_from_fix_to_dme_distance",
+            "fix_to_manual_termination",
+            "course_to_altitude",
+            "course_to_dme_distance",
+            "course_to_intercept",
+            "course_to_radial",
+            "radius_to_fix",
+            "arc_to_fix",
+            "heading_to_altitude",
+            "heading_to_dme_distance",
+            "heading_to_intercept",
+            "heading_to_manual_termination",
+            "heading_to_radial",
+            "procedure_turn",
+            "hold_to_altitude",
+            "hold_to_fix",
+            "hold_to_manual_termination"
+          ],
+          "x-enum-descriptions": {
+            "arc_to_fix": "This value identifies an arc to a fix (`AF`). The aircraft flies an arc at one distance measuring equipment (DME) distance from a navigation aid to the fix of the leg.",
+            "course_to_altitude": "This value identifies a course to an altitude (`CA`). The aircraft flies a given course. The aircraft completes the leg when it is at or above a given altitude, at no given position.",
+            "course_to_dme_distance": "This value identifies a course to a distance measuring equipment (DME) distance (`CD`). The aircraft flies a given course to a given DME distance from a navigation aid.",
+            "course_to_fix": "This value identifies a course to a fix (`CF`). The aircraft flies a given course to the fix of the leg.",
+            "course_to_intercept": "This value identifies a course to intercept the next leg (`CI`). The aircraft flies a given course until it intercepts the next leg.",
+            "course_to_radial": "This value identifies a course to a radial (`CR`). The aircraft flies a given course to a given radial of a very high frequency omnidirectional range (VOR).",
+            "direct_to_fix": "This value identifies a direct-to-fix leg (`DF`). The aircraft flies directly from its position to the fix of the leg.",
+            "fix_to_altitude": "This value identifies a course from a fix to an altitude (`FA`). The aircraft flies a given course from the fix of the leg. The aircraft completes the leg when it is at or above a given altitude.",
+            "fix_to_manual_termination": "This value identifies a course from a fix to a manual termination (`FM`). The aircraft flies a given course from the fix of the leg until a manual termination by the pilot, usually to fly a radar vector.",
+            "heading_to_altitude": "This value identifies a heading to an altitude (`VA`). The aircraft flies a given heading. The aircraft completes the leg when it is at or above a given altitude, at no given position.",
+            "heading_to_dme_distance": "This value identifies a heading to a distance measuring equipment (DME) distance (`VD`). The aircraft flies a given heading to a given DME distance from a navigation aid.",
+            "heading_to_intercept": "This value identifies a heading to intercept the next leg (`VI`). The aircraft flies a given heading until it intercepts the next leg.",
+            "heading_to_manual_termination": "This value identifies a heading to a manual termination (`VM`). The aircraft flies a given heading until a manual termination by the pilot, usually to fly a radar vector.",
+            "heading_to_radial": "This value identifies a heading to a radial (`VR`). The aircraft flies a given heading to a given radial of a very high frequency omnidirectional range (VOR).",
+            "hold_to_altitude": "This value identifies a hold to an altitude (`HA`). The aircraft flies the holding pattern until it is at a given altitude.",
+            "hold_to_fix": "This value identifies a hold to a fix (`HF`). The aircraft flies one circuit of the holding pattern and completes the leg at the holding fix.",
+            "hold_to_manual_termination": "This value identifies a holding pattern to a manual termination (`HM`). The aircraft flies the holding pattern until a manual termination by the pilot.",
+            "initial_fix": "This value identifies an initial fix (`IF`). The procedure or the transition in the procedure data starts at this fix. The leg has no path.",
+            "procedure_turn": "This value identifies a procedure turn (`PI`). From the fix of the leg, the aircraft flies an outbound leg. Then it makes a left turn or a right turn, and a turn of 180 degrees to intercept the next leg.",
+            "radius_to_fix": "This value identifies a radius to a fix (`RF`). The aircraft flies a constant-radius arc around a given centre, from the previous fix to the fix of the leg.",
+            "track_from_fix_for_distance": "This value identifies a track from a fix for a distance (`FC`). From the fix of the leg, the aircraft flies the track over the ground of the leg for a given distance.",
+            "track_from_fix_to_dme_distance": "This value identifies a track from a fix to a distance measuring equipment (DME) distance (`FD`). The aircraft flies the track over the ground of the leg from the fix of the leg. The aircraft completes the leg at a given DME distance from a navigation aid.",
+            "track_to_fix": "This value identifies a track to a fix (`TF`). The aircraft flies a straight track from the previous fix to the fix of the leg."
+          }
+        },
+        "missed_approach": {
+          "description": "The value is `true` when the leg is part of the missed approach procedure.",
+          "type": "boolean"
+        },
+        "recommended_navaid": {
+          "$ref": "#/$defs/NavaidRef",
+          "description": "This field gives the recommended navigation aid: the navigation aid that gives the course, the radial or the distance for the leg."
+        },
+        "speed": {
+          "$ref": "#/$defs/SpeedConstraint",
+          "description": "This field gives the speed constraint at the end of the leg."
+        },
+        "time": {
+          "$ref": "#/$defs/Duration",
+          "description": "This field gives the published flight time of the leg, in minutes."
+        },
+        "turn_direction": {
+          "description": "This field gives the direction of the turn onto this leg, as one of the enumerated values.",
+          "enum": [
+            "left",
+            "right",
+            "either"
+          ],
+          "x-enum-descriptions": {
+            "either": "The aircraft can make a left turn or a right turn onto the leg.",
+            "left": "The aircraft makes a left turn onto the leg.",
+            "right": "The aircraft makes a right turn onto the leg."
+          }
+        },
+        "vertical_angle_deg": {
+          "description": "This field gives the vertical path angle to the fix, in degrees. A value less than zero is a descent.",
+          "maximum": 90,
+          "minimum": -90,
+          "type": "number"
+        }
+      },
+      "required": [
+        "leg_type"
+      ],
+      "type": "object"
+    },
+    "NavaidRef": {
+      "description": "A navigation aid reference is a navigation aid: its identifier and position, or a reference to a navigation aid in the resource catalogue.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "ident": {
+              "description": "This field identifies this navigation aid.",
+              "minLength": 1,
+              "type": "string"
+            },
+            "position": {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+              "description": "This field gives the geographic position of the navigation aid, as latitude and longitude."
+            }
+          },
+          "required": [
+            "ident",
+            "position"
+          ],
+          "type": "object"
+        },
+        {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "x-measure-kinds": [
+            "NAVAID"
+          ]
+        }
+      ]
+    },
+    "SpeedConstraint": {
+      "additionalProperties": false,
+      "description": "A speed constraint is a speed restriction with its type and its speed.",
+      "properties": {
+        "kind": {
+          "description": "This field gives the type of the speed restriction, as one of the enumerated values.",
+          "enum": [
+            "at",
+            "at_or_below",
+            "at_or_above"
+          ],
+          "x-enum-descriptions": {
+            "at": "The aircraft flies at the speed in `value`.",
+            "at_or_above": "The speed is a minimum speed. The aircraft flies at or above the speed in `value`.",
+            "at_or_below": "The speed is a maximum speed. The aircraft flies at or below the speed in `value`."
+          }
+        },
+        "value": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Speed",
+          "description": "This field gives the speed of the restriction, as a speed with its unit."
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "type": "object"
+    },
+    "Transition": {
+      "additionalProperties": false,
+      "description": "A transition is one transition or route segment of a procedure.",
+      "properties": {
+        "ident": {
+          "description": "This field identifies this transition. Examples are the entry fix and the runway. The common route and the final approach do not have this field.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "legs": {
+          "description": "This list contains the legs of the transition, in the sequence of flight, in order.",
+          "items": {
+            "$ref": "#/$defs/Leg"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "legs"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "urn:openaix:schema:procedure:0.1.0-draft.1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "An instrument procedure is a standard instrument departure (SID), a standard terminal arrival route (STAR) or an approach. It is a sequence of legs with altitude constraints and speed constraints.",
+  "properties": {
+    "$schema": {
+      "description": "This field identifies the schema that validates this document.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "airfield": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "description": "This field identifies the airfield at the start or at the end of the procedure. When the airfield has a list of its procedures, the list shall include this procedure.",
+      "x-catalog": "places"
+    },
+    "extensions": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+      "allOf": [
+        {
+          "properties": {
+            "sim": {
+              "properties": {
+                "dcs": {
+                  "properties": {
+                    "bindings": {
+                      "items": {
+                        "properties": {
+                          "kind": {
+                            "enum": [
+                              "drawing"
+                            ]
+                          },
+                          "primitive_type": {
+                            "enum": [
+                              "Polygon",
+                              "Line"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "propertyNames": {
+                    "enum": [
+                      "bindings"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
+    },
+    "id": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "description": "This field identifies this procedure. Other resources and orders use this stable identifier to refer to this procedure."
+    },
+    "ident": {
+      "description": "This field identifies this procedure as published. An example is `I16R`.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "kind": {
+      "const": "procedure",
+      "description": "The value identifies this record as a procedure record. The value selects this navigation contract."
+    },
+    "name": {
+      "description": "This field gives the name of this procedure, for display.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "procedure_type": {
+      "description": "This field gives the type of the procedure, as one of the enumerated values.",
+      "enum": [
+        "departure",
+        "arrival",
+        "approach"
+      ],
+      "x-enum-descriptions": {
+        "approach": "This value identifies an instrument approach procedure, from the initial approach fix to a landing or a missed approach.",
+        "arrival": "This value identifies a standard terminal arrival route (STAR): an instrument flight rules (IFR) route from the en-route structure to the approach.",
+        "departure": "This value identifies a standard instrument departure (SID): an instrument flight rules (IFR) route from the runway to the en-route structure."
+      }
+    },
+    "resources_ref": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
+      "description": "This field identifies the resource catalogue that resolves the references of this procedure. The reference gives the identifier and the revision of the catalogue."
+    },
+    "source": {
+      "description": "This field gives the source of this record. The value gives the authority that publishes the data, and the cycle, for example `FAA CIFP cycle 2610`. A record that an author writes does not have this field.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "transitions": {
+      "description": "This list contains the transitions and common route segments of the procedure. A transition without an identifier is the common route or the final approach.",
+      "items": {
+        "$ref": "#/$defs/Transition"
+      },
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "name",
+    "transitions"
+  ],
+  "title": "Procedure",
+  "type": "object",
+  "x-navigation-profile": "procedure"
+}

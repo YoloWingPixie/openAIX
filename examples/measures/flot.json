@@ -1,0 +1,32 @@
+{
+  "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "description": "Forward line of own troops of the partner land force at the start of the period.",
+  "geometry": {
+    "kind": "line",
+    "points": [
+      {
+        "latitude": 34.835,
+        "longitude": 39.724
+      },
+      {
+        "latitude": 34.855,
+        "longitude": 40.025
+      },
+      {
+        "latitude": 34.815,
+        "longitude": 40.374
+      },
+      {
+        "latitude": 34.835,
+        "longitude": 40.725
+      }
+    ]
+  },
+  "id": "oir-flot",
+  "name": "OIR FLOT",
+  "type": "FLOT"
+}

@@ -1,0 +1,500 @@
+{
+  "aixm-airspace-volume": {
+    "publisher": "AIXM",
+    "title": "AirspaceVolume",
+    "edition": "AIXM 5.1 conceptual reference",
+    "url": "https://aixm.aero/sites/default/files/imce/AIXM51HTML/AIXM/Class_AirspaceVolume.html",
+    "format": "html",
+    "role": "Conceptual reference for component boundaries and vertical limits; geometry and wire formats are not adopted"
+  },
+  "aixm-timesheet": {
+    "publisher": "AIXM",
+    "title": "Timesheet",
+    "edition": "AIXM 5.1 conceptual reference",
+    "url": "https://aixm.aero/sites/default/files/imce/AIXM51HTML/AIXM/Class_Timesheet.html",
+    "format": "html",
+    "role": "Recurring schedule, time-reference and exclusion concepts; no AIXM encoding adoption"
+  },
+  "alssa-air-control-2021": {
+    "publisher": "Air Land Sea Space Application Center",
+    "title": "Air Control Communication",
+    "edition": "ATP 3-52.4 / MCRP 3-20F.10 / NTTP 6-02.9 / AFTTP 3-2.8, 2 September 2021; superseded by the 9 October 2024 edition",
+    "url": "https://web.archive.org/web/20230331143720id_/https://www.alsa.mil/Portals/9/Documents/mttps/acc_2021.pdf",
+    "format": "pdf",
+    "sha256": "d93eb03cf7ccecfed76e09c1fc78b2cfd848b620339692df1149b4974dba795d",
+    "role": "IMPACT time for friendly surface-to-air fires in a joint or fighter engagement zone (Chapter IV paragraph 8.b(7)(a), page 27). Archived copy of the alsa.mil publication"
+  },
+  "alssa-air-control-2024": {
+    "publisher": "Air Land Sea Space Application Center",
+    "title": "Air Control Communication",
+    "edition": "ATP 3-52.4 / MCRP 3-20F.10 / NTTP 6-02.9 / AFTTP 3-2.8, 9 October 2024",
+    "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN44804-ATP_3-52.4-001-WEB-3.pdf",
+    "format": "pdf",
+    "sha256": "1da1145cf9077eff7625da1dc092fa1f90d71e7f2eb46d753fad4b6f8db29bca",
+    "role": "BULLSEYE reference point, Chapter IV section 4 paragraph a, page 26"
+  },
+  "alssa-brevity-2023": {
+    "publisher": "Air Land Sea Space Application Center",
+    "title": "Multi-Service Brevity Codes",
+    "edition": "ATP 1-02.1 / MCRP 3-30B.1 / NTTP 6-02.1 / AFTTP 3-2.5, 7 March 2023",
+    "url": "https://web.archive.org/web/20240124210015id_/https://irp.fas.org/doddir/army/atp1-02-1.pdf",
+    "format": "pdf",
+    "sha256": "cecd5b6fb01b819688207add7d845023200a1ee2b633e1b7ab523776b6562c9c",
+    "role": "Brevity terms: COMMIT (page 11), REDWOOD (page 34). Archived copy of the publication"
+  },
+  "alssa-kill-box-2009": {
+    "publisher": "Air Land Sea Application Center",
+    "title": "Multi-Service Tactics, Techniques, and Procedures for Kill Box Employment",
+    "edition": "FM 3-09.34 / MCRP 3-25H / NTTP 3-09.2.1 / AFTTP 3-2.59, 4 August 2009",
+    "format": "pdf",
+    "sha256": "a96e3106cd256e6a68b0c0431d047db7c0ddd121a62cc55a7875856a5d3f4e47",
+    "role": "Kill box types, airspace, lifecycle and status terms (Chapter I paragraphs 2.b and 2.c(2), pages 1-2; Chapter III paragraphs 2-3, pages 11-14). Cited by locator and paraphrased; openAIX quotes no wording from it. No public URL recorded"
+  },
+  "army-adp-3-90-2019": {
+    "publisher": "Department of the Army",
+    "title": "Offense and Defense",
+    "edition": "ADP 3-90, 31 July 2019",
+    "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN34828-ADP_3-90-000-WEB-1.pdf",
+    "format": "pdf",
+    "sha256": "0993765358d4c4d3c92c4bc3fc5956118e82c18f4db7379e4d4d20d493bf317b",
+    "role": "Engagement area definition, paragraph 2-54, page 2-12"
+  },
+  "army-fm-1-02-1-2026": {
+    "publisher": "Department of the Army",
+    "title": "Operational Terms",
+    "edition": "FM 1-02.1, May 2026 (page footers 30 May 2026)",
+    "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN46659-FM_1-02.1-000-WEB-1.pdf",
+    "format": "pdf",
+    "sha256": "47a099c25c944f1b4eeedaf75d87930a875a54379be9dcaf9c8bdfe1ab232642",
+    "role": "Army and joint term cross-check: assembly area page 7, battle position page 10, boundary page 11, limit of advance, line of contact and line of departure page 56, named area of interest page 63, objective page 65, phase line page 70, target area of interest page 89, target reference point page 90, fire support station page 39"
+  },
+  "army-fm-1-02-2-2025": {
+    "publisher": "Department of the Army",
+    "title": "Military Symbols",
+    "edition": "FM 1-02.2, 23 January 2025, including Change 1 of 13 August 2025",
+    "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN44621-FM_1-02.2-001-WEB-3.pdf",
+    "format": "pdf",
+    "sha256": "fc4382f5dda8e9c8208c1214ccd7e4295c5d689e0fa4a7107127f99ab7b427bb",
+    "role": "Symbol family of each ground graphic (Chapter 5): boundaries paragraph 5-14 and Table 5-3, pages 152 and 153; area control measures Table 5-4, pages 155 to 157; battle positions Table 5-5, page 160; line control measures Table 5-8, pages 180 and 182; target points Table 5-25, page 226"
+  },
+  "army-fm-3-09-2024": {
+    "publisher": "Department of the Army",
+    "title": "Fire Support and Field Artillery Operations",
+    "edition": "FM 3-09, 12 August 2024",
+    "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN41659-FM_3-09-000-WEB-2.pdf",
+    "format": "pdf",
+    "sha256": "1fd2a14b86c57f2b7af7d757fd5acba80f0abda59f65e313f5b67526a33303ba",
+    "role": "Kill box types, blue and purple (Appendix B paragraph B-19, page B-8)"
+  },
+  "army-fm-3-21-38-2006": {
+    "publisher": "Department of the Army",
+    "title": "Pathfinder Operations",
+    "edition": "FM 3-21.38, 25 April 2006",
+    "url": "https://archive.org/download/MManuals/Fm3-21-38_2006PathfinderOperations.pdf",
+    "format": "pdf",
+    "sha256": "88c6d277bb736a9a436b47bd47b228702217b42af9e9055925b04d314bbf5861",
+    "role": "Drop zone release methods (CARP, GMRS, VIRS), Chapter 6, pages 6-4 and 6-12; raised angle marker, paragraph 6-48; clear-to-drop signals, paragraph 6-88; code letters, Figure 6-16. Archived copy of the public Army publication"
+  },
+  "army-fm-3-52-2013": {
+    "publisher": "Department of the Army",
+    "title": "Airspace Control",
+    "edition": "FM 3-52, 8 February 2013; superseded",
+    "url": "https://web.archive.org/web/20240906180317id_/https://irp.fas.org/doddir/army/fm3-52.pdf",
+    "format": "pdf",
+    "sha256": "9118d9bc2cf8cbce03bcc22d0b77848881528ff9e407d6b774356552568735d3",
+    "role": "Restricted operations area as a usage of the restricted operations zone type, paragraph D-9, page D-2, and Table B-9, page B-20. Archived copy; the archive serves it compressed, and the hash is of the decompressed PDF"
+  },
+  "army-fm-3-52-2016": {
+    "publisher": "Department of the Army",
+    "title": "Airspace Control",
+    "edition": "FM 3-52, 20 October 2016",
+    "url": "https://web.archive.org/web/20190126174553id_/https://armypubs.army.mil/epubs/DR_pubs/DR_a/pdf/web/FM%203-52%20FINAL%20WEB.pdf",
+    "format": "pdf",
+    "sha256": "8be53c5bddb524bc5ad81f69c4c7f1e695a92f2645842adce753853e29693a32",
+    "role": "Coordinating altitude and coordination level, Appendix B Table B-3, pages B-6 and B-7 (the CA in MSL without lateral limits, the CL in AGL); division-assigned airspace up to the CA, paragraph 3-20, page 3-4; air defence measures, Table B-8, page B-19. Archived copy of the armypubs publication"
+  },
+  "army-fm-3-90-2023": {
+    "publisher": "Department of the Army",
+    "title": "Tactics",
+    "edition": "FM 3-90, 1 May 2023",
+    "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN38160-FM_3-90-000-WEB-1.pdf",
+    "format": "pdf",
+    "sha256": "48f17648df5d1485cd0f07c14486ff894ac8e6433d3f7bb40f583d497e7c5afc",
+    "role": "Minimum-risk route (Appendix A paragraph A-105, page A-34, citing JP 3-52) and current engagement area wording (A-74)"
+  },
+  "army-fm-3-99-2025": {
+    "publisher": "Department of the Army",
+    "title": "Airborne and Air Assault Operations",
+    "edition": "FM 3-99, 6 March 2015, incorporating Change 1 of September 2025",
+    "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN44799-FM_3-99-001-WEB-4.pdf",
+    "format": "pdf",
+    "sha256": "a9637a09c558f77264ac7629c639a561123d0ef90fcdf03df8634a76ca4718a9",
+    "role": "Airdrop methods and loads, paragraphs 5-18 and 5-19 (page 5-4); air movement table, paragraphs 12-35 to 12-37 (page 12-9); lifts, serials and chalks, paragraphs 13-15 to 13-21 (page 13-5); landing formations, Chapter 11"
+  },
+  "army-fm-5-0-2024": {
+    "publisher": "Department of the Army",
+    "title": "Planning and Orders Production",
+    "edition": "FM 5-0, 4 November 2024, including Change 1 of 8 August 2025",
+    "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN44590-FM_5-0-001-WEB-3.pdf",
+    "format": "pdf",
+    "sha256": "d1b5d0e660fd9373954dda356dbbd4f23dcf1d5d173755bb2c9cc95b9d76c774",
+    "role": "OPORD base order format (Appendix D, Figure D-2, pages 204-208, with the annex list on page 208), fragmentary order format (Figure D-5, page 219) and the annex formats (Appendix E, Figures E-1 to E-22, pages 229-337, including Annex W, Figure E-21, page 331). This edition also lists Annex I (Air and Missile Defense, Figure E-9, page 274), which openAIX does not use (see army-fm-6-0-2022)"
+  },
+  "army-fm-6-0-2014": {
+    "publisher": "Department of the Army",
+    "title": "Commander and Staff Organization and Operations",
+    "edition": "FM 6-0, 5 May 2014, Change 1 included; historical public edition",
+    "url": "https://home.army.mil/wood/application/files/8315/5751/8360/FM_6-0_I_Command_and_Staff_Organization_and_Operations.pdf",
+    "format": "pdf",
+    "role": "Fragmentary order format, Figure C-5, C-25; official indexed excerpt inspected"
+  },
+  "army-fm-6-0-2022": {
+    "publisher": "Department of the Army",
+    "title": "Commander and Staff Organization and Operations",
+    "edition": "FM 6-0, May 2022",
+    "url": "https://armypubs.army.mil/epubs/DR_pubs/DR_a/ARN35404-FM_6-0-000-WEB-1.pdf",
+    "format": "pdf",
+    "sha256": "0cb5416178687bf4353b3494bc70f2bb9034bd4627a28bc482a41a9c030b92b2",
+    "role": "Staff responsibility for each OPORD annex (Chapter 2, paragraphs 2-50 to 2-140), including Annex W (paragraph 2-59) and Appendix 7 (Air and Missile Defense) of Annex D (paragraph 2-83, page 2-18). This edition moves the order formats to FM 5-0"
+  },
+  "dcs-f16c-early-access-guide-2026": {
+    "publisher": "Eagle Dynamics",
+    "title": "DCS: F-16C Viper Early Access Guide",
+    "edition": "English, updated 16 August 2026, as installed with DCS World",
+    "format": "pdf",
+    "sha256": "b26f89b715cd130f82798a2e8973a1b7dd52b4366007feb4c7a29677f248e7c5",
+    "role": "Simulator data, not doctrine: ALIC codes, system and radar designations and radar types of Appendix B (page 749); HARM table RWR symbols (page 657). Read from Mods/aircraft/F-16C/Doc/DCS F-16C Early Access Guide EN.pdf of the owner's DCS installation"
+  },
+  "dod-civil-sar-2017": {
+    "publisher": "Department of Defense",
+    "title": "DoD Support to Civil Search and Rescue (SAR)",
+    "edition": "DoDI 3003.01, 26 September 2011, incorporating Change 1 on 12 May 2017",
+    "url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/300301p.pdf",
+    "format": "pdf",
+    "role": "Glossary page 12, civil search and rescue in a permissive environment; official indexed excerpt inspected"
+  },
+  "ecfr-14-cfr-91-215-2026": {
+    "publisher": "Office of the Federal Register",
+    "title": "14 CFR 91.215, ATC transponder and altitude reporting equipment and use",
+    "edition": "Electronic Code of Federal Regulations, Title 14 current to 1 October 2026, read 3 October 2026",
+    "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-91/subpart-C/section-91.215",
+    "format": "html",
+    "role": "Regulatory basis of the Mode C veil, paragraph (b)(2); the regulation does not use the words Mode C veil"
+  },
+  "eu-sera-923-2012-2025": {
+    "publisher": "European Union",
+    "title": "Commission Implementing Regulation (EU) No 923/2012 (standardised European rules of the air)",
+    "edition": "Consolidated text 02012R0923-20250501, 1 May 2025",
+    "url": "https://web.archive.org/web/20251130114339id_/https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:02012R0923-20250501",
+    "format": "pdf",
+    "sha256": "f7a229967c04f5808c4ea3b0539c66be20818e8615d14ae9dc13d4e1a8107ad6",
+    "role": "RMZ and TMZ definitions, Article 2 points 106 and 136, consolidated pages 13 and 16; operating rules SERA.6005(a), (b) and (d), page 42. Archived copy of the EUR-Lex text, because EUR-Lex refuses automated downloads"
+  },
+  "faa-aim-2026": {
+    "publisher": "Federal Aviation Administration",
+    "title": "Aeronautical Information Manual",
+    "edition": "Basic of 20 February 2025 with Changes 1, 2 and 3 (Change 3 effective 9 July 2026)",
+    "url": "https://www.faa.gov/air_traffic/publications/media/AIM_Basic_w_Chg_1_and_2_and_3_dtd_7-9-26_FINAL.pdf",
+    "format": "pdf",
+    "sha256": "8b11e7a168e1ef9ea16853b8ab7b3353f01490dffb51f2736a0a72e6278f8ff5",
+    "role": "Civil airspace definitions: Mode C veil 3-2-3b6, page 3-2-3; MOA 3-4-5a, page 3-4-2; CFA 3-4-7, page 3-4-2; NSA 3-4-8, page 3-4-3; TFR 3-5-3, page 3-5-3; TRSA 3-5-6, page 3-5-9; SFRA 3-5-7b, page 3-5-10"
+  },
+  "faa-aip-msa": {
+    "publisher": "Federal Aviation Administration",
+    "title": "United States AIP, ENR 1.5 Holding, Approach, and Departure Procedures",
+    "edition": "Public online edition inspected 2 October 2026",
+    "url": "https://www.faa.gov/air_traffic/publications/atpubs/aip_html/part2_enr_section_1.5.html",
+    "format": "html",
+    "role": "Minimum safe altitude center, sector, radius and altitude concepts"
+  },
+  "faa-cifp-2610": {
+    "publisher": "Federal Aviation Administration",
+    "title": "Coded Instrument Flight Procedures",
+    "edition": "AIRAC 2610, effective 1 October 2026",
+    "url": "https://aeronav.faa.gov/Upload_313-d/cifp/CIFP_261001.zip",
+    "format": "zip",
+    "sha256": "6a84a58d92c598b8effe7daabb85443e90ac216ccc148890df8f13590e5c1b8b",
+    "role": "First-party fixed-width civil navigation records"
+  },
+  "faa-h-8083-16b-2017": {
+    "publisher": "Federal Aviation Administration",
+    "title": "Instrument Procedures Handbook",
+    "edition": "FAA-H-8083-16B, 2017 (signed 14 September 2017; current edition on faa.gov, 3 October 2026)",
+    "url": "https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/instrument_procedures_handbook/FAA-H-8083-16B.pdf",
+    "format": "pdf",
+    "sha256": "67bee284221e2748c426a99793c332fe9f57018b9858f77b911675c814a03e91",
+    "role": "The 23 path and terminator leg types with their uses (Chapter 6, Path and Terminator Legs, pages 6-5 to 6-9, figures 6-5 to 6-25); the only FAA publication read that defines FC, FD, CD, CR, AF, VD, VR, PI, HA and HF"
+  },
+  "faa-instrument-procedures-handbook": {
+    "publisher": "Federal Aviation Administration",
+    "title": "Instrument Procedures Handbook",
+    "edition": "2007, historical FAA handbook; Appendix A",
+    "url": "https://www.govinfo.gov/content/pkg/GOVPUB-TD4-PURL-LPS101480/pdf/GOVPUB-TD4-PURL-LPS101480.pdf",
+    "format": "pdf",
+    "sha256": "fa4ca6aff6bcf1db12db257a396fa17eb4e0ca07222b21a4da23883d6f65bf82",
+    "role": "Public navigation database field examples, Figure A-5 and pages A-5 through A-7; not a complete record dictionary"
+  },
+  "faa-jo-7400-2r-2026": {
+    "publisher": "Federal Aviation Administration",
+    "title": "Procedures for Handling Airspace Matters",
+    "edition": "JO 7400.2R, basic of 20 February 2025 with Changes 1, 2 and 3 (9 July 2026)",
+    "url": "https://www.faa.gov/documentLibrary/media/Order/7400.2R_Bsc_w_Chg_1_2_and_3_dtd_7-9-26.pdf",
+    "format": "pdf",
+    "sha256": "2c1ce7c298218e96855f9f3f2dd999a353ac29b85e5abb752d2c4b18644267f4",
+    "role": "Special use airspace types and notes on ATCAA, paragraph 21-1-3, page 21-1-1; ATCAA 21-7-4a, page 21-7-1; MOA 25-1-1; CFA 27-1-1 to 27-1-5, page 27-1-1; NSA 28-1-1 to 28-1-4, page 28-1-1"
+  },
+  "faa-order-8260-19k-2025": {
+    "publisher": "Federal Aviation Administration",
+    "title": "Flight Procedures and Airspace",
+    "edition": "Order 8260.19K, effective 15 January 2025 (current edition on faa.gov, 3 October 2026)",
+    "url": "https://www.faa.gov/documentLibrary/media/Order/Order_8260.19K.pdf",
+    "format": "pdf",
+    "sha256": "43a7c6301c5cebb31412802948ea7ada826e98a35e3ec9d28eb0095618891d92",
+    "role": "Path and terminator concept (paragraph 4-6-4.b, page 4-63) and RNAV leg type descriptions IF, TF, RF, CA, DF, VA, CF, VM, VI and FM (paragraph 4-6-5, pages 4-64 and 4-65)"
+  },
+  "faa-order-8260-3g-2024": {
+    "publisher": "Federal Aviation Administration",
+    "title": "United States Standard for Terminal Instrument Procedures (TERPS)",
+    "edition": "Order 8260.3G, effective 1 July 2024 (current edition on faa.gov, 3 October 2026)",
+    "url": "https://www.faa.gov/documentLibrary/media/Order/Order_8260.3G.pdf",
+    "format": "pdf",
+    "sha256": "ea779404ff8d0cab17c7ff47976b1a45a88b51a9c82f8ba40ad330d574a93550",
+    "role": "Leg type definitions CF, CA and CI (Appendix B, Section 2, items 18 to 20, page B-4), DF (item 30, page B-5), VA and VI (items 59 and 60, page B-7), RF (item 108, page B-12) and TF (item 129, page B-13)"
+  },
+  "faa-order-8260-46k-2024": {
+    "publisher": "Federal Aviation Administration",
+    "title": "Departure Procedure (DP) Program",
+    "edition": "Order 8260.46K, effective 1 July 2024 (current edition on faa.gov, 3 October 2026)",
+    "url": "https://www.faa.gov/documentLibrary/media/Order/Order_8260.46K.pdf",
+    "format": "pdf",
+    "sha256": "a8bfc350e6acfe904fd9ea3a0228d07abcfa0ff0af867508a80f85957c772273",
+    "role": "Permissible RNAV departure leg types CF, DF, VI, VA, VM, HM, TF, RF, FM and IF (paragraph 3-1-6.b, table 3-1-1, pages 3-5 and 3-6), to which Order 8260.58D refers; it defines no leg type"
+  },
+  "faa-order-8260-58d-2025": {
+    "publisher": "Federal Aviation Administration",
+    "title": "United States Standard for Performance Based Navigation (PBN) Instrument Procedure Design",
+    "edition": "Order 8260.58D, effective 15 January 2025; no change issued (current edition on faa.gov, 3 October 2026; cancels 8260.58C)",
+    "url": "https://www.faa.gov/documentLibrary/media/Order/Order_8260.58D.pdf",
+    "format": "pdf",
+    "sha256": "ead3c8e089a88dbde5de0a35a47ad72b9d484a54d408f1b0db15828581f31638",
+    "role": "PBN procedure design use of the IF, TF, RF, DF, CA, VM and FM legs (paragraphs 1-2-5.a(3), page 1-4; 1-2-5.d(3), page 1-20; 2-2-1.a(1), page 2-2; 3-5-2, page 3-34; 5-6-2, page 5-36). It defines no complete leg type list and refers to Order 8260.46, paragraph 3-1-6, for departure leg types"
+  },
+  "faa-pcg-2026": {
+    "publisher": "Federal Aviation Administration",
+    "title": "Pilot/Controller Glossary",
+    "edition": "Basic of 20 February 2025 with Changes 1, 2 and 3 (9 July 2026)",
+    "url": "https://www.faa.gov/air_traffic/publications/media/PCG_Bsc_w_Chg_1_2_and_3_dtd_7-9-26.pdf",
+    "format": "pdf",
+    "sha256": "b30eb2d5cac01f51949c13a41c92facf002edcf94ca8fafac5051497d6dd81e5",
+    "role": "Glossary definitions: ATC assigned airspace, page A-17; special activity airspace, special flight rules area and special use airspace, page S-7; temporary flight restriction and terminal radar service area, page T-3"
+  },
+  "icao-annex-11-2018": {
+    "publisher": "International Civil Aviation Organization",
+    "title": "Annex 11 to the Convention on International Civil Aviation, Air Traffic Services",
+    "edition": "Fifteenth edition, July 2018, consolidated to Amendment 54",
+    "url": "https://www.bazl.admin.ch/dam/en/sd-web/q5pNzgbPZhc4/an11_cons.pdf",
+    "format": "pdf",
+    "sha256": "432e918cf5b642baf4c8439c5602108d6b9e773319832a629d877eadf51dbc8f",
+    "role": "Checked for RMZ and TMZ: Chapter 1 has no such definitions. Paragraph 2.27, page 2-17, makes States set transponder carriage requirements in defined portions of airspace. Copy published by the Swiss Federal Office of Civil Aviation"
+  },
+  "icao-doc-8168-v2-2014": {
+    "publisher": "International Civil Aviation Organization",
+    "title": "Procedures for Air Navigation Services, Aircraft Operations, Volume II: Construction of Visual and Instrument Flight Procedures",
+    "edition": "Doc 8168, Volume II, sixth edition, 2014 (amendments approved before 23 April 2014)",
+    "url": "https://skybrary.aero/sites/default/files/bookshelf/5801.pdf",
+    "format": "pdf",
+    "sha256": "9dd010f9b351ce4290d47304062b63c622c0148d72566a0535e518d89ab43266",
+    "role": "Path terminator definition (Part I, Section 1, Chapter 1, pages I-1-1-7 and I-1-1-8) and the path terminator types IF, TF, DF, CA, CF, FA, FM, HM, RF, VA, VI and VM (Part III, Section 2, Chapter 5, 5.2, pages III-2-5-1 to III-2-5-5). SKYbrary bookshelf copy of the ICAO publication; newer amendments were not read"
+  },
+  "icao-doc-9613-2023": {
+    "publisher": "International Civil Aviation Organization",
+    "title": "Performance-based Navigation (PBN) Manual",
+    "edition": "Doc 9613, fifth edition, 2023; unedited English version",
+    "url": "https://pbnportal.eu/dam/jcr:ca055ef7-5fa7-45e1-b4ee-7319dbc486b6/9613_unedited_en_V5.pdf",
+    "format": "pdf",
+    "sha256": "d06e3fdd7cc2c24adcd174f997aace1b860eea6c64fbd5410be4ab2ccddae8e4",
+    "role": "Path terminator names CA, CF, DF, FA, FM, RF, TF, VA, VI and VM (Abbreviations and acronyms, pages xxiii to xxv); RNAV 1 and RNAV 2 leg transitions (Volume II, Part B, Chapter 3, page II-B-3-16, item g). Copy posted by the EUROCONTROL PBN portal"
+  },
+  "joint-dod-dictionary-2021": {
+    "publisher": "Joint Chiefs of Staff",
+    "title": "DOD Dictionary of Military and Associated Terms",
+    "edition": "As of November 2021",
+    "url": "https://web.archive.org/web/20211125185612id_/https://www.jcs.mil/Portals/36/Documents/Doctrine/pubs/dictionary.pdf",
+    "format": "pdf",
+    "sha256": "c5dd903fab3ef3a65c50cf99f605f46347856f844a81ea401c0ef1072f6c55ac",
+    "role": "Corroborating joint definitions: fire support area page 82, fire support station page 83, restrictive fire line page 186, boundary page 27, line of departure page 131, phase line page 168, target reference point page 212; BCL appears only as an abbreviation, page 247. Last PDF edition on jcs.mil, archived copy"
+  },
+  "joint-jp-3-01-2012": {
+    "publisher": "Joint Chiefs of Staff",
+    "title": "Countering Air and Missile Threats",
+    "edition": "JP 3-01, 23 March 2012; superseded (current edition 6 April 2023 not retrievable)",
+    "url": "https://defenseinnovationmarketplace.dtic.mil/wp-content/uploads/2018/02/JointDoctrine-CounteringAirandMissileThreats.pdf",
+    "format": "pdf",
+    "sha256": "03a59a310a48362af8d71f144e4207ca14b466932f386f65a32fc30503c5c8bd",
+    "role": "Weapon engagement zones (Chapter V paragraph 7.b: FEZ, HIMEZ, LOMEZ, JEZ) and air-to-air fighter interception (Chapter V paragraph 11.f(2), page V-26)"
+  },
+  "joint-jp-3-01-2017": {
+    "publisher": "Joint Chiefs of Staff",
+    "title": "Countering Air and Missile Threats",
+    "edition": "JP 3-01, 21 April 2017, validated 2 May 2018",
+    "url": "https://web.archive.org/web/20220122150304id_/https://www.jcs.mil/Portals/36/Documents/Doctrine/pubs/jp3_01.pdf",
+    "format": "pdf",
+    "sha256": "ad9f2149ee4688a5f50073b768d4206a186ffe2e2eb44e19f34f941ecde424fe",
+    "role": "Types of missile engagement zone (HIMEZ, LOMEZ and SHORADEZ), Chapter V paragraph 7.b(2)(c)1, page V-9; glossary pages GL-11 to GL-14. Archived copy of the jcs.mil publication"
+  },
+  "joint-jp-3-02-2019": {
+    "publisher": "Joint Chiefs of Staff",
+    "title": "Amphibious Operations",
+    "edition": "JP 3-02, 4 January 2019",
+    "url": "https://web.archive.org/web/20190626010335id_/https://www.jcs.mil/Portals/36/Documents/Doctrine/pubs/jp3_02.pdf",
+    "format": "pdf",
+    "sha256": "d83a29ba8b3067af83e3f2626468f17665a3fa44db10e0d40adb1dbbe878ff97",
+    "role": "Fire support station definition, glossary page GL-13; fire support areas and stations in the landing area, Chapter IV paragraph 15.c(7), page IV-23. Archived copy of the jcs.mil publication"
+  },
+  "joint-jp-3-09": {
+    "publisher": "Joint Chiefs of Staff",
+    "title": "Joint Fire Support",
+    "edition": "JP 3-09, 30 June 2010; superseded by later editions that were not retrievable (jcs.mil HTTP 403)",
+    "url": "https://www.govinfo.gov/content/pkg/GOVPUB-D5-PURL-gpo29331/pdf/GOVPUB-D5-PURL-gpo29331.pdf",
+    "format": "pdf",
+    "sha256": "0d8731992f97a718b0b5ebe5aea55ad9d83d030c7c06588ea6f34f1772324059",
+    "role": "Fire support coordination measures (Appendix A): permissive and restrictive measures, kill boxes and the airspace coordination area; copy from the GPO govinfo federal depository"
+  },
+  "joint-jp-3-09-2019": {
+    "publisher": "Joint Chiefs of Staff",
+    "title": "Joint Fire Support",
+    "edition": "JP 3-09, 10 April 2019",
+    "url": "https://web.archive.org/web/20190626010332id_/https://www.jcs.mil/Portals/36/Documents/Doctrine/pubs/jp3_09.pdf",
+    "format": "pdf",
+    "sha256": "1d111ceb5f2a225ae597af9e3f677065c8f5114bcdd60c3c46303e1bc7fb0e85",
+    "role": "Fire support coordination measures and manoeuvre control measures (Appendix A): permissive and restrictive classes, paragraph 2.a(2)(b), page A-2; BCL 2.b(2), pages A-3 and A-4; RFL 2.c(2), page A-10; FSA and FSS 3.c, page A-13; glossary FSA GL-6, RFL GL-8. Archived copy of the jcs.mil publication; a capture of November 2024 has the same bytes"
+  },
+  "joint-jp-3-09-3-2014": {
+    "publisher": "Joint Chiefs of Staff",
+    "title": "Close Air Support",
+    "edition": "JP 3-09.3, 25 November 2014",
+    "url": "https://web.archive.org/web/20210901042508id_/https://irp.fas.org/doddir/dod/jp3_09_3.pdf",
+    "format": "pdf",
+    "sha256": "cb688a7cc7ce73d2a2812f2eafd623b9fd7bfa39b0eae49fcc5fce61d3796fd9",
+    "role": "Initial point (Chapter III paragraphs 12.c(1), page III-49, and 14.c(3)(a), page III-73); TLE categories (paragraph 11.c(4), Figure III-5, pages III-34 to III-35); types of terminal attack control (12.a, page III-42); 9-line CAS brief (12.c, pages III-49 to III-50); kill box (14.a(1)(e), page III-65); CAS requests and mission data (paragraph 27, pages III-127 to III-132). Archived copy, byte-identical to the local copy used"
+  },
+  "joint-jp-3-30-2019": {
+    "publisher": "Joint Chiefs of Staff",
+    "title": "Joint Air Operations",
+    "edition": "JP 3-30, 25 July 2019, validated 17 September 2021",
+    "url": "https://web.archive.org/web/20220120010939id_/https://www.jcs.mil/Portals/36/Documents/Doctrine/pubs/jp3_30.pdf",
+    "format": "pdf",
+    "sha256": "ea7d85bebf1ee57487343f6ce921891da5d849fec5330a627fff1a9fde709d73",
+    "role": "Air tasking order definition (Glossary, GL-6), ATO contents and execution period (Chapter II paragraph 6.d(1)(b), Chapter III paragraph 6), ACO publication (Chapter II paragraph 3.a). Archived copy of the jcs.mil publication"
+  },
+  "joint-jp-3-52-2004": {
+    "publisher": "Joint Chiefs of Staff",
+    "title": "Joint Doctrine for Airspace Control in the Combat Zone",
+    "edition": "JP 3-52, 30 August 2004; superseded",
+    "url": "https://web.archive.org/web/20090322155210id_/http://www.dtic.mil/doctrine/jel/new_pubs/jp3_52.pdf",
+    "format": "pdf",
+    "sha256": "f9d85fe833fc228407ccde181e72135001616ff4248f3650e4af1143b9fabfdc",
+    "role": "Restricted operations area, Annex B to Appendix C, Figure C-B-1, pages C-B-4 and C-B-20, and glossary page GL-9; earlier meaning of the coordinating altitude, glossary page GL-6. Archived copy of the DTIC publication"
+  },
+  "joint-jp-3-52-2014": {
+    "publisher": "Joint Chiefs of Staff",
+    "title": "Joint Airspace Control",
+    "edition": "JP 3-52, 13 November 2014",
+    "url": "https://web.archive.org/web/20180219015500id_/http://www.jcs.mil:80/Portals/36/Documents/Doctrine/pubs/jp3_52.pdf",
+    "format": "pdf",
+    "sha256": "35483f82db2ced61309131b940103dcb9406e1f1deda2926029d549d96e4a21a",
+    "role": "Coordinating altitude and coordination level, Chapter III paragraph 6.d, page III-6; Appendix C, Figure C-3, page C-6; glossary page GL-4; air defence measures, Figure C-7, pages C-13 to C-15. Archived copy of the jcs.mil publication; no later public edition was found"
+  },
+  "nato-ajp-3-3-5": {
+    "publisher": "NATO",
+    "title": "Allied Joint Doctrine for Airspace Control",
+    "edition": "Edition C Version 1, March 2024",
+    "url": "https://assets.publishing.service.gov.uk/media/65eb0ff562ff489bab87b366/AJP_3_3_5_EdC_Airspace.pdf",
+    "format": "pdf",
+    "sha256": "5888f799924f9e2f14727eb54cdebdbfd02668773bfa7c499d2878165226dd98",
+    "role": "Coordination measure definitions and categories (Annex B tables B-1 to B-7 and narrative), zone coordination (paragraph 5.7) and ACMREQ message sets (Annex C)"
+  },
+  "navigraph-dfd-1-14": {
+    "publisher": "Navigraph",
+    "title": "DFD Data Format",
+    "edition": "Version 1.14, public developer documentation inspected 3 October 2026",
+    "url": "https://developers.navigraph.com/docs/navigation-data/dfd-data-format",
+    "format": "html",
+    "role": "First-party provider navigation attributes with references to the industry record format; not the normative field dictionary of that format"
+  },
+  "ogc-cdb-navaids": {
+    "publisher": "Open Geospatial Consortium",
+    "title": "Volume 12: OGC CDB Navaids Attribution and Navaids Attribution Enumeration Values",
+    "edition": "16-003r3, version 1.1, 19 December 2018",
+    "url": "https://docs.ogc.org/bp/16-003r3/16-003r3.pdf",
+    "format": "pdf",
+    "role": "Published navigation attribute meanings, sections 6.27 and 6.32; CDB encoding and geometry are not adopted"
+  },
+  "rcaf-shape-ch5": {
+    "publisher": "Royal Canadian Air Force",
+    "title": "Canadian Forces Aerospace Shape Doctrine, Chapter 5: Command and Control",
+    "edition": "B-GA-403-000/FP-001, official web chapter inspected 2 October 2026; edition date not established",
+    "url": "https://www.canada.ca/en/air-force/corporate/policies-standards/royal-canadian-air-force-doctrine/ad-b-ga-403-000-fp-001-chapter-5.html",
+    "format": "html",
+    "role": "Public concept reference for tasking-cycle products; not an edition-pinned field dictionary"
+  },
+  "usaf-afdp-3-01-2019": {
+    "publisher": "United States Air Force",
+    "title": "Counterair Operations",
+    "edition": "AFDP 3-01, 6 September 2019; superseded by the 15 June 2023 edition, which was not read",
+    "url": "https://web.archive.org/web/20210805133959id_/https://www.doctrine.af.mil/Portals/61/documents/AFDP_3-01/3-01-AFDP-COUNTERAIR.pdf",
+    "format": "pdf",
+    "sha256": "3f811c92025ebdd75c2899187ec664d2f765c64ffb70236daeba63770964d684",
+    "role": "Offensive counterair: SEAD categories, fighter escort and fighter sweep (pages 8-9); ACO contents (page 18); DCA fighters on combat air patrol intercept hostile aircraft (page 36). Archived copy of the doctrine.af.mil publication"
+  },
+  "usaf-afdp-3-03-2020": {
+    "publisher": "United States Air Force",
+    "title": "Counterland Operations",
+    "edition": "AFDP 3-03, 21 October 2020",
+    "url": "https://web.archive.org/web/20220123022136id_/https://www.doctrine.af.mil/Portals/61/documents/AFDP_3-03/3-03-AFDP-COUNTERLAND.pdf",
+    "format": "pdf",
+    "sha256": "344034eaf5265c2f187b29427f96485dc8838a9122f1ad27e80665ea013d3675",
+    "role": "Joint time-sensitive target definition (page 29); kill box purpose, establishment, ACO promulgation and ATO tasking (pages 80-81). Archived copy of the doctrine.af.mil publication"
+  },
+  "usaf-afdp-3-36-2024": {
+    "publisher": "United States Air Force",
+    "title": "Air Mobility Operations",
+    "edition": "AFDP 3-36, 24 June 2024",
+    "url": "https://www.doctrine.af.mil/Portals/61/documents/AFDP_3-36/3-36-AFDP-MOBILITY-OPS.pdf",
+    "format": "pdf",
+    "role": "Airlift, air refueling, aeromedical evacuation and air mobility support distinctions; official indexed excerpts and doctrine smartbook inspected"
+  },
+  "usaf-afdp-3-36-airlift-effects-2019": {
+    "publisher": "United States Air Force",
+    "title": "Air Mobility Operations: Airlift Effects",
+    "edition": "AFDP 3-36 chapter, last updated 28 June 2019; historical public edition",
+    "url": "https://www.doctrine.af.mil/Portals/61/documents/AFDP_3-36/3-36-D19-Mobility-Airlift-Effect.pdf",
+    "format": "pdf",
+    "role": "Page 44, airlift support for aeromedical evacuation, humanitarian relief and noncombatant evacuation; official indexed excerpt inspected"
+  },
+  "usaf-afdp-3-50-csar-2020": {
+    "publisher": "United States Air Force",
+    "title": "Personnel Recovery: Combat Search and Rescue",
+    "edition": "AFDP 3-50 chapter, last updated 18 March 2020; historical public edition",
+    "url": "https://www.doctrine.af.mil/Portals/61/documents/AFDP_3-50/3-50-D03-Recovery-CSAR.pdf",
+    "format": "pdf",
+    "role": "Page 15, Combat Search and Rescue; distinguishes combat recovery from civil search and rescue and casualty evacuation"
+  },
+  "usaf-afdp-3-60-2021": {
+    "publisher": "United States Air Force",
+    "title": "Targeting",
+    "edition": "AFDP 3-60, 12 November 2021",
+    "url": "https://web.archive.org/web/20211202030101id_/https://www.doctrine.af.mil/Portals/61/documents/AFDP_3-60/3-60-AFDP-TARGETING.pdf",
+    "format": "pdf",
+    "sha256": "e922750d3da42b7ce2068b959a64b397489c27752342c8bdc3c1f62512292c1f",
+    "role": "JIPTL in the joint targeting cycle (Chapter 1, page 8); dynamic target categories and F2T2EA (pages 25-27); TST engagement authority (page 30); basic encyclopedia number system (page 36); target development, draft JIPTL and cut line (pages 47-49). Archived copy of the doctrine.af.mil publication"
+  },
+  "xplane-mora-1150": {
+    "publisher": "Laminar Research",
+    "title": "Navigation Data for Minimum Off Route Altitudes File Specification",
+    "edition": "1150, 22 March 2020",
+    "url": "https://developer.x-plane.com/wp-content/uploads/2020/03/XP-MORA1150-Spec.pdf",
+    "format": "pdf",
+    "role": "First-party simulator grid specification that refers to section 5.143 of version 18 of the industry record format; not the normative field dictionary of that format"
+  }
+}

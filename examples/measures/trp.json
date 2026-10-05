@@ -1,0 +1,19 @@
+{
+  "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "description": "Target reference point at the road junction south-east of the Cobalt vehicle park; Axeman gives Cobalt targets as offsets from it.",
+  "id": "trp-01",
+  "name": "TRP 01",
+  "position": {
+    "latitude": 35.091,
+    "longitude": 40.318
+  },
+  "position_description": "Road junction south-east of the revetted vehicle park in the Cobalt compound.",
+  "roles": [
+    "target_reference"
+  ],
+  "type": "POINT"
+}

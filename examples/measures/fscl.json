@@ -1,0 +1,31 @@
+{
+  "$schema": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "coordination_instructions": [
+    "Fires short of the line that may affect the land force are coordinated with its fire support element."
+  ],
+  "description": "Fire support coordination line set by the partner land force north of the FLOT; the Cobalt and Onyx kill boxes lie beyond it.",
+  "geometry": {
+    "kind": "line",
+    "points": [
+      {
+        "latitude": 35.025,
+        "longitude": 39.725
+      },
+      {
+        "latitude": 35.03,
+        "longitude": 40.125
+      },
+      {
+        "latitude": 35.025,
+        "longitude": 40.725
+      }
+    ]
+  },
+  "id": "oir-fscl",
+  "name": "OIR FSCL",
+  "type": "FSCL"
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "altitude": {
+    "lower": {
+      "reference": "MSL",
+      "unit": "ft",
+      "value": 8000
+    },
+    "upper": {
+      "reference": "MSL",
+      "unit": "ft",
+      "value": 10000
+    }
+  },
+  "description": "Rear-area transit corridor from the Jordanian bases to the Juniper ingress gate, routing aircraft through friendly air defences.",
+  "geometry": {
+    "kind": "corridor",
+    "points": [
+      {
+        "latitude": 32.025,
+        "longitude": 37.003
+      },
+      {
+        "latitude": 32.807,
+        "longitude": 37.775
+      },
+      {
+        "latitude": 33.59,
+        "longitude": 38.552
+      }
+    ],
+    "width": {
+      "unit": "nm",
+      "value": 5
+    }
+  },
+  "id": "silver-tc",
+  "name": "Silver transit corridor",
+  "purpose": "Route inbound and outbound traffic past the Granite missile engagement zone with minimum risk.",
+  "restrictions": [
+    "Air traffic services are not provided inside the corridor."
+  ],
+  "type": "TC"
+}

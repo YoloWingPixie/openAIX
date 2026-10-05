@@ -1,0 +1,43 @@
+{
+  "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "center": {
+          "latitude": 32.7,
+          "longitude": 38.4
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 25
+        }
+      },
+      "id": "sentinel-block",
+      "lower_limit": {
+        "reference": "FL",
+        "unit": "flight_level",
+        "value": 270
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "FL",
+        "unit": "flight_level",
+        "value": 310
+      }
+    }
+  ],
+  "description": "Airborne early warning area over eastern Jordan around the Sentinel surveillance orbit.",
+  "id": "sentinel-aewa",
+  "name": "Sentinel early warning area",
+  "purpose": "Reserve airspace for the airborne early warning aircraft.",
+  "type": "AEWA"
+}

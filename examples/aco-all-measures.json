@@ -1,0 +1,1920 @@
+{
+  "$schema": "urn:openaix:schema:aco:0.1.0-draft.1",
+  "assignments": [
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "desert-atcaa",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "juniper-field-class-b",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "cedar-strip-class-d",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "desert-moa",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "sierra-mta",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "mesquite-tfr",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "shell-aara",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T14:30:00Z",
+        "start": "2026-10-02T13:30:00Z"
+      },
+      "measure": "anvil-aca",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "sentinel-aewa",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "oir-aor",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "bastion-basin-boundary",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "bastion-bullseye",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "cobalt-buffer",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "bastion-ca",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "oir-cl",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "dagger-cp",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "silver-gate",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "oir-flot",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "oir-fscl",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "basin-hidacz",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "bolt-ip",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "kestrel-isr",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T14:30:00Z",
+        "start": "2026-10-02T13:30:00Z"
+      },
+      "measure": "onyx-box",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "pl-brass",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "pl-zinc",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "granite-mez",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T14:00:00Z",
+        "start": "2026-10-02T13:40:00Z"
+      },
+      "measure": "kestrel-misarc",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T14:30:00Z",
+        "start": "2026-10-02T13:30:00Z"
+      },
+      "measure": "bastion-mrr",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "quarry-nfa",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "lantern-nfz",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "pl-nickel",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "juniper-wash-rfa",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:30:00Z"
+      },
+      "measure": "pewter-rfl",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T14:45:00Z",
+        "start": "2026-10-02T13:15:00Z"
+      },
+      "measure": "anvil-roz",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "sage-shoradez",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "silver-tc",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "granite-tl",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "trp-01",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "tiger-orbit",
+      "role": "cap",
+      "state": "active"
+    }
+  ],
+  "kind": "aco",
+  "meta": {
+    "id": "measure-examples",
+    "revision": "1",
+    "title": "All measure contracts: the OIR measures and the US civil airspace types"
+  },
+  "period": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "resources": {
+    "control_measures": {
+      "anvil-aca": {
+        "$schema": "urn:openaix:schema:measure-aca:0.1.0-draft.1",
+        "aca_kind": "formal",
+        "active": {
+          "end": "2026-10-02T14:30:00Z",
+          "start": "2026-10-02T13:30:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T14:30:00Z",
+              "start": "2026-10-02T13:30:00Z"
+            },
+            "geometry": {
+              "kind": "corridor",
+              "points": [
+                {
+                  "latitude": 34.975,
+                  "longitude": 40.024
+                },
+                {
+                  "latitude": 35.095,
+                  "longitude": 40.446
+                }
+              ],
+              "width": {
+                "unit": "nm",
+                "value": 2
+              }
+            },
+            "id": "anvil-baseline",
+            "lower_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 9000
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 12000
+            }
+          }
+        ],
+        "description": "Formal airspace coordination area along the Anvil battery's line of fire into Onyx; aircraft inside it are reasonably safe from the surface fires.",
+        "id": "anvil-aca",
+        "name": "Anvil ACA",
+        "type": "ACA"
+      },
+      "anvil-roz": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T14:45:00Z",
+          "start": "2026-10-02T13:15:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T14:45:00Z",
+              "start": "2026-10-02T13:15:00Z"
+            },
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 34.935,
+                    "longitude": 39.954
+                  },
+                  {
+                    "latitude": 34.935,
+                    "longitude": 40.065
+                  },
+                  {
+                    "latitude": 35.005,
+                    "longitude": 40.065
+                  },
+                  {
+                    "latitude": 35.005,
+                    "longitude": 39.954
+                  },
+                  {
+                    "latitude": 34.935,
+                    "longitude": 39.954
+                  }
+                ]
+              ]
+            },
+            "id": "anvil-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 12000
+            }
+          }
+        ],
+        "coordination_instructions": [
+          "Request transit from Banshee; expect to hold at Bolt until the battery checks fire."
+        ],
+        "description": "Restricted Operating Zone around the Anvil HIMARS firing point while it fires into the Onyx kill box.",
+        "id": "anvil-roz",
+        "name": "Anvil fires ROZ",
+        "notes": "Hot 1315Z to 1445Z; expect short-notice extension for troops in contact.",
+        "purpose": "Protect aircraft from the surface fires of the Anvil battery.",
+        "restrictions": [
+          "Aircraft other than the Anvil observation flight remain outside while the zone is active."
+        ],
+        "type": "ROZ"
+      },
+      "basin-hidacz": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 35.035,
+                    "longitude": 39.825
+                  },
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.175
+                  },
+                  {
+                    "latitude": 35.335,
+                    "longitude": 40.175
+                  },
+                  {
+                    "latitude": 35.335,
+                    "longitude": 39.825
+                  },
+                  {
+                    "latitude": 35.035,
+                    "longitude": 39.825
+                  }
+                ]
+              ]
+            },
+            "id": "basin-main",
+            "lower_limit": {
+              "surface": true
+            },
+            "name": "Objective area",
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 17000
+            }
+          },
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 35.195,
+                "longitude": 40.075
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 3
+              }
+            },
+            "id": "lantern-cutout",
+            "lower_limit": {
+              "surface": true
+            },
+            "name": "Lantern exclusion",
+            "operation": "subtract",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 10000
+            }
+          }
+        ],
+        "coordination_instructions": [
+          "Check in on the Basin control frequency 10 nm before the boundary."
+        ],
+        "description": "High-density airspace control zone over the northern objective area, where helicopters, observation drones and fires are concentrated; the Lantern no-fly zone is cut out of it.",
+        "id": "basin-hidacz",
+        "name": "Basin HIDACZ",
+        "purpose": "Coordinate the concentrated objective-area users under one controlling agency.",
+        "restrictions": [
+          "Enter only with a clearance from the Basin airspace control element."
+        ],
+        "type": "HIDACZ"
+      },
+      "bastion-basin-boundary": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "Fires across the boundary are coordinated with the adjacent task force."
+        ],
+        "description": "Lateral boundary between Task Force Bastion to the east and Task Force Basin to the west, from PL BRASS to PL ZINC.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 34.835,
+              "longitude": 40.126
+            },
+            {
+              "latitude": 35.025,
+              "longitude": 40.125
+            }
+          ]
+        },
+        "id": "bastion-basin-boundary",
+        "name": "Task Force Bastion and Task Force Basin boundary",
+        "type": "BOUNDARY"
+      },
+      "bastion-bullseye": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "continuous": true
+        },
+        "description": "OIR bullseye for bearing and range calls; bearings from it are magnetic.",
+        "id": "bastion-bullseye",
+        "name": "Bastion",
+        "position": {
+          "latitude": 34.735,
+          "longitude": 40.326
+        },
+        "roles": [
+          "bullseye"
+        ],
+        "type": "POINT"
+      },
+      "bastion-ca": {
+        "$schema": "urn:openaix:schema:measure-cl:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "Coordinate with Warhawk and Darkstar before flying or firing through 11000 feet MSL inside the Task Force Bastion area.",
+          "No coordinating altitude applies beyond the FSCL or inside an open kill box."
+        ],
+        "description": "Coordinating altitude over Task Force Bastion, from the boundary to the RFL and from PL BRASS to the FSCL; Warhawk controls the assigned airspace below it, and Darkstar the airspace above it.",
+        "geometry": {
+          "kind": "vertical",
+          "level": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 11000
+          }
+        },
+        "id": "bastion-ca",
+        "name": "OIR coordinating altitude",
+        "type": "CA"
+      },
+      "bastion-mrr": {
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T14:30:00Z",
+          "start": "2026-10-02T13:30:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 300
+          },
+          "upper": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 1500
+          }
+        },
+        "description": "Low-level minimum-risk route from Cedar across the forward line of own troops for helicopter and low-flying traffic.",
+        "geometry": {
+          "kind": "corridor",
+          "points": [
+            {
+              "latitude": 33.59,
+              "longitude": 39.002
+            },
+            {
+              "latitude": 34.372,
+              "longitude": 40.225
+            },
+            {
+              "latitude": 34.835,
+              "longitude": 40.627
+            },
+            {
+              "latitude": 34.935,
+              "longitude": 40.574
+            }
+          ],
+          "width": {
+            "unit": "nm",
+            "value": 2
+          }
+        },
+        "id": "bastion-mrr",
+        "name": "Bastion minimum-risk route",
+        "purpose": "Cross the FLOT with the least known hazard from friendly fires.",
+        "type": "MRR"
+      },
+      "bolt-ip": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Initial point for attack runs into the Cobalt and Onyx kill boxes.",
+        "id": "bolt-ip",
+        "name": "Bolt",
+        "position": {
+          "latitude": 34.935,
+          "longitude": 40.175
+        },
+        "roles": [
+          "initial"
+        ],
+        "type": "POINT"
+      },
+      "cedar-strip-class-d": {
+        "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+        "active": {
+          "continuous": true
+        },
+        "airspace_class_code": "D",
+        "airspace_type": "ClassD",
+        "components": [
+          {
+            "geometry": {
+              "center": {
+                "latitude": 36.7,
+                "longitude": -115.3
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 4
+              }
+            },
+            "id": "cedar-strip",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 6500
+            }
+          }
+        ],
+        "description": "US Class D airspace around the Cedar Strip airfield, from the surface to 2500 feet above it.",
+        "id": "cedar-strip-class-d",
+        "name": "Cedar Strip Class D",
+        "type": "AIRSPACE"
+      },
+      "cobalt-buffer": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.177
+                  },
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.225
+                  },
+                  {
+                    "latitude": 35.155,
+                    "longitude": 40.225
+                  },
+                  {
+                    "latitude": 35.155,
+                    "longitude": 40.177
+                  },
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.177
+                  }
+                ]
+              ]
+            },
+            "id": "cobalt-buffer-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 17000
+            }
+          }
+        ],
+        "description": "Buffer zone separating the Basin HIDACZ from the Cobalt and Onyx kill boxes to the east.",
+        "id": "cobalt-buffer",
+        "name": "Cobalt buffer zone",
+        "purpose": "Keep a lateral buffer between objective-area traffic and kill box attacks.",
+        "type": "BZ"
+      },
+      "dagger-cp": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Contact point where strike flight leads check in with Banshee.",
+        "id": "dagger-cp",
+        "name": "Dagger",
+        "position": {
+          "latitude": 34.785,
+          "longitude": 40.273
+        },
+        "roles": [
+          "control"
+        ],
+        "type": "POINT"
+      },
+      "desert-atcaa": {
+        "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "airspace_type": "ATCAA",
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 36.4,
+                    "longitude": -116.45
+                  },
+                  {
+                    "latitude": 36.4,
+                    "longitude": -116.05
+                  },
+                  {
+                    "latitude": 36.75,
+                    "longitude": -116.05
+                  },
+                  {
+                    "latitude": 36.75,
+                    "longitude": -116.45
+                  },
+                  {
+                    "latitude": 36.4,
+                    "longitude": -116.45
+                  }
+                ]
+              ]
+            },
+            "id": "desert-atcaa-volume",
+            "lower_limit": {
+              "reference": "FL",
+              "unit": "flight_level",
+              "value": 180
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "FL",
+              "unit": "flight_level",
+              "value": 260
+            }
+          }
+        ],
+        "coordination_instructions": [
+          "The using agency requests the ATCAA from the air route traffic control centre; it is not charted."
+        ],
+        "description": "ATC-assigned airspace over the Desert MOA, from flight level 180 to flight level 260; it extends the MOA activity into Class A airspace.",
+        "designator": "DESERT ATCAA",
+        "id": "desert-atcaa",
+        "name": "Desert ATCAA",
+        "type": "AIRSPACE"
+      },
+      "desert-moa": {
+        "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "airspace_type": "MOA",
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 36.4,
+                    "longitude": -116.45
+                  },
+                  {
+                    "latitude": 36.4,
+                    "longitude": -116.05
+                  },
+                  {
+                    "latitude": 36.75,
+                    "longitude": -116.05
+                  },
+                  {
+                    "latitude": 36.75,
+                    "longitude": -116.45
+                  },
+                  {
+                    "latitude": 36.4,
+                    "longitude": -116.45
+                  }
+                ]
+              ]
+            },
+            "id": "desert-moa-volume",
+            "lower_limit": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 500
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "FL",
+              "unit": "flight_level",
+              "value": 180
+            }
+          }
+        ],
+        "description": "US military operations area west of Juniper Field. It ends below flight level 180, and the Desert ATCAA lies above it.",
+        "designator": "DESERT MOA",
+        "id": "desert-moa",
+        "name": "Desert MOA",
+        "restrictions": [
+          "Nonparticipating IFR traffic is cleared through only when ATC separates it."
+        ],
+        "type": "AIRSPACE"
+      },
+      "granite-mez": {
+        "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 34.735,
+                "longitude": 39.924
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 12
+              }
+            },
+            "id": "granite-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 15000
+            }
+          }
+        ],
+        "coordination_instructions": [
+          "Coordinate with the air defence controller before entering; use the Silver transit corridor otherwise."
+        ],
+        "description": "Low- to medium-altitude missile engagement zone around the coalition Granite surface-to-air missile battery.",
+        "id": "granite-mez",
+        "mez_kind": "low",
+        "name": "Granite missile engagement zone",
+        "type": "MEZ"
+      },
+      "granite-tl": {
+        "$schema": "urn:openaix:schema:measure-tl:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Traverse level for crossing the Granite low-level air defence area.",
+        "geometry": {
+          "altitude": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 7500
+          },
+          "height": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 2000
+          },
+          "kind": "vertical"
+        },
+        "id": "granite-tl",
+        "name": "Granite traverse level",
+        "type": "TL"
+      },
+      "juniper-field-class-b": {
+        "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+        "active": {
+          "continuous": true
+        },
+        "airspace_class_code": "B",
+        "airspace_type": "ClassB",
+        "components": [
+          {
+            "geometry": {
+              "center": {
+                "latitude": 36.35,
+                "longitude": -115.25
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 5
+              }
+            },
+            "id": "surface",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 10000
+            }
+          },
+          {
+            "geometry": {
+              "center": {
+                "latitude": 36.35,
+                "longitude": -115.25
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 10
+              }
+            },
+            "id": "inner-shelf",
+            "lower_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 2500
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 10000
+            }
+          },
+          {
+            "geometry": {
+              "center": {
+                "latitude": 36.35,
+                "longitude": -115.25
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 20
+              }
+            },
+            "id": "outer-shelf",
+            "lower_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 5000
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 9000
+            }
+          }
+        ],
+        "description": "US Class B airspace with a surface area and two shelves around Juniper Field; each shelf has its own floor and ceiling.",
+        "id": "juniper-field-class-b",
+        "name": "Juniper Field Class B",
+        "type": "AIRSPACE"
+      },
+      "juniper-wash-rfa": {
+        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Restrictive fire area over a friendly logistics site south of the FLOT.",
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 34.715,
+                "longitude": 40.225
+              },
+              {
+                "latitude": 34.715,
+                "longitude": 40.325
+              },
+              {
+                "latitude": 34.775,
+                "longitude": 40.325
+              },
+              {
+                "latitude": 34.775,
+                "longitude": 40.225
+              },
+              {
+                "latitude": 34.715,
+                "longitude": 40.225
+              }
+            ]
+          ]
+        },
+        "id": "juniper-wash-rfa",
+        "name": "Juniper Wash RFA",
+        "restrictions": [
+          "No improved conventional munitions.",
+          "Fires that exceed these restrictions require coordination with the land force fire support element."
+        ],
+        "type": "RFA"
+      },
+      "kestrel-isr": {
+        "$schema": "urn:openaix:schema:measure-isr:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Identification safety range around the Kestrel surface action group in the eastern Mediterranean, south-east of Cyprus.",
+        "geometry": {
+          "center": {
+            "latitude": 34.35,
+            "longitude": 34.4
+          },
+          "kind": "circle",
+          "radius": {
+            "unit": "nm",
+            "value": 15
+          }
+        },
+        "id": "kestrel-isr",
+        "name": "Kestrel identification safety range",
+        "range": {
+          "unit": "nm",
+          "value": 15
+        },
+        "reference_force": "Kestrel surface action group",
+        "reference_position": {
+          "latitude": 34.35,
+          "longitude": 34.4
+        },
+        "type": "ISR"
+      },
+      "kestrel-misarc": {
+        "$schema": "urn:openaix:schema:measure-misarc:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T14:00:00Z",
+          "start": "2026-10-02T13:40:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "surface": true
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 450
+          }
+        },
+        "axis": {
+          "reference": "true",
+          "value": 45
+        },
+        "center": {
+          "latitude": 34.35,
+          "longitude": 34.4
+        },
+        "description": "Missile arc from the Kestrel destroyer toward an inbound target track from the north-east.",
+        "firing_unit": "Kestrel (Arleigh Burke-class destroyer)",
+        "id": "kestrel-misarc",
+        "name": "Kestrel missile arc",
+        "range": {
+          "unit": "nm",
+          "value": 30
+        },
+        "type": "MISARC",
+        "width_deg": 10
+      },
+      "lantern-nfz": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "continuous": true
+        },
+        "components": [
+          {
+            "geometry": {
+              "center": {
+                "latitude": 35.195,
+                "longitude": 40.075
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 3
+              }
+            },
+            "id": "lantern-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 10000
+            }
+          }
+        ],
+        "description": "No-fly zone over the Lantern village inside the objective area.",
+        "id": "lantern-nfz",
+        "name": "Lantern no-fly zone",
+        "restrictions": [
+          "No aircraft operations except those authorised by Banshee as the enforcing authority."
+        ],
+        "type": "NFZ"
+      },
+      "mesquite-tfr": {
+        "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "airspace_type": "TFR",
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 36.95,
+                "longitude": -114.98
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 5
+              }
+            },
+            "id": "mesquite-tfr-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 8000
+            }
+          }
+        ],
+        "description": "Temporary flight restriction under 14 CFR 91.137 around a wildfire east of Juniper Field.",
+        "designator": "FDC 6/0213",
+        "id": "mesquite-tfr",
+        "name": "Mesquite fire TFR",
+        "restrictions": [
+          "Only aircraft that support the fire suppression enter the TFR."
+        ],
+        "type": "AIRSPACE"
+      },
+      "oir-aor": {
+        "$schema": "urn:openaix:schema:measure-aor:0.1.0-draft.1",
+        "active": {
+          "continuous": true
+        },
+        "description": "Area of responsibility of the CJTF-OIR air component in this order, from eastern Jordan to the Euphrates valley; the airspace control area follows it.",
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 32.54,
+                "longitude": 36.9
+              },
+              {
+                "latitude": 32.54,
+                "longitude": 40.9
+              },
+              {
+                "latitude": 35.8,
+                "longitude": 40.9
+              },
+              {
+                "latitude": 35.8,
+                "longitude": 36.9
+              },
+              {
+                "latitude": 32.54,
+                "longitude": 36.9
+              }
+            ]
+          ]
+        },
+        "id": "oir-aor",
+        "name": "OIR area of responsibility",
+        "type": "AOR"
+      },
+      "oir-cl": {
+        "$schema": "urn:openaix:schema:measure-cl:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Coordination level separating land-component aviation below from fixed-wing traffic above.",
+        "geometry": {
+          "kind": "vertical",
+          "level": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 3500
+          }
+        },
+        "id": "oir-cl",
+        "name": "OIR coordination level",
+        "type": "CL"
+      },
+      "oir-flot": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Forward line of own troops of the partner land force at the start of the period.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 34.835,
+              "longitude": 39.724
+            },
+            {
+              "latitude": 34.855,
+              "longitude": 40.025
+            },
+            {
+              "latitude": 34.815,
+              "longitude": 40.374
+            },
+            {
+              "latitude": 34.835,
+              "longitude": 40.725
+            }
+          ]
+        },
+        "id": "oir-flot",
+        "name": "OIR FLOT",
+        "type": "FLOT"
+      },
+      "oir-fscl": {
+        "$schema": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "Fires short of the line that may affect the land force are coordinated with its fire support element."
+        ],
+        "description": "Fire support coordination line set by the partner land force north of the FLOT; the Cobalt and Onyx kill boxes lie beyond it.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 35.025,
+              "longitude": 39.725
+            },
+            {
+              "latitude": 35.03,
+              "longitude": 40.125
+            },
+            {
+              "latitude": 35.025,
+              "longitude": 40.725
+            }
+          ]
+        },
+        "id": "oir-fscl",
+        "name": "OIR FSCL",
+        "type": "FSCL"
+      },
+      "onyx-box": {
+        "$schema": "urn:openaix:schema:measure-kb:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T14:30:00Z",
+          "start": "2026-10-02T13:30:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T14:30:00Z",
+              "start": "2026-10-02T13:30:00Z"
+            },
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.374
+                  },
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.525
+                  },
+                  {
+                    "latitude": 35.155,
+                    "longitude": 40.525
+                  },
+                  {
+                    "latitude": 35.155,
+                    "longitude": 40.374
+                  },
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.374
+                  }
+                ]
+              ]
+            },
+            "id": "onyx-volume",
+            "lower_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 8000
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 18000
+            }
+          }
+        ],
+        "description": "Purple kill box east of Cobalt for combined air and surface fires against the Cobalt compound and its supply routes.",
+        "grid_label": "Onyx 2, keypad 5",
+        "id": "onyx-box",
+        "killbox_kind": "purple",
+        "name": "Onyx kill box",
+        "restrictions": [
+          "Aircraft remain at or above the 8000 ft MSL floor while the box is open."
+        ],
+        "type": "KB"
+      },
+      "pewter-rfl": {
+        "$schema": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:30:00Z"
+        },
+        "coordination_instructions": [
+          "No fires or their effects across the line without coordination with the affected task force."
+        ],
+        "description": "Restrictive fire line between Task Force Bastion attacking north and Task Force Pewter converging from the east; set by the partner land force, the common commander.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 34.855,
+              "longitude": 40.475
+            },
+            {
+              "latitude": 34.935,
+              "longitude": 40.485
+            },
+            {
+              "latitude": 35.015,
+              "longitude": 40.476
+            }
+          ]
+        },
+        "id": "pewter-rfl",
+        "name": "Bastion and Pewter RFL",
+        "type": "RFL"
+      },
+      "pl-brass": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "Task Force Bastion crosses PL BRASS at 1330Z after the Cobalt kill box opens."
+        ],
+        "description": "Phase line BRASS, designated as the line of departure of Task Force Bastion; it follows the FLOT at the start of the period.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 34.845,
+              "longitude": 40.127
+            },
+            {
+              "latitude": 34.85,
+              "longitude": 40.305
+            },
+            {
+              "latitude": 34.845,
+              "longitude": 40.476
+            }
+          ]
+        },
+        "id": "pl-brass",
+        "name": "PL BRASS",
+        "type": "LD"
+      },
+      "pl-nickel": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "Report PL NICKEL to Warhawk; CAS friendlies lines use the last reported phase line."
+        ],
+        "description": "Phase line NICKEL along the desert road to Deir ez-Zor; Task Force Bastion reports crossing it to Warhawk and Axeman.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 34.925,
+              "longitude": 40.125
+            },
+            {
+              "latitude": 34.92,
+              "longitude": 40.307
+            },
+            {
+              "latitude": 34.925,
+              "longitude": 40.474
+            }
+          ]
+        },
+        "id": "pl-nickel",
+        "name": "PL NICKEL",
+        "type": "PL"
+      },
+      "pl-zinc": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "No Task Force Bastion element advances beyond PL ZINC; security forces may push to it."
+        ],
+        "description": "Phase line ZINC, the limit of advance of Task Force Bastion, short of the FSCL and the Cobalt and Onyx kill boxes.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 35.015,
+              "longitude": 40.125
+            },
+            {
+              "latitude": 35.015,
+              "longitude": 40.476
+            }
+          ]
+        },
+        "id": "pl-zinc",
+        "name": "PL ZINC",
+        "type": "LOA"
+      },
+      "quarry-nfa": {
+        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "No-fire area that protects a civilian water pumping station between the FLOT and the FSCL.",
+        "geometry": {
+          "center": {
+            "latitude": 34.935,
+            "longitude": 40.324
+          },
+          "kind": "circle",
+          "radius": {
+            "unit": "m",
+            "value": 1000
+          }
+        },
+        "id": "quarry-nfa",
+        "name": "Quarry Springs NFA",
+        "restrictions": [
+          "No fires or effects into the area unless the establishing headquarters approves each mission."
+        ],
+        "type": "NFA"
+      },
+      "sage-shoradez": {
+        "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 34.735,
+                "longitude": 40.225
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 2.5
+              }
+            },
+            "id": "sage-shorad-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 8000
+            }
+          }
+        ],
+        "coordination_instructions": [
+          "Helicopters inbound to Sage enter on the Sage FARP approach after the air defence controller confirms weapons hold."
+        ],
+        "description": "Short-range air defence engagement zone over the Sage FARP, where an Avenger platoon has engagement responsibility.",
+        "id": "sage-shoradez",
+        "mez_kind": "short_range",
+        "name": "Sage SHORADEZ",
+        "type": "MEZ"
+      },
+      "sentinel-aewa": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 32.7,
+                "longitude": 38.4
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 25
+              }
+            },
+            "id": "sentinel-block",
+            "lower_limit": {
+              "reference": "FL",
+              "unit": "flight_level",
+              "value": 270
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "FL",
+              "unit": "flight_level",
+              "value": 310
+            }
+          }
+        ],
+        "description": "Airborne early warning area over eastern Jordan around the Sentinel surveillance orbit.",
+        "id": "sentinel-aewa",
+        "name": "Sentinel early warning area",
+        "purpose": "Reserve airspace for the airborne early warning aircraft.",
+        "type": "AEWA"
+      },
+      "shell-aara": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 33.0,
+                    "longitude": 38.85
+                  },
+                  {
+                    "latitude": 33.0,
+                    "longitude": 39.25
+                  },
+                  {
+                    "latitude": 33.12,
+                    "longitude": 39.25
+                  },
+                  {
+                    "latitude": 33.12,
+                    "longitude": 38.85
+                  },
+                  {
+                    "latitude": 33.0,
+                    "longitude": 38.85
+                  }
+                ]
+              ]
+            },
+            "id": "shell-block",
+            "lower_limit": {
+              "reference": "FL",
+              "unit": "flight_level",
+              "value": 170
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "FL",
+              "unit": "flight_level",
+              "value": 210
+            }
+          }
+        ],
+        "description": "Air-to-air refuelling area over the Syria-Iraq-Jordan border triangle, around the Shell tanker track.",
+        "id": "shell-aara",
+        "name": "Shell refuelling area",
+        "purpose": "Reserve a block for tanker and receiver join-ups.",
+        "restrictions": [
+          "Non-refuelling traffic remains clear unless coordinated with Darkstar."
+        ],
+        "type": "AARA"
+      },
+      "sierra-mta": {
+        "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "airspace_type": "MTA",
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 37.85,
+                    "longitude": -116.4
+                  },
+                  {
+                    "latitude": 37.85,
+                    "longitude": -115.9
+                  },
+                  {
+                    "latitude": 38.1,
+                    "longitude": -115.9
+                  },
+                  {
+                    "latitude": 38.1,
+                    "longitude": -116.4
+                  },
+                  {
+                    "latitude": 37.85,
+                    "longitude": -116.4
+                  }
+                ]
+              ]
+            },
+            "id": "sierra-block",
+            "lower_limit": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 500
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 12000
+            }
+          }
+        ],
+        "description": "Military training area north of the Desert MOA for air combat training.",
+        "id": "sierra-mta",
+        "name": "Sierra Training Area",
+        "restrictions": [
+          "Coordinate entry with the scheduling agency."
+        ],
+        "type": "AIRSPACE"
+      },
+      "silver-gate": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Entry and exit gate where recovering and departing aircraft begin their transit in the Silver transit corridor.",
+        "id": "silver-gate",
+        "name": "Silver gate",
+        "position": {
+          "latitude": 32.807,
+          "longitude": 37.775
+        },
+        "roles": [
+          "gate",
+          "ingress",
+          "egress"
+        ],
+        "type": "POINT"
+      },
+      "silver-tc": {
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 8000
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 10000
+          }
+        },
+        "description": "Rear-area transit corridor from the Jordanian bases to the Juniper ingress gate, routing aircraft through friendly air defences.",
+        "geometry": {
+          "kind": "corridor",
+          "points": [
+            {
+              "latitude": 32.025,
+              "longitude": 37.003
+            },
+            {
+              "latitude": 32.807,
+              "longitude": 37.775
+            },
+            {
+              "latitude": 33.59,
+              "longitude": 38.552
+            }
+          ],
+          "width": {
+            "unit": "nm",
+            "value": 5
+          }
+        },
+        "id": "silver-tc",
+        "name": "Silver transit corridor",
+        "purpose": "Route inbound and outbound traffic past the Granite missile engagement zone with minimum risk.",
+        "restrictions": [
+          "Air traffic services are not provided inside the corridor."
+        ],
+        "type": "TC"
+      },
+      "tiger-orbit": {
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 240
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 260
+          }
+        },
+        "description": "Racetrack north-west of the objective area, used first for combat air patrol and then for airborne early warning.",
+        "geometry": {
+          "kind": "racetrack",
+          "leg_length": {
+            "unit": "nm",
+            "value": 20
+          },
+          "point": {
+            "latitude": 35.235,
+            "longitude": 39.625
+          },
+          "radial": {
+            "reference": "true",
+            "value": 90
+          },
+          "turns": "right"
+        },
+        "id": "tiger-orbit",
+        "name": "Tiger",
+        "type": "ORBIT"
+      },
+      "trp-01": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Target reference point at the road junction south-east of the Cobalt vehicle park; Axeman gives Cobalt targets as offsets from it.",
+        "id": "trp-01",
+        "name": "TRP 01",
+        "position": {
+          "latitude": 35.091,
+          "longitude": 40.318
+        },
+        "position_description": "Road junction south-east of the revetted vehicle park in the Cobalt compound.",
+        "roles": [
+          "target_reference"
+        ],
+        "type": "POINT"
+      }
+    }
+  },
+  "schema_version": "0.1.0-draft.1"
+}

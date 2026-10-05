@@ -1,0 +1,63 @@
+{
+  "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "airspace_type": "MOA",
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "kind": "polygon",
+        "rings": [
+          [
+            {
+              "latitude": 36.4,
+              "longitude": -116.45
+            },
+            {
+              "latitude": 36.4,
+              "longitude": -116.05
+            },
+            {
+              "latitude": 36.75,
+              "longitude": -116.05
+            },
+            {
+              "latitude": 36.75,
+              "longitude": -116.45
+            },
+            {
+              "latitude": 36.4,
+              "longitude": -116.45
+            }
+          ]
+        ]
+      },
+      "id": "desert-moa-volume",
+      "lower_limit": {
+        "reference": "AGL",
+        "unit": "ft",
+        "value": 500
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "FL",
+        "unit": "flight_level",
+        "value": 180
+      }
+    }
+  ],
+  "description": "US military operations area west of Juniper Field. It ends below flight level 180, and the Desert ATCAA lies above it.",
+  "designator": "DESERT MOA",
+  "id": "desert-moa",
+  "name": "Desert MOA",
+  "restrictions": [
+    "Nonparticipating IFR traffic is cleared through only when ATC separates it."
+  ],
+  "type": "AIRSPACE"
+}

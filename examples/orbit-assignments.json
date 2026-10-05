@@ -1,0 +1,78 @@
+{
+  "$schema": "urn:openaix:schema:aco:0.1.0-draft.1",
+  "assignments": [
+    {
+      "effective": {
+        "end": "2026-10-02T14:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "tiger-orbit",
+      "role": "cap",
+      "state": "active"
+    },
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T14:00:00Z"
+      },
+      "measure": "tiger-orbit",
+      "purpose": "Surveillance of the northern objective area",
+      "role": "aew",
+      "state": "active"
+    }
+  ],
+  "kind": "aco",
+  "meta": {
+    "id": "tiger-assignments",
+    "revision": "1",
+    "title": "Tiger orbit: patrol then surveillance"
+  },
+  "period": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "resources": {
+    "control_measures": {
+      "tiger-orbit": {
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 240
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 260
+          }
+        },
+        "description": "Racetrack north-west of the objective area, used first for combat air patrol and then for airborne early warning.",
+        "geometry": {
+          "kind": "racetrack",
+          "leg_length": {
+            "unit": "nm",
+            "value": 20
+          },
+          "point": {
+            "latitude": 35.235,
+            "longitude": 39.625
+          },
+          "radial": {
+            "reference": "true",
+            "value": 90
+          },
+          "turns": "right"
+        },
+        "id": "tiger-orbit",
+        "name": "Tiger",
+        "type": "ORBIT"
+      }
+    }
+  },
+  "schema_version": "0.1.0-draft.1"
+}

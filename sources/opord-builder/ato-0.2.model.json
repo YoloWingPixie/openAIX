@@ -1,0 +1,6612 @@
+{
+  "$defs": {
+    "AARTrack": {
+      "additionalProperties": false,
+      "description": "Named Air-to-Air Refueling track. Tanker assignments to the track are\nmade in FRAGOs; the OPORD publishes the enduring geometry + radios.",
+      "properties": {
+        "active_dtg_end": {
+          "anyOf": [
+            {
+              "description": "Military date-time group in DDHHMMZMONYY form (e.g. '181200ZAPR26').",
+              "pattern": "^\\d{6}Z[A-Z]{3}\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Track inactive after this DTG.",
+          "title": "Active Dtg End"
+        },
+        "active_dtg_start": {
+          "anyOf": [
+            {
+              "description": "Military date-time group in DDHHMMZMONYY form (e.g. '181200ZAPR26').",
+              "pattern": "^\\d{6}Z[A-Z]{3}\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Track active from this DTG.",
+          "title": "Active Dtg Start"
+        },
+        "altitude_ceiling_ft": {
+          "description": "Altitude block ceiling (feet MSL).",
+          "title": "Altitude Ceiling Ft",
+          "type": "integer"
+        },
+        "altitude_floor_ft": {
+          "description": "Altitude block floor (feet MSL).",
+          "title": "Altitude Floor Ft",
+          "type": "integer"
+        },
+        "anchor_primary": {
+          "description": "Primary anchor coordinates.",
+          "title": "Anchor Primary",
+          "type": "string"
+        },
+        "anchor_secondary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Secondary anchor (end of track for racetrack tracks).",
+          "title": "Anchor Secondary"
+        },
+        "name": {
+          "description": "Track designator (e.g. 'TRACK ARCO', 'TRACK SHELL').",
+          "title": "Name",
+          "type": "string"
+        },
+        "primary_freq": {
+          "description": "Primary track frequency.",
+          "title": "Primary Freq",
+          "type": "string"
+        },
+        "refueling_method": {
+          "description": "Boom, drogue, or both (track-dependent).",
+          "enum": [
+            "BOOM",
+            "DROGUE",
+            "BOTH"
+          ],
+          "title": "Refueling Method",
+          "type": "string"
+        },
+        "secondary_freq": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Backup / boom-talk frequency.",
+          "title": "Secondary Freq"
+        },
+        "tacan_channel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Track TACAN channel (e.g. '63Y').",
+          "title": "Tacan Channel"
+        },
+        "tanker_types_supported": {
+          "description": "Airframes that can occupy this track (e.g. 'KC-135R', 'KC-46A', 'KC-130J', 'S-3B').",
+          "items": {
+            "type": "string"
+          },
+          "title": "Tanker Types Supported",
+          "type": "array"
+        },
+        "track_heading": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Track heading in degrees true (when not defined by two anchors).",
+          "title": "Track Heading"
+        },
+        "track_length_nm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Track length in nautical miles.",
+          "title": "Track Length Nm"
+        }
+      },
+      "required": [
+        "name",
+        "anchor_primary",
+        "altitude_floor_ft",
+        "altitude_ceiling_ft",
+        "refueling_method",
+        "primary_freq"
+      ],
+      "title": "AARTrack",
+      "type": "object"
+    },
+    "AICSector": {
+      "additionalProperties": false,
+      "description": "Air Intercept Controller sector — sub-sector inside an AWACS orbit's\ncoverage, assigned to a named controller.",
+      "properties": {
+        "controller_callsign": {
+          "description": "Controller callsign.",
+          "title": "Controller Callsign",
+          "type": "string"
+        },
+        "primary_freq": {
+          "description": "Sector primary frequency.",
+          "title": "Primary Freq",
+          "type": "string"
+        },
+        "reports_to": {
+          "description": "Parent AWACS callsign this controller reports to.",
+          "title": "Reports To",
+          "type": "string"
+        },
+        "responsible_geography": {
+          "description": "Sector definition (e.g. '090-180 from BULLSEYE, 0-200nm, 0-45000ft').",
+          "title": "Responsible Geography",
+          "type": "string"
+        },
+        "secondary_freq": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Backup frequency.",
+          "title": "Secondary Freq"
+        },
+        "sector_name": {
+          "description": "Sector designator (e.g. 'SECTOR NORTH', 'RED 1').",
+          "title": "Sector Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sector_name",
+        "controller_callsign",
+        "responsible_geography",
+        "primary_freq",
+        "reports_to"
+      ],
+      "title": "AICSector",
+      "type": "object"
+    },
+    "AWACSOrbit": {
+      "additionalProperties": false,
+      "description": "Persistent AWACS / airborne-C2 orbit. Daily ATO tasks specific airframes\ninto these orbits; the OPORD publishes the station framework.",
+      "properties": {
+        "altitude_ft": {
+          "description": "Orbit altitude (feet MSL).",
+          "title": "Altitude Ft",
+          "type": "integer"
+        },
+        "callsign": {
+          "description": "AWACS callsign (e.g. 'MAGIC', 'OVERLORD', 'DARKSTAR').",
+          "title": "Callsign",
+          "type": "string"
+        },
+        "datalink_channel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Link-16 channel / MIDS net / DCS datalink ID.",
+          "title": "Datalink Channel"
+        },
+        "off_station_dtg": {
+          "anyOf": [
+            {
+              "description": "Military date-time group in DDHHMMZMONYY form (e.g. '181200ZAPR26').",
+              "pattern": "^\\d{6}Z[A-Z]{3}\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Off-station DTG.",
+          "title": "Off Station Dtg"
+        },
+        "on_station_dtg": {
+          "anyOf": [
+            {
+              "description": "Military date-time group in DDHHMMZMONYY form (e.g. '181200ZAPR26').",
+              "pattern": "^\\d{6}Z[A-Z]{3}\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "On-station DTG.",
+          "title": "On Station Dtg"
+        },
+        "orbit_center": {
+          "description": "Orbit center coordinates.",
+          "title": "Orbit Center",
+          "type": "string"
+        },
+        "orbit_radius_nm": {
+          "description": "Orbit radius in nautical miles.",
+          "title": "Orbit Radius Nm",
+          "type": "number"
+        },
+        "owns_bullseye": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Bullseye GeoRef name this orbit publishes (matches a GeoRef entry).",
+          "title": "Owns Bullseye"
+        },
+        "platform": {
+          "description": "Airframe (e.g. 'E-3G Sentry', 'E-2D Hawkeye', 'KJ-2000').",
+          "title": "Platform",
+          "type": "string"
+        },
+        "primary_freq": {
+          "description": "Primary control frequency.",
+          "title": "Primary Freq",
+          "type": "string"
+        },
+        "sector_of_responsibility": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Primary airspace sector covered.",
+          "title": "Sector Of Responsibility"
+        }
+      },
+      "required": [
+        "callsign",
+        "platform",
+        "orbit_center",
+        "orbit_radius_nm",
+        "altitude_ft",
+        "primary_freq"
+      ],
+      "title": "AWACSOrbit",
+      "type": "object"
+    },
+    "Activity": {
+      "additionalProperties": false,
+      "properties": {
+        "altitude": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Altitude"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Area"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "instructions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Instructions",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "transit",
+            "hold",
+            "station",
+            "refuel",
+            "task",
+            "recovery",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "support_flight": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Support Flight"
+        },
+        "window": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Window"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "description"
+      ],
+      "title": "Activity",
+      "type": "object"
+    },
+    "AfterTime": {
+      "additionalProperties": false,
+      "properties": {
+        "at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            }
+          ],
+          "title": "At"
+        },
+        "kind": {
+          "const": "not_before",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "at"
+      ],
+      "title": "AfterTime",
+      "type": "object"
+    },
+    "Agency": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Window"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "callsign": {
+          "minLength": 1,
+          "title": "Callsign",
+          "type": "string"
+        },
+        "channels": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Channels",
+          "type": "array",
+          "x-catalog": "channels"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GeoPoint"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "role": {
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "callsign",
+        "role",
+        "channels"
+      ],
+      "title": "Agency",
+      "type": "object"
+    },
+    "AgencyControl": {
+      "additionalProperties": false,
+      "properties": {
+        "agency": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Agency",
+          "type": "string",
+          "x-catalog": "agencies"
+        },
+        "check_in": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Check In",
+          "x-catalog": "procedures"
+        },
+        "handovers": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Handovers",
+          "type": "array",
+          "x-catalog": "agencies"
+        },
+        "kind": {
+          "const": "agency",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "agency"
+      ],
+      "title": "AgencyControl",
+      "type": "object"
+    },
+    "Aimpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "briefing": {
+          "items": {
+            "$ref": "#/$defs/Attachment"
+          },
+          "title": "Briefing",
+          "type": "array"
+        },
+        "dcs_objects": {
+          "items": {
+            "$ref": "#/$defs/DCSObjectRef"
+          },
+          "title": "Dcs Objects",
+          "type": "array"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "elevation_msl_ft": {
+          "title": "Elevation Msl Ft",
+          "type": "number"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "position": {
+          "$ref": "#/$defs/GeoPoint"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "position",
+        "elevation_msl_ft"
+      ],
+      "title": "Aimpoint",
+      "type": "object"
+    },
+    "AirborneControl": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "altitude": {
+          "$ref": "#/$defs/AltitudeBlock"
+        },
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Area"
+        },
+        "control_responsibilities": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Control Responsibilities",
+          "type": "array"
+        },
+        "datalink": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Identification"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "handover": {
+          "minLength": 1,
+          "title": "Handover",
+          "type": "string"
+        },
+        "kind": {
+          "const": "airborne_control",
+          "title": "Kind",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "station_window": {
+          "$ref": "#/$defs/Window"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        },
+        "supported_missions": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Supported Missions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "area",
+        "altitude",
+        "station_window",
+        "control_responsibilities",
+        "handover"
+      ],
+      "title": "AirborneControl",
+      "type": "object"
+    },
+    "AirborneLaunch": {
+      "additionalProperties": false,
+      "properties": {
+        "altitude": {
+          "$ref": "#/$defs/Altitude"
+        },
+        "at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            }
+          ],
+          "title": "At"
+        },
+        "kind": {
+          "const": "airborne",
+          "title": "Kind",
+          "type": "string"
+        },
+        "position": {
+          "$ref": "#/$defs/GeoPoint"
+        },
+        "speed": {
+          "$ref": "#/$defs/Speed"
+        }
+      },
+      "required": [
+        "kind",
+        "position",
+        "at",
+        "altitude",
+        "speed"
+      ],
+      "title": "AirborneLaunch",
+      "type": "object"
+    },
+    "AircraftOverride": {
+      "additionalProperties": false,
+      "properties": {
+        "dcs_unit": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dcs Unit"
+        },
+        "fuel": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FuelPlan"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "identification": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Identification"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "member": {
+          "minimum": 1,
+          "title": "Member",
+          "type": "integer"
+        },
+        "scl": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scl",
+          "x-catalog": "scls"
+        }
+      },
+      "required": [
+        "member"
+      ],
+      "title": "AircraftOverride",
+      "type": "object"
+    },
+    "AirspaceControl": {
+      "additionalProperties": false,
+      "description": "Stable airspace architecture published in Annex C Operations. FRAGOs\nreference these by name when tasking sorties into specific tracks, stations,\nor zones — the OPORD publishes geometry, radios, and controller callsigns\nonce and FRAGOs consume them by reference.",
+      "properties": {
+        "aar_tracks": {
+          "description": "Air-to-Air Refueling tracks with altitude block, refueling method, frequencies, and supported tanker types.",
+          "items": {
+            "$ref": "#/$defs/AARTrack"
+          },
+          "title": "Aar Tracks",
+          "type": "array"
+        },
+        "aic_sectors": {
+          "description": "Air Intercept Controller sub-sectors inside AWACS coverage, each with a named controller and freq.",
+          "items": {
+            "$ref": "#/$defs/AICSector"
+          },
+          "title": "Aic Sectors",
+          "type": "array"
+        },
+        "airspace_zones": {
+          "description": "Published airspace zones (ROZ, HIDACZ, MEZ/FEZ/JEZ, NFZ, SAR corridor, Safe Area) with geometry + altitude block + active window.",
+          "items": {
+            "$ref": "#/$defs/AirspaceZone"
+          },
+          "title": "Airspace Zones",
+          "type": "array"
+        },
+        "awacs_orbits": {
+          "description": "Persistent AWACS / airborne-C2 orbits with callsign, platform, orbit center, and station window.",
+          "items": {
+            "$ref": "#/$defs/AWACSOrbit"
+          },
+          "title": "Awacs Orbits",
+          "type": "array"
+        },
+        "cap_tracks": {
+          "description": "Combat Air Patrol stations / orbits. FRAGOs assign flights to these by name.",
+          "items": {
+            "$ref": "#/$defs/CAPTrack"
+          },
+          "title": "Cap Tracks",
+          "type": "array"
+        },
+        "geo_refs": {
+          "description": "Named geographic reference points (bullseye, IP, CP, anchor, waypoint, NAVAID). Multiple bullseyes allowed — e.g. a primary + alternate for split-sector BRAA calls.",
+          "items": {
+            "$ref": "#/$defs/GeoRef"
+          },
+          "title": "Geo Refs",
+          "type": "array"
+        },
+        "ingress_corridors": {
+          "description": "Minimum-Risk Routes / published ingress/egress corridors.",
+          "items": {
+            "$ref": "#/$defs/MinimumRiskRoute"
+          },
+          "title": "Ingress Corridors",
+          "type": "array"
+        }
+      },
+      "title": "AirspaceControl",
+      "type": "object"
+    },
+    "AirspaceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "collection": {
+          "enum": [
+            "geo_refs",
+            "airspace_zones",
+            "cap_tracks",
+            "aar_tracks",
+            "awacs_orbits",
+            "aic_sectors",
+            "ingress_corridors"
+          ],
+          "title": "Collection",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "collection",
+        "name"
+      ],
+      "title": "AirspaceRef",
+      "type": "object"
+    },
+    "AirspaceSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "airspace": {
+          "$ref": "#/$defs/AirspaceRef"
+        }
+      },
+      "required": [
+        "airspace"
+      ],
+      "title": "AirspaceSelection",
+      "type": "object"
+    },
+    "AirspaceZone": {
+      "additionalProperties": false,
+      "description": "Published airspace zone with a single ``kind`` discriminator covering\nROZ / HIDACZ / weapon engagement zones / no-fly / SAR / safe areas. Shape\nis either a circle (anchor + radius) or a polygon (ordered vertex list).",
+      "properties": {
+        "active_dtg_end": {
+          "anyOf": [
+            {
+              "description": "Military date-time group in DDHHMMZMONYY form (e.g. '181200ZAPR26').",
+              "pattern": "^\\d{6}Z[A-Z]{3}\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "DTG zone becomes inactive; omit for duration of operation.",
+          "title": "Active Dtg End"
+        },
+        "active_dtg_start": {
+          "anyOf": [
+            {
+              "description": "Military date-time group in DDHHMMZMONYY form (e.g. '181200ZAPR26').",
+              "pattern": "^\\d{6}Z[A-Z]{3}\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "DTG zone becomes active; omit for always-active.",
+          "title": "Active Dtg Start"
+        },
+        "altitude_ceiling_ft": {
+          "description": "Ceiling altitude (feet MSL).",
+          "title": "Altitude Ceiling Ft",
+          "type": "integer"
+        },
+        "altitude_floor_ft": {
+          "description": "Floor altitude (feet MSL).",
+          "title": "Altitude Floor Ft",
+          "type": "integer"
+        },
+        "anchor_point": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Circle anchor (coordinates); used when the zone is radial.",
+          "title": "Anchor Point"
+        },
+        "engagement_rules": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "WEZ variants only — engagement authority/constraints (e.g. 'Patriot missile layer; fighters stay above 25000ft').",
+          "title": "Engagement Rules"
+        },
+        "kind": {
+          "description": "Zone category.",
+          "enum": [
+            "ROZ",
+            "HIDACZ",
+            "MEZ",
+            "FEZ",
+            "JEZ",
+            "NFZ",
+            "SAR",
+            "SAFE"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "description": "Zone designator (e.g. 'ROZ HAMMER', 'MEZ NORTH', 'NFZ ALTENSTADT').",
+          "title": "Name",
+          "type": "string"
+        },
+        "polygon_vertices": {
+          "description": "Ordered polygon vertices (coordinate strings); used when the zone is non-circular.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Polygon Vertices",
+          "type": "array"
+        },
+        "purpose": {
+          "description": "Short purpose statement (e.g. 'CAS stack over OBJ HAMMER').",
+          "title": "Purpose",
+          "type": "string"
+        },
+        "radius_nm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Circle radius in nautical miles; used with ``anchor_point``.",
+          "title": "Radius Nm"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "altitude_floor_ft",
+        "altitude_ceiling_ft",
+        "purpose"
+      ],
+      "title": "AirspaceZone",
+      "type": "object"
+    },
+    "AlertLaunch": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "$ref": "#/$defs/Window"
+        },
+        "departure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Departure",
+          "type": "string",
+          "x-catalog": "places"
+        },
+        "kind": {
+          "const": "alert",
+          "title": "Kind",
+          "type": "string"
+        },
+        "readiness_minutes": {
+          "minimum": 0,
+          "title": "Readiness Minutes",
+          "type": "number"
+        },
+        "release_authority": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Release Authority",
+          "type": "string",
+          "x-catalog": "agencies"
+        }
+      },
+      "required": [
+        "kind",
+        "departure",
+        "availability",
+        "readiness_minutes",
+        "release_authority"
+      ],
+      "title": "AlertLaunch",
+      "type": "object"
+    },
+    "Altitude": {
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "enum": [
+            "MSL",
+            "AGL",
+            "FL"
+          ],
+          "title": "Reference",
+          "type": "string"
+        },
+        "unit": {
+          "enum": [
+            "ft",
+            "m",
+            "flight_level"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "value",
+        "reference",
+        "unit"
+      ],
+      "title": "Altitude",
+      "type": "object"
+    },
+    "AltitudeBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "lower": {
+          "$ref": "#/$defs/Altitude"
+        },
+        "upper": {
+          "$ref": "#/$defs/Altitude"
+        }
+      },
+      "required": [
+        "lower",
+        "upper"
+      ],
+      "title": "AltitudeBlock",
+      "type": "object"
+    },
+    "Area": {
+      "additionalProperties": false,
+      "properties": {
+        "active": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Window"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "altitude": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AltitudeBlock"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "geometry": {
+          "discriminator": {
+            "mapping": {
+              "circle": "#/$defs/Circle",
+              "corridor": "#/$defs/Corridor",
+              "polygon": "#/$defs/Polygon"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Circle"
+            },
+            {
+              "$ref": "#/$defs/Polygon"
+            },
+            {
+              "$ref": "#/$defs/Corridor"
+            }
+          ],
+          "title": "Geometry"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "restrictions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Restrictions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "geometry"
+      ],
+      "title": "Area",
+      "type": "object"
+    },
+    "AreaSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "area": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Area",
+          "type": "string",
+          "x-catalog": "areas"
+        }
+      },
+      "required": [
+        "area"
+      ],
+      "title": "AreaSelection",
+      "type": "object"
+    },
+    "AreaTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Area"
+        },
+        "briefing": {
+          "items": {
+            "$ref": "#/$defs/Attachment"
+          },
+          "title": "Briefing",
+          "type": "array"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "identification_features": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Identification Features",
+          "type": "array"
+        },
+        "kind": {
+          "const": "area",
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "restrictions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Restrictions",
+          "type": "array"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocumentRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "target_number": {
+          "minLength": 1,
+          "title": "Target Number",
+          "type": "string"
+        },
+        "target_population": {
+          "minLength": 1,
+          "title": "Target Population",
+          "type": "string"
+        },
+        "threat_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Threat Refs",
+          "type": "array",
+          "x-catalog": "threats"
+        }
+      },
+      "required": [
+        "target_number",
+        "name",
+        "description",
+        "identification_features",
+        "kind",
+        "area",
+        "target_population"
+      ],
+      "title": "AreaTarget",
+      "type": "object"
+    },
+    "AreaTargetSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "area",
+          "title": "Kind",
+          "type": "string"
+        },
+        "target": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Target",
+          "type": "string",
+          "x-catalog": "targets"
+        }
+      },
+      "required": [
+        "kind",
+        "target"
+      ],
+      "title": "AreaTargetSelection",
+      "type": "object"
+    },
+    "AtTime": {
+      "additionalProperties": false,
+      "properties": {
+        "at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            }
+          ],
+          "title": "At"
+        },
+        "kind": {
+          "const": "at",
+          "title": "Kind",
+          "type": "string"
+        },
+        "tolerance_seconds": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Tolerance Seconds",
+          "type": "number"
+        }
+      },
+      "required": [
+        "kind",
+        "at"
+      ],
+      "title": "AtTime",
+      "type": "object"
+    },
+    "Attachment": {
+      "additionalProperties": false,
+      "properties": {
+        "caption": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Caption"
+        },
+        "kind": {
+          "enum": [
+            "image",
+            "map",
+            "document",
+            "link"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "path",
+        "kind"
+      ],
+      "title": "Attachment",
+      "type": "object"
+    },
+    "AttackAssignment": {
+      "additionalProperties": false,
+      "properties": {
+        "activation_condition": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Activation Condition"
+        },
+        "assigned_to": {
+          "items": {
+            "$ref": "#/$defs/FlightSelection"
+          },
+          "minItems": 1,
+          "title": "Assigned To",
+          "type": "array"
+        },
+        "desired_effect": {
+          "enum": [
+            "DESTROY",
+            "NEUTRALIZE",
+            "SUPPRESS",
+            "DISRUPT",
+            "DEGRADE",
+            "DENY",
+            "DIVERT"
+          ],
+          "title": "Desired Effect",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "instructions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Instructions",
+          "type": "array"
+        },
+        "priority": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Priority",
+          "type": "integer"
+        },
+        "required_stores": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Required Stores",
+          "type": "array",
+          "x-catalog": "stores"
+        },
+        "restrictions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Restrictions",
+          "type": "array"
+        },
+        "role": {
+          "default": "primary",
+          "enum": [
+            "primary",
+            "alternate"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        },
+        "target": {
+          "discriminator": {
+            "mapping": {
+              "area": "#/$defs/AreaTargetSelection",
+              "fixed": "#/$defs/FixedSelection",
+              "mobile": "#/$defs/MobileSelection"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FixedSelection"
+            },
+            {
+              "$ref": "#/$defs/MobileSelection"
+            },
+            {
+              "$ref": "#/$defs/AreaTargetSelection"
+            }
+          ],
+          "title": "Target"
+        },
+        "timing": {
+          "discriminator": {
+            "mapping": {
+              "at": "#/$defs/AtTime",
+              "not_after": "#/$defs/BeforeTime",
+              "not_before": "#/$defs/AfterTime",
+              "on_order": "#/$defs/OnOrder",
+              "window": "#/$defs/InWindow"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AtTime"
+            },
+            {
+              "$ref": "#/$defs/InWindow"
+            },
+            {
+              "$ref": "#/$defs/BeforeTime"
+            },
+            {
+              "$ref": "#/$defs/AfterTime"
+            },
+            {
+              "$ref": "#/$defs/OnOrder"
+            }
+          ],
+          "title": "Timing"
+        }
+      },
+      "required": [
+        "id",
+        "target",
+        "assigned_to",
+        "desired_effect",
+        "success_criteria",
+        "timing"
+      ],
+      "title": "AttackAssignment",
+      "type": "object"
+    },
+    "BeforeTime": {
+      "additionalProperties": false,
+      "properties": {
+        "at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            }
+          ],
+          "title": "At"
+        },
+        "kind": {
+          "const": "not_after",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "at"
+      ],
+      "title": "BeforeTime",
+      "type": "object"
+    },
+    "CAPTrack": {
+      "additionalProperties": false,
+      "description": "Named Combat Air Patrol orbit. FRAGOs assign flights to these by name\n(e.g. 'FLY ANCHOR 1') rather than re-publishing the track geometry.",
+      "properties": {
+        "altitude_ceiling_ft": {
+          "description": "Ceiling altitude (feet MSL).",
+          "title": "Altitude Ceiling Ft",
+          "type": "integer"
+        },
+        "altitude_floor_ft": {
+          "description": "Floor altitude (feet MSL).",
+          "title": "Altitude Floor Ft",
+          "type": "integer"
+        },
+        "anchor_point": {
+          "description": "Anchor coordinates.",
+          "title": "Anchor Point",
+          "type": "string"
+        },
+        "controller_callsign": {
+          "description": "Controlling agency callsign (usually AWACS or AIC, e.g. 'MAGIC').",
+          "title": "Controller Callsign",
+          "type": "string"
+        },
+        "name": {
+          "description": "Track/station designator (e.g. 'ANCHOR 1', 'CAP EAST').",
+          "title": "Name",
+          "type": "string"
+        },
+        "orbit_geometry": {
+          "default": "RACETRACK",
+          "description": "Orbit pattern.",
+          "enum": [
+            "RACETRACK",
+            "FIGURE_EIGHT",
+            "CIRCLE",
+            "LINEAR"
+          ],
+          "title": "Orbit Geometry",
+          "type": "string"
+        },
+        "orbit_heading": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Primary orbit heading in degrees true (for RACETRACK/LINEAR).",
+          "title": "Orbit Heading"
+        },
+        "orbit_leg_length_nm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Leg length in nautical miles (for RACETRACK / FIGURE_EIGHT).",
+          "title": "Orbit Leg Length Nm"
+        },
+        "primary_freq": {
+          "description": "Primary tactical frequency (e.g. '251.0 AM', 'V15').",
+          "title": "Primary Freq",
+          "type": "string"
+        },
+        "sector_of_responsibility": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Responsible sector / engagement area.",
+          "title": "Sector Of Responsibility"
+        }
+      },
+      "required": [
+        "name",
+        "anchor_point",
+        "altitude_floor_ft",
+        "altitude_ceiling_ft",
+        "controller_callsign",
+        "primary_freq"
+      ],
+      "title": "CAPTrack",
+      "type": "object"
+    },
+    "CargoItem": {
+      "additionalProperties": false,
+      "properties": {
+        "handling": {
+          "minLength": 1,
+          "title": "Handling",
+          "type": "string"
+        },
+        "mass_each": {
+          "$ref": "#/$defs/Mass"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "quantity": {
+          "minimum": 1,
+          "title": "Quantity",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "quantity",
+        "mass_each",
+        "handling"
+      ],
+      "title": "CargoItem",
+      "type": "object"
+    },
+    "Channel": {
+      "additionalProperties": false,
+      "properties": {
+        "frequency_mhz": {
+          "exclusiveMinimum": 0,
+          "title": "Frequency Mhz",
+          "type": "number"
+        },
+        "modulation": {
+          "enum": [
+            "AM",
+            "FM"
+          ],
+          "title": "Modulation",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "usage": {
+          "minLength": 1,
+          "title": "Usage",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "frequency_mhz",
+        "modulation",
+        "usage"
+      ],
+      "title": "Channel",
+      "type": "object"
+    },
+    "Circle": {
+      "additionalProperties": false,
+      "properties": {
+        "centre": {
+          "$ref": "#/$defs/GeoPoint"
+        },
+        "kind": {
+          "const": "circle",
+          "title": "Kind",
+          "type": "string"
+        },
+        "radius_nm": {
+          "exclusiveMinimum": 0,
+          "title": "Radius Nm",
+          "type": "number"
+        }
+      },
+      "required": [
+        "kind",
+        "centre",
+        "radius_nm"
+      ],
+      "title": "Circle",
+      "type": "object"
+    },
+    "ClassificationLevel": {
+      "description": "U.S. Government classification markings permitted on an OPORD banner.",
+      "enum": [
+        "UNCLASSIFIED",
+        "CUI",
+        "CONFIDENTIAL",
+        "SECRET",
+        "TOP SECRET"
+      ],
+      "title": "ClassificationLevel",
+      "type": "string"
+    },
+    "CleanPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "clean",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "CleanPayload",
+      "type": "object"
+    },
+    "CollectionRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Area"
+        },
+        "collection_window": {
+          "$ref": "#/$defs/Window"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "information_required": {
+          "minLength": 1,
+          "title": "Information Required",
+          "type": "string"
+        },
+        "latest_useful_time": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            }
+          ],
+          "title": "Latest Useful Time"
+        },
+        "product": {
+          "minLength": 1,
+          "title": "Product",
+          "type": "string"
+        },
+        "recipient": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Recipient",
+          "type": "string",
+          "x-catalog": "agencies"
+        },
+        "sensor": {
+          "minLength": 1,
+          "title": "Sensor",
+          "type": "string"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target",
+          "x-catalog": "targets"
+        }
+      },
+      "required": [
+        "id",
+        "information_required",
+        "sensor",
+        "area",
+        "collection_window",
+        "latest_useful_time",
+        "product",
+        "recipient"
+      ],
+      "title": "CollectionRequirement",
+      "type": "object"
+    },
+    "Configuration": {
+      "additionalProperties": false,
+      "properties": {
+        "alternatives": {
+          "items": {
+            "$ref": "#/$defs/SCLAlternative"
+          },
+          "title": "Alternatives",
+          "type": "array"
+        },
+        "member_overrides": {
+          "items": {
+            "$ref": "#/$defs/AircraftOverride"
+          },
+          "title": "Member Overrides",
+          "type": "array"
+        },
+        "primary_scl": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Primary Scl",
+          "type": "string",
+          "x-catalog": "scls"
+        },
+        "secondary_purpose": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Secondary Purpose"
+        },
+        "secondary_scl": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Secondary Scl",
+          "x-catalog": "scls"
+        }
+      },
+      "required": [
+        "primary_scl"
+      ],
+      "title": "Configuration",
+      "type": "object"
+    },
+    "Contingency": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "minLength": 1,
+          "title": "Action",
+          "type": "string"
+        },
+        "alternate_route": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Alternate Route",
+          "x-catalog": "routes"
+        },
+        "condition": {
+          "minLength": 1,
+          "title": "Condition",
+          "type": "string"
+        },
+        "decision_authority": {
+          "minLength": 1,
+          "title": "Decision Authority",
+          "type": "string"
+        },
+        "divert": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Divert",
+          "x-catalog": "places"
+        }
+      },
+      "required": [
+        "condition",
+        "action",
+        "decision_authority"
+      ],
+      "title": "Contingency",
+      "type": "object"
+    },
+    "Corridor": {
+      "additionalProperties": false,
+      "properties": {
+        "centreline": {
+          "items": {
+            "$ref": "#/$defs/GeoPoint"
+          },
+          "minItems": 2,
+          "title": "Centreline",
+          "type": "array"
+        },
+        "kind": {
+          "const": "corridor",
+          "title": "Kind",
+          "type": "string"
+        },
+        "width_nm": {
+          "exclusiveMinimum": 0,
+          "title": "Width Nm",
+          "type": "number"
+        }
+      },
+      "required": [
+        "kind",
+        "centreline",
+        "width_nm"
+      ],
+      "title": "Corridor",
+      "type": "object"
+    },
+    "CustomTask": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Area"
+        },
+        "assigned_actions": {
+          "items": {
+            "$ref": "#/$defs/ProcedureStep"
+          },
+          "minItems": 1,
+          "title": "Assigned Actions",
+          "type": "array"
+        },
+        "coordination": {
+          "minLength": 1,
+          "title": "Coordination",
+          "type": "string"
+        },
+        "kind": {
+          "const": "custom",
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "operating_window": {
+          "$ref": "#/$defs/Window"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "required_capabilities": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Required Capabilities",
+          "type": "array"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "name",
+        "area",
+        "operating_window",
+        "assigned_actions",
+        "coordination",
+        "required_capabilities"
+      ],
+      "title": "CustomTask",
+      "type": "object"
+    },
+    "DCSObjectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "group",
+            "unit",
+            "static",
+            "scenery"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "object_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Object Id"
+        }
+      },
+      "required": [
+        "kind",
+        "name"
+      ],
+      "title": "DCSObjectRef",
+      "type": "object"
+    },
+    "DocumentRef": {
+      "additionalProperties": false,
+      "description": "A cited document; no automatic network retrieval.",
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "revision": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revision"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Title"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "DocumentRef",
+      "type": "object"
+    },
+    "ElectromagneticTask": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Area"
+        },
+        "assigned_effect": {
+          "minLength": 1,
+          "title": "Assigned Effect",
+          "type": "string"
+        },
+        "coordination_procedure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Coordination Procedure",
+          "type": "string",
+          "x-catalog": "procedures"
+        },
+        "equipment_requirements": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Equipment Requirements",
+          "type": "array"
+        },
+        "kind": {
+          "const": "electromagnetic",
+          "title": "Kind",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "operating_window": {
+          "$ref": "#/$defs/Window"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "restrictions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Restrictions",
+          "type": "array"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        },
+        "supported_missions": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Supported Missions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "area",
+        "operating_window",
+        "supported_missions",
+        "assigned_effect",
+        "equipment_requirements",
+        "coordination_procedure",
+        "restrictions"
+      ],
+      "title": "ElectromagneticTask",
+      "type": "object"
+    },
+    "Escort": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "kind": {
+          "const": "escort",
+          "title": "Kind",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "protection_window": {
+          "$ref": "#/$defs/Window"
+        },
+        "release_condition": {
+          "minLength": 1,
+          "title": "Release Condition",
+          "type": "string"
+        },
+        "rendezvous": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Rendezvous",
+          "type": "string",
+          "x-catalog": "places"
+        },
+        "rendezvous_time": {
+          "discriminator": {
+            "mapping": {
+              "at": "#/$defs/AtTime",
+              "not_after": "#/$defs/BeforeTime",
+              "not_before": "#/$defs/AfterTime",
+              "on_order": "#/$defs/OnOrder",
+              "window": "#/$defs/InWindow"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AtTime"
+            },
+            {
+              "$ref": "#/$defs/InWindow"
+            },
+            {
+              "$ref": "#/$defs/BeforeTime"
+            },
+            {
+              "$ref": "#/$defs/AfterTime"
+            },
+            {
+              "$ref": "#/$defs/OnOrder"
+            }
+          ],
+          "title": "Rendezvous Time"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "separation_instructions": {
+          "minLength": 1,
+          "title": "Separation Instructions",
+          "type": "string"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        },
+        "supported_missions": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Supported Missions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "supported_missions",
+        "rendezvous",
+        "rendezvous_time",
+        "protection_window",
+        "separation_instructions",
+        "release_condition"
+      ],
+      "title": "Escort",
+      "type": "object"
+    },
+    "FixedSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "aimpoints": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Aimpoints",
+          "type": "array"
+        },
+        "kind": {
+          "const": "fixed",
+          "title": "Kind",
+          "type": "string"
+        },
+        "target": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Target",
+          "type": "string",
+          "x-catalog": "targets"
+        }
+      },
+      "required": [
+        "kind",
+        "target",
+        "aimpoints"
+      ],
+      "title": "FixedSelection",
+      "type": "object"
+    },
+    "FixedTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "aimpoints": {
+          "minProperties": 1,
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/Aimpoint"
+            }
+          },
+          "title": "Aimpoints",
+          "type": "object"
+        },
+        "briefing": {
+          "items": {
+            "$ref": "#/$defs/Attachment"
+          },
+          "title": "Briefing",
+          "type": "array"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "identification_features": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Identification Features",
+          "type": "array"
+        },
+        "kind": {
+          "const": "fixed",
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "restrictions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Restrictions",
+          "type": "array"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocumentRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "target_number": {
+          "minLength": 1,
+          "title": "Target Number",
+          "type": "string"
+        },
+        "threat_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Threat Refs",
+          "type": "array",
+          "x-catalog": "threats"
+        }
+      },
+      "required": [
+        "target_number",
+        "name",
+        "description",
+        "identification_features",
+        "kind",
+        "aimpoints"
+      ],
+      "title": "FixedTarget",
+      "type": "object"
+    },
+    "Flight": {
+      "additionalProperties": false,
+      "properties": {
+        "activities": {
+          "items": {
+            "$ref": "#/$defs/Activity"
+          },
+          "title": "Activities",
+          "type": "array"
+        },
+        "aircraft_type": {
+          "minLength": 1,
+          "title": "Aircraft Type",
+          "type": "string"
+        },
+        "alternate_routes": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Alternate Routes",
+          "type": "array",
+          "x-catalog": "routes"
+        },
+        "callsign": {
+          "minLength": 1,
+          "title": "Callsign",
+          "type": "string"
+        },
+        "communications": {
+          "items": {
+            "$ref": "#/$defs/RadioAssignment"
+          },
+          "title": "Communications",
+          "type": "array"
+        },
+        "configuration": {
+          "$ref": "#/$defs/Configuration"
+        },
+        "count": {
+          "minimum": 1,
+          "title": "Count",
+          "type": "integer"
+        },
+        "dcs_group": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dcs Group"
+        },
+        "fuel": {
+          "$ref": "#/$defs/FuelPlan"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "identification": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Identification"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "launch": {
+          "discriminator": {
+            "mapping": {
+              "airborne": "#/$defs/AirborneLaunch",
+              "alert": "#/$defs/AlertLaunch",
+              "scheduled": "#/$defs/ScheduledLaunch"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ScheduledLaunch"
+            },
+            {
+              "$ref": "#/$defs/AlertLaunch"
+            },
+            {
+              "$ref": "#/$defs/AirborneLaunch"
+            }
+          ],
+          "title": "Launch"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "participation": {
+          "enum": [
+            "player",
+            "ai",
+            "mixed"
+          ],
+          "title": "Participation",
+          "type": "string"
+        },
+        "recovery": {
+          "$ref": "#/$defs/Recovery"
+        },
+        "refueling_method": {
+          "anyOf": [
+            {
+              "enum": [
+                "boom",
+                "drogue",
+                "none"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Refueling Method"
+        },
+        "route": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Route",
+          "x-catalog": "routes"
+        },
+        "spins_paragraphs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Spins Paragraphs",
+          "type": "array"
+        },
+        "unit": {
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "callsign",
+        "unit",
+        "aircraft_type",
+        "count",
+        "participation",
+        "configuration",
+        "fuel",
+        "launch",
+        "recovery"
+      ],
+      "title": "Flight",
+      "type": "object"
+    },
+    "FlightSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "flight": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Flight",
+          "type": "string"
+        },
+        "members": {
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Members",
+          "type": "array"
+        }
+      },
+      "required": [
+        "flight"
+      ],
+      "title": "FlightSelection",
+      "type": "object"
+    },
+    "FuelPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "bingo": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Mass"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "initial": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Mass"
+            },
+            {
+              "$ref": "#/$defs/InternalFuel"
+            }
+          ],
+          "title": "Initial"
+        },
+        "joker": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Mass"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "reserve": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Mass"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "initial"
+      ],
+      "title": "FuelPlan",
+      "type": "object"
+    },
+    "GeoPoint": {
+      "additionalProperties": false,
+      "description": "WGS 84 decimal degrees. DCS Cartesian coordinates require a separate adapter.",
+      "properties": {
+        "latitude": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Longitude",
+          "type": "number"
+        }
+      },
+      "required": [
+        "latitude",
+        "longitude"
+      ],
+      "title": "GeoPoint",
+      "type": "object"
+    },
+    "GeoRef": {
+      "additionalProperties": false,
+      "description": "Named geographic reference point — bullseye, IP, CP, anchor, waypoint,\nNAVAID. Pilots call positions BRAA or bearing/range from these. An OPORD\nmay publish multiple (primary bullseye + backup + named waypoints).",
+      "properties": {
+        "altitude_ft": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Altitude in feet MSL when applicable (NAVAIDs, elevated fixes).",
+          "title": "Altitude Ft"
+        },
+        "coordinates": {
+          "description": "MGRS, L/L, or game-specific coordinate string.",
+          "title": "Coordinates",
+          "type": "string"
+        },
+        "effective_dtg": {
+          "anyOf": [
+            {
+              "description": "Military date-time group in DDHHMMZMONYY form (e.g. '181200ZAPR26').",
+              "pattern": "^\\d{6}Z[A-Z]{3}\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "DTG this reference becomes effective; omit for always-active.",
+          "title": "Effective Dtg"
+        },
+        "kind": {
+          "description": "Reference-point category.",
+          "enum": [
+            "BULLSEYE",
+            "IP",
+            "CP",
+            "ANCHOR",
+            "WAYPOINT",
+            "EGRESS_PT",
+            "FIX",
+            "NAVAID"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "description": "Callsign or designator (e.g. 'BULLSEYE', 'IP ALPHA', 'CP DOG').",
+          "title": "Name",
+          "type": "string"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Freeform notes (e.g. 'Primary bullseye; all BRAA calls reference this point').",
+          "title": "Notes"
+        },
+        "tacan_channel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "TACAN channel + band when the reference is a NAVAID (e.g. '73X').",
+          "title": "Tacan Channel"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "coordinates"
+      ],
+      "title": "GeoRef",
+      "type": "object"
+    },
+    "Identification": {
+      "additionalProperties": false,
+      "properties": {
+        "datalink_network": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Datalink Network"
+        },
+        "datalink_station": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Datalink Station"
+        },
+        "datalink_type": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Datalink Type"
+        },
+        "instructions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Instructions",
+          "type": "array"
+        },
+        "mode_1": {
+          "anyOf": [
+            {
+              "pattern": "^[0-7]{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mode 1"
+        },
+        "mode_2": {
+          "anyOf": [
+            {
+              "pattern": "^[0-7]{4}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mode 2"
+        },
+        "mode_3": {
+          "anyOf": [
+            {
+              "pattern": "^[0-7]{4}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mode 3"
+        },
+        "mode_4": {
+          "anyOf": [
+            {
+              "enum": [
+                "on",
+                "off",
+                "as_directed"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mode 4"
+        },
+        "mode_5": {
+          "anyOf": [
+            {
+              "enum": [
+                "on",
+                "off",
+                "as_directed"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mode 5"
+        },
+        "tacan": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TACAN"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "Identification",
+      "type": "object"
+    },
+    "InWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "window",
+          "title": "Kind",
+          "type": "string"
+        },
+        "window": {
+          "$ref": "#/$defs/Window"
+        }
+      },
+      "required": [
+        "kind",
+        "window"
+      ],
+      "title": "InWindow",
+      "type": "object"
+    },
+    "InternalFuel": {
+      "additionalProperties": false,
+      "properties": {
+        "external_percent": {
+          "anyOf": [
+            {
+              "maximum": 100,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "External Percent"
+        },
+        "internal_percent": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Internal Percent",
+          "type": "number"
+        }
+      },
+      "required": [
+        "internal_percent"
+      ],
+      "title": "InternalFuel",
+      "type": "object"
+    },
+    "LastKnownPosition": {
+      "additionalProperties": false,
+      "properties": {
+        "as_of": {
+          "format": "date-time",
+          "title": "As Of",
+          "type": "string"
+        },
+        "position": {
+          "$ref": "#/$defs/GeoPoint"
+        }
+      },
+      "required": [
+        "position",
+        "as_of"
+      ],
+      "title": "LastKnownPosition",
+      "type": "object"
+    },
+    "LightData": {
+      "additionalProperties": false,
+      "description": "Canonical astronomical / illumination data for a calendar day per the SWO product.\n\nDoctrinal set: date, BMNT, sunrise, sunset, EENT, moonrise, moonset,\nmoon phase, percent illumination (FM 6-0 App D / ATP 2-01.3 Ch 3).",
+      "properties": {
+        "bmnt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Beginning Morning Nautical Twilight time (HHMM local or Z).",
+          "title": "Bmnt"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Calendar date this light data applies to (YYYY-MM-DD or DDMMMYY).",
+          "title": "Date"
+        },
+        "eent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "End Evening Nautical Twilight time (HHMM).",
+          "title": "Eent"
+        },
+        "moon_phase": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Moon phase (new, waxing crescent, first quarter, waxing gibbous, full, waning gibbous, last quarter, waning crescent).",
+          "title": "Moon Phase"
+        },
+        "moonrise": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Moonrise time (HHMM).",
+          "title": "Moonrise"
+        },
+        "moonset": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Moonset time (HHMM).",
+          "title": "Moonset"
+        },
+        "percent_illumination": {
+          "anyOf": [
+            {
+              "maximum": 100,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Moon illumination percent (0–100). Drives NVG/thermal planning.",
+          "title": "Percent Illumination"
+        },
+        "sunrise": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Sunrise time (HHMM).",
+          "title": "Sunrise"
+        },
+        "sunset": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Sunset time (HHMM).",
+          "title": "Sunset"
+        }
+      },
+      "title": "LightData",
+      "type": "object"
+    },
+    "Manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "cargo": {
+          "items": {
+            "$ref": "#/$defs/CargoItem"
+          },
+          "title": "Cargo",
+          "type": "array"
+        },
+        "passengers": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Passengers",
+          "type": "integer"
+        },
+        "personnel_notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Personnel Notes"
+        }
+      },
+      "title": "Manifest",
+      "type": "object"
+    },
+    "Mass": {
+      "additionalProperties": false,
+      "properties": {
+        "unit": {
+          "enum": [
+            "kg",
+            "lb"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "minimum": 0,
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "title": "Mass",
+      "type": "object"
+    },
+    "Metadata": {
+      "additionalProperties": false,
+      "properties": {
+        "author": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Author"
+        },
+        "classification": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClassificationLevel"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "coalition": {
+          "anyOf": [
+            {
+              "enum": [
+                "blue",
+                "red",
+                "neutral"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Coalition"
+        },
+        "distribution": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Distribution",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "issued_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issued At"
+        },
+        "issuing_unit": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuing Unit"
+        },
+        "operation": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Operation"
+        },
+        "references": {
+          "items": {
+            "$ref": "#/$defs/DocumentRef"
+          },
+          "title": "References",
+          "type": "array"
+        },
+        "revision": {
+          "minLength": 1,
+          "title": "Revision",
+          "type": "string"
+        },
+        "supersedes": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocumentRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "revision"
+      ],
+      "title": "Metadata",
+      "type": "object"
+    },
+    "MinimumRiskRoute": {
+      "additionalProperties": false,
+      "description": "Minimum-Risk Route (MRR) / ingress or egress corridor. Published with\nnamed waypoints that flights follow to avoid friendly fires and SAM rings.",
+      "properties": {
+        "active_dtg_end": {
+          "anyOf": [
+            {
+              "description": "Military date-time group in DDHHMMZMONYY form (e.g. '181200ZAPR26').",
+              "pattern": "^\\d{6}Z[A-Z]{3}\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Route inactive after this DTG.",
+          "title": "Active Dtg End"
+        },
+        "active_dtg_start": {
+          "anyOf": [
+            {
+              "description": "Military date-time group in DDHHMMZMONYY form (e.g. '181200ZAPR26').",
+              "pattern": "^\\d{6}Z[A-Z]{3}\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Route active from this DTG.",
+          "title": "Active Dtg Start"
+        },
+        "altitude_ceiling_ft": {
+          "description": "Maximum altitude (feet MSL).",
+          "title": "Altitude Ceiling Ft",
+          "type": "integer"
+        },
+        "altitude_floor_ft": {
+          "description": "Minimum altitude (feet MSL).",
+          "title": "Altitude Floor Ft",
+          "type": "integer"
+        },
+        "direction": {
+          "description": "Authorized direction of travel.",
+          "enum": [
+            "INGRESS",
+            "EGRESS",
+            "BIDIRECTIONAL"
+          ],
+          "title": "Direction",
+          "type": "string"
+        },
+        "name": {
+          "description": "Route designator (e.g. 'MRR BRAVO', 'INGRESS CORRIDOR 1').",
+          "title": "Name",
+          "type": "string"
+        },
+        "purpose": {
+          "description": "Purpose / use case (e.g. 'Rotary-wing ingress to OBJ HAMMER').",
+          "title": "Purpose",
+          "type": "string"
+        },
+        "waypoints": {
+          "description": "Ordered waypoints along the route (coordinate strings or GeoRef names).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Waypoints",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "direction",
+        "altitude_floor_ft",
+        "altitude_ceiling_ft",
+        "purpose"
+      ],
+      "title": "MinimumRiskRoute",
+      "type": "object"
+    },
+    "Mission": {
+      "additionalProperties": false,
+      "properties": {
+        "briefing": {
+          "items": {
+            "$ref": "#/$defs/Attachment"
+          },
+          "title": "Briefing",
+          "type": "array"
+        },
+        "constraints": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "contingencies": {
+          "items": {
+            "$ref": "#/$defs/Contingency"
+          },
+          "title": "Contingencies",
+          "type": "array"
+        },
+        "control": {
+          "discriminator": {
+            "mapping": {
+              "agency": "#/$defs/AgencyControl",
+              "self_controlled": "#/$defs/SelfControl"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AgencyControl"
+            },
+            {
+              "$ref": "#/$defs/SelfControl"
+            }
+          ],
+          "title": "Control"
+        },
+        "flights": {
+          "items": {
+            "$ref": "#/$defs/Flight"
+          },
+          "minItems": 1,
+          "title": "Flights",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "mission_number": {
+          "minLength": 1,
+          "title": "Mission Number",
+          "type": "string"
+        },
+        "package": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Package"
+        },
+        "priority": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Priority"
+        },
+        "request_refs": {
+          "items": {
+            "$ref": "#/$defs/DocumentRef"
+          },
+          "title": "Request Refs",
+          "type": "array"
+        },
+        "support": {
+          "items": {
+            "$ref": "#/$defs/SupportLink"
+          },
+          "title": "Support",
+          "type": "array"
+        },
+        "tasking": {
+          "discriminator": {
+            "mapping": {
+              "airborne_control": "#/$defs/AirborneControl",
+              "cap": "#/$defs/Patrol",
+              "custom": "#/$defs/CustomTask",
+              "electromagnetic": "#/$defs/ElectromagneticTask",
+              "escort": "#/$defs/Escort",
+              "on_call_cas": "#/$defs/OnCallCAS",
+              "personnel_recovery": "#/$defs/PersonnelRecovery",
+              "preplanned_attack": "#/$defs/PreplannedAttack",
+              "reconnaissance": "#/$defs/Reconnaissance",
+              "refueling": "#/$defs/Refueling",
+              "training": "#/$defs/Training",
+              "transport": "#/$defs/Transport"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PreplannedAttack"
+            },
+            {
+              "$ref": "#/$defs/OnCallCAS"
+            },
+            {
+              "$ref": "#/$defs/Patrol"
+            },
+            {
+              "$ref": "#/$defs/Escort"
+            },
+            {
+              "$ref": "#/$defs/Refueling"
+            },
+            {
+              "$ref": "#/$defs/AirborneControl"
+            },
+            {
+              "$ref": "#/$defs/Reconnaissance"
+            },
+            {
+              "$ref": "#/$defs/ElectromagneticTask"
+            },
+            {
+              "$ref": "#/$defs/Transport"
+            },
+            {
+              "$ref": "#/$defs/PersonnelRecovery"
+            },
+            {
+              "$ref": "#/$defs/Training"
+            },
+            {
+              "$ref": "#/$defs/CustomTask"
+            }
+          ],
+          "title": "Tasking"
+        },
+        "tasking_relationship": {
+          "default": "assigned",
+          "enum": [
+            "assigned",
+            "coordination_only"
+          ],
+          "title": "Tasking Relationship",
+          "type": "string"
+        },
+        "threat_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Threat Refs",
+          "type": "array",
+          "x-catalog": "threats"
+        }
+      },
+      "required": [
+        "id",
+        "mission_number",
+        "tasking",
+        "flights",
+        "control"
+      ],
+      "title": "Mission",
+      "type": "object"
+    },
+    "MobileSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "mobile",
+          "title": "Kind",
+          "type": "string"
+        },
+        "target": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Target",
+          "type": "string",
+          "x-catalog": "targets"
+        }
+      },
+      "required": [
+        "kind",
+        "target"
+      ],
+      "title": "MobileSelection",
+      "type": "object"
+    },
+    "MobileTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "briefing": {
+          "items": {
+            "$ref": "#/$defs/Attachment"
+          },
+          "title": "Briefing",
+          "type": "array"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "expected_movement": {
+          "minLength": 1,
+          "title": "Expected Movement",
+          "type": "string"
+        },
+        "identification_features": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Identification Features",
+          "type": "array"
+        },
+        "kind": {
+          "const": "mobile",
+          "title": "Kind",
+          "type": "string"
+        },
+        "last_known": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LastKnownPosition"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "restrictions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Restrictions",
+          "type": "array"
+        },
+        "search_area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Search Area"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocumentRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "target_number": {
+          "minLength": 1,
+          "title": "Target Number",
+          "type": "string"
+        },
+        "threat_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Threat Refs",
+          "type": "array",
+          "x-catalog": "threats"
+        }
+      },
+      "required": [
+        "target_number",
+        "name",
+        "description",
+        "identification_features",
+        "kind",
+        "search_area",
+        "expected_movement"
+      ],
+      "title": "MobileTarget",
+      "type": "object"
+    },
+    "Offset": {
+      "additionalProperties": false,
+      "description": "Minutes relative to the enclosing ATO period start; negative values are allowed.",
+      "properties": {
+        "offset_minutes": {
+          "title": "Offset Minutes",
+          "type": "number"
+        }
+      },
+      "required": [
+        "offset_minutes"
+      ],
+      "title": "Offset",
+      "type": "object"
+    },
+    "OnCallCAS": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Area"
+        },
+        "availability": {
+          "$ref": "#/$defs/Window"
+        },
+        "check_in_procedure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Check In Procedure",
+          "type": "string",
+          "x-catalog": "procedures"
+        },
+        "kind": {
+          "const": "on_call_cas",
+          "title": "Kind",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "request_refs": {
+          "items": {
+            "$ref": "#/$defs/DocumentRef"
+          },
+          "title": "Request Refs",
+          "type": "array"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        },
+        "supported_force": {
+          "minLength": 1,
+          "title": "Supported Force",
+          "type": "string"
+        },
+        "target_assignment_procedure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Target Assignment Procedure",
+          "type": "string",
+          "x-catalog": "procedures"
+        },
+        "tasking_agency": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Tasking Agency",
+          "type": "string",
+          "x-catalog": "agencies"
+        },
+        "terminal_control": {
+          "enum": [
+            "type_1",
+            "type_2",
+            "type_3",
+            "assigned_by_controller"
+          ],
+          "title": "Terminal Control",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "supported_force",
+        "area",
+        "availability",
+        "tasking_agency",
+        "target_assignment_procedure",
+        "check_in_procedure",
+        "terminal_control"
+      ],
+      "title": "OnCallCAS",
+      "type": "object"
+    },
+    "OnOrder": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Authority",
+          "type": "string",
+          "x-catalog": "agencies"
+        },
+        "condition": {
+          "minLength": 1,
+          "title": "Condition",
+          "type": "string"
+        },
+        "kind": {
+          "const": "on_order",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "authority",
+        "condition"
+      ],
+      "title": "OnOrder",
+      "type": "object"
+    },
+    "Package": {
+      "additionalProperties": false,
+      "properties": {
+        "commander": {
+          "$ref": "#/$defs/FlightSelection"
+        },
+        "coordination": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Coordination",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "rendezvous": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rendezvous",
+          "x-catalog": "places"
+        },
+        "rendezvous_time": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "at": "#/$defs/AtTime",
+                  "not_after": "#/$defs/BeforeTime",
+                  "not_before": "#/$defs/AfterTime",
+                  "on_order": "#/$defs/OnOrder",
+                  "window": "#/$defs/InWindow"
+                },
+                "propertyName": "kind"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/AtTime"
+                },
+                {
+                  "$ref": "#/$defs/InWindow"
+                },
+                {
+                  "$ref": "#/$defs/BeforeTime"
+                },
+                {
+                  "$ref": "#/$defs/AfterTime"
+                },
+                {
+                  "$ref": "#/$defs/OnOrder"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rendezvous Time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "objective",
+        "commander"
+      ],
+      "title": "Package",
+      "type": "object"
+    },
+    "Patrol": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "altitude": {
+          "$ref": "#/$defs/AltitudeBlock"
+        },
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Area"
+        },
+        "coverage_responsibility": {
+          "minLength": 1,
+          "title": "Coverage Responsibility",
+          "type": "string"
+        },
+        "engagement_instructions": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Engagement Instructions",
+          "type": "string",
+          "x-catalog": "procedures"
+        },
+        "handover": {
+          "minLength": 1,
+          "title": "Handover",
+          "type": "string"
+        },
+        "kind": {
+          "const": "cap",
+          "title": "Kind",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "station_window": {
+          "$ref": "#/$defs/Window"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "area",
+        "altitude",
+        "station_window",
+        "coverage_responsibility",
+        "engagement_instructions",
+        "handover"
+      ],
+      "title": "Patrol",
+      "type": "object"
+    },
+    "Period": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "format": "date-time",
+          "title": "End",
+          "type": "string"
+        },
+        "start": {
+          "format": "date-time",
+          "title": "Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "Period",
+      "type": "object"
+    },
+    "PersonnelRecovery": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "availability": {
+          "$ref": "#/$defs/Window"
+        },
+        "coordination_agency": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Coordination Agency",
+          "type": "string",
+          "x-catalog": "agencies"
+        },
+        "incident": {
+          "minLength": 1,
+          "title": "Incident",
+          "type": "string"
+        },
+        "kind": {
+          "const": "personnel_recovery",
+          "title": "Kind",
+          "type": "string"
+        },
+        "medical_requirements": {
+          "minLength": 1,
+          "title": "Medical Requirements",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "recognition_procedure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Recognition Procedure",
+          "type": "string",
+          "x-catalog": "procedures"
+        },
+        "recovery_destination": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Recovery Destination",
+          "type": "string",
+          "x-catalog": "places"
+        },
+        "recovery_method": {
+          "enum": [
+            "land",
+            "hoist",
+            "pickup",
+            "assigned_on_scene"
+          ],
+          "title": "Recovery Method",
+          "type": "string"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "search_area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Search Area"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        },
+        "tasking_procedure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Tasking Procedure",
+          "type": "string",
+          "x-catalog": "procedures"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "incident",
+        "search_area",
+        "availability",
+        "coordination_agency",
+        "tasking_procedure",
+        "recovery_method",
+        "recovery_destination",
+        "medical_requirements",
+        "recognition_procedure"
+      ],
+      "title": "PersonnelRecovery",
+      "type": "object"
+    },
+    "PinnedRef": {
+      "additionalProperties": false,
+      "description": "A local document dependency checked by identifier and revision.",
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "revision": {
+          "minLength": 1,
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "revision",
+        "path"
+      ],
+      "title": "PinnedRef",
+      "type": "object"
+    },
+    "Place": {
+      "additionalProperties": false,
+      "properties": {
+        "approach_instructions": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Approach Instructions"
+        },
+        "control": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Control",
+          "x-catalog": "agencies"
+        },
+        "dcs": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DCSObjectRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "elevation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Altitude"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "icao": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Z]{4}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Icao"
+        },
+        "kind": {
+          "enum": [
+            "airfield",
+            "carrier",
+            "farp",
+            "point"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GeoPoint"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "runways": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Runways",
+          "type": "array"
+        },
+        "tacan": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TACAN"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "name",
+        "kind"
+      ],
+      "title": "Place",
+      "type": "object"
+    },
+    "Polygon": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "polygon",
+          "title": "Kind",
+          "type": "string"
+        },
+        "vertices": {
+          "items": {
+            "$ref": "#/$defs/GeoPoint"
+          },
+          "minItems": 3,
+          "title": "Vertices",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "vertices"
+      ],
+      "title": "Polygon",
+      "type": "object"
+    },
+    "PreplannedAttack": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "assignments": {
+          "items": {
+            "$ref": "#/$defs/AttackAssignment"
+          },
+          "minItems": 1,
+          "title": "Assignments",
+          "type": "array"
+        },
+        "kind": {
+          "const": "preplanned_attack",
+          "title": "Kind",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "role": {
+          "enum": [
+            "strike",
+            "sead",
+            "dead",
+            "preplanned_cas",
+            "maritime_attack"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        },
+        "supporting_request": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocumentRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "role",
+        "assignments"
+      ],
+      "title": "PreplannedAttack",
+      "type": "object"
+    },
+    "Procedure": {
+      "additionalProperties": false,
+      "properties": {
+        "references": {
+          "items": {
+            "$ref": "#/$defs/DocumentRef"
+          },
+          "title": "References",
+          "type": "array"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/ProcedureStep"
+          },
+          "minItems": 1,
+          "title": "Steps",
+          "type": "array"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "steps"
+      ],
+      "title": "Procedure",
+      "type": "object"
+    },
+    "ProcedureStep": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "minLength": 1,
+          "title": "Action",
+          "type": "string"
+        },
+        "completion": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Completion"
+        },
+        "condition": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Condition"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "title": "ProcedureStep",
+      "type": "object"
+    },
+    "RadioAssignment": {
+      "additionalProperties": false,
+      "properties": {
+        "channel": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Channel",
+          "type": "string",
+          "x-catalog": "channels"
+        },
+        "preset": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preset"
+        },
+        "purpose": {
+          "minLength": 1,
+          "title": "Purpose",
+          "type": "string"
+        },
+        "radio": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Radio"
+        }
+      },
+      "required": [
+        "purpose",
+        "channel"
+      ],
+      "title": "RadioAssignment",
+      "type": "object"
+    },
+    "ReceiverSlot": {
+      "additionalProperties": false,
+      "properties": {
+        "flight": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Flight",
+          "type": "string"
+        },
+        "planned_offload": {
+          "$ref": "#/$defs/Mass"
+        },
+        "window": {
+          "$ref": "#/$defs/Window"
+        }
+      },
+      "required": [
+        "flight",
+        "window",
+        "planned_offload"
+      ],
+      "title": "ReceiverSlot",
+      "type": "object"
+    },
+    "Reconnaissance": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "kind": {
+          "const": "reconnaissance",
+          "title": "Kind",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "reporting_procedure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Reporting Procedure",
+          "type": "string",
+          "x-catalog": "procedures"
+        },
+        "requirements": {
+          "items": {
+            "$ref": "#/$defs/CollectionRequirement"
+          },
+          "minItems": 1,
+          "title": "Requirements",
+          "type": "array"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "requirements",
+        "reporting_procedure"
+      ],
+      "title": "Reconnaissance",
+      "type": "object"
+    },
+    "Recovery": {
+      "additionalProperties": false,
+      "properties": {
+        "alternates": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Alternates",
+          "type": "array",
+          "x-catalog": "places"
+        },
+        "destination": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Destination",
+          "type": "string",
+          "x-catalog": "places"
+        },
+        "planned_time": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Planned Time"
+        },
+        "procedure": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Procedure",
+          "x-catalog": "procedures"
+        },
+        "restrictions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Restrictions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "destination"
+      ],
+      "title": "Recovery",
+      "type": "object"
+    },
+    "Refueling": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "altitude": {
+          "$ref": "#/$defs/AltitudeBlock"
+        },
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Area"
+        },
+        "channel": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Channel",
+          "type": "string",
+          "x-catalog": "channels"
+        },
+        "kind": {
+          "const": "refueling",
+          "title": "Kind",
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "boom",
+            "drogue",
+            "both"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "planned_offload": {
+          "$ref": "#/$defs/Mass"
+        },
+        "receivers": {
+          "items": {
+            "$ref": "#/$defs/ReceiverSlot"
+          },
+          "title": "Receivers",
+          "type": "array"
+        },
+        "rendezvous_procedure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Rendezvous Procedure",
+          "type": "string",
+          "x-catalog": "procedures"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "station_window": {
+          "$ref": "#/$defs/Window"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        },
+        "tacan": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TACAN"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "unassigned_receiver_policy": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unassigned Receiver Policy"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "area",
+        "altitude",
+        "station_window",
+        "method",
+        "planned_offload",
+        "channel",
+        "rendezvous_procedure"
+      ],
+      "title": "Refueling",
+      "type": "object"
+    },
+    "ReportDefinition": {
+      "additionalProperties": false,
+      "description": "A reporting requirement per ATP 6-02.x and unit SOP.",
+      "properties": {
+        "classification": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Maximum classification of the report content.",
+          "title": "Classification"
+        },
+        "format_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Reference to the format specification (SOP paragraph, USMTF form, etc.).",
+          "title": "Format Ref"
+        },
+        "frequency": {
+          "description": "Submission frequency (e.g. 'Daily NLT 0600', 'On event').",
+          "title": "Frequency",
+          "type": "string"
+        },
+        "medium": {
+          "description": "Transmission medium (e.g. 'SIPR email', 'FM voice', 'JBC-P').",
+          "title": "Medium",
+          "type": "string"
+        },
+        "name": {
+          "description": "Report name (e.g. 'SITREP', 'LOGSTAT', 'CASREP').",
+          "title": "Name",
+          "type": "string"
+        },
+        "precedence": {
+          "description": "Message precedence per JP 6-0.",
+          "enum": [
+            "FLASH",
+            "IMMEDIATE",
+            "PRIORITY",
+            "ROUTINE"
+          ],
+          "title": "Precedence",
+          "type": "string"
+        },
+        "recipient": {
+          "description": "Recipient of the report.",
+          "title": "Recipient",
+          "type": "string"
+        },
+        "submitter": {
+          "description": "Unit or staff section required to submit the report.",
+          "title": "Submitter",
+          "type": "string"
+        },
+        "trigger": {
+          "description": "Event or schedule that triggers submission.",
+          "title": "Trigger",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "submitter",
+        "recipient",
+        "frequency",
+        "precedence",
+        "medium",
+        "trigger"
+      ],
+      "title": "ReportDefinition",
+      "type": "object"
+    },
+    "Resources": {
+      "additionalProperties": false,
+      "properties": {
+        "agencies": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/Agency"
+            }
+          },
+          "title": "Agencies",
+          "type": "object"
+        },
+        "airspace": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AirspaceControl"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "areas": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/Area"
+            }
+          },
+          "title": "Areas",
+          "type": "object"
+        },
+        "channels": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/Channel"
+            }
+          },
+          "title": "Channels",
+          "type": "object"
+        },
+        "places": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/Place"
+            }
+          },
+          "title": "Places",
+          "type": "object"
+        },
+        "procedures": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/Procedure"
+            }
+          },
+          "title": "Procedures",
+          "type": "object"
+        },
+        "reports": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/ReportDefinition"
+            }
+          },
+          "title": "Reports",
+          "type": "object"
+        },
+        "routes": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/Route"
+            }
+          },
+          "title": "Routes",
+          "type": "object"
+        },
+        "scls": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/SCL"
+            }
+          },
+          "title": "Scls",
+          "type": "object"
+        },
+        "stores": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/Store"
+            }
+          },
+          "title": "Stores",
+          "type": "object"
+        },
+        "targets": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "discriminator": {
+                "mapping": {
+                  "area": "#/$defs/AreaTarget",
+                  "fixed": "#/$defs/FixedTarget",
+                  "mobile": "#/$defs/MobileTarget"
+                },
+                "propertyName": "kind"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/FixedTarget"
+                },
+                {
+                  "$ref": "#/$defs/MobileTarget"
+                },
+                {
+                  "$ref": "#/$defs/AreaTarget"
+                }
+              ]
+            }
+          },
+          "title": "Targets",
+          "type": "object"
+        },
+        "threats": {
+          "patternProperties": {
+            "^[a-z][a-z0-9_.-]*$": {
+              "$ref": "#/$defs/Threat"
+            }
+          },
+          "title": "Threats",
+          "type": "object"
+        }
+      },
+      "title": "Resources",
+      "type": "object"
+    },
+    "Route": {
+      "additionalProperties": false,
+      "properties": {
+        "contingencies": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Contingencies",
+          "type": "array"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "points": {
+          "items": {
+            "$ref": "#/$defs/RoutePoint"
+          },
+          "minItems": 1,
+          "title": "Points",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "points"
+      ],
+      "title": "Route",
+      "type": "object"
+    },
+    "RoutePoint": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "enum": [
+            "departure",
+            "transit",
+            "ingress",
+            "egress",
+            "hold",
+            "approach",
+            "recovery"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "altitude": {
+          "$ref": "#/$defs/Altitude"
+        },
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "instructions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Instructions",
+          "type": "array"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "position": {
+          "$ref": "#/$defs/GeoPoint"
+        },
+        "speed": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Speed"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "timing": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "at": "#/$defs/AtTime",
+                  "not_after": "#/$defs/BeforeTime",
+                  "not_before": "#/$defs/AfterTime",
+                  "on_order": "#/$defs/OnOrder",
+                  "window": "#/$defs/InWindow"
+                },
+                "propertyName": "kind"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/AtTime"
+                },
+                {
+                  "$ref": "#/$defs/InWindow"
+                },
+                {
+                  "$ref": "#/$defs/BeforeTime"
+                },
+                {
+                  "$ref": "#/$defs/AfterTime"
+                },
+                {
+                  "$ref": "#/$defs/OnOrder"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timing"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "position",
+        "action",
+        "altitude"
+      ],
+      "title": "RoutePoint",
+      "type": "object"
+    },
+    "SCL": {
+      "additionalProperties": false,
+      "description": "One expected configuration. Quantities are per aircraft. Physical fit is not certified.",
+      "properties": {
+        "aircraft_types": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Aircraft Types",
+          "type": "array"
+        },
+        "code": {
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "countermeasure_program": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Countermeasure Program"
+        },
+        "dcs_payload_name": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dcs Payload Name"
+        },
+        "gun_rounds": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gun Rounds"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "payload": {
+          "discriminator": {
+            "mapping": {
+              "clean": "#/$defs/CleanPayload",
+              "stations": "#/$defs/StationPayload",
+              "summary": "#/$defs/SummaryPayload"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SummaryPayload"
+            },
+            {
+              "$ref": "#/$defs/StationPayload"
+            },
+            {
+              "$ref": "#/$defs/CleanPayload"
+            }
+          ],
+          "title": "Payload"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocumentRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "code",
+        "name",
+        "aircraft_types",
+        "payload"
+      ],
+      "title": "SCL",
+      "type": "object"
+    },
+    "SCLAlternative": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "minLength": 1,
+          "title": "Authority",
+          "type": "string"
+        },
+        "condition": {
+          "minLength": 1,
+          "title": "Condition",
+          "type": "string"
+        },
+        "scl": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Scl",
+          "type": "string",
+          "x-catalog": "scls"
+        }
+      },
+      "required": [
+        "scl",
+        "condition",
+        "authority"
+      ],
+      "title": "SCLAlternative",
+      "type": "object"
+    },
+    "ScheduledLaunch": {
+      "additionalProperties": false,
+      "properties": {
+        "departure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Departure",
+          "type": "string",
+          "x-catalog": "places"
+        },
+        "kind": {
+          "const": "scheduled",
+          "title": "Kind",
+          "type": "string"
+        },
+        "startup": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Startup"
+        },
+        "takeoff": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            }
+          ],
+          "title": "Takeoff"
+        },
+        "taxi": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Taxi"
+        }
+      },
+      "required": [
+        "kind",
+        "departure",
+        "takeoff"
+      ],
+      "title": "ScheduledLaunch",
+      "type": "object"
+    },
+    "SelfControl": {
+      "additionalProperties": false,
+      "properties": {
+        "instructions": {
+          "minLength": 1,
+          "title": "Instructions",
+          "type": "string"
+        },
+        "kind": {
+          "const": "self_controlled",
+          "title": "Kind",
+          "type": "string"
+        },
+        "responsible_flight": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Responsible Flight",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "responsible_flight",
+        "instructions"
+      ],
+      "title": "SelfControl",
+      "type": "object"
+    },
+    "Speed": {
+      "additionalProperties": false,
+      "properties": {
+        "unit": {
+          "enum": [
+            "knots_ias",
+            "knots_tas",
+            "kmh_ias",
+            "kmh_tas",
+            "mach"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "exclusiveMinimum": 0,
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "title": "Speed",
+      "type": "object"
+    },
+    "StationLoad": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/StoreLoad"
+          },
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        },
+        "rack": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_.-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rack",
+          "x-catalog": "stores"
+        },
+        "station": {
+          "minLength": 1,
+          "title": "Station",
+          "type": "string"
+        }
+      },
+      "required": [
+        "station",
+        "items"
+      ],
+      "title": "StationLoad",
+      "type": "object"
+    },
+    "StationPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "stations",
+          "title": "Kind",
+          "type": "string"
+        },
+        "stations": {
+          "items": {
+            "$ref": "#/$defs/StationLoad"
+          },
+          "minItems": 1,
+          "title": "Stations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "stations"
+      ],
+      "title": "StationPayload",
+      "type": "object"
+    },
+    "Store": {
+      "additionalProperties": false,
+      "properties": {
+        "dcs_clsid": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dcs Clsid"
+        },
+        "kind": {
+          "enum": [
+            "weapon",
+            "pod",
+            "tank",
+            "rack",
+            "cargo",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "name",
+        "kind"
+      ],
+      "title": "Store",
+      "type": "object"
+    },
+    "StoreLoad": {
+      "additionalProperties": false,
+      "properties": {
+        "fuze": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fuze"
+        },
+        "laser_code": {
+          "anyOf": [
+            {
+              "pattern": "^[1-8]{4}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Laser Code"
+        },
+        "program": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Program"
+        },
+        "quantity": {
+          "minimum": 1,
+          "title": "Quantity",
+          "type": "integer"
+        },
+        "store": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Store",
+          "type": "string",
+          "x-catalog": "stores"
+        }
+      },
+      "required": [
+        "store",
+        "quantity"
+      ],
+      "title": "StoreLoad",
+      "type": "object"
+    },
+    "SummaryPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/StoreLoad"
+          },
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        },
+        "kind": {
+          "const": "summary",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "items"
+      ],
+      "title": "SummaryPayload",
+      "type": "object"
+    },
+    "SupportLink": {
+      "additionalProperties": false,
+      "properties": {
+        "coordination": {
+          "minLength": 1,
+          "title": "Coordination",
+          "type": "string"
+        },
+        "flight": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Flight",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "tanker",
+            "escort",
+            "airborne_control",
+            "suppression",
+            "recovery",
+            "controller",
+            "other"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "window": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Window"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "role",
+        "flight",
+        "coordination"
+      ],
+      "title": "SupportLink",
+      "type": "object"
+    },
+    "TACAN": {
+      "additionalProperties": false,
+      "properties": {
+        "band": {
+          "enum": [
+            "X",
+            "Y"
+          ],
+          "title": "Band",
+          "type": "string"
+        },
+        "channel": {
+          "maximum": 126,
+          "minimum": 1,
+          "title": "Channel",
+          "type": "integer"
+        },
+        "identifier": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Identifier"
+        }
+      },
+      "required": [
+        "channel",
+        "band"
+      ],
+      "title": "TACAN",
+      "type": "object"
+    },
+    "Threat": {
+      "additionalProperties": false,
+      "properties": {
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Area"
+        },
+        "as_of": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "As Of"
+        },
+        "briefing": {
+          "items": {
+            "$ref": "#/$defs/Attachment"
+          },
+          "title": "Briefing",
+          "type": "array"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "expected_activity": {
+          "minLength": 1,
+          "title": "Expected Activity",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "air",
+            "air_defense",
+            "surface",
+            "electromagnetic",
+            "environmental",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DocumentRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "system": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "System"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "description",
+        "expected_activity"
+      ],
+      "title": "Threat",
+      "type": "object"
+    },
+    "Training": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AreaSelection"
+            },
+            {
+              "$ref": "#/$defs/AirspaceSelection"
+            }
+          ],
+          "title": "Area"
+        },
+        "debrief_procedure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Debrief Procedure",
+          "type": "string",
+          "x-catalog": "procedures"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/ProcedureStep"
+          },
+          "minItems": 1,
+          "title": "Events",
+          "type": "array"
+        },
+        "exercise_window": {
+          "$ref": "#/$defs/Window"
+        },
+        "kind": {
+          "const": "training",
+          "title": "Kind",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "restrictions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Restrictions",
+          "type": "array"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "area",
+        "exercise_window",
+        "events",
+        "restrictions",
+        "debrief_procedure"
+      ],
+      "title": "Training",
+      "type": "object"
+    },
+    "Transport": {
+      "additionalProperties": false,
+      "properties": {
+        "abort_criteria": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Abort Criteria",
+          "type": "array"
+        },
+        "delivery_method": {
+          "enum": [
+            "land",
+            "airdrop",
+            "sling_load",
+            "hover"
+          ],
+          "title": "Delivery Method",
+          "type": "string"
+        },
+        "delivery_time": {
+          "discriminator": {
+            "mapping": {
+              "at": "#/$defs/AtTime",
+              "not_after": "#/$defs/BeforeTime",
+              "not_before": "#/$defs/AfterTime",
+              "on_order": "#/$defs/OnOrder",
+              "window": "#/$defs/InWindow"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AtTime"
+            },
+            {
+              "$ref": "#/$defs/InWindow"
+            },
+            {
+              "$ref": "#/$defs/BeforeTime"
+            },
+            {
+              "$ref": "#/$defs/AfterTime"
+            },
+            {
+              "$ref": "#/$defs/OnOrder"
+            }
+          ],
+          "title": "Delivery Time"
+        },
+        "destination": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Destination",
+          "type": "string",
+          "x-catalog": "places"
+        },
+        "ground_coordination": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Ground Coordination",
+          "type": "string",
+          "x-catalog": "agencies"
+        },
+        "kind": {
+          "const": "transport",
+          "title": "Kind",
+          "type": "string"
+        },
+        "loading_procedure": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Loading Procedure",
+          "type": "string",
+          "x-catalog": "procedures"
+        },
+        "manifest": {
+          "$ref": "#/$defs/Manifest"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "pickup": {
+          "pattern": "^[a-z][a-z0-9_.-]*$",
+          "title": "Pickup",
+          "type": "string",
+          "x-catalog": "places"
+        },
+        "pickup_time": {
+          "discriminator": {
+            "mapping": {
+              "at": "#/$defs/AtTime",
+              "not_after": "#/$defs/BeforeTime",
+              "not_before": "#/$defs/AfterTime",
+              "on_order": "#/$defs/OnOrder",
+              "window": "#/$defs/InWindow"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AtTime"
+            },
+            {
+              "$ref": "#/$defs/InWindow"
+            },
+            {
+              "$ref": "#/$defs/BeforeTime"
+            },
+            {
+              "$ref": "#/$defs/AfterTime"
+            },
+            {
+              "$ref": "#/$defs/OnOrder"
+            }
+          ],
+          "title": "Pickup Time"
+        },
+        "report_refs": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.-]*$",
+            "type": "string"
+          },
+          "title": "Report Refs",
+          "type": "array",
+          "x-catalog": "reports"
+        },
+        "success_criteria": {
+          "minLength": 1,
+          "title": "Success Criteria",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objective",
+        "success_criteria",
+        "kind",
+        "pickup",
+        "destination",
+        "pickup_time",
+        "delivery_time",
+        "manifest",
+        "delivery_method",
+        "ground_coordination",
+        "loading_procedure"
+      ],
+      "title": "Transport",
+      "type": "object"
+    },
+    "Weather": {
+      "additionalProperties": false,
+      "description": "Paragraph 1.b.(2) Weather — five military aspects, light, forecast, climate, effects.\n\nPer FM 6-0 (May 2022) Appendix D and ATP 2-01.3 Ch 3, the weather\nsub-paragraph must cover the five military aspects of weather\n(visibility, winds, precipitation, cloud cover, temperature/humidity),\na light table, AND for multi-day operations a forecast keyed to\nphases or days — a single snapshot is insufficient for campaign-\nscale OPORDs. ``effects_on_operations`` captures the doctrinally\nrequired 'so what' analysis. ``climate_baseline`` provides the\nseasonal norm when the forecast confidence is low or the AO is\nunfamiliar. The SWO / tactical weather team produces the underlying\nStaff Weather Product; this paragraph is the executive summary\nwith the tables typically living in Annex B (Intelligence).",
+      "properties": {
+        "climate_baseline": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Seasonal/regional climatology baseline for the AO (prevailing winds, precipitation norms, temperature bands). Used as the reference against which the operation-period forecast is compared; most useful for unfamiliar AOs or operations > 72 hrs.",
+          "title": "Climate Baseline"
+        },
+        "cloud_cover": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Ceiling and cloud coverage with effects on aviation, ISR, and close air support.",
+          "title": "Cloud Cover"
+        },
+        "effects_on_operations": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Consolidated 'so what' for the base order: how weather across the operation period affects friendly and enemy COAs and warfighting functions. Doctrinally required per ATP 2-01.3 Ch 3.",
+          "title": "Effects On Operations"
+        },
+        "forecast_by_period": {
+          "description": "Forecast rows keyed to phases or D+N days for the full operation period. Doctrinally expected for multi-day / phased campaigns.",
+          "items": {
+            "$ref": "#/$defs/WeatherPeriodForecast"
+          },
+          "title": "Forecast By Period",
+          "type": "array"
+        },
+        "forecast_confidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Forecast confidence level (LOW / MODERATE / HIGH) with rationale — drives branch planning around weather-dependent assets.",
+          "title": "Forecast Confidence"
+        },
+        "light_data": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Light table single-line summary: BMNT, sunrise, sunset, EENT, moon phase, illumination %. Use ``light_data_structured`` or ``forecast_by_period[].light_data`` for field-level data.",
+          "title": "Light Data"
+        },
+        "light_data_structured": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LightData"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Structured light data for the critical day/event of the operation."
+        },
+        "precipitation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Expected precipitation type, intensity, and effects on mobility, optics, and soldier load.",
+          "title": "Precipitation"
+        },
+        "swo_product_reference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Pointer to the authoritative SWO / tactical weather team product (e.g. 'Annex B, App 1, Tab B (Weather), SWO Product 26-04-WX-015').",
+          "title": "Swo Product Reference"
+        },
+        "temperature_and_humidity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Temperature and humidity ranges with effects on personnel, equipment, and heat/cold casualty risk.",
+          "title": "Temperature And Humidity"
+        },
+        "visibility": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Visibility conditions and effects on operations (fog, haze, obscurants, illumination limits).",
+          "title": "Visibility"
+        },
+        "winds": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Surface and aloft winds with effects on aviation, fires, smoke, and CBRN employment.",
+          "title": "Winds"
+        }
+      },
+      "title": "Weather",
+      "type": "object"
+    },
+    "WeatherPeriodForecast": {
+      "additionalProperties": false,
+      "description": "One row of the operation-period weather forecast.\n\nPer FM 6-0 / ATP 2-01.3, multi-day or phased operations require a\nforecast covering the full operation period — typically keyed to\nphase or D+N day — not a single snapshot. Each row carries the 5\naspects, optional structured light data, and an effects-on-operations\n'so what' line. Produced by the Staff Weather Officer (SWO) /\nG-2/S-2 weather team.",
+      "properties": {
+        "cloud_cover": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Cloud cover / ceiling forecast with effects.",
+          "title": "Cloud Cover"
+        },
+        "effects_on_operations": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The 'so what' — net effect on friendly and enemy operations and specific warfighting functions (aviation, fires, ISR, optics, mobility, CBRN).",
+          "title": "Effects On Operations"
+        },
+        "light_data": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LightData"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Structured light data covering this period (if period ≤ 24 hrs) or the most operationally critical day in the window."
+        },
+        "period_end": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Period end DTG or date.",
+          "title": "Period End"
+        },
+        "period_start": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Period start DTG or date (e.g. '190500ZAPR26' or '2026-04-19').",
+          "title": "Period Start"
+        },
+        "phase_or_day": {
+          "description": "Phase label or D+N day the forecast covers (e.g. 'Phase II / D+1', 'D-Day', 'H-6 to H+12').",
+          "title": "Phase Or Day",
+          "type": "string"
+        },
+        "precipitation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Precipitation forecast with effects.",
+          "title": "Precipitation"
+        },
+        "temperature_and_humidity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Temperature (Hi/Lo) and humidity for this period.",
+          "title": "Temperature And Humidity"
+        },
+        "visibility": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Visibility forecast with effects.",
+          "title": "Visibility"
+        },
+        "winds": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Wind forecast with effects.",
+          "title": "Winds"
+        }
+      },
+      "required": [
+        "phase_or_day"
+      ],
+      "title": "WeatherPeriodForecast",
+      "type": "object"
+    },
+    "Window": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            }
+          ],
+          "title": "End"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/Offset"
+            }
+          ],
+          "title": "Start"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "Window",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "general_instructions": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "General Instructions",
+      "type": "array"
+    },
+    "kind": {
+      "const": "ato",
+      "title": "Kind",
+      "type": "string"
+    },
+    "meta": {
+      "$ref": "#/$defs/Metadata"
+    },
+    "missions": {
+      "items": {
+        "$ref": "#/$defs/Mission"
+      },
+      "minItems": 1,
+      "title": "Missions",
+      "type": "array"
+    },
+    "packages": {
+      "items": {
+        "$ref": "#/$defs/Package"
+      },
+      "title": "Packages",
+      "type": "array"
+    },
+    "period": {
+      "$ref": "#/$defs/Period"
+    },
+    "resources": {
+      "$ref": "#/$defs/Resources"
+    },
+    "schema_version": {
+      "const": "0.2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "spins": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PinnedRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "weather": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Weather"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "kind",
+    "schema_version",
+    "meta",
+    "period",
+    "resources",
+    "missions"
+  ],
+  "title": "ATO",
+  "type": "object"
+}

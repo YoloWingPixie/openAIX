@@ -1,0 +1,19 @@
+{
+  "$schema": "urn:openaix:schema:measure-cl:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "description": "Coordination level separating land-component aviation below from fixed-wing traffic above.",
+  "geometry": {
+    "kind": "vertical",
+    "level": {
+      "reference": "AGL",
+      "unit": "ft",
+      "value": 3500
+    }
+  },
+  "id": "oir-cl",
+  "name": "OIR coordination level",
+  "type": "CL"
+}

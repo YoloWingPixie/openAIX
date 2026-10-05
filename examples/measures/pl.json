@@ -1,0 +1,31 @@
+{
+  "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "coordination_instructions": [
+    "Report PL NICKEL to Warhawk; CAS friendlies lines use the last reported phase line."
+  ],
+  "description": "Phase line NICKEL along the desert road to Deir ez-Zor; Task Force Bastion reports crossing it to Warhawk and Axeman.",
+  "geometry": {
+    "kind": "line",
+    "points": [
+      {
+        "latitude": 34.925,
+        "longitude": 40.125
+      },
+      {
+        "latitude": 34.92,
+        "longitude": 40.307
+      },
+      {
+        "latitude": 34.925,
+        "longitude": 40.474
+      }
+    ]
+  },
+  "id": "pl-nickel",
+  "name": "PL NICKEL",
+  "type": "PL"
+}

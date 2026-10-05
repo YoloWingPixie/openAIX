@@ -1,0 +1,57 @@
+{
+  "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "kind": "polygon",
+        "rings": [
+          [
+            {
+              "latitude": 35.035,
+              "longitude": 40.177
+            },
+            {
+              "latitude": 35.035,
+              "longitude": 40.225
+            },
+            {
+              "latitude": 35.155,
+              "longitude": 40.225
+            },
+            {
+              "latitude": 35.155,
+              "longitude": 40.177
+            },
+            {
+              "latitude": 35.035,
+              "longitude": 40.177
+            }
+          ]
+        ]
+      },
+      "id": "cobalt-buffer-volume",
+      "lower_limit": {
+        "surface": true
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 17000
+      }
+    }
+  ],
+  "description": "Buffer zone separating the Basin HIDACZ from the Cobalt and Onyx kill boxes to the east.",
+  "id": "cobalt-buffer",
+  "name": "Cobalt buffer zone",
+  "purpose": "Keep a lateral buffer between objective-area traffic and kill box attacks.",
+  "type": "BZ"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "urn:openaix:schema:msa:0.1.0-draft.1",
+  "airfield": "kden",
+  "center": {
+    "ident": "KDEN",
+    "position": {
+      "latitude": 39.8616666667,
+      "longitude": -104.6731666667
+    }
+  },
+  "id": "kden-msa",
+  "kind": "msa",
+  "name": "KDEN minimum safe altitude",
+  "resources_ref": {
+    "id": "kden-navigation",
+    "revision": "2610"
+  },
+  "sectors": [
+    {
+      "end_bearing": {
+        "reference": "magnetic",
+        "value": 180
+      },
+      "full_circle": true,
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 9700
+      },
+      "radius": {
+        "unit": "nm",
+        "value": 25
+      },
+      "start_bearing": {
+        "reference": "magnetic",
+        "value": 180
+      }
+    }
+  ],
+  "source": "FAA CIFP cycle 2610"
+}

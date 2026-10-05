@@ -1,0 +1,66 @@
+{
+  "$schema": "urn:openaix:schema:runway:0.1.0-draft.1",
+  "airfield": "kden",
+  "designator": "16R/34L",
+  "ends": [
+    {
+      "designator": "16R",
+      "heading": {
+        "declination_deg": 8.0,
+        "reference": "magnetic",
+        "value": 173.0
+      },
+      "localizer": "kden-idqq",
+      "threshold": {
+        "latitude": 39.8957972222,
+        "longitude": -104.6960833333
+      },
+      "threshold_crossing_height": {
+        "unit": "ft",
+        "value": 55
+      },
+      "threshold_elevation": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 5322
+      }
+    },
+    {
+      "designator": "34L",
+      "heading": {
+        "declination_deg": 8.0,
+        "reference": "magnetic",
+        "value": 353.0
+      },
+      "threshold": {
+        "latitude": 39.8518861111,
+        "longitude": -104.6965888889
+      },
+      "threshold_crossing_height": {
+        "unit": "ft",
+        "value": 55
+      },
+      "threshold_elevation": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 5327
+      }
+    }
+  ],
+  "id": "kden-rw16r-34l",
+  "kind": "runway",
+  "length": {
+    "unit": "ft",
+    "value": 16000
+  },
+  "name": "KDEN runway 16R/34L",
+  "resources_ref": {
+    "id": "kden-navigation",
+    "revision": "2610"
+  },
+  "source": "FAA CIFP cycle 2610",
+  "width": {
+    "unit": "ft",
+    "value": 200
+  }
+}

@@ -1,0 +1,6726 @@
+{
+  "$schema": "urn:openaix:schema:resources:0.1.0-draft.1",
+  "kind": "resources",
+  "meta": {
+    "id": "oir-resources",
+    "issued_at": "2026-10-02T11:00:00Z",
+    "issuing_unit": "CJTF-OIR CAOC",
+    "operation": "INHERENT RESOLVE",
+    "revision": "1",
+    "title": "OIR shared resources"
+  },
+  "resources": {
+    "agencies": {
+      "axeman": {
+        "callsign": "Axeman",
+        "channels": [
+          "cas-uhf"
+        ],
+        "id": "axeman",
+        "kind": "c2-agency",
+        "position": {
+          "latitude": 35.005,
+          "longitude": 40.265
+        },
+        "role": "JTAC"
+      },
+      "banshee": {
+        "callsign": "Banshee",
+        "channels": [
+          "banshee-uhf"
+        ],
+        "id": "banshee",
+        "kind": "c2-agency",
+        "position": {
+          "latitude": 32.546,
+          "longitude": 38.214
+        },
+        "role": "CRC"
+      },
+      "caoc": {
+        "callsign": "Kingpin",
+        "channels": [
+          "ops-uhf"
+        ],
+        "id": "caoc",
+        "kind": "c2-agency",
+        "position": {
+          "latitude": 31.838,
+          "longitude": 36.803
+        },
+        "role": "AOC"
+      },
+      "darkstar": {
+        "callsign": "Darkstar",
+        "channels": [
+          "control-uhf"
+        ],
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "kind": "unit",
+                  "mission_id": "oir-syria",
+                  "name": "OIR Darkstar E-3A",
+                  "object_id": 11,
+                  "unit_type": "E-3A"
+                }
+              ]
+            }
+          }
+        },
+        "id": "darkstar",
+        "kind": "c2-agency",
+        "role": "AWACS"
+      },
+      "salti-tower": {
+        "callsign": "Salti Tower",
+        "channels": [
+          "salti-uhf"
+        ],
+        "id": "salti-tower",
+        "kind": "c2-agency",
+        "position": {
+          "latitude": 31.825431,
+          "longitude": 36.781257
+        },
+        "role": "ATC"
+      },
+      "warhawk": {
+        "callsign": "Warhawk",
+        "channels": [
+          "cas-uhf"
+        ],
+        "id": "warhawk",
+        "kind": "c2-agency",
+        "position": {
+          "latitude": 32.965,
+          "longitude": 37.794
+        },
+        "role": "ASOC"
+      }
+    },
+    "aircraft_types": {
+      "a-10c": {
+        "category": "airplane",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "type": "A-10C_2"
+            }
+          }
+        },
+        "name": "A-10C II Thunderbolt II"
+      },
+      "ah-64d": {
+        "category": "helicopter",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "type": "AH-64D_BLK_II"
+            }
+          }
+        },
+        "name": "AH-64D Apache Longbow Block II"
+      },
+      "c-130j": {
+        "category": "airplane",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "type": "C-130"
+            }
+          }
+        },
+        "name": "C-130J Hercules"
+      },
+      "ch-47f": {
+        "category": "helicopter",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "type": "CH-47Fbl1"
+            }
+          }
+        },
+        "name": "CH-47F Chinook"
+      },
+      "e-3a": {
+        "category": "airplane",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "type": "E-3A"
+            }
+          }
+        },
+        "name": "E-3A Sentry"
+      },
+      "ea-18g": {
+        "category": "airplane",
+        "name": "EA-18G Growler"
+      },
+      "f-15c": {
+        "category": "airplane",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "type": "F-15C"
+            }
+          }
+        },
+        "name": "F-15C Eagle"
+      },
+      "f-15e": {
+        "category": "airplane",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "type": "F-15ESE"
+            }
+          }
+        },
+        "name": "F-15E Strike Eagle"
+      },
+      "f-16c-50": {
+        "category": "airplane",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "type": "F-16C_50"
+            }
+          }
+        },
+        "name": "F-16C Fighting Falcon Block 50"
+      },
+      "hh-60g": {
+        "category": "helicopter",
+        "name": "HH-60G Pave Hawk"
+      },
+      "kc-135r": {
+        "category": "airplane",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "type": "KC-135"
+            }
+          }
+        },
+        "name": "KC-135R Stratotanker"
+      },
+      "mq-9": {
+        "category": "unmanned",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "type": "MQ-9 Reaper"
+            }
+          }
+        },
+        "name": "MQ-9 Reaper"
+      }
+    },
+    "areas": {
+      "azraq-training": {
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 5000
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 250
+          }
+        },
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 31.9,
+                "longitude": 37.1
+              },
+              {
+                "latitude": 31.9,
+                "longitude": 37.5
+              },
+              {
+                "latitude": 32.1,
+                "longitude": 37.5
+              },
+              {
+                "latitude": 32.1,
+                "longitude": 37.1
+              },
+              {
+                "latitude": 31.9,
+                "longitude": 37.1
+              }
+            ]
+          ]
+        },
+        "name": "Azraq training area"
+      },
+      "jamming-orbit": {
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 240
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 260
+          }
+        },
+        "geometry": {
+          "center": {
+            "latitude": 34.835,
+            "longitude": 39.974
+          },
+          "kind": "circle",
+          "radius": {
+            "unit": "nm",
+            "value": 8
+          }
+        },
+        "name": "Grizzly stand-off area"
+      },
+      "range-sweep": {
+        "active": {
+          "end": "2026-10-02T13:20:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "surface": true
+          },
+          "upper": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 1000
+          }
+        },
+        "geometry": {
+          "center": {
+            "latitude": 35.095,
+            "longitude": 40.305
+          },
+          "kind": "circle",
+          "radius": {
+            "unit": "nm",
+            "value": 6
+          }
+        },
+        "name": "Cobalt clearance area"
+      },
+      "recce-box": {
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 15000
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 20000
+          }
+        },
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 35.155,
+                "longitude": 40.125
+              },
+              {
+                "latitude": 35.155,
+                "longitude": 40.425
+              },
+              {
+                "latitude": 35.285,
+                "longitude": 40.425
+              },
+              {
+                "latitude": 35.285,
+                "longitude": 40.125
+              },
+              {
+                "latitude": 35.155,
+                "longitude": 40.125
+              }
+            ]
+          ]
+        },
+        "name": "Gainful search box"
+      },
+      "red-air": {
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 150
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 350
+          }
+        },
+        "geometry": {
+          "kind": "corridor",
+          "points": [
+            {
+              "latitude": 35.485,
+              "longitude": 39.825
+            },
+            {
+              "latitude": 35.485,
+              "longitude": 40.525
+            }
+          ],
+          "width": {
+            "unit": "nm",
+            "value": 10
+          }
+        },
+        "name": "Northern threat axis"
+      },
+      "sweep-north": {
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 200
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 350
+          }
+        },
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 35.235,
+                "longitude": 39.925
+              },
+              {
+                "latitude": 35.235,
+                "longitude": 40.525
+              },
+              {
+                "latitude": 35.435,
+                "longitude": 40.525
+              },
+              {
+                "latitude": 35.435,
+                "longitude": 39.925
+              },
+              {
+                "latitude": 35.235,
+                "longitude": 39.925
+              }
+            ]
+          ]
+        },
+        "name": "North sweep area",
+        "restrictions": [
+          "Remain north of the Cobalt kill box while it is open."
+        ]
+      }
+    },
+    "channels": {
+      "banshee-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 305.0
+        },
+        "name": "Banshee",
+        "notes": "Banshee gives kill box open and closed calls; read back the status.",
+        "usage": "Kill box status, rescue reservation and procedural control east of H4"
+      },
+      "cas-alt-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 318.4
+        },
+        "name": "Warhawk CAS alternate",
+        "notes": "Use when Warhawk CAS is jammed or saturated; Axeman monitors both.",
+        "usage": "Alternate CAS check-in and terminal control with Axeman"
+      },
+      "cas-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 309.2
+        },
+        "name": "Warhawk CAS",
+        "notes": "Check in 10 nm before Dagger; Warhawk stacks CAS from 15000 feet.",
+        "usage": "CAS check-in and terminal control with Axeman"
+      },
+      "control-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 251.0
+        },
+        "name": "Darkstar control",
+        "notes": "Primary air control frequency; Link 16 carries the same air picture.",
+        "usage": "Orbit, corridor and holding coordination"
+      },
+      "ops-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 255.4
+        },
+        "name": "Kingpin",
+        "notes": "Monitored 0300Z to 2100Z; outside those hours relay through Darkstar.",
+        "usage": "Mission changes, aborts and battle-damage reports"
+      },
+      "rescue-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 282.8
+        },
+        "name": "Rescue common",
+        "notes": "Guard 243.0 is the backup survivor frequency.",
+        "usage": "On-scene personnel recovery coordination"
+      },
+      "salti-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 253.15
+        },
+        "name": "Salti Tower",
+        "notes": "VHF 120.5 is the same position.",
+        "usage": "Muwaffaq Salti tower, ground and approach (combined)"
+      },
+      "strike-vhf": {
+        "frequency": {
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 138.75
+        },
+        "name": "Anvil package",
+        "usage": "Strike package inter-flight"
+      },
+      "tanker-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 276.1
+        },
+        "name": "Shell boom",
+        "notes": "Primary tanker for the eastern stack; expect 15 minutes on the boom per two-ship.",
+        "usage": "Tanker rendezvous and boom operations"
+      }
+    },
+    "control_measures": {
+      "aa-bastion": {
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Assembly area of Task Force Bastion south of PL BRASS.",
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 34.755,
+                "longitude": 40.204
+              },
+              {
+                "latitude": 34.755,
+                "longitude": 40.303
+              },
+              {
+                "latitude": 34.815,
+                "longitude": 40.304
+              },
+              {
+                "latitude": 34.815,
+                "longitude": 40.205
+              },
+              {
+                "latitude": 34.755,
+                "longitude": 40.204
+              }
+            ]
+          ]
+        },
+        "id": "aa-bastion",
+        "name": "AA BASTION",
+        "type": "AA"
+      },
+      "abc": {
+        "airfield": "prince-hassan",
+        "class": "VORTAC",
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 2165
+        },
+        "frequency": {
+          "unit": "MHz",
+          "value": 115.9
+        },
+        "id": "abc",
+        "ident": "ABC",
+        "name": "Prince Hassan VORTAC",
+        "position": {
+          "latitude": 32.159572,
+          "longitude": 37.148259
+        },
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+        "tacan": {
+          "band": "X",
+          "channel": 106,
+          "identifier": "ABC"
+        },
+        "type": "NAVAID"
+      },
+      "bastion-basin-boundary": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "Fires across the boundary are coordinated with the adjacent task force."
+        ],
+        "description": "Lateral boundary between Task Force Bastion to the east and Task Force Basin to the west, from PL BRASS to PL ZINC.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 34.835,
+              "longitude": 40.126
+            },
+            {
+              "latitude": 35.025,
+              "longitude": 40.125
+            }
+          ]
+        },
+        "id": "bastion-basin-boundary",
+        "name": "Task Force Bastion and Task Force Basin boundary",
+        "type": "BOUNDARY"
+      },
+      "bastion-bullseye": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Bullseye for air-to-air calls in OIR.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "bastion-bullseye",
+        "name": "Bastion bullseye",
+        "position": {
+          "latitude": 34.215,
+          "longitude": 39.647
+        },
+        "roles": [
+          "bullseye"
+        ],
+        "type": "POINT"
+      },
+      "bastion-ca": {
+        "$schema": "urn:openaix:schema:measure-cl:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "Coordinate with Warhawk and Darkstar before flying or firing through 11000 feet MSL inside the Task Force Bastion area.",
+          "No coordinating altitude applies beyond the FSCL or inside an open kill box."
+        ],
+        "description": "Coordinating altitude over Task Force Bastion, from the boundary to the RFL and from PL BRASS to the FSCL; Warhawk controls the assigned airspace below it, and Darkstar the airspace above it.",
+        "geometry": {
+          "kind": "vertical",
+          "level": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 11000
+          }
+        },
+        "id": "bastion-ca",
+        "name": "OIR coordinating altitude",
+        "type": "CA"
+      },
+      "carp-tin": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Planned CARP for the personnel drop on DZ Tin.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "carp-tin",
+        "name": "DZ Tin release point",
+        "position": {
+          "latitude": 34.66,
+          "longitude": 40.439
+        },
+        "roles": [
+          "control"
+        ],
+        "type": "POINT"
+      },
+      "cedar": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf",
+          "banshee-uhf"
+        ],
+        "contact_agency": "darkstar",
+        "coordination_instructions": [
+          "Darkstar hands outbound flights to Banshee at Cedar."
+        ],
+        "description": "Egress gate where flights leave the operating area for recovery to Muwaffaq Salti or Prince Hassan.",
+        "handover_agency": "banshee",
+        "id": "cedar",
+        "instructions": [
+          "Report Cedar with fuel state; give BDA to Warhawk before check-out."
+        ],
+        "name": "Cedar",
+        "notes": "Report Cedar with fuel state; Banshee gives the recovery altimeter.",
+        "position": {
+          "latitude": 33.59,
+          "longitude": 39.002
+        },
+        "position_description": "Southeastern egress gate reached after release from Mesa holding.",
+        "reference_agency": "darkstar",
+        "restrictions": [
+          "Do not route through the rescue reservation from Cedar while it is active."
+        ],
+        "roles": [
+          "control",
+          "egress",
+          "gate"
+        ],
+        "route": "marshal-exit",
+        "type": "POINT"
+      },
+      "cobalt-box": {
+        "$schema": "urn:openaix:schema:measure-kb:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "banshee-uhf"
+        ],
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "bindings": [
+                    {
+                      "kind": "drawing",
+                      "layer": "Blue",
+                      "mission_id": "oir-syria",
+                      "name": "OIR Cobalt Boundary",
+                      "object_id": 42,
+                      "polygon_mode": "free",
+                      "primitive_type": "Polygon",
+                      "style": {
+                        "color": "0x3366FFFF",
+                        "fill_color": "0x3366FF20",
+                        "thickness": 2,
+                        "visible": true
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.225
+                  },
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.374
+                  },
+                  {
+                    "latitude": 35.155,
+                    "longitude": 40.375
+                  },
+                  {
+                    "latitude": 35.155,
+                    "longitude": 40.225
+                  },
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.225
+                  }
+                ]
+              ]
+            },
+            "id": "cobalt-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "name": "Cobalt volume",
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 13000
+            }
+          }
+        ],
+        "controlling_agency": "banshee",
+        "coordination_instructions": [
+          "Enter only from Marshal after Banshee reports the box open."
+        ],
+        "description": "Kill Box (KB) over the Cobalt compound west of the Euphrates, north of the transit and rescue areas.",
+        "establishing_authority": "caoc",
+        "grid_label": "Cobalt 1",
+        "id": "cobalt-box",
+        "killbox_kind": "blue",
+        "name": "Cobalt kill box",
+        "notes": "Banshee opens the box only after Sweeper reports the area clear of civilian traffic.",
+        "purpose": "Air-to-surface attacks on the Cobalt compound and vehicle park.",
+        "restrictions": [
+          "Firing status follows the assignment intervals below; no attacks on the river crossings."
+        ],
+        "type": "KB"
+      },
+      "dz-tin": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "banshee-uhf"
+        ],
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 34.685,
+                "longitude": 40.475
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 0.5
+              }
+            },
+            "id": "dz-tin-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "name": "DZ Tin",
+            "operation": "add",
+            "upper_limit": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 1500
+            }
+          }
+        ],
+        "controlling_agency": "banshee",
+        "description": "Drop zone for the airborne platoon on the south flank of Task Force Bastion, south of PL BRASS.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "dz-tin",
+        "name": "DZ Tin",
+        "purpose": "Drop zone for the airborne platoon on the south flank of Task Force Bastion, south of PL BRASS.",
+        "type": "DZ"
+      },
+      "falcon": {
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 220
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 260
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "coordination_instructions": [
+          "Report Falcon on station and off station to Darkstar on 251.000 MHz AM."
+        ],
+        "description": "Combat air patrol racetrack north of the support orbits, facing the northern threat axis.",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "closed": true,
+                  "kind": "drawing",
+                  "layer": "Blue",
+                  "line_mode": "segments",
+                  "mission_id": "oir-syria",
+                  "name": "OIR Falcon Track",
+                  "object_id": 43,
+                  "primitive_type": "Line",
+                  "style": {
+                    "color": "0x66CCFFFF",
+                    "thickness": 2,
+                    "visible": true
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "geometry": {
+          "kind": "racetrack",
+          "leg_length": {
+            "unit": "nm",
+            "value": 20
+          },
+          "point": {
+            "latitude": 34.885,
+            "longitude": 40.275
+          },
+          "radial": {
+            "reference": "true",
+            "value": 270
+          },
+          "turn_radius": {
+            "unit": "nm",
+            "value": 2
+          },
+          "turns": "right"
+        },
+        "id": "falcon",
+        "name": "Falcon patrol",
+        "purpose": "Falcon protects the strike package and the high-value orbits from the north.",
+        "restrictions": [
+          "Remain between FL220 and FL260; do not cross south of Shell without Darkstar approval."
+        ],
+        "type": "ORBIT"
+      },
+      "gainful-misarc": {
+        "$schema": "urn:openaix:schema:measure-misarc:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "axis": {
+          "reference": "true",
+          "value": 200
+        },
+        "center": {
+          "latitude": 35.215,
+          "longitude": 40.265
+        },
+        "description": "Expected engagement sector of the SA-6 battery toward the Anvil ingress from the south-west.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "gainful-misarc",
+        "name": "Gainful missile arc",
+        "range": {
+          "unit": "km",
+          "value": 24
+        },
+        "type": "MISARC",
+        "width_deg": 60
+      },
+      "ghi": {
+        "airfield": "ojms",
+        "class": "VORTAC",
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 1636
+        },
+        "frequency": {
+          "unit": "MHz",
+          "value": 113.8
+        },
+        "id": "ghi",
+        "ident": "GHI",
+        "name": "Muwaffaq Salti VORTAC",
+        "position": {
+          "latitude": 31.834683,
+          "longitude": 36.778475
+        },
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+        "tacan": {
+          "band": "X",
+          "channel": 85,
+          "identifier": "GHI"
+        },
+        "type": "NAVAID"
+      },
+      "iffoff-zinc": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Northbound aircraft set Mode 3/A and Mode 1 to standby north of this line.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 35.005,
+              "longitude": 39.925
+            },
+            {
+              "latitude": 35.005,
+              "longitude": 40.626
+            }
+          ]
+        },
+        "id": "iffoff-zinc",
+        "name": "IFFOFF ZINC",
+        "type": "IFFOFF"
+      },
+      "iffon-nickel": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Southbound aircraft set every IFF mode on south of this line.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 34.975,
+              "longitude": 39.925
+            },
+            {
+              "latitude": 34.975,
+              "longitude": 40.624
+            }
+          ]
+        },
+        "id": "iffon-nickel",
+        "name": "IFFON NICKEL",
+        "type": "IFFON"
+      },
+      "ip-silver": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf",
+          "banshee-uhf"
+        ],
+        "contact_agency": "darkstar",
+        "coordination_instructions": [
+          "Retain the current controller until the handover is acknowledged."
+        ],
+        "description": "Initial point for attacks into the Cobalt kill box from the southwest.",
+        "handover_agency": "banshee",
+        "id": "ip-silver",
+        "instructions": [
+          "Report this point by name; bearings elsewhere in the order are true."
+        ],
+        "name": "Silver",
+        "position": {
+          "latitude": 34.955,
+          "longitude": 40.045
+        },
+        "position_description": "Desert road bend south-west of the Cobalt compound.",
+        "reference_agency": "darkstar",
+        "restrictions": [
+          "A point report does not authorize entry into the restricted operating zone."
+        ],
+        "roles": [
+          "initial"
+        ],
+        "route": "marshal-entry",
+        "type": "POINT"
+      },
+      "isp-tinsel": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "contact_agency": "darkstar",
+        "description": "Identification safety point on MRR TINSEL; returning flights report it to Darkstar.",
+        "id": "isp-tinsel",
+        "name": "ISP TINSEL",
+        "position": {
+          "latitude": 34.529,
+          "longitude": 40.301
+        },
+        "roles": [
+          "identification_safety"
+        ],
+        "type": "POINT"
+      },
+      "jettison-tin": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "banshee-uhf"
+        ],
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 34.835,
+                "longitude": 40.675
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 2
+              }
+            },
+            "id": "tin-flat",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 8000
+            }
+          }
+        ],
+        "controlling_agency": "banshee",
+        "description": "Desert area for the release of hung or unused stores before recovery.",
+        "id": "jettison-tin",
+        "name": "Tin Flat jettison area",
+        "type": "ROZ"
+      },
+      "juniper": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf",
+          "banshee-uhf"
+        ],
+        "contact_agency": "banshee",
+        "coordination_instructions": [
+          "Banshee hands inbound flights to Darkstar at Juniper."
+        ],
+        "description": "Ingress gate west of At Tanf where traffic from Muwaffaq Salti enters the operating area under Darkstar control.",
+        "handover_agency": "darkstar",
+        "id": "juniper",
+        "instructions": [
+          "Report Juniper with altitude and playtime; Darkstar assigns the corridor slot."
+        ],
+        "name": "Juniper",
+        "notes": "Expect a Darkstar picture call at Juniper; squawk the ATO Mode 3 code before the gate.",
+        "position": {
+          "latitude": 33.59,
+          "longitude": 38.552
+        },
+        "position_description": "Southwestern ingress gate; beginning of the Juniper-to-Marshal transit corridor.",
+        "reference_agency": "darkstar",
+        "restrictions": [
+          "Do not pass Juniper northbound without a Darkstar check-in."
+        ],
+        "roles": [
+          "control",
+          "ingress",
+          "gate"
+        ],
+        "route": "marshal-entry",
+        "type": "POINT"
+      },
+      "lz-nickel": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "banshee-uhf"
+        ],
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 34.895,
+                "longitude": 40.304
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 0.3
+              }
+            },
+            "id": "lz-nickel-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "name": "LZ Nickel",
+            "operation": "add",
+            "upper_limit": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 500
+            }
+          }
+        ],
+        "controlling_agency": "banshee",
+        "description": "Landing zone for the Task Force Bastion air assault, between PL BRASS and PL NICKEL.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "lz-nickel",
+        "name": "LZ Nickel",
+        "purpose": "Landing zone for the Task Force Bastion air assault, between PL BRASS and PL NICKEL.",
+        "type": "LZ"
+      },
+      "marshal": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf",
+          "banshee-uhf"
+        ],
+        "contact_agency": "darkstar",
+        "coordination_instructions": [
+          "Darkstar keeps control from Marshal to the push from holding."
+        ],
+        "description": "Holding fix at the north end of the transit corridor and the anchor of Mesa holding.",
+        "handover_agency": "darkstar",
+        "id": "marshal",
+        "instructions": [
+          "Report Marshal level; expect a Mesa holding level of 14000 or 16000 feet MSL."
+        ],
+        "name": "Marshal",
+        "notes": "Marshal is the hand-off point from Banshee procedural control to Darkstar.",
+        "position": {
+          "latitude": 34.059,
+          "longitude": 39.477
+        },
+        "position_description": "Northern end of the inbound corridor and the reference point for Mesa holding.",
+        "reference_agency": "darkstar",
+        "restrictions": [
+          "A Marshal report does not clear a flight into the Cobalt kill box."
+        ],
+        "roles": [
+          "control",
+          "marshalling"
+        ],
+        "route": "marshal-entry",
+        "type": "POINT"
+      },
+      "mesa": {
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 14000
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 16000
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "coordination_instructions": [
+          "Leave Mesa only on Darkstar release, via Cedar for recovery or Marshal for the push."
+        ],
+        "description": "Holding racetrack at Marshal for flights that wait for the kill box or the tanker.",
+        "geometry": {
+          "kind": "racetrack",
+          "leg_length": {
+            "unit": "nm",
+            "value": 10
+          },
+          "point": {
+            "latitude": 34.059,
+            "longitude": 39.477
+          },
+          "radial": {
+            "reference": "true",
+            "value": 180
+          },
+          "turn_radius": {
+            "unit": "nm",
+            "value": 2
+          },
+          "turns": "right"
+        },
+        "id": "mesa",
+        "name": "Mesa holding",
+        "purpose": "Mesa separates holding flights by level above the transit corridor.",
+        "restrictions": [
+          "One flight per level at 14000 or 16000 feet MSL, as Darkstar assigns."
+        ],
+        "type": "ORBIT"
+      },
+      "mrr-tinsel": {
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 12000
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 14000
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "description": "Minimum-risk return route from the Cobalt kill box to Cedar, east of the CAP and tanker orbits.",
+        "geometry": {
+          "kind": "corridor",
+          "points": [
+            {
+              "latitude": 34.985,
+              "longitude": 40.475
+            },
+            {
+              "latitude": 34.529,
+              "longitude": 40.301
+            },
+            {
+              "latitude": 33.59,
+              "longitude": 39.002
+            }
+          ],
+          "width": {
+            "unit": "nm",
+            "value": 4
+          }
+        },
+        "id": "mrr-tinsel",
+        "name": "MRR TINSEL",
+        "type": "MRR"
+      },
+      "nai-gainful": {
+        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Road junctions where the SA-6 battery is expected to relocate.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 35.175,
+                "longitude": 40.205
+              },
+              {
+                "latitude": 35.175,
+                "longitude": 40.345
+              },
+              {
+                "latitude": 35.255,
+                "longitude": 40.345
+              },
+              {
+                "latitude": 35.255,
+                "longitude": 40.205
+              },
+              {
+                "latitude": 35.175,
+                "longitude": 40.205
+              }
+            ]
+          ]
+        },
+        "id": "nai-gainful",
+        "name": "NAI 1 Gainful",
+        "type": "NAI"
+      },
+      "nai-junction": {
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Road junction north of Cobalt that the SA-6 uses to relocate.",
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 35.165,
+                "longitude": 40.305
+              },
+              {
+                "latitude": 35.165,
+                "longitude": 40.345
+              },
+              {
+                "latitude": 35.195,
+                "longitude": 40.345
+              },
+              {
+                "latitude": 35.195,
+                "longitude": 40.305
+              },
+              {
+                "latitude": 35.165,
+                "longitude": 40.305
+              }
+            ]
+          ]
+        },
+        "id": "nai-junction",
+        "name": "NAI 2 JUNCTION",
+        "type": "NAI"
+      },
+      "obj-cobalt": {
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Objective of Task Force Bastion: the ISIS command post and vehicle park.",
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 35.085,
+                "longitude": 40.284
+              },
+              {
+                "latitude": 35.085,
+                "longitude": 40.326
+              },
+              {
+                "latitude": 35.11,
+                "longitude": 40.324
+              },
+              {
+                "latitude": 35.11,
+                "longitude": 40.285
+              },
+              {
+                "latitude": 35.085,
+                "longitude": 40.284
+              }
+            ]
+          ]
+        },
+        "id": "obj-cobalt",
+        "name": "OBJ COBALT",
+        "type": "OBJ"
+      },
+      "oir-aor": {
+        "$schema": "urn:openaix:schema:measure-aor:0.1.0-draft.1",
+        "active": {
+          "continuous": true
+        },
+        "description": "Area of responsibility of the CJTF-OIR air component in this order, from eastern Jordan to the Euphrates valley; the airspace control area follows it.",
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 32.54,
+                "longitude": 36.9
+              },
+              {
+                "latitude": 32.54,
+                "longitude": 40.9
+              },
+              {
+                "latitude": 35.8,
+                "longitude": 40.9
+              },
+              {
+                "latitude": 35.8,
+                "longitude": 36.9
+              },
+              {
+                "latitude": 32.54,
+                "longitude": 36.9
+              }
+            ]
+          ]
+        },
+        "id": "oir-aor",
+        "name": "OIR area of responsibility",
+        "type": "AOR"
+      },
+      "oir-fscl": {
+        "$schema": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "Fires short of the line that may affect the land force are coordinated with its fire support element."
+        ],
+        "description": "Fire support coordination line set by the partner land force north of the FLOT; the Cobalt and Onyx kill boxes lie beyond it.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 35.025,
+              "longitude": 39.725
+            },
+            {
+              "latitude": 35.03,
+              "longitude": 40.125
+            },
+            {
+              "latitude": 35.025,
+              "longitude": 40.725
+            }
+          ]
+        },
+        "id": "oir-fscl",
+        "name": "OIR FSCL",
+        "type": "FSCL"
+      },
+      "pewter-rfl": {
+        "$schema": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:30:00Z"
+        },
+        "coordination_instructions": [
+          "No fires or their effects across the line without coordination with the affected task force."
+        ],
+        "description": "Restrictive fire line between Task Force Bastion attacking north and Task Force Pewter converging from the east; set by the partner land force, the common commander.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 34.855,
+              "longitude": 40.475
+            },
+            {
+              "latitude": 34.935,
+              "longitude": 40.485
+            },
+            {
+              "latitude": 35.015,
+              "longitude": 40.476
+            }
+          ]
+        },
+        "id": "pewter-rfl",
+        "name": "Bastion and Pewter RFL",
+        "type": "RFL"
+      },
+      "pi-tin": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Personnel point of impact on DZ Tin, marked by the raised angle marker.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "pi-tin",
+        "name": "DZ Tin point of impact",
+        "position": {
+          "latitude": 34.676,
+          "longitude": 40.462
+        },
+        "roles": [
+          "control"
+        ],
+        "type": "POINT"
+      },
+      "pl-brass": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "Task Force Bastion crosses PL BRASS at 1330Z after the Cobalt kill box opens."
+        ],
+        "description": "Phase line BRASS, designated as the line of departure of Task Force Bastion; it follows the FLOT at the start of the period.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 34.845,
+              "longitude": 40.127
+            },
+            {
+              "latitude": 34.85,
+              "longitude": 40.305
+            },
+            {
+              "latitude": 34.845,
+              "longitude": 40.476
+            }
+          ]
+        },
+        "id": "pl-brass",
+        "name": "PL BRASS",
+        "type": "LD"
+      },
+      "pl-nickel": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "Report PL NICKEL to Warhawk; CAS friendlies lines use the last reported phase line."
+        ],
+        "description": "Phase line NICKEL along the desert road to Deir ez-Zor; Task Force Bastion reports crossing it to Warhawk and Axeman.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 34.925,
+              "longitude": 40.125
+            },
+            {
+              "latitude": 34.92,
+              "longitude": 40.307
+            },
+            {
+              "latitude": 34.925,
+              "longitude": 40.474
+            }
+          ]
+        },
+        "id": "pl-nickel",
+        "name": "PL NICKEL",
+        "type": "PL"
+      },
+      "pl-zinc": {
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "coordination_instructions": [
+          "No Task Force Bastion element advances beyond PL ZINC; security forces may push to it."
+        ],
+        "description": "Phase line ZINC, the limit of advance of Task Force Bastion, short of the FSCL and the Cobalt and Onyx kill boxes.",
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 35.015,
+              "longitude": 40.125
+            },
+            {
+              "latitude": 35.015,
+              "longitude": 40.476
+            }
+          ]
+        },
+        "id": "pl-zinc",
+        "name": "PL ZINC",
+        "type": "LOA"
+      },
+      "pz-sage": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "banshee-uhf"
+        ],
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 34.74,
+                "longitude": 40.22
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 0.3
+              }
+            },
+            "id": "pz-sage-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "name": "PZ Sage",
+            "operation": "add",
+            "upper_limit": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 500
+            }
+          }
+        ],
+        "controlling_agency": "banshee",
+        "description": "Pickup zone for the Task Force Bastion air assault, beside Sage FARP.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "pz-sage",
+        "name": "PZ Sage",
+        "purpose": "Pickup zone for the Task Force Bastion air assault, beside Sage FARP.",
+        "type": "PZ"
+      },
+      "quarry-nfa": {
+        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "No-fire area that protects a civilian water pumping station between the FLOT and the FSCL.",
+        "geometry": {
+          "center": {
+            "latitude": 34.935,
+            "longitude": 40.324
+          },
+          "kind": "circle",
+          "radius": {
+            "unit": "m",
+            "value": 1000
+          }
+        },
+        "id": "quarry-nfa",
+        "name": "Quarry Springs NFA",
+        "restrictions": [
+          "No fires or effects into the area unless the establishing headquarters approves each mission."
+        ],
+        "type": "NFA"
+      },
+      "range-camp-nfa": {
+        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "No-fire area around the occupied displaced-persons camp east of the Cobalt compound.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "geometry": {
+          "center": {
+            "latitude": 35.065,
+            "longitude": 40.405
+          },
+          "kind": "circle",
+          "radius": {
+            "unit": "m",
+            "value": 1852
+          }
+        },
+        "id": "range-camp-nfa",
+        "name": "Displaced-persons camp NFA",
+        "restrictions": [
+          "No fires or effects into the area unless Kingpin approves each mission."
+        ],
+        "type": "NFA"
+      },
+      "rescue-reservation": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "banshee-uhf"
+        ],
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "bindings": [
+                    {
+                      "kind": "trigger_zone",
+                      "mission_id": "oir-syria",
+                      "name": "OIR Rescue Search",
+                      "object_id": 41,
+                      "zone_type": "circle"
+                    }
+                  ]
+                }
+              }
+            },
+            "geometry": {
+              "center": {
+                "latitude": 34.529,
+                "longitude": 40.551
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 3
+              }
+            },
+            "id": "search-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "name": "Search volume",
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 10000
+            }
+          }
+        ],
+        "controlling_agency": "banshee",
+        "coordination_instructions": [
+          "Contact Banshee on 305.000 MHz AM before approaching the boundary."
+        ],
+        "description": "Restricted Operating Zone (ROZ) that protects the search for the isolated aircrew of Hawg 2, east of the transit route.",
+        "id": "rescue-reservation",
+        "name": "Rescue reservation",
+        "notes": "Survivor last reported on the eastern edge; Pedro has on-scene command.",
+        "purpose": "Reserve the search area for the rescue package.",
+        "restrictions": [
+          "Other aircraft remain outside until Banshee releases the reservation."
+        ],
+        "type": "ROZ"
+      },
+      "rp-nickel": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Release point of the air assault serials.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "rp-nickel",
+        "name": "RP Nickel",
+        "position": {
+          "latitude": 34.865,
+          "longitude": 40.284
+        },
+        "roles": [
+          "control"
+        ],
+        "type": "POINT"
+      },
+      "sage-shoradez": {
+        "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 34.735,
+                "longitude": 40.225
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 2.5
+              }
+            },
+            "id": "sage-shorad-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 8000
+            }
+          }
+        ],
+        "coordination_instructions": [
+          "Helicopters inbound to Sage enter on the Sage FARP approach after the air defence controller confirms weapons hold."
+        ],
+        "description": "Short-range air defence engagement zone over the Sage FARP, where an Avenger platoon has engagement responsibility.",
+        "id": "sage-shoradez",
+        "mez_kind": "short_range",
+        "name": "Sage SHORADEZ",
+        "type": "MEZ"
+      },
+      "sentinel": {
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 280
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 300
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "coordination_instructions": [
+          "Darkstar reports any move of Sentinel to Kingpin on 255.400 MHz AM."
+        ],
+        "description": "Airborne early warning orbit over eastern Jordan for Darkstar.",
+        "geometry": {
+          "kind": "racetrack",
+          "leg_length": {
+            "unit": "nm",
+            "value": 20
+          },
+          "point": {
+            "latitude": 32.7,
+            "longitude": 38.4
+          },
+          "radial": {
+            "reference": "true",
+            "value": 180
+          },
+          "turn_radius": {
+            "unit": "nm",
+            "value": 2
+          },
+          "turns": "right"
+        },
+        "id": "sentinel",
+        "name": "Sentinel surveillance",
+        "purpose": "Sentinel gives Darkstar radar cover from H4 to the Euphrates valley.",
+        "restrictions": [
+          "Remain between FL280 and FL300; fighters stay clear of Sentinel by 5 nm."
+        ],
+        "type": "ORBIT"
+      },
+      "shell": {
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 180
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 200
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "coordination_instructions": [
+          "Contact Shell on 276.100 MHz AM 20 nm from the anchor; Darkstar keeps radar control."
+        ],
+        "description": "Air-to-air refuelling anchor east of the transit corridor, south of the Cobalt kill box.",
+        "geometry": {
+          "kind": "racetrack",
+          "leg_length": {
+            "unit": "nm",
+            "value": 15
+          },
+          "point": {
+            "latitude": 33.06,
+            "longitude": 39.05
+          },
+          "radial": {
+            "reference": "true",
+            "value": 270
+          },
+          "turn_radius": {
+            "unit": "nm",
+            "value": 2
+          },
+          "turns": "right"
+        },
+        "id": "shell",
+        "name": "Shell refuelling",
+        "purpose": "Shell gives fuel to the fighters and the strike package before and after the push.",
+        "restrictions": [
+          "Receivers join 1000 feet below the tanker and stay between FL180 and FL200."
+        ],
+        "type": "ORBIT"
+      },
+      "sl-sage": {
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 7000
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 9000
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "description": "Safe lane through the Sage SHORAD engagement zone for aircraft that return to FARP Sage.",
+        "geometry": {
+          "kind": "corridor",
+          "points": [
+            {
+              "latitude": 34.835,
+              "longitude": 40.225
+            },
+            {
+              "latitude": 34.529,
+              "longitude": 40.003
+            }
+          ],
+          "width": {
+            "unit": "nm",
+            "value": 2
+          }
+        },
+        "id": "sl-sage",
+        "name": "SL SAGE",
+        "type": "SL"
+      },
+      "south-transit": {
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 10000
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 12000
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "coordination_instructions": [
+          "Request climb at Marshal; do not climb into the stack without clearance."
+        ],
+        "description": "Special Corridor (SC) for the inbound route from Juniper to Marshal, below Mesa holding.",
+        "geometry": {
+          "kind": "corridor",
+          "one_way": true,
+          "points": [
+            {
+              "latitude": 33.59,
+              "longitude": 38.552
+            },
+            {
+              "latitude": 34.059,
+              "longitude": 39.477
+            }
+          ],
+          "width": {
+            "unit": "nm",
+            "value": 3
+          }
+        },
+        "id": "south-transit",
+        "name": "South transit corridor",
+        "notes": "Maximum 300 knots indicated; outside the period the published Jordanian routes apply.",
+        "purpose": "Keep inbound traffic below the holding stack.",
+        "restrictions": [
+          "Inbound only; outbound traffic uses Marshal to Cedar."
+        ],
+        "type": "SC"
+      },
+      "sp-sage": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Start point of the air assault serials.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "sp-sage",
+        "name": "SP Sage",
+        "position": {
+          "latitude": 34.775,
+          "longitude": 40.234
+        },
+        "roles": [
+          "control"
+        ],
+        "type": "POINT"
+      },
+      "trp-01": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "Target reference point at the road junction south-east of the Cobalt vehicle park; Axeman gives Cobalt targets as offsets from it.",
+        "id": "trp-01",
+        "name": "TRP 01",
+        "position": {
+          "latitude": 35.091,
+          "longitude": 40.318
+        },
+        "position_description": "Road junction south-east of the revetted vehicle park in the Cobalt compound.",
+        "roles": [
+          "target_reference"
+        ],
+        "type": "POINT"
+      },
+      "zinc-mez": {
+        "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "geometry": {
+              "center": {
+                "latitude": 35.255,
+                "longitude": 39.905
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "km",
+                "value": 25
+              }
+            },
+            "id": "zinc-mez-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 60000
+            }
+          }
+        ],
+        "description": "Missile engagement zone of the hostile SA-3 site that defends the Zinc depot.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "zinc-mez",
+        "mez_kind": "low",
+        "name": "Zinc LOMEZ",
+        "type": "MEZ"
+      },
+      "zinc-pump-nfa": {
+        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "description": "No-fire area around the civilian water pumping station beside the Zinc depot.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "geometry": {
+          "center": {
+            "latitude": 35.225,
+            "longitude": 39.885
+          },
+          "kind": "circle",
+          "radius": {
+            "unit": "m",
+            "value": 500
+          }
+        },
+        "id": "zinc-pump-nfa",
+        "name": "Zinc pumping station NFA",
+        "restrictions": [
+          "No fires or effects into the area unless Kingpin approves each mission."
+        ],
+        "type": "NFA"
+      }
+    },
+    "emitters": {
+      "sa3-zinc": {
+        "detection_range": {
+          "unit": "km",
+          "value": 60
+        },
+        "engagement_ceiling": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 59000
+        },
+        "engagement_floor": {
+          "reference": "AGL",
+          "unit": "ft",
+          "value": 65
+        },
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "alic_code": 123
+            }
+          }
+        },
+        "id": "sa3-zinc",
+        "max_engagement_range": {
+          "unit": "km",
+          "value": 25
+        },
+        "measures": [
+          {
+            "id": "zinc-mez",
+            "kind": "control_measure"
+          }
+        ],
+        "min_engagement_range": {
+          "unit": "km",
+          "value": 3.5
+        },
+        "mobility": "fixed",
+        "name": "Zinc SA-3 site (captured)",
+        "native_designation": "S-125",
+        "position": {
+          "latitude": 35.255,
+          "longitude": 39.905
+        },
+        "radar_reporting_name": "Low Blow",
+        "radar_roles": [
+          "target_tracking"
+        ],
+        "radar_system_id": "SNR-125",
+        "reporting_name": "Goa",
+        "rwr_symbol": "3",
+        "side": "red",
+        "status": "active",
+        "system_id": "SA-3"
+      },
+      "sa6-gainful": {
+        "detection_range": {
+          "unit": "km",
+          "value": 75
+        },
+        "engagement_ceiling": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 46000
+        },
+        "engagement_floor": {
+          "reference": "AGL",
+          "unit": "ft",
+          "value": 300
+        },
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "alic_code": 108,
+              "bindings": [
+                {
+                  "group_category": "vehicle",
+                  "kind": "group",
+                  "mission_id": "oir-syria",
+                  "name": "OIR Gainful battery"
+                }
+              ]
+            }
+          }
+        },
+        "id": "sa6-gainful",
+        "last_seen": "2026-10-02T12:15:00Z",
+        "max_engagement_range": {
+          "unit": "km",
+          "value": 24
+        },
+        "measures": [
+          {
+            "id": "gainful-misarc",
+            "kind": "control_measure"
+          }
+        ],
+        "min_engagement_range": {
+          "unit": "km",
+          "value": 4
+        },
+        "mobility": "relocatable",
+        "name": "Cobalt SA-6 battery (captured)",
+        "native_designation": "2K12 Kub",
+        "position": {
+          "latitude": 35.215,
+          "longitude": 40.265
+        },
+        "radar_reporting_name": "Straight Flush",
+        "radar_roles": [
+          "target_acquisition",
+          "target_illumination"
+        ],
+        "radar_system_id": "1S91",
+        "remarks": "Relocates up to 5 nautical miles after it emits; last seen on the river road north of Cobalt.",
+        "reporting_name": "Gainful",
+        "rwr_symbol": "6",
+        "side": "red",
+        "status": "active",
+        "system_id": "SA-6"
+      },
+      "sa8-nickel": {
+        "detection_range": {
+          "unit": "km",
+          "value": 30
+        },
+        "engagement_ceiling": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 16000
+        },
+        "engagement_floor": {
+          "reference": "AGL",
+          "unit": "ft",
+          "value": 30
+        },
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "alic_code": 117
+            }
+          }
+        },
+        "id": "sa8-nickel",
+        "last_seen": "2026-10-02T11:30:00Z",
+        "max_engagement_range": {
+          "unit": "km",
+          "value": 10
+        },
+        "min_engagement_range": {
+          "unit": "km",
+          "value": 1.5
+        },
+        "mobility": "mobile",
+        "name": "Nickel SA-8 platoon",
+        "native_designation": "9K33 Osa",
+        "position": {
+          "latitude": 35.115,
+          "longitude": 40.175
+        },
+        "radar_reporting_name": "Land Roll",
+        "radar_roles": [
+          "target_acquisition",
+          "target_tracking"
+        ],
+        "reporting_name": "Gecko",
+        "rwr_symbol": "8",
+        "side": "red",
+        "status": "suspected",
+        "system_id": "SA-8"
+      }
+    },
+    "instrument_procedures": {
+      "ojms-i31": {
+        "airfield": "ojms",
+        "id": "ojms-i31",
+        "ident": "I31",
+        "kind": "procedure",
+        "name": "Muwaffaq Salti ILS runway 31 approach (I31)",
+        "procedure_type": "approach",
+        "transitions": [
+          {
+            "legs": [
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 3300
+                  }
+                },
+                "approach_fix": "final_approach_fix",
+                "fix": {
+                  "ident": "FAF31",
+                  "position": {
+                    "latitude": 31.767214,
+                    "longitude": 36.869855
+                  }
+                },
+                "leg_type": "initial_fix"
+              },
+              {
+                "approach_fix": "missed_approach_point",
+                "fix": {
+                  "ident": "RW31",
+                  "position": {
+                    "latitude": 31.825413,
+                    "longitude": 36.79439
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 5000
+                  }
+                },
+                "course": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 307.2
+                },
+                "leg_type": "course_to_altitude",
+                "missed_approach": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "localizers": {
+      "ojms-ils-26": {
+        "airfield": "ojms",
+        "course": {
+          "declination_deg": 5.0,
+          "reference": "magnetic",
+          "value": 256.2
+        },
+        "frequency": {
+          "unit": "MHz",
+          "value": 109.7
+        },
+        "id": "ojms-ils-26",
+        "ident": "IGHS",
+        "ils_category": "I",
+        "kind": "localizer",
+        "name": "Muwaffaq Salti ILS runway 26 localizer",
+        "position": {
+          "latitude": 31.815141,
+          "longitude": 36.76229
+        },
+        "runway": "26",
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua"
+      },
+      "ojms-ils-31": {
+        "airfield": "ojms",
+        "course": {
+          "declination_deg": 5.0,
+          "reference": "magnetic",
+          "value": 307.2
+        },
+        "frequency": {
+          "unit": "MHz",
+          "value": 108.9
+        },
+        "id": "ojms-ils-31",
+        "ident": "IGHI",
+        "ils_category": "I",
+        "kind": "localizer",
+        "name": "Muwaffaq Salti ILS runway 31 localizer",
+        "position": {
+          "latitude": 31.844333,
+          "longitude": 36.768847
+        },
+        "runway": "31",
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua"
+      }
+    },
+    "pattern_profiles": {
+      "usaf-standard": {
+        "altitude": {
+          "reference": "AGL",
+          "unit": "ft",
+          "value": 1500
+        },
+        "break_point": "approach_end",
+        "categories": {
+          "helicopter": {
+            "altitude": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 500
+            }
+          },
+          "trainer": {
+            "altitude": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 1000
+            },
+            "overhead_altitude": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 1500
+            }
+          }
+        },
+        "direction": "left",
+        "initial": [
+          {
+            "distance": {
+              "unit": "nm",
+              "value": 5
+            }
+          }
+        ],
+        "overhead_altitude": {
+          "reference": "AGL",
+          "unit": "ft",
+          "value": 2000
+        }
+      }
+    },
+    "places": {
+      "farp-sage": {
+        "coalition": "blue",
+        "controlling_agency": "banshee",
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 1150
+        },
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "kind": "static",
+                  "mission_id": "oir-syria",
+                  "name": "OIR Sage FARP"
+                }
+              ]
+            }
+          }
+        },
+        "frequencies": [
+          {
+            "callsign": "Sage Ops",
+            "frequency": {
+              "band": "fm",
+              "modulation": "FM",
+              "unit": "MHz",
+              "value": 41.5
+            },
+            "role": "ops"
+          },
+          {
+            "callsign": "Sage Ops",
+            "frequency": {
+              "band": "uhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 285.0
+            },
+            "role": "ops"
+          }
+        ],
+        "id": "farp-sage",
+        "kind": "farp",
+        "name": "Sage FARP",
+        "pads": [
+          {
+            "name": "Pad 1",
+            "position": {
+              "latitude": 34.73527,
+              "longitude": 40.225
+            }
+          },
+          {
+            "name": "Pad 2",
+            "position": {
+              "latitude": 34.73473,
+              "longitude": 40.225
+            }
+          }
+        ],
+        "position": {
+          "latitude": 34.735,
+          "longitude": 40.225
+        }
+      },
+      "h4": {
+        "calm_wind_runway": "28",
+        "coalition": "blue",
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 2251
+        },
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "kind": "airbase",
+                  "mission_id": "oir-syria",
+                  "name": "H4"
+                }
+              ]
+            }
+          }
+        },
+        "frequencies": [
+          {
+            "callsign": "H4 Tower",
+            "frequency": {
+              "band": "uhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 250.15
+            },
+            "role": "tower"
+          },
+          {
+            "callsign": "H4 Tower",
+            "frequency": {
+              "band": "vhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 122.6
+            },
+            "role": "tower"
+          }
+        ],
+        "id": "h4",
+        "ident": "OJHF",
+        "kind": "airfield",
+        "magnetic_variation_deg": 5.0,
+        "name": "H4",
+        "position": {
+          "latitude": 32.539282,
+          "longitude": 38.19508
+        },
+        "runways": [
+          {
+            "designator": "10/28",
+            "ends": [
+              {
+                "designator": "10",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 97.7
+                },
+                "threshold": {
+                  "latitude": 32.541449,
+                  "longitude": 38.183712
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 2251
+                }
+              },
+              {
+                "designator": "28",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 277.7
+                },
+                "threshold": {
+                  "latitude": 32.537115,
+                  "longitude": 38.206446
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 2251
+                }
+              }
+            ],
+            "id": "h4-rw10-28",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 7178
+            },
+            "name": "10/28",
+            "surface": "hard",
+            "width": {
+              "unit": "ft",
+              "value": 148
+            }
+          }
+        ],
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+        "traffic_pattern": {
+          "profile": "usaf-standard"
+        },
+        "transition_altitude": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 13000
+        }
+      },
+      "ojms": {
+        "atis": {
+          "remarks": [
+            "Tower combines ground, tower and approach on 253.15 and 120.5; BAK-12 cables 1500 feet from both runway 13 and 31 thresholds.",
+            "Transient fighters park on stands 40 and 41; shelters are at the north-west end."
+          ],
+          "runway_in_use": "13",
+          "transition_level": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 150
+          }
+        },
+        "calm_wind_runway": "13",
+        "coalition": "blue",
+        "controlling_agency": "salti-tower",
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 1636
+        },
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "kind": "airbase",
+                  "mission_id": "oir-syria",
+                  "name": "Muwaffaq Salti"
+                }
+              ]
+            }
+          }
+        },
+        "frequencies": [
+          {
+            "callsign": "Salti Tower",
+            "frequency": {
+              "band": "uhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 253.15
+            },
+            "role": "tower"
+          },
+          {
+            "callsign": "Salti Tower",
+            "frequency": {
+              "band": "vhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 120.5
+            },
+            "role": "tower"
+          },
+          {
+            "callsign": "Salti Tower",
+            "frequency": {
+              "band": "uhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 253.15
+            },
+            "role": "ground"
+          },
+          {
+            "callsign": "Salti Tower",
+            "frequency": {
+              "band": "uhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 253.15
+            },
+            "role": "approach"
+          },
+          {
+            "callsign": "Salti Information",
+            "frequency": {
+              "band": "uhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 251.85
+            },
+            "role": "atis"
+          },
+          {
+            "callsign": "Salti Metro",
+            "frequency": {
+              "band": "uhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 344.6
+            },
+            "role": "pmsv"
+          },
+          {
+            "callsign": "Kingpin",
+            "frequency": {
+              "band": "uhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 255.4
+            },
+            "role": "ops"
+          }
+        ],
+        "id": "ojms",
+        "ident": "OJMS",
+        "kind": "airfield",
+        "localizers": [
+          "ojms-ils-31",
+          "ojms-ils-26"
+        ],
+        "magnetic_variation_deg": 5.0,
+        "name": "Muwaffaq Salti",
+        "navaids": [
+          {
+            "id": "ghi",
+            "kind": "control_measure"
+          }
+        ],
+        "parking": [
+          {
+            "category": "fighter",
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "bindings": [
+                    {
+                      "kind": "stand",
+                      "name": "40"
+                    }
+                  ]
+                }
+              }
+            },
+            "heading": {
+              "reference": "true",
+              "value": 324.9
+            },
+            "id": "stand-40",
+            "length": {
+              "unit": "m",
+              "value": 26
+            },
+            "name": "40",
+            "position": {
+              "latitude": 31.834801,
+              "longitude": 36.786459
+            },
+            "ramp": "Main ramp",
+            "width": {
+              "unit": "m",
+              "value": 24
+            }
+          },
+          {
+            "category": "fighter",
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "bindings": [
+                    {
+                      "kind": "stand",
+                      "name": "41"
+                    }
+                  ]
+                }
+              }
+            },
+            "heading": {
+              "reference": "true",
+              "value": 325.2
+            },
+            "id": "stand-41",
+            "length": {
+              "unit": "m",
+              "value": 26
+            },
+            "name": "41",
+            "position": {
+              "latitude": 31.834627,
+              "longitude": 36.786673
+            },
+            "ramp": "Main ramp",
+            "width": {
+              "unit": "m",
+              "value": 24
+            }
+          },
+          {
+            "category": "fighter",
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "bindings": [
+                    {
+                      "kind": "stand",
+                      "name": "29"
+                    }
+                  ]
+                }
+              }
+            },
+            "heading": {
+              "reference": "true",
+              "value": 339.3
+            },
+            "id": "stand-29",
+            "length": {
+              "unit": "m",
+              "value": 18
+            },
+            "name": "29",
+            "position": {
+              "latitude": 31.844813,
+              "longitude": 36.779449
+            },
+            "ramp": "North-west shelters",
+            "shelter": true,
+            "width": {
+              "unit": "m",
+              "value": 13
+            }
+          },
+          {
+            "category": "fighter",
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "bindings": [
+                    {
+                      "kind": "stand",
+                      "name": "31"
+                    }
+                  ]
+                }
+              }
+            },
+            "heading": {
+              "reference": "true",
+              "value": 281.2
+            },
+            "id": "stand-31",
+            "length": {
+              "unit": "m",
+              "value": 18
+            },
+            "name": "31",
+            "position": {
+              "latitude": 31.843114,
+              "longitude": 36.776102
+            },
+            "ramp": "North-west shelters",
+            "shelter": true,
+            "width": {
+              "unit": "m",
+              "value": 13
+            }
+          },
+          {
+            "category": "heavy",
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "bindings": [
+                    {
+                      "kind": "stand",
+                      "name": "115"
+                    }
+                  ]
+                }
+              }
+            },
+            "heading": {
+              "reference": "true",
+              "value": 184.8
+            },
+            "id": "stand-115",
+            "length": {
+              "unit": "m",
+              "value": 60
+            },
+            "name": "115",
+            "position": {
+              "latitude": 31.824955,
+              "longitude": 36.792494
+            },
+            "ramp": "South-east apron",
+            "width": {
+              "unit": "m",
+              "value": 52
+            }
+          },
+          {
+            "category": "helicopter",
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "bindings": [
+                    {
+                      "kind": "stand",
+                      "name": "H01"
+                    }
+                  ]
+                }
+              }
+            },
+            "heading": {
+              "reference": "true",
+              "value": 250.3
+            },
+            "helicopters": true,
+            "id": "stand-h01",
+            "length": {
+              "unit": "m",
+              "value": 18
+            },
+            "name": "H01",
+            "position": {
+              "latitude": 31.828852,
+              "longitude": 36.794642
+            },
+            "ramp": "South-east apron",
+            "width": {
+              "unit": "m",
+              "value": 15
+            }
+          }
+        ],
+        "position": {
+          "latitude": 31.825431,
+          "longitude": 36.781257
+        },
+        "procedures": [
+          "ojms-i31"
+        ],
+        "runways": [
+          {
+            "designator": "08/26",
+            "ends": [
+              {
+                "designator": "08",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 74.9
+                },
+                "threshold": {
+                  "latitude": 31.815801,
+                  "longitude": 36.766644
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1636
+                }
+              },
+              {
+                "designator": "26",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 254.9
+                },
+                "lighting": {
+                  "edge_lights": true
+                },
+                "localizer": "ojms-ils-26",
+                "threshold": {
+                  "latitude": 31.819432,
+                  "longitude": 36.790728
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1636
+                }
+              }
+            ],
+            "id": "ojms-rw08-26",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 7598
+            },
+            "name": "08/26",
+            "surface": "hard",
+            "width": {
+              "unit": "ft",
+              "value": 197
+            }
+          },
+          {
+            "designator": "13/31",
+            "ends": [
+              {
+                "arresting_gear": [
+                  {
+                    "distance_from_threshold": {
+                      "unit": "ft",
+                      "value": 1500
+                    },
+                    "type": "BAK_12"
+                  }
+                ],
+                "designator": "13",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 126.1
+                },
+                "lighting": {
+                  "edge_lights": true
+                },
+                "threshold": {
+                  "latitude": 31.841077,
+                  "longitude": 36.773265
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1636
+                }
+              },
+              {
+                "arresting_gear": [
+                  {
+                    "distance_from_threshold": {
+                      "unit": "ft",
+                      "value": 1500
+                    },
+                    "type": "BAK_12"
+                  }
+                ],
+                "designator": "31",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 306.1
+                },
+                "lighting": {
+                  "approach_lighting": "SSALR",
+                  "edge_lights": true,
+                  "slope_indicator": "PAPI"
+                },
+                "localizer": "ojms-ils-31",
+                "threshold": {
+                  "latitude": 31.825413,
+                  "longitude": 36.79439
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1636
+                },
+                "traffic_pattern": {
+                  "direction": "right"
+                }
+              }
+            ],
+            "id": "ojms-rw13-31",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 8691
+            },
+            "name": "13/31",
+            "surface": "hard",
+            "width": {
+              "unit": "ft",
+              "value": 197
+            }
+          }
+        ],
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+        "taxi": {
+          "edges": [
+            {
+              "from": "stand-40-lead",
+              "to": "ramp-exit",
+              "width": {
+                "unit": "m",
+                "value": 52
+              }
+            },
+            {
+              "from": "stand-41-lead",
+              "to": "stand-40-lead",
+              "width": {
+                "unit": "m",
+                "value": 52
+              }
+            },
+            {
+              "category": "heavy",
+              "from": "ramp-exit",
+              "to": "parallel-north",
+              "width": {
+                "unit": "m",
+                "value": 52
+              }
+            },
+            {
+              "from": "parallel-north",
+              "to": "entry-turn",
+              "width": {
+                "unit": "m",
+                "value": 52
+              }
+            },
+            {
+              "from": "entry-turn",
+              "one_way": true,
+              "to": "hold-13",
+              "width": {
+                "unit": "m",
+                "value": 52
+              }
+            },
+            {
+              "from": "hold-13",
+              "to": "entry-13",
+              "width": {
+                "unit": "m",
+                "value": 52
+              }
+            }
+          ],
+          "nodes": [
+            {
+              "id": "stand-40-lead",
+              "kind": "parking",
+              "position": {
+                "latitude": 31.834355,
+                "longitude": 36.785792
+              },
+              "stand": "stand-40"
+            },
+            {
+              "id": "stand-41-lead",
+              "kind": "parking",
+              "position": {
+                "latitude": 31.834198,
+                "longitude": 36.786004
+              },
+              "stand": "stand-41"
+            },
+            {
+              "id": "ramp-exit",
+              "kind": "intersection",
+              "name": "Ramp exit",
+              "position": {
+                "latitude": 31.835153,
+                "longitude": 36.784718
+              }
+            },
+            {
+              "id": "parallel-north",
+              "kind": "intersection",
+              "name": "North-west corner",
+              "position": {
+                "latitude": 31.839513,
+                "longitude": 36.778844
+              }
+            },
+            {
+              "id": "entry-turn",
+              "kind": "intersection",
+              "name": "Runway 13 entry turn",
+              "position": {
+                "latitude": 31.839171,
+                "longitude": 36.778002
+              }
+            },
+            {
+              "id": "hold-13",
+              "kind": "hold_short",
+              "name": "Holding point runway 13",
+              "position": {
+                "latitude": 31.837092,
+                "longitude": 36.778961
+              },
+              "runway_end": "13"
+            },
+            {
+              "id": "entry-13",
+              "kind": "runway_connection",
+              "position": {
+                "latitude": 31.836528,
+                "longitude": 36.779398
+              },
+              "runway_end": "13"
+            }
+          ]
+        },
+        "traffic_pattern": {
+          "initial": [
+            {
+              "distance": {
+                "unit": "nm",
+                "value": 5
+              }
+            }
+          ],
+          "overhead_altitude": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 3600
+          },
+          "profile": "usaf-standard"
+        },
+        "transition_altitude": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 13000
+        }
+      },
+      "prince-hassan": {
+        "calm_wind_runway": "31",
+        "coalition": "blue",
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 2165
+        },
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "kind": "airbase",
+                  "mission_id": "oir-syria",
+                  "name": "Prince Hassan"
+                }
+              ]
+            }
+          }
+        },
+        "frequencies": [
+          {
+            "callsign": "PrinceHassan Tower",
+            "frequency": {
+              "band": "uhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 252.95
+            },
+            "role": "tower"
+          },
+          {
+            "callsign": "PrinceHassan Tower",
+            "frequency": {
+              "band": "vhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 122.6
+            },
+            "role": "tower"
+          }
+        ],
+        "id": "prince-hassan",
+        "ident": "OJHR",
+        "kind": "airfield",
+        "magnetic_variation_deg": 5.0,
+        "name": "Prince Hassan",
+        "navaids": [
+          {
+            "id": "abc",
+            "kind": "control_measure"
+          }
+        ],
+        "operating_hours": {
+          "periods": [
+            {
+              "end_day_offset": 1,
+              "end_time": "01:00:00",
+              "start_time": "03:00:00",
+              "weekdays": [
+                "sun",
+                "mon",
+                "tue",
+                "wed",
+                "thu"
+              ]
+            }
+          ],
+          "time_reference": "UTC"
+        },
+        "position": {
+          "latitude": 32.160735,
+          "longitude": 37.149403
+        },
+        "runways": [
+          {
+            "designator": "13/31",
+            "ends": [
+              {
+                "designator": "13",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 126.0
+                },
+                "threshold": {
+                  "latitude": 32.169103,
+                  "longitude": 37.138014
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 2165
+                }
+              },
+              {
+                "designator": "31",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 306.0
+                },
+                "threshold": {
+                  "latitude": 32.152366,
+                  "longitude": 37.160789
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 2165
+                }
+              }
+            ],
+            "id": "prince-hassan-rw13-31",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 9314
+            },
+            "name": "13/31",
+            "surface": "hard",
+            "width": {
+              "unit": "ft",
+              "value": 197
+            }
+          }
+        ],
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+        "traffic_pattern": {
+          "profile": "usaf-standard"
+        },
+        "transition_altitude": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 13000
+        }
+      }
+    },
+    "procedures": {
+      "cap-commit": {
+        "steps": [
+          {
+            "action": "Commit on hostile or unknown tracks entering the sweep area below flight level 350.",
+            "condition": "Darkstar declares the track."
+          },
+          {
+            "action": "Do not pursue south of the Cobalt kill box while it is open."
+          }
+        ],
+        "title": "Falcon commit criteria"
+      },
+      "cas-check-in": {
+        "steps": [
+          {
+            "action": "Check in with Warhawk: mission number, aircraft, position and altitude, ordnance, playtime, abort code."
+          },
+          {
+            "action": "Receive the situation update and the JTAC assignment.",
+            "completion": "Warhawk hands the flight to Axeman."
+          }
+        ],
+        "title": "Warhawk CAS check-in"
+      },
+      "dz-authentication": {
+        "steps": [
+          {
+            "action": "Authenticate the DZ support team with the number of the day before the one-minute call."
+          },
+          {
+            "action": "Drop only on green smoke at the raised angle marker.",
+            "condition": "Clear-to-drop signal seen."
+          }
+        ],
+        "title": "DZ Tin authentication"
+      },
+      "harm-employment": {
+        "steps": [
+          {
+            "action": "Fire only at emitters of the SA-6 battery inside the Cobalt kill box.",
+            "condition": "The kill box is open."
+          },
+          {
+            "action": "Call the missile shot on the Anvil package frequency."
+          }
+        ],
+        "title": "Weasel HARM employment"
+      },
+      "range-debrief": {
+        "steps": [
+          {
+            "action": "Debrief at Muwaffaq Salti 1700Z with weapons-system video and the JTAC log."
+          }
+        ],
+        "title": "Mission debrief"
+      },
+      "recovery-ojms": {
+        "steps": [
+          {
+            "action": "Leave the operating area via Cedar; contact Banshee.",
+            "completion": "Handed over to Salti Tower."
+          }
+        ],
+        "title": "Muwaffaq Salti recovery"
+      },
+      "sar-recognition": {
+        "steps": [
+          {
+            "action": "Authenticate the survivor with the SARNEG word and the number of the day."
+          },
+          {
+            "action": "Survivor marks with day smoke or an infrared strobe at night."
+          }
+        ],
+        "title": "Rescue recognition"
+      },
+      "tanker-rendezvous": {
+        "steps": [
+          {
+            "action": "Contact Shell on the tanker frequency 20 nautical miles from Shell anchor."
+          },
+          {
+            "action": "Join 1000 feet below the tanker's flight level, then climb to pre-contact when cleared.",
+            "condition": "Visual with the tanker."
+          }
+        ],
+        "title": "Shell rendezvous"
+      },
+      "training-rules": {
+        "steps": [
+          {
+            "action": "Call knock-it-off on Darkstar control for any safety concern."
+          },
+          {
+            "action": "Keep 1000 feet vertical or 1 nautical mile horizontal from other aircraft in a merge."
+          }
+        ],
+        "title": "Azraq training rules"
+      }
+    },
+    "reports": {
+      "bda": {
+        "channel": "ops-uhf",
+        "classification": "UNCLASSIFIED",
+        "medium": "voice",
+        "name": "Battle damage assessment",
+        "precedence": "PRIORITY",
+        "recipient": "caoc",
+        "trigger": "After each attack"
+      },
+      "inflightrep": {
+        "channel": "control-uhf",
+        "medium": "voice",
+        "name": "In-flight report (INFLIGHTREP)",
+        "precedence": "IMMEDIATE",
+        "recipient": "darkstar",
+        "trigger": "Time-sensitive observation airborne"
+      },
+      "misrep": {
+        "channel": "ops-uhf",
+        "medium": "voice",
+        "name": "Mission report (MISREP)",
+        "precedence": "PRIORITY",
+        "recipient": "caoc",
+        "trigger": "Within 30 minutes of landing"
+      }
+    },
+    "routes": {
+      "marshal-entry": {
+        "contingencies": [
+          "If no holding level is available, remain below 12000 feet MSL and follow Darkstar instructions."
+        ],
+        "name": "Juniper to Marshal",
+        "points": [
+          {
+            "action": "ingress",
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 10000
+            },
+            "id": "entry-juniper",
+            "instructions": [
+              "Check in with Darkstar before entering the corridor."
+            ],
+            "name": "Juniper",
+            "position": {
+              "latitude": 33.59,
+              "longitude": 38.552
+            },
+            "speed": {
+              "unit": "knots_ias",
+              "value": 250
+            },
+            "timing": {
+              "kind": "window",
+              "window": {
+                "end": "2026-10-02T15:00:00Z",
+                "start": "2026-10-02T13:00:00Z"
+              }
+            }
+          },
+          {
+            "action": "hold",
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 12000
+            },
+            "id": "entry-marshal",
+            "instructions": [
+              "Request a climb to the assigned Mesa holding level."
+            ],
+            "name": "Marshal",
+            "position": {
+              "latitude": 34.059,
+              "longitude": 39.477
+            },
+            "speed": {
+              "unit": "knots_ias",
+              "value": 250
+            },
+            "timing": {
+              "kind": "window",
+              "window": {
+                "end": "2026-10-02T15:00:00Z",
+                "start": "2026-10-02T13:00:00Z"
+              }
+            }
+          }
+        ]
+      },
+      "marshal-exit": {
+        "contingencies": [
+          "For lost communications, continue to Cedar at the last assigned altitude; do not enter an active reservation."
+        ],
+        "name": "Marshal to Cedar",
+        "points": [
+          {
+            "action": "egress",
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 12000
+            },
+            "id": "exit-marshal",
+            "instructions": [
+              "Descend only after Darkstar releases the holding level."
+            ],
+            "name": "Marshal",
+            "position": {
+              "latitude": 34.059,
+              "longitude": 39.477
+            },
+            "speed": {
+              "unit": "knots_ias",
+              "value": 250
+            },
+            "timing": {
+              "kind": "window",
+              "window": {
+                "end": "2026-10-02T15:00:00Z",
+                "start": "2026-10-02T13:00:00Z"
+              }
+            }
+          },
+          {
+            "action": "egress",
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 10000
+            },
+            "id": "exit-cedar",
+            "instructions": [
+              "Contact Banshee after handover."
+            ],
+            "name": "Cedar",
+            "position": {
+              "latitude": 33.59,
+              "longitude": 39.002
+            },
+            "speed": {
+              "unit": "knots_ias",
+              "value": 250
+            },
+            "timing": {
+              "kind": "window",
+              "window": {
+                "end": "2026-10-02T15:00:00Z",
+                "start": "2026-10-02T13:00:00Z"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "scls": {
+      "a10-cas": {
+        "aircraft_type": "a-10c",
+        "countermeasures": {
+          "chaff": 240,
+          "flares": 120
+        },
+        "era": "modern",
+        "gun_rounds": 1150,
+        "id": "a10-cas",
+        "kind": "scl",
+        "laser_code": "1688",
+        "missions": [
+          {
+            "tasking": "on_call_cas"
+          },
+          {
+            "role": "scheduled_cas",
+            "tasking": "preplanned_attack"
+          }
+        ],
+        "name": "Hog CAS",
+        "remarks": "Paveways on code 1511 for Axeman's second designator; Mavericks and HE rockets for vehicles.",
+        "scl_number": "A10-CAS1",
+        "stations": [
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "ALQ_184",
+                  "label": "1",
+                  "pylon": 1
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "alq-184"
+              }
+            ],
+            "station": "1"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{69926055-0DA8-4530-9F2F-C86B157EA9F6}",
+                  "label": "2",
+                  "pylon": 2
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "lau-131-m151"
+              }
+            ],
+            "station": "2"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+                  "label": "3",
+                  "pylon": 3
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "agm-65d"
+              }
+            ],
+            "station": "3"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}",
+                  "label": "4",
+                  "pylon": 4
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "gbu-12"
+              }
+            ],
+            "station": "4"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}",
+                  "label": "8",
+                  "pylon": 8
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "gbu-12"
+              }
+            ],
+            "station": "8"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+                  "label": "9",
+                  "pylon": 9
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "agm-65d"
+              }
+            ],
+            "station": "9"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{A111396E-D3E8-4b9c-8AC9-2432489304D5}",
+                  "label": "10",
+                  "pylon": 10
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "litening"
+              }
+            ],
+            "station": "10"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{DB434044-F5D0-4F1F-9BA9-B73027E18DD3}",
+                  "label": "11",
+                  "pylon": 11
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 2,
+                "store": "aim-9m"
+              }
+            ],
+            "rack": "lau-105",
+            "station": "11"
+          }
+        ],
+        "stores": [
+          {
+            "quantity": 1,
+            "store": "alq-184"
+          },
+          {
+            "quantity": 1,
+            "store": "lau-131-m151"
+          },
+          {
+            "quantity": 2,
+            "store": "agm-65d"
+          },
+          {
+            "fuze": {
+              "arming_delay_s": 4,
+              "delay_ms": 0,
+              "function": "instantaneous",
+              "tail_fuze": "FMU-139"
+            },
+            "laser_code": "1511",
+            "quantity": 2,
+            "store": "gbu-12"
+          },
+          {
+            "quantity": 1,
+            "store": "litening"
+          },
+          {
+            "quantity": 2,
+            "store": "aim-9m"
+          }
+        ]
+      },
+      "a10-faca": {
+        "aircraft_type": "a-10c",
+        "countermeasures": {
+          "chaff": 240,
+          "flares": 120
+        },
+        "era": "modern",
+        "gun_rounds": 1150,
+        "id": "a10-faca",
+        "kind": "scl",
+        "laser_code": "1688",
+        "missions": [
+          {
+            "role": "fac_a",
+            "tasking": "counterland_control"
+          },
+          {
+            "tasking": "on_call_cas"
+          }
+        ],
+        "name": "Hog FAC(A) marking",
+        "remarks": "Two pods of white phosphorus rockets for target marks; self-attack with Paveways and a Maverick.",
+        "scl_number": "A10-FAC1",
+        "stations": [
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "ALQ_184",
+                  "label": "1",
+                  "pylon": 1
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "alq-184"
+              }
+            ],
+            "station": "1"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{69926055-0DA8-4530-9F2F-C86B157EA9F6}",
+                  "label": "2",
+                  "pylon": 2
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "lau-131-m151"
+              }
+            ],
+            "station": "2"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{BRU42LS_2*LAU131_HYDRA_70_M156_L}",
+                  "label": "3",
+                  "pylon": 3
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 2,
+                "store": "lau-131-m156"
+              }
+            ],
+            "rack": "bru-42",
+            "station": "3"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}",
+                  "label": "4",
+                  "pylon": 4
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "gbu-12"
+              }
+            ],
+            "station": "4"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}",
+                  "label": "8",
+                  "pylon": 8
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "gbu-12"
+              }
+            ],
+            "station": "8"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+                  "label": "9",
+                  "pylon": 9
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "agm-65d"
+              }
+            ],
+            "station": "9"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{A111396E-D3E8-4b9c-8AC9-2432489304D5}",
+                  "label": "10",
+                  "pylon": 10
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "litening"
+              }
+            ],
+            "station": "10"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{DB434044-F5D0-4F1F-9BA9-B73027E18DD3}",
+                  "label": "11",
+                  "pylon": 11
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 2,
+                "store": "aim-9m"
+              }
+            ],
+            "rack": "lau-105",
+            "station": "11"
+          }
+        ],
+        "stores": [
+          {
+            "quantity": 1,
+            "store": "alq-184"
+          },
+          {
+            "quantity": 1,
+            "store": "lau-131-m151"
+          },
+          {
+            "quantity": 2,
+            "store": "lau-131-m156"
+          },
+          {
+            "fuze": {
+              "arming_delay_s": 4,
+              "delay_ms": 0,
+              "function": "instantaneous",
+              "tail_fuze": "FMU-139"
+            },
+            "quantity": 2,
+            "store": "gbu-12"
+          },
+          {
+            "quantity": 1,
+            "store": "agm-65d"
+          },
+          {
+            "quantity": 1,
+            "store": "litening"
+          },
+          {
+            "quantity": 2,
+            "store": "aim-9m"
+          }
+        ]
+      },
+      "ah64-hellfire": {
+        "aircraft_type": "ah-64d",
+        "countermeasures": {
+          "chaff": 30,
+          "flares": 60
+        },
+        "era": "modern",
+        "gun_rounds": 1200,
+        "id": "ah64-hellfire",
+        "kind": "scl",
+        "laser_code": "1688",
+        "missions": [
+          {
+            "tasking": "custom"
+          },
+          {
+            "tasking": "on_call_cas"
+          }
+        ],
+        "name": "Apache Hellfire and rockets",
+        "remarks": "Eight Hellfires on the inboard pylons and two rocket launchers outboard; Longbow radar on the mast.",
+        "scl_number": "AH64-1",
+        "stations": [
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "M261_MK151",
+                  "label": "1",
+                  "pylon": 1
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "m261-m151"
+              }
+            ],
+            "station": "1"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{88D18A5E-99C8-4B04-B40B-1C02F2018B6E}",
+                  "label": "2",
+                  "pylon": 2
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 4,
+                "store": "agm-114k"
+              }
+            ],
+            "rack": "m299",
+            "station": "2"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{88D18A5E-99C8-4B04-B40B-1C02F2018B6E}",
+                  "label": "3",
+                  "pylon": 3
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 4,
+                "store": "agm-114k"
+              }
+            ],
+            "rack": "m299",
+            "station": "3"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "M261_MK151",
+                  "label": "4",
+                  "pylon": 4
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "m261-m151"
+              }
+            ],
+            "station": "4"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{AN_APG_78}",
+                  "label": "MMA",
+                  "pylon": 6
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "apg-78"
+              }
+            ],
+            "station": "MMA"
+          }
+        ],
+        "stores": [
+          {
+            "quantity": 2,
+            "store": "m261-m151"
+          },
+          {
+            "quantity": 8,
+            "store": "agm-114k"
+          },
+          {
+            "quantity": 1,
+            "store": "apg-78"
+          }
+        ]
+      },
+      "ea18g-ea": {
+        "aircraft_type": "ea-18g",
+        "era": "modern",
+        "id": "ea18g-ea",
+        "kind": "scl",
+        "missions": [
+          {
+            "tasking": "electromagnetic"
+          }
+        ],
+        "name": "Growler stand-off jamming",
+        "remarks": "Three jamming pods. DCS has no EA-18G, so the load has no stations or simulator bindings.",
+        "scl_number": "EA18G-EA1",
+        "stores": [
+          {
+            "quantity": 3,
+            "store": "alq-99"
+          },
+          {
+            "quantity": 2,
+            "store": "aim-120c"
+          },
+          {
+            "quantity": 2,
+            "store": "tank-480"
+          }
+        ]
+      },
+      "f15c-aa": {
+        "aircraft_type": "f-15c",
+        "countermeasures": {
+          "chaff": 120,
+          "flares": 60
+        },
+        "era": "modern",
+        "gun_rounds": 940,
+        "id": "f15c-aa",
+        "kind": "scl",
+        "missions": [
+          {
+            "tasking": "counterair"
+          },
+          {
+            "tasking": "cap"
+          }
+        ],
+        "name": "Eagle air-to-air",
+        "remarks": "Sweep load with one centreline tank.",
+        "scl_number": "F15C-AA1",
+        "stations": [
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+                  "label": "1",
+                  "pylon": 1
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-9m"
+              }
+            ],
+            "station": "1"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "3",
+                  "pylon": 3
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "3"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "4",
+                  "pylon": 4
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "4"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "5",
+                  "pylon": 5
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "5"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "7",
+                  "pylon": 7
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "7"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "8",
+                  "pylon": 8
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "8"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{E1F29B21-F291-4589-9FD8-3272EEC69506}",
+                  "label": "6",
+                  "pylon": 6
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-610"
+              }
+            ],
+            "station": "6"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "9",
+                  "pylon": 9
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "9"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+                  "label": "11",
+                  "pylon": 11
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-9m"
+              }
+            ],
+            "station": "11"
+          }
+        ],
+        "stores": [
+          {
+            "quantity": 2,
+            "store": "aim-9m"
+          },
+          {
+            "quantity": 6,
+            "store": "aim-120c"
+          },
+          {
+            "quantity": 1,
+            "store": "tank-610"
+          }
+        ]
+      },
+      "f15e-scar": {
+        "aircraft_type": "f-15e",
+        "countermeasures": {
+          "chaff": 120,
+          "flares": 60
+        },
+        "era": "modern",
+        "gun_rounds": 500,
+        "id": "f15e-scar",
+        "kind": "scl",
+        "laser_code": "1688",
+        "missions": [
+          {
+            "role": "scar",
+            "tasking": "counterland_control"
+          },
+          {
+            "role": "air_interdiction",
+            "tasking": "preplanned_attack"
+          }
+        ],
+        "name": "Strike Eagle SCAR",
+        "remarks": "JDAM with airburst fuzes for vehicles in the open and Paveways for moving targets.",
+        "scl_number": "F15E-SC1",
+        "stations": [
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}",
+                  "label": "2",
+                  "pylon": 2
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "gbu-12"
+              }
+            ],
+            "station": "2"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}",
+                  "label": "8",
+                  "pylon": 14
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "gbu-12"
+              }
+            ],
+            "station": "8"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{CFT_L_GBU_38_x_3}",
+                  "label": "L-CFT",
+                  "pylon": 4
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 3,
+                "store": "gbu-38"
+              }
+            ],
+            "station": "L-CFT"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{CFT_R_GBU_38_x_3}",
+                  "label": "R-CFT",
+                  "pylon": 12
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 3,
+                "store": "gbu-38"
+              }
+            ],
+            "station": "R-CFT"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F15E_EXTTANK}",
+                  "label": "5",
+                  "pylon": 8
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-610"
+              }
+            ],
+            "station": "5"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "2A",
+                  "pylon": 1
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "2A"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+                  "label": "2B",
+                  "pylon": 3
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-9m"
+              }
+            ],
+            "station": "2B"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+                  "label": "8A",
+                  "pylon": 13
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-9m"
+              }
+            ],
+            "station": "8A"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "8B",
+                  "pylon": 15
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "8B"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F-15E_AAQ-14_LANTIRN}",
+                  "label": "TGP",
+                  "pylon": 7
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "lantirn-tgt"
+              }
+            ],
+            "station": "TGP"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F-15E_AAQ-13_LANTIRN}",
+                  "label": "NVP",
+                  "pylon": 9
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "lantirn-nav"
+              }
+            ],
+            "station": "NVP"
+          }
+        ],
+        "stores": [
+          {
+            "fuze": {
+              "arming_delay_s": 4,
+              "delay_ms": 0,
+              "function": "instantaneous",
+              "tail_fuze": "FMU-139"
+            },
+            "quantity": 2,
+            "store": "gbu-12"
+          },
+          {
+            "fuze": {
+              "arming_delay_s": 4,
+              "function": "proximity",
+              "height_of_burst": {
+                "unit": "ft",
+                "value": 20
+              },
+              "nose_fuze": "DSU-33",
+              "tail_fuze": "FMU-139"
+            },
+            "quantity": 6,
+            "store": "gbu-38"
+          },
+          {
+            "quantity": 1,
+            "store": "tank-610"
+          },
+          {
+            "quantity": 2,
+            "store": "aim-120c"
+          },
+          {
+            "quantity": 2,
+            "store": "aim-9m"
+          },
+          {
+            "quantity": 1,
+            "store": "lantirn-tgt"
+          },
+          {
+            "quantity": 1,
+            "store": "lantirn-nav"
+          }
+        ]
+      },
+      "f15e-strike": {
+        "aircraft_type": "f-15e",
+        "countermeasures": {
+          "chaff": 120,
+          "flares": 60
+        },
+        "era": "modern",
+        "gun_rounds": 500,
+        "id": "f15e-strike",
+        "kind": "scl",
+        "laser_code": "1688",
+        "missions": [
+          {
+            "role": "strike",
+            "tasking": "preplanned_attack"
+          },
+          {
+            "role": "air_interdiction",
+            "tasking": "preplanned_attack"
+          }
+        ],
+        "name": "Strike Eagle penetrator and Paveway",
+        "remarks": "Penetrators for hardened aimpoints, Paveways for soft aimpoints; one centreline tank.",
+        "scl_number": "F15E-ST1",
+        "stations": [
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{GBU-31V3B}",
+                  "label": "2",
+                  "pylon": 2
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "gbu-31v3"
+              }
+            ],
+            "station": "2"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{GBU-31V3B}",
+                  "label": "8",
+                  "pylon": 14
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "gbu-31v3"
+              }
+            ],
+            "station": "8"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{CFT_L_GBU_12_x_2}",
+                  "label": "L-CFT",
+                  "pylon": 4
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 2,
+                "store": "gbu-12"
+              }
+            ],
+            "station": "L-CFT"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{CFT_R_GBU_12_x_2}",
+                  "label": "R-CFT",
+                  "pylon": 12
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 2,
+                "store": "gbu-12"
+              }
+            ],
+            "station": "R-CFT"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F15E_EXTTANK}",
+                  "label": "5",
+                  "pylon": 8
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-610"
+              }
+            ],
+            "station": "5"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "2A",
+                  "pylon": 1
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "2A"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+                  "label": "2B",
+                  "pylon": 3
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-9m"
+              }
+            ],
+            "station": "2B"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+                  "label": "8A",
+                  "pylon": 13
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-9m"
+              }
+            ],
+            "station": "8A"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "8B",
+                  "pylon": 15
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "8B"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F-15E_AAQ-14_LANTIRN}",
+                  "label": "TGP",
+                  "pylon": 7
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "lantirn-tgt"
+              }
+            ],
+            "station": "TGP"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F-15E_AAQ-13_LANTIRN}",
+                  "label": "NVP",
+                  "pylon": 9
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "lantirn-nav"
+              }
+            ],
+            "station": "NVP"
+          }
+        ],
+        "stores": [
+          {
+            "fuze": {
+              "delay_ms": 60,
+              "function": "delay",
+              "tail_fuze": "FMU-143"
+            },
+            "quantity": 2,
+            "store": "gbu-31v3"
+          },
+          {
+            "fuze": {
+              "arming_delay_s": 4,
+              "delay_ms": 0,
+              "function": "instantaneous",
+              "tail_fuze": "FMU-139"
+            },
+            "quantity": 4,
+            "store": "gbu-12"
+          },
+          {
+            "quantity": 1,
+            "store": "tank-610"
+          },
+          {
+            "quantity": 2,
+            "store": "aim-120c"
+          },
+          {
+            "quantity": 2,
+            "store": "aim-9m"
+          },
+          {
+            "quantity": 1,
+            "store": "lantirn-tgt"
+          },
+          {
+            "quantity": 1,
+            "store": "lantirn-nav"
+          }
+        ]
+      },
+      "f16-ai": {
+        "aircraft_type": "f-16c-50",
+        "code": "4G12.3A.1X.2",
+        "countermeasures": {
+          "chaff": 60,
+          "flares": 60,
+          "program": "MAN 1"
+        },
+        "era": "modern",
+        "extensions": {
+          "org.vcsg8.scl-tools": {
+            "mission": "DTA",
+            "payload_prefix": "93rd"
+          },
+          "sim": {
+            "dcs": {
+              "payload": {
+                "name": "93rd DTA05 (4G12.3A.1X.2)",
+                "task_ids": [
+                  31,
+                  30,
+                  32
+                ],
+                "unit_type": "F-16C_50"
+              }
+            }
+          }
+        },
+        "gun_rounds": 510,
+        "id": "f16-ai",
+        "kind": "scl",
+        "laser_code": "1688",
+        "missions": [
+          {
+            "role": "air_interdiction",
+            "tasking": "preplanned_attack"
+          },
+          {
+            "role": "strike",
+            "tasking": "preplanned_attack"
+          },
+          {
+            "role": "maritime_attack",
+            "tasking": "preplanned_attack"
+          },
+          {
+            "tasking": "on_call_cas"
+          }
+        ],
+        "name": "DTA05 GBU-12",
+        "remarks": "93rd XAI, CAS and TASMO load. The code leaves out the jammer, the HTS and the targeting pod: the 93rd assumes them in the modern era.",
+        "scl_number": "DTA05",
+        "source": {
+          "id": "vcsg8-scl-data",
+          "section": "DTA05",
+          "title": "VCSG8 SCL data page, F-16C Viper table"
+        },
+        "stations": [
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "1",
+                  "pylon": 1
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "1"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{5CE2FF2A-645A-4197-B48D-8720AC69394F}",
+                  "label": "2",
+                  "pylon": 2
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-9x"
+              }
+            ],
+            "station": "2"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{TER_9A_2L*GBU-12}",
+                  "label": "3",
+                  "pylon": 3,
+                  "settings": {
+                    "01_prfx_arm_delay_ctrl_FMU139CB_LD": 4,
+                    "01_prfx_function_delay_ctrl_FMU139CB_LD": 0,
+                    "NFP_PRESID": "Paveway_II",
+                    "NFP_PRESVER": 2,
+                    "NFP_VIS_DrawArgNo_55": 0.1,
+                    "NFP_VIS_DrawArgNo_57": 0,
+                    "NFP_fuze_type_tail": "FMU139CB_LD",
+                    "laser_code": 1688
+                  }
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 2,
+                "store": "gbu-12"
+              }
+            ],
+            "rack": "ter-9a",
+            "station": "3"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+                  "label": "4",
+                  "pylon": 4
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-370"
+              }
+            ],
+            "station": "4"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+                  "label": "6",
+                  "pylon": 6
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-370"
+              }
+            ],
+            "station": "6"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{TER_9A_2R*GBU-12}",
+                  "label": "7",
+                  "pylon": 7,
+                  "settings": {
+                    "01_prfx_arm_delay_ctrl_FMU139CB_LD": 4,
+                    "01_prfx_function_delay_ctrl_FMU139CB_LD": 0,
+                    "NFP_PRESID": "Paveway_II",
+                    "NFP_PRESVER": 2,
+                    "NFP_VIS_DrawArgNo_55": 0.1,
+                    "NFP_VIS_DrawArgNo_57": 0,
+                    "NFP_fuze_type_tail": "FMU139CB_LD",
+                    "laser_code": 1688
+                  }
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 2,
+                "store": "gbu-12"
+              }
+            ],
+            "rack": "ter-9a",
+            "station": "7"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "8",
+                  "pylon": 8
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "8"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "9",
+                  "pylon": 9
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "9"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "ALQ_184_Long",
+                  "label": "5",
+                  "pylon": 5
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "alq-184-long"
+              }
+            ],
+            "station": "5"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{AN_ASQ_213}",
+                  "label": "5L",
+                  "pylon": 10
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "hts"
+              }
+            ],
+            "station": "5L"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{AN_AAQ_33}",
+                  "label": "5R",
+                  "pylon": 11
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "sniper"
+              }
+            ],
+            "station": "5R"
+          }
+        ],
+        "stores": [
+          {
+            "quantity": 3,
+            "store": "aim-120c"
+          },
+          {
+            "quantity": 1,
+            "store": "aim-9x"
+          },
+          {
+            "fuze": {
+              "arming_delay_s": 4,
+              "delay_ms": 0,
+              "function": "instantaneous",
+              "tail_fuze": "FMU-139"
+            },
+            "quantity": 4,
+            "store": "gbu-12"
+          },
+          {
+            "quantity": 2,
+            "store": "tank-370"
+          },
+          {
+            "quantity": 1,
+            "store": "alq-184-long"
+          },
+          {
+            "quantity": 1,
+            "store": "hts"
+          },
+          {
+            "quantity": 1,
+            "store": "sniper"
+          }
+        ]
+      },
+      "f16-cap": {
+        "aircraft_type": "f-16c-50",
+        "code": "5A.1X.2",
+        "countermeasures": {
+          "chaff": 60,
+          "flares": 60
+        },
+        "era": "modern",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "payload": {
+                "name": "93rd AD05 (5A.1X.2)",
+                "task_ids": [
+                  11,
+                  10,
+                  18,
+                  19
+                ],
+                "unit_type": "F-16C_50"
+              }
+            }
+          }
+        },
+        "gun_rounds": 510,
+        "id": "f16-cap",
+        "kind": "scl",
+        "missions": [
+          {
+            "tasking": "counterair"
+          },
+          {
+            "tasking": "cap"
+          },
+          {
+            "tasking": "escort"
+          },
+          {
+            "tasking": "training"
+          }
+        ],
+        "name": "AD05 AMRAAM",
+        "remarks": "93rd doctrine CAP standard. Two wing tanks; the jammer has the centreline.",
+        "scl_number": "AD05",
+        "stations": [
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "1",
+                  "pylon": 1
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "1"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "2",
+                  "pylon": 2
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "2"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "3",
+                  "pylon": 3
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "3"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+                  "label": "4",
+                  "pylon": 4
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-370"
+              }
+            ],
+            "station": "4"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+                  "label": "6",
+                  "pylon": 6
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-370"
+              }
+            ],
+            "station": "6"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{5CE2FF2A-645A-4197-B48D-8720AC69394F}",
+                  "label": "7",
+                  "pylon": 7
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-9x"
+              }
+            ],
+            "station": "7"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "8",
+                  "pylon": 8
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "8"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "9",
+                  "pylon": 9
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "9"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "ALQ_184_Long",
+                  "label": "5",
+                  "pylon": 5
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "alq-184-long"
+              }
+            ],
+            "station": "5"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{AN_ASQ_213}",
+                  "label": "5L",
+                  "pylon": 10
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "hts"
+              }
+            ],
+            "station": "5L"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{AN_AAQ_33}",
+                  "label": "5R",
+                  "pylon": 11
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "sniper"
+              }
+            ],
+            "station": "5R"
+          }
+        ],
+        "stores": [
+          {
+            "quantity": 5,
+            "store": "aim-120c"
+          },
+          {
+            "quantity": 2,
+            "store": "tank-370"
+          },
+          {
+            "quantity": 1,
+            "store": "aim-9x"
+          },
+          {
+            "quantity": 1,
+            "store": "alq-184-long"
+          },
+          {
+            "quantity": 1,
+            "store": "hts"
+          },
+          {
+            "quantity": 1,
+            "store": "sniper"
+          }
+        ]
+      },
+      "f16-sead": {
+        "aircraft_type": "f-16c-50",
+        "code": "2A88.4A.WW.2",
+        "countermeasures": {
+          "chaff": 60,
+          "flares": 60
+        },
+        "era": "modern",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "payload": {
+                "name": "93rd WW01 (2A88.4A.WW.2)",
+                "task_ids": [
+                  29
+                ],
+                "unit_type": "F-16C_50"
+              }
+            }
+          }
+        },
+        "gun_rounds": 510,
+        "id": "f16-sead",
+        "kind": "scl",
+        "missions": [
+          {
+            "role": "sead",
+            "tasking": "preplanned_attack"
+          },
+          {
+            "role": "dead",
+            "tasking": "preplanned_attack"
+          }
+        ],
+        "name": "WW01 HARM",
+        "remarks": "93rd SEAD standard. HARMs on stations 3 and 7, AMRAAMs on the wingtips and outboard stations.",
+        "scl_number": "WW01",
+        "stations": [
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "1",
+                  "pylon": 1
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "1"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "2",
+                  "pylon": 2
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "2"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{B06DD79A-F21E-4EB9-BD9D-AB3844618C93}",
+                  "label": "3",
+                  "pylon": 3
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "agm-88c"
+              }
+            ],
+            "station": "3"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+                  "label": "4",
+                  "pylon": 4
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-370"
+              }
+            ],
+            "station": "4"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+                  "label": "6",
+                  "pylon": 6
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-370"
+              }
+            ],
+            "station": "6"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{B06DD79A-F21E-4EB9-BD9D-AB3844618C93}",
+                  "label": "7",
+                  "pylon": 7
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "agm-88c"
+              }
+            ],
+            "station": "7"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "8",
+                  "pylon": 8
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "8"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "9",
+                  "pylon": 9
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "9"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "ALQ_184_Long",
+                  "label": "5",
+                  "pylon": 5
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "alq-184-long"
+              }
+            ],
+            "station": "5"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{AN_ASQ_213}",
+                  "label": "5L",
+                  "pylon": 10
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "hts"
+              }
+            ],
+            "station": "5L"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{AN_AAQ_33}",
+                  "label": "5R",
+                  "pylon": 11
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "sniper"
+              }
+            ],
+            "station": "5R"
+          }
+        ],
+        "stores": [
+          {
+            "quantity": 4,
+            "store": "aim-120c"
+          },
+          {
+            "program": "POS",
+            "quantity": 2,
+            "store": "agm-88c"
+          },
+          {
+            "quantity": 2,
+            "store": "tank-370"
+          },
+          {
+            "quantity": 1,
+            "store": "alq-184-long"
+          },
+          {
+            "quantity": 1,
+            "store": "hts"
+          },
+          {
+            "quantity": 1,
+            "store": "sniper"
+          }
+        ]
+      },
+      "f16-sead-pre2015": {
+        "aircraft_type": "f-16c-50",
+        "code": "2A88.4A.WW.2",
+        "countermeasures": {
+          "chaff": 60,
+          "flares": 60
+        },
+        "era": "modern",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "payload": {
+                "name": "93rd WW01 (2A88.4A.WW.2) Pre-2015",
+                "task_ids": [
+                  29
+                ],
+                "unit_type": "F-16C_50"
+              }
+            }
+          }
+        },
+        "gun_rounds": 510,
+        "id": "f16-sead-pre2015",
+        "kind": "scl",
+        "missions": [
+          {
+            "role": "sead",
+            "tasking": "preplanned_attack"
+          },
+          {
+            "role": "dead",
+            "tasking": "preplanned_attack"
+          }
+        ],
+        "name": "WW01 HARM Pre-2015",
+        "remarks": "Before 2015 the Viper carries the HTS or a targeting pod, not both; a SEAD load keeps the HTS.",
+        "scl_number": "WW01",
+        "stations": [
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "1",
+                  "pylon": 1
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "1"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "2",
+                  "pylon": 2
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "2"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{B06DD79A-F21E-4EB9-BD9D-AB3844618C93}",
+                  "label": "3",
+                  "pylon": 3
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "agm-88c"
+              }
+            ],
+            "station": "3"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+                  "label": "4",
+                  "pylon": 4
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-370"
+              }
+            ],
+            "station": "4"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+                  "label": "6",
+                  "pylon": 6
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "tank-370"
+              }
+            ],
+            "station": "6"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{B06DD79A-F21E-4EB9-BD9D-AB3844618C93}",
+                  "label": "7",
+                  "pylon": 7
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "agm-88c"
+              }
+            ],
+            "station": "7"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "8",
+                  "pylon": 8
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "8"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+                  "label": "9",
+                  "pylon": 9
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "aim-120c"
+              }
+            ],
+            "station": "9"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "ALQ_184_Long",
+                  "label": "5",
+                  "pylon": 5
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "alq-184-long"
+              }
+            ],
+            "station": "5"
+          },
+          {
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "clsid": "{AN_ASQ_213}",
+                  "label": "5L",
+                  "pylon": 10
+                }
+              }
+            },
+            "items": [
+              {
+                "quantity": 1,
+                "store": "hts"
+              }
+            ],
+            "station": "5L"
+          }
+        ],
+        "stores": [
+          {
+            "quantity": 4,
+            "store": "aim-120c"
+          },
+          {
+            "program": "POS",
+            "quantity": 2,
+            "store": "agm-88c"
+          },
+          {
+            "quantity": 2,
+            "store": "tank-370"
+          },
+          {
+            "quantity": 1,
+            "store": "alq-184-long"
+          },
+          {
+            "quantity": 1,
+            "store": "hts"
+          }
+        ],
+        "variant_tags": [
+          "Pre-2015"
+        ]
+      }
+    },
+    "stores": {
+      "agm-114k": {
+        "family": "AGM-114",
+        "kind": "weapon",
+        "name": "AGM-114K Hellfire II",
+        "notes": "DCS loads it on the M299 launcher."
+      },
+      "agm-65d": {
+        "family": "AGM-65",
+        "kind": "weapon",
+        "name": "AGM-65D Maverick",
+        "notes": "DCS loads it on a LAU-117 or LAU-88 launcher."
+      },
+      "agm-88c": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{B06DD79A-F21E-4EB9-BD9D-AB3844618C93}"
+              ]
+            }
+          }
+        },
+        "family": "AGM-88",
+        "kind": "weapon",
+        "name": "AGM-88C HARM"
+      },
+      "aim-120c": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}"
+              ]
+            }
+          }
+        },
+        "family": "AIM-120",
+        "kind": "weapon",
+        "name": "AIM-120C AMRAAM"
+      },
+      "aim-9m": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}"
+              ]
+            }
+          }
+        },
+        "family": "AIM-9",
+        "kind": "weapon",
+        "name": "AIM-9M Sidewinder"
+      },
+      "aim-9x": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{5CE2FF2A-645A-4197-B48D-8720AC69394F}"
+              ]
+            }
+          }
+        },
+        "family": "AIM-9",
+        "kind": "weapon",
+        "name": "AIM-9X Sidewinder"
+      },
+      "alq-184": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "ALQ_184"
+              ]
+            }
+          }
+        },
+        "family": "ALQ-184",
+        "kind": "pod",
+        "name": "AN/ALQ-184 ECM pod",
+        "role": "self_protection_jamming"
+      },
+      "alq-184-long": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "ALQ_184_Long"
+              ]
+            }
+          }
+        },
+        "family": "ALQ-184",
+        "kind": "pod",
+        "name": "AN/ALQ-184 ECM pod, long",
+        "role": "self_protection_jamming"
+      },
+      "alq-99": {
+        "kind": "pod",
+        "name": "AN/ALQ-99 tactical jamming pod",
+        "role": "tactical_jamming"
+      },
+      "apg-78": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{AN_APG_78}"
+              ]
+            }
+          }
+        },
+        "kind": "other",
+        "name": "AN/APG-78 Longbow fire control radar",
+        "notes": "Mast-mounted radar; DCS loads it on the MMA station."
+      },
+      "bru-42": {
+        "kind": "rack",
+        "name": "BRU-42 triple ejector rack"
+      },
+      "gbu-12": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{DB769D48-67D7-42ED-A2BE-108D566C8B1E}"
+              ]
+            }
+          }
+        },
+        "family": "GBU-12",
+        "kind": "weapon",
+        "name": "GBU-12 Paveway II"
+      },
+      "gbu-31v3": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{GBU-31V3B}"
+              ]
+            }
+          }
+        },
+        "family": "GBU-31",
+        "kind": "weapon",
+        "name": "GBU-31(V)3/B JDAM 2000 lb penetrator"
+      },
+      "gbu-38": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{GBU-38}"
+              ]
+            }
+          }
+        },
+        "family": "GBU-38",
+        "kind": "weapon",
+        "name": "GBU-38 JDAM 500 lb"
+      },
+      "hts": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{AN_ASQ_213}"
+              ]
+            }
+          }
+        },
+        "kind": "pod",
+        "name": "AN/ASQ-213 HARM targeting system",
+        "role": "emitter_targeting"
+      },
+      "lantirn-nav": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{F-15E_AAQ-13_LANTIRN}"
+              ]
+            }
+          }
+        },
+        "kind": "pod",
+        "name": "AN/AAQ-13 LANTIRN navigation pod",
+        "role": "navigation"
+      },
+      "lantirn-tgt": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{F-15E_AAQ-14_LANTIRN}"
+              ]
+            }
+          }
+        },
+        "kind": "pod",
+        "name": "AN/AAQ-14 LANTIRN targeting pod",
+        "role": "targeting"
+      },
+      "lau-105": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "LAU-105"
+              ]
+            }
+          }
+        },
+        "kind": "rack",
+        "name": "LAU-105 dual missile launcher"
+      },
+      "lau-131-m151": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{69926055-0DA8-4530-9F2F-C86B157EA9F6}"
+              ]
+            }
+          }
+        },
+        "family": "LAU-131",
+        "kind": "weapon",
+        "name": "LAU-131 rocket pod, 7 Hydra 70 M151 HE"
+      },
+      "lau-131-m156": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{2AF2EC3F-9065-4de5-93E1-1739C9A71EF7}"
+              ]
+            }
+          }
+        },
+        "family": "LAU-131",
+        "kind": "weapon",
+        "name": "LAU-131 rocket pod, 7 Hydra 70 M156 white phosphorus",
+        "notes": "Marking rockets for FAC(A) target marks."
+      },
+      "litening": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{A111396E-D3E8-4b9c-8AC9-2432489304D5}"
+              ]
+            }
+          }
+        },
+        "kind": "pod",
+        "name": "AN/AAQ-28 LITENING targeting pod",
+        "role": "targeting"
+      },
+      "m261-m151": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "M261_MK151"
+              ]
+            }
+          }
+        },
+        "family": "M261",
+        "kind": "weapon",
+        "name": "M261 rocket launcher, 19 Hydra 70 M151 HE"
+      },
+      "m299": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{M299_EMPTY}"
+              ]
+            }
+          }
+        },
+        "kind": "rack",
+        "name": "M299 Hellfire launcher"
+      },
+      "sniper": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{AN_AAQ_33}"
+              ]
+            }
+          }
+        },
+        "kind": "pod",
+        "name": "AN/AAQ-33 Sniper targeting pod",
+        "role": "targeting"
+      },
+      "tank-370": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}"
+              ]
+            }
+          }
+        },
+        "kind": "tank",
+        "name": "370 US gal external fuel tank"
+      },
+      "tank-480": {
+        "kind": "tank",
+        "name": "480 US gal external fuel tank"
+      },
+      "tank-610": {
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "clsids": [
+                "{E1F29B21-F291-4589-9FD8-3272EEC69506}",
+                "{F15E_EXTTANK}"
+              ]
+            }
+          }
+        },
+        "kind": "tank",
+        "name": "610 US gal external fuel tank",
+        "notes": "DCS has one class identifier for the F-15C tank and one for the F-15E tank."
+      },
+      "ter-9a": {
+        "kind": "rack",
+        "name": "TER-9A triple ejector rack"
+      }
+    },
+    "targets": {
+      "cobalt-array": {
+        "aimpoints": {
+          "bunker-north": {
+            "elevation": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 690
+            },
+            "name": "North bunker",
+            "position": {
+              "latitude": 35.1,
+              "longitude": 40.3
+            }
+          },
+          "vehicle-park": {
+            "elevation": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 685
+            },
+            "name": "Vehicle park",
+            "position": {
+              "latitude": 35.093,
+              "longitude": 40.314
+            }
+          }
+        },
+        "description": "ISIS command post and vehicle park in a walled compound west of the Euphrates.",
+        "identification_features": [
+          "Two hardened shelters north of the road junction",
+          "Revetted vehicle park"
+        ],
+        "kind": "fixed",
+        "name": "Cobalt compound",
+        "target_number": "IR-0001",
+        "threat_refs": [
+          "sa-6"
+        ]
+      },
+      "gainful-battery": {
+        "description": "SA-6 Gainful battery that ISIS captured and moves along the river road north of Cobalt.",
+        "expected_movement": "Relocates up to 5 nautical miles after emitting.",
+        "identification_features": [
+          "Straight Flush radar vehicle with three launchers"
+        ],
+        "kind": "mobile",
+        "last_known": {
+          "as_of": "2026-10-02T12:15:00Z",
+          "position": {
+            "latitude": 35.215,
+            "longitude": 40.265
+          }
+        },
+        "name": "Captured SA-6 battery",
+        "search_area": {
+          "area": "recce-box"
+        },
+        "target_number": "IR-0002",
+        "threat_refs": [
+          "sa-6"
+        ]
+      },
+      "unknown-track": {
+        "description": "Track of two aircraft from the north-west without a flight plan or deconfliction call; identity is not assumed.",
+        "kind": "mobile",
+        "last_known": {
+          "as_of": "2026-10-02T12:50:00Z",
+          "position": {
+            "latitude": 35.585,
+            "longitude": 40.125
+          }
+        },
+        "name": "Unidentified aircraft formation",
+        "target_number": "IR-0003"
+      },
+      "zinc-depot": {
+        "aimpoints": {
+          "fuel-tanks": {
+            "elevation": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 720
+            },
+            "name": "Fuel tanks",
+            "position": {
+              "latitude": 35.217,
+              "longitude": 39.877
+            }
+          },
+          "vehicle-shed": {
+            "elevation": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 715
+            },
+            "name": "Vehicle shed",
+            "position": {
+              "latitude": 35.214,
+              "longitude": 39.87
+            }
+          }
+        },
+        "description": "ISIS fuel and ammunition depot that supplies the fighters in the valley.",
+        "identification_features": [
+          "Four fuel tanks east of the road",
+          "Long vehicle shed"
+        ],
+        "kind": "fixed",
+        "name": "Zinc supply depot",
+        "target_number": "IR-0004"
+      }
+    },
+    "threats": {
+      "red-air-fighters": {
+        "area": {
+          "area": "red-air"
+        },
+        "expected_activity": "Two to four aircraft can approach from the north-west between 1310Z and 1400Z.",
+        "kind": "air",
+        "name": "Third-party fighters",
+        "system": "MiG-29"
+      },
+      "sa-6": {
+        "area": {
+          "area": "recce-box"
+        },
+        "as_of": "2026-10-02T12:00:00Z",
+        "emitters": [
+          "sa6-gainful"
+        ],
+        "expected_activity": "Radar emits when strike aircraft approach Cobalt.",
+        "kind": "air_defense",
+        "name": "SA-6 Gainful",
+        "system": "2K12 Kub"
+      }
+    }
+  },
+  "schema_version": "0.1.0-draft.1"
+}

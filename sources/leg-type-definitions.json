@@ -1,0 +1,493 @@
+{
+  "description": "Definition of each procedure leg type (path terminator), keyed by its two-letter code: `leg_type` (the openAIX value), `name` (the published name in the primary source), first-party `source` and `locator`, `source_text` (the published wording, unchanged), optional `references` (further first-party sources with locators and their wording), `definition` (the ASD-STE100 text that the schemas use), `verified` and an optional `note` on differences between the sources.",
+  "review": "Checked on 3 October 2026 against downloaded copies whose SHA-256 is pinned in sources/authorities.json. PANS-OPS defines twelve leg types; the FAA Instrument Procedures Handbook defines all 23, and FAA Orders 8260.3G, 8260.19K and 8260.58D define or use a subset. FAA Order 8260.58D defines no complete list.",
+  "codes": {
+    "IF": {
+      "leg_type": "initial_fix",
+      "name": "Initial fix",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-2",
+      "source_text": "The coding of RNAV procedures starts at an IF. An IF does not define a desired track in and of itself, but is used in conjunction with another leg type (e.g. TF) in order to define the desired path.",
+      "references": [
+        {
+          "source": "faa-order-8260-19k-2025",
+          "locator": "Paragraph 4-6-5.a, page 4-64",
+          "source_text": "Initial fix. This is the point or fix where a flight segment begins. An IF is not a route segment and does not define a desired track in and of itself. It is used in conjunction with other leg types such as a TF leg in order to define the desired segment. Note: “IF” in this context is not to be confused with IAF or IF; however, it may be located at one of these locations for coding purposes."
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-6, figure 6-5",
+          "source_text": "Initial fix or IF leg—defines a database fix as a point in space and is only required to define the beginning of a route or procedure."
+        },
+        {
+          "source": "faa-order-8260-58d-2025",
+          "locator": "Paragraph 5-6-2, page 5-36",
+          "source_text": "When designing an RNAV route following vectors, establish the first waypoint as an Initial Fix leg (IF)."
+        },
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv; Volume II, Part B, Chapter 3, page II-B-3-16, item g",
+          "source_text": "IF Intermediate fix"
+        }
+      ],
+      "definition": "This value identifies an initial fix (`IF`). The procedure or the transition in the procedure data starts at this fix. The leg has no path.",
+      "verified": true,
+      "note": "PANS-OPS and the FAA (Order 8260.19K, the Instrument Procedures Handbook and Order 8260.58D) call the path terminator `IF` the initial fix. A note in Order 8260.19K tells that this fix is not the intermediate fix of an approach, which also has the abbreviation IF. The PBN Manual gives IF only as the intermediate fix."
+    },
+    "TF": {
+      "leg_type": "track_to_fix",
+      "name": "Track to a fix",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-2",
+      "source_text": "The primary straight route segment for RNAV is a TF route. The TF route is defined by a geodesic path between two waypoints. The first of the two waypoints is either the termination waypoint of the previous segment or an initial fix (IF).",
+      "references": [
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv",
+          "source_text": "TF Track to fix"
+        },
+        {
+          "source": "faa-order-8260-3g-2024",
+          "locator": "Appendix B, Section 2, item 129, page B-13",
+          "source_text": "Track-to-fix (TF) leg. A geodesic path between two fixes. The resulting track is wind corrected."
+        },
+        {
+          "source": "faa-order-8260-19k-2025",
+          "locator": "Paragraph 4-6-5.b, page 4-64",
+          "source_text": "Track-to-fix (TF) leg. This designates a track or geodesic path between two fixes."
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-6, figure 6-6",
+          "source_text": "Track to a fix or TF leg—defines a great circle track over the ground between two known database fixes and the preferred method for specification of straight legs (course or heading can be mentioned on charts but designer should ensure TF leg is used for coding)."
+        },
+        {
+          "source": "faa-order-8260-58d-2025",
+          "locator": "Paragraph 1-2-5.a(3), page 1-4",
+          "source_text": "The alignment restriction between Track-to-Fix (TF) and Radius-to-Fix (RF) legs is no course change exceeding alignment tolerance."
+        }
+      ],
+      "definition": "This value identifies a track to a fix (`TF`). The aircraft flies a straight track from the previous fix to the fix of the leg.",
+      "verified": true
+    },
+    "CF": {
+      "leg_type": "course_to_fix",
+      "name": "Course to a fix",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-3",
+      "source_text": "A CF is defined as a course that terminates at a fix/waypoint followed by a specific route segment.",
+      "references": [
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv",
+          "source_text": "CF Course to fix"
+        },
+        {
+          "source": "faa-order-8260-3g-2024",
+          "locator": "Appendix B, Section 2, item 18, page B-4",
+          "source_text": "Course-to-a-fix (CF). A defined, repeatable course (track over the ground) to a specific database fix."
+        },
+        {
+          "source": "faa-order-8260-19k-2025",
+          "locator": "Paragraph 4-6-5.g, page 4-64",
+          "source_text": "Course-to-fix (CF) leg. The CF leg is defined as a magnetic course that terminates at a fix."
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-6 and 6-7, figure 6-8",
+          "source_text": "Course to a fix or CF leg—defines a specified course to a specific database fix. Whenever possible, TF legs should be used instead of CF legs to avoid magnetic variation issues."
+        }
+      ],
+      "definition": "This value identifies a course to a fix (`CF`). The aircraft flies a given course to the fix of the leg.",
+      "verified": true
+    },
+    "DF": {
+      "leg_type": "direct_to_fix",
+      "name": "Direct to a fix",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-2",
+      "source_text": "A DF is used to define a route segment from an unspecified position, on the aircraft’s present track, to a specified fix/waypoint.",
+      "references": [
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv",
+          "source_text": "DF Direct to fix"
+        },
+        {
+          "source": "faa-order-8260-3g-2024",
+          "locator": "Appendix B, Section 2, item 30, page B-5",
+          "source_text": "Direct-to-fix (DF). An unspecified non-repeatable track starting from an undefined position to a specific database fix."
+        },
+        {
+          "source": "faa-order-8260-19k-2025",
+          "locator": "Paragraph 4-6-5.e, page 4-64",
+          "source_text": "Direct-to-fix (DF) leg. A DF leg is used to define a route segment (geodesic path) that begins at an aircraft present position, or unspecified position, and extends to a specified fix."
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-7, figure 6-9",
+          "source_text": "Direct to a fix or DF leg—defines an unspecified track starting from an undefined position to a specified fix."
+        },
+        {
+          "source": "faa-order-8260-58d-2025",
+          "locator": "Paragraph 1-2-5.a(3), page 1-4",
+          "source_text": "When preceded by a Direct-to-Fix (DF) leg, the alignment restriction applies to both the early and late tracks."
+        }
+      ],
+      "definition": "This value identifies a direct-to-fix leg (`DF`). The aircraft flies directly from its position to the fix of the leg.",
+      "verified": true
+    },
+    "FA": {
+      "leg_type": "fix_to_altitude",
+      "name": "Course from a fix to an altitude",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-3",
+      "source_text": "An FA is used to define a route segment that begins at a fix/waypoint and terminates at a point where the aircraft altitude is at, or above, a specified altitude. No position is specified for the altitude point.",
+      "references": [
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv",
+          "source_text": "FA Fix to altitude"
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-7, figure 6-10",
+          "source_text": "Fix to an altitude or FA leg—defines a specified track over the ground from a database fix to a specified altitude at an unspecified position."
+        }
+      ],
+      "definition": "This value identifies a course from a fix to an altitude (`FA`). The aircraft flies a given course from the fix of the leg. The aircraft completes the leg when it is at or above a given altitude.",
+      "verified": true,
+      "note": "PANS-OPS uses the name course from a fix. The FAA handbook uses the words fix to an altitude and a specified track over the ground. The meaning is the same."
+    },
+    "FC": {
+      "leg_type": "track_from_fix_for_distance",
+      "name": "Track from a fix from a distance",
+      "source": "faa-h-8083-16b-2017",
+      "locator": "Chapter 6, Path and Terminator Legs, page 6-7, figure 6-11",
+      "source_text": "Track from a fix from a distance or FC leg—defines a specified track over the ground from a database fix for a specific distance.",
+      "definition": "This value identifies a track from a fix for a distance (`FC`). From the fix of the leg, the aircraft flies the track over the ground of the leg for a given distance.",
+      "verified": true,
+      "note": "The title in the handbook is \"from a distance\". Its definition is \"for a specific distance\", and the openAIX name follows the definition. The ICAO copies in the project do not define this leg type."
+    },
+    "FD": {
+      "leg_type": "track_from_fix_to_dme_distance",
+      "name": "Track from a fix to a DME distance",
+      "source": "faa-h-8083-16b-2017",
+      "locator": "Chapter 6, Path and Terminator Legs, page 6-7, figure 6-12",
+      "source_text": "Track from a fix to a distance measuring equipment (DME) distance or FD leg—defines a specified track over the ground from a database fix to a specific DME distance that is from a specific database DME NAVAID.",
+      "definition": "This value identifies a track from a fix to a DME distance (`FD`). The aircraft flies the track over the ground of the leg from the fix of the leg. The aircraft completes the leg at a given DME distance from a navigation aid.",
+      "verified": true,
+      "note": "The ICAO copies in the project do not define this leg type."
+    },
+    "FM": {
+      "leg_type": "fix_to_manual_termination",
+      "name": "Course from a fix to a manual termination",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-3",
+      "source_text": "An FM is used when a route segment is terminated for radar vectors. It provides similar functionality to the VM. The aircraft continues on the prescribed heading until intervention by the pilot.",
+      "references": [
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv",
+          "source_text": "FM Fix to manual termination"
+        },
+        {
+          "source": "faa-order-8260-19k-2025",
+          "locator": "Paragraph 4-6-5.j, page 4-65",
+          "source_text": "Fix to a manual termination (FM) leg. A course from a fix to a manual termination leg used in departure or arrival procedures when a route segment is expected to be terminated by radar vectors."
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-7, figure 6-13",
+          "source_text": "From a fix to a manual termination or FM leg—defines a specified track over the ground from a database fix until manual termination of the leg."
+        },
+        {
+          "source": "faa-order-8260-58d-2025",
+          "locator": "Paragraph 2-2-1.a(1), page 2-2",
+          "source_text": "Use TF or RF legs, except a heading to a manual termination (VM) or from a fix to a manual termination (FM) leg may be established at the STAR termination."
+        }
+      ],
+      "definition": "This value identifies a course from a fix to a manual termination (`FM`). The aircraft flies a given course from the fix of the leg until a manual termination by the pilot, usually to fly a radar vector.",
+      "verified": true
+    },
+    "CA": {
+      "leg_type": "course_to_altitude",
+      "name": "Course to an altitude",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-2",
+      "source_text": "A CA is used to define the course of an outbound route segment that terminates at an altitude with an unspecified position.",
+      "references": [
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv",
+          "source_text": "CA Course to altitude"
+        },
+        {
+          "source": "faa-order-8260-3g-2024",
+          "locator": "Appendix B, Section 2, item 19, page B-4",
+          "source_text": "Course-to-an-altitude (CA). A defined, repeatable course to a specific altitude at an unspecified position."
+        },
+        {
+          "source": "faa-order-8260-19k-2025",
+          "locator": "Paragraph 4-6-5.d, page 4-64",
+          "source_text": "Course-to-altitude (CA) leg. A CA leg defines a specified path terminating at an altitude. A CA leg must specify a course and altitude."
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-7, figure 6-14",
+          "source_text": "Course to an altitude or CA leg—defines a specified course to a specific altitude at an unspecified position."
+        },
+        {
+          "source": "faa-order-8260-58d-2025",
+          "locator": "Paragraph 3-5-2, page 3-34",
+          "source_text": "A CA leg is used as the first leg of an RNAV missed approach and must be followed by a DF leg. The CA leg must specify a course and altitude."
+        }
+      ],
+      "definition": "This value identifies a course to an altitude (`CA`). The aircraft flies a given course. The aircraft completes the leg when it is at or above a given altitude, at no given position.",
+      "verified": true
+    },
+    "CD": {
+      "leg_type": "course_to_dme_distance",
+      "name": "Course to a DME distance",
+      "source": "faa-h-8083-16b-2017",
+      "locator": "Chapter 6, Path and Terminator Legs, page 6-7 and 6-8, figure 6-15",
+      "source_text": "Course to a DME distance or CD leg—defines a specified course to a specific DME distance that is from a specific database DME NAVAID.",
+      "definition": "This value identifies a course to a DME distance (`CD`). The aircraft flies a given course to a given DME distance from a navigation aid.",
+      "verified": true,
+      "note": "The ICAO copies in the project do not define this leg type."
+    },
+    "CI": {
+      "leg_type": "course_to_intercept",
+      "name": "Course to an intercept",
+      "source": "faa-order-8260-3g-2024",
+      "locator": "Appendix B, Section 2, item 20, page B-4",
+      "source_text": "Course-to-an-intercept (CI). A defined, repeatable course to intercept the subsequent leg.",
+      "references": [
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-8, figure 6-16",
+          "source_text": "Course to an intercept or CI leg—defines a specified course to intercept a subsequent leg."
+        }
+      ],
+      "definition": "This value identifies a course to intercept the next leg (`CI`). The aircraft flies a given course until it intercepts the next leg.",
+      "verified": true,
+      "note": "The ICAO copies in the project do not define this leg type."
+    },
+    "CR": {
+      "leg_type": "course_to_radial",
+      "name": "Course to a radial termination",
+      "source": "faa-h-8083-16b-2017",
+      "locator": "Chapter 6, Path and Terminator Legs, page 6-8, figure 6-17",
+      "source_text": "Course to a radial termination or CR leg—defines a course to a specified radial from a specific database VOR NAVAID.",
+      "definition": "This value identifies a course to a radial (`CR`). The aircraft flies a given course to a given radial of a VOR.",
+      "verified": true,
+      "note": "The FAA gives the radial of a VOR. The earlier openAIX text permitted the radial of each type of navigation aid. The ICAO copies in the project do not define this leg type."
+    },
+    "RF": {
+      "leg_type": "radius_to_fix",
+      "name": "Constant radius arc to a fix",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-4",
+      "source_text": "The RF segment is a circular path about a defined turn centre that terminates at a waypoint. The beginning of the arc segment is defined by the terminating waypoint of the previous segment.",
+      "references": [
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv",
+          "source_text": "RF Radius to fix"
+        },
+        {
+          "source": "faa-order-8260-3g-2024",
+          "locator": "Appendix B, Section 2, item 108, page B-12",
+          "source_text": "Radius-to-fix (RF) leg. A constant radius circular repeatable path about a defined turn center that begins and terminates at a fix."
+        },
+        {
+          "source": "faa-order-8260-19k-2025",
+          "locator": "Paragraph 4-6-5.c, page 4-64",
+          "source_text": "Constant radius to a fix (RF) leg. An RF leg defines a curved path route segment about a defined turn center that terminates at a fix."
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-6, figure 6-7",
+          "source_text": "Constant radius arc or RF leg—defines a constant radius turn between two databases fixes, lines tangent to the arc, and a center fix."
+        },
+        {
+          "source": "faa-order-8260-58d-2025",
+          "locator": "Paragraph 1-2-5.d(3), page 1-20",
+          "source_text": "RF legs are used to control the ground track of a turn where obstructions prevent the design of a FB or FO turn, or to accommodate other operational requirements."
+        }
+      ],
+      "definition": "This value identifies a radius to a fix (`RF`). The aircraft flies a constant-radius arc around a given centre, from the previous fix to the fix of the leg.",
+      "verified": true,
+      "note": "The names are different: constant radius arc to a fix (PANS-OPS), radius to fix (PBN Manual, Orders 8260.3G and 8260.58D), constant radius to a fix (Order 8260.19K), constant radius arc (FAA handbook). The meaning is the same."
+    },
+    "AF": {
+      "leg_type": "arc_to_fix",
+      "name": "Arc to a fix",
+      "source": "faa-h-8083-16b-2017",
+      "locator": "Chapter 6, Path and Terminator Legs, page 6-8, figure 6-18",
+      "source_text": "Arc to a fix or AF leg—defines a track over the ground at a specified constant distance from a database DME NAVAID.",
+      "definition": "This value identifies an arc to a fix (`AF`). The aircraft flies an arc at one DME distance from a navigation aid to the fix of the leg.",
+      "verified": true,
+      "note": "The ICAO copies in the project do not define this leg type."
+    },
+    "VA": {
+      "leg_type": "heading_to_altitude",
+      "name": "Heading to an altitude",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-5",
+      "source_text": "A VA is often used on departures where a heading rather than a track has been specified for climb-out. The segment terminates at a specified altitude without a terminating position.",
+      "references": [
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv",
+          "source_text": "VA Heading to an altitude"
+        },
+        {
+          "source": "faa-order-8260-3g-2024",
+          "locator": "Appendix B, Section 2, item 59, page B-7",
+          "source_text": "Heading-to-an-altitude (VA). A specified heading to a specific altitude at an unspecified position. The resulting track is not wind corrected."
+        },
+        {
+          "source": "faa-order-8260-19k-2025",
+          "locator": "Paragraph 4-6-5.f, page 4-64",
+          "source_text": "Heading-to-an-altitude (VA) leg. The VA leg is used in a departure route segment where a heading rather than a track has been specified for climb. The VA segment terminates at a specified altitude without a terminating position defined."
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-8, figure 6-19",
+          "source_text": "Heading to an altitude termination or VA leg—defines a specified heading to a specific altitude termination at an unspecified position."
+        }
+      ],
+      "definition": "This value identifies a heading to an altitude (`VA`). The aircraft flies a given heading. The aircraft completes the leg when it is at or above a given altitude, at no given position.",
+      "verified": true
+    },
+    "VD": {
+      "leg_type": "heading_to_dme_distance",
+      "name": "Heading to a DME distance termination",
+      "source": "faa-h-8083-16b-2017",
+      "locator": "Chapter 6, Path and Terminator Legs, page 6-8, figure 6-20",
+      "source_text": "Heading to a DME distance termination or VD leg—defines a specified heading terminating at a specified DME distance from a specific database DME NAVAID.",
+      "definition": "This value identifies a heading to a DME distance (`VD`). The aircraft flies a given heading to a given DME distance from a navigation aid.",
+      "verified": true,
+      "note": "The ICAO copies in the project do not define this leg type."
+    },
+    "VI": {
+      "leg_type": "heading_to_intercept",
+      "name": "Heading to an intercept",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-5",
+      "source_text": "A VI segment is coded wherever a heading is assigned to an aircraft until it intercepts the next leg segment. The aircraft continues on the prescribed heading until the next leg is intercepted.",
+      "references": [
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv",
+          "source_text": "VI Heading to an intercept"
+        },
+        {
+          "source": "faa-order-8260-3g-2024",
+          "locator": "Appendix B, Section 2, item 60, page B-7",
+          "source_text": "Heading-to-an-intercept (VI). A specified heading to intercept the subsequent leg at an unspecified position. The resulting track is not wind corrected."
+        },
+        {
+          "source": "faa-order-8260-19k-2025",
+          "locator": "Paragraph 4-6-5.i, page 4-65",
+          "source_text": "Heading to an intercept (VI) leg. A VI leg defines a specified heading to intercept the subsequent leg at an unspecified position."
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-8, figure 6-21",
+          "source_text": "Heading to an intercept or VI leg—defines a specified heading to intercept the subsequent leg at an unspecified position."
+        }
+      ],
+      "definition": "This value identifies a heading to intercept the next leg (`VI`). The aircraft flies a given heading until it intercepts the next leg.",
+      "verified": true
+    },
+    "VM": {
+      "leg_type": "heading_to_manual_termination",
+      "name": "Heading to a manual termination",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-5",
+      "source_text": "A VM segment may be coded wherever radar vectoring is provided at the end of a procedure. It provides similar functionality to the FM. The aircraft continues on the prescribed heading until intervention by the pilot.",
+      "references": [
+        {
+          "source": "icao-doc-9613-2023",
+          "locator": "Abbreviations and acronyms, pages xxiii to xxv",
+          "source_text": "VM Heading to a manual termination"
+        },
+        {
+          "source": "faa-order-8260-19k-2025",
+          "locator": "Paragraph 4-6-5.h, page 4-65",
+          "source_text": "Heading to a manual termination (VM) leg. A VM leg is a manual termination leg used whenever a departure or arrival route description specifies a course or heading to fly in expectation of a radar vector."
+        },
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-8, figure 6-22",
+          "source_text": "Heading to a manual termination or VM leg—defines a specified heading until a manual termination."
+        },
+        {
+          "source": "faa-order-8260-58d-2025",
+          "locator": "Paragraph 2-2-1.a(1), page 2-2",
+          "source_text": "Use TF or RF legs, except a heading to a manual termination (VM) or from a fix to a manual termination (FM) leg may be established at the STAR termination."
+        }
+      ],
+      "definition": "This value identifies a heading to a manual termination (`VM`). The aircraft flies a given heading until a manual termination by the pilot, usually to fly a radar vector.",
+      "verified": true
+    },
+    "VR": {
+      "leg_type": "heading_to_radial",
+      "name": "Heading to a radial termination",
+      "source": "faa-h-8083-16b-2017",
+      "locator": "Chapter 6, Path and Terminator Legs, page 6-8 and 6-9, figure 6-23",
+      "source_text": "Heading to a radial termination or VR leg—defines a specified heading to a specified radial from a specific database VOR NAVAID.",
+      "definition": "This value identifies a heading to a radial (`VR`). The aircraft flies a given heading to a given radial of a VOR.",
+      "verified": true,
+      "note": "The FAA gives the radial of a VOR. The earlier openAIX text permitted the radial of each type of navigation aid. The ICAO copies in the project do not define this leg type."
+    },
+    "PI": {
+      "leg_type": "procedure_turn",
+      "name": "Procedure turn",
+      "source": "faa-h-8083-16b-2017",
+      "locator": "Chapter 6, Path and Terminator Legs, page 6-9, figure 6-24",
+      "source_text": "Procedure turn or PI leg—defines a course reversal starting at a specific database fix and includes outbound leg followed by a left or right turn and 180° course reversal to intercept the next leg.",
+      "definition": "This value identifies a procedure turn (`PI`). From the fix of the leg, the aircraft flies an outbound leg. Then it makes a left turn or a right turn, and a turn of 180 degrees to intercept the next leg.",
+      "verified": true,
+      "note": "The earlier openAIX text did not give the outbound leg and the 180-degree turn of the FAA definition. The ICAO copies in the project do not define this leg type."
+    },
+    "HA": {
+      "leg_type": "hold_to_altitude",
+      "name": "Racetrack course reversal, altitude termination",
+      "source": "faa-h-8083-16b-2017",
+      "locator": "Chapter 6, Path and Terminator Legs, page 6-9, figure 6-25",
+      "source_text": "Racetrack course reversal or altitude termination (HA), single circuit terminating at the fix (base turn) (HF), or manual termination (HM) leg types—define racetrack pattern or course reversals at a specified database fix. HA - Terminates at an altitude",
+      "definition": "This value identifies a hold to an altitude (`HA`). The aircraft flies the holding pattern until it is at a given altitude.",
+      "verified": true,
+      "note": "The ICAO copies in the project do not define this leg type."
+    },
+    "HF": {
+      "leg_type": "hold_to_fix",
+      "name": "Racetrack course reversal, single circuit terminating at the fix",
+      "source": "faa-h-8083-16b-2017",
+      "locator": "Chapter 6, Path and Terminator Legs, page 6-9, figure 6-25",
+      "source_text": "Racetrack course reversal or altitude termination (HA), single circuit terminating at the fix (base turn) (HF), or manual termination (HM) leg types—define racetrack pattern or course reversals at a specified database fix. HF - Terminates at the fix after one orbit",
+      "definition": "This value identifies a hold to a fix (`HF`). The aircraft flies one circuit of the holding pattern and completes the leg at the holding fix.",
+      "verified": true,
+      "note": "The ICAO copies in the project do not define this leg type."
+    },
+    "HM": {
+      "leg_type": "hold_to_manual_termination",
+      "name": "Holding/racetrack to a manual termination",
+      "source": "icao-doc-8168-v2-2014",
+      "locator": "Part III, Section 2, Chapter 5, 5.2, page III-2-5-4",
+      "source_text": "An HM is used to define a holding pattern path that is manually terminated by the flight crew.",
+      "references": [
+        {
+          "source": "faa-h-8083-16b-2017",
+          "locator": "Chapter 6, Path and Terminator Legs, page 6-9, figure 6-25",
+          "source_text": "Racetrack course reversal or altitude termination (HA), single circuit terminating at the fix (base turn) (HF), or manual termination (HM) leg types—define racetrack pattern or course reversals at a specified database fix. HM - Manually terminated"
+        }
+      ],
+      "definition": "This value identifies a holding pattern to a manual termination (`HM`). The aircraft flies the holding pattern until a manual termination by the pilot.",
+      "verified": true
+    }
+  }
+}

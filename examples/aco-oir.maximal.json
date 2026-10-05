@@ -1,0 +1,1129 @@
+{
+  "$schema": "urn:openaix:schema:aco:0.1.0-draft.1",
+  "assignments": [
+    {
+      "control_points": [
+        {
+          "id": "marshal",
+          "kind": "control_measure"
+        }
+      ],
+      "controlling_agency": "darkstar",
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "falcon",
+      "purpose": "Combat Air Patrol (CAP) north of the support orbits.",
+      "restrictions": [
+        "Do not pursue south of the Cobalt kill box while it is open."
+      ],
+      "role": "cap",
+      "state": "active",
+      "transit_instructions": [
+        "Enter Falcon at flight level 220 or the flight level assigned by Darkstar."
+      ],
+      "usage": "cap"
+    },
+    {
+      "control_points": [
+        {
+          "id": "juniper",
+          "kind": "control_measure"
+        }
+      ],
+      "controlling_agency": "darkstar",
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "sentinel",
+      "purpose": "Airborne Early Warning (AEW) and control for OIR.",
+      "restrictions": [
+        "Do not leave Sentinel without a relief or Kingpin approval."
+      ],
+      "role": "aew",
+      "state": "active",
+      "transit_instructions": [
+        "Remain in Sentinel between flight levels 280 and 300."
+      ],
+      "usage": "aew"
+    },
+    {
+      "control_points": [
+        {
+          "id": "marshal",
+          "kind": "control_measure"
+        }
+      ],
+      "controlling_agency": "darkstar",
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "shell",
+      "purpose": "Air-to-air refuelling for the counterair and strike flights.",
+      "restrictions": [
+        "Boom receivers only; no probe-and-drogue refuelling on Shell."
+      ],
+      "role": "refueling",
+      "state": "active",
+      "transit_instructions": [
+        "Request tanker clearance before joining Shell between flight levels 180 and 200; hold the last assigned altitude or flight level until cleared."
+      ],
+      "usage": "aar"
+    },
+    {
+      "control_points": [
+        {
+          "id": "marshal",
+          "kind": "control_measure"
+        }
+      ],
+      "controlling_agency": "darkstar",
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "entry_route": "marshal-entry",
+      "exit_route": "marshal-exit",
+      "measure": "mesa",
+      "purpose": "Holding before kill box or tanker entry.",
+      "restrictions": [
+        "No climb or descent in the stack without a Darkstar clearance."
+      ],
+      "role": "holding",
+      "stack_instructions": [
+        "Assign 14000 or 16000 feet MSL; one flight per level.",
+        "Maintain the assigned level until Darkstar clears a climb or descent."
+      ],
+      "state": "active",
+      "transit_instructions": [
+        "Join at Marshal at the assigned level; leave via Cedar after release."
+      ],
+      "usage": "holding"
+    },
+    {
+      "control_points": [
+        {
+          "id": "juniper",
+          "kind": "control_measure"
+        }
+      ],
+      "controlling_agency": "darkstar",
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "south-transit",
+      "purpose": "Activate the inbound transit corridor.",
+      "restrictions": [
+        "Inbound only; maximum 300 knots indicated in the corridor."
+      ],
+      "state": "active",
+      "transit_instructions": [
+        "Fly Juniper to Marshal between 10000 and 12000 feet MSL."
+      ],
+      "usage": "transit"
+    },
+    {
+      "control_points": [
+        {
+          "id": "cedar",
+          "kind": "control_measure"
+        }
+      ],
+      "controlling_agency": "banshee",
+      "effective": {
+        "end": "2026-10-02T14:20:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "rescue-reservation",
+      "purpose": "Protect the rescue search from unrelated traffic.",
+      "restrictions": [
+        "Aircraft not in the rescue package stay outside the reservation."
+      ],
+      "state": "active",
+      "transit_instructions": [
+        "Rescue aircraft enter only after Banshee confirms the reservation is active."
+      ]
+    },
+    {
+      "control_points": [
+        {
+          "id": "cedar",
+          "kind": "control_measure"
+        }
+      ],
+      "controlling_agency": "banshee",
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T14:20:00Z"
+      },
+      "measure": "rescue-reservation",
+      "purpose": "Release the rescue reservation after the recovery.",
+      "restrictions": [
+        "Rescue helicopters leave the area by Cedar before 1430Z."
+      ],
+      "state": "deactivated",
+      "transit_instructions": [
+        "Normal coordination resumes; this deactivation is not a landing clearance."
+      ]
+    },
+    {
+      "control_points": [
+        {
+          "id": "marshal",
+          "kind": "control_measure"
+        }
+      ],
+      "controlling_agency": "banshee",
+      "effective": {
+        "end": "2026-10-02T13:20:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "killbox_status": "closed",
+      "measure": "cobalt-box",
+      "purpose": "Keep the kill box closed until the area is clear.",
+      "restrictions": [
+        "No aircraft below 13000 feet MSL in the box while Sweeper clears the area."
+      ],
+      "state": "active",
+      "transit_instructions": [
+        "Remain outside the box until the firing window opens."
+      ],
+      "usage": "fires"
+    },
+    {
+      "control_points": [
+        {
+          "id": "marshal",
+          "kind": "control_measure"
+        }
+      ],
+      "controlling_agency": "banshee",
+      "effective": {
+        "end": "2026-10-02T13:50:00Z",
+        "start": "2026-10-02T13:20:00Z"
+      },
+      "killbox_status": "open",
+      "measure": "cobalt-box",
+      "purpose": "Permit the scheduled firing phase.",
+      "restrictions": [
+        "Attack headings stay between 300 and 060 degrees magnetic, away from TF Bastion."
+      ],
+      "state": "active",
+      "transit_instructions": [
+        "Banshee confirms clearance and target identification before each attack."
+      ],
+      "usage": "fires"
+    },
+    {
+      "control_points": [
+        {
+          "id": "marshal",
+          "kind": "control_measure"
+        }
+      ],
+      "controlling_agency": "banshee",
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:50:00Z"
+      },
+      "killbox_status": "closed",
+      "measure": "cobalt-box",
+      "purpose": "Close the box after the firing phase.",
+      "restrictions": [
+        "No re-attack after the box closes; report BDA on egress."
+      ],
+      "state": "active",
+      "transit_instructions": [
+        "Cease attacks; depart under Banshee instructions."
+      ],
+      "usage": "fires"
+    }
+  ],
+  "extensions": {
+    "org.cjtf-oir.ato": {
+      "ato_day": "214",
+      "mission_id": "oir-syria"
+    }
+  },
+  "instructions": [
+    "All times are UTC. Altimeter: QNH below the Jordanian transition altitude of 13000 feet, standard pressure above.",
+    "Use the explicit vertical reference: flight levels use standard pressure; MSL and AGL values are feet. No pressure-to-height conversion is implied. Orbit radials are true bearings.",
+    "This order allocates airspace. Flight tasking and permissions to engage remain separate."
+  ],
+  "kind": "aco",
+  "meta": {
+    "author": "CAOC airspace cell",
+    "classification": "UNCLASSIFIED",
+    "coalition": "blue",
+    "distribution": [
+      "Darkstar",
+      "Banshee",
+      "Salti Tower",
+      "All OIR flights"
+    ],
+    "id": "oir-aco",
+    "issued_at": "2026-10-02T12:30:00Z",
+    "issuing_unit": "CJTF-OIR CAOC",
+    "operation": "INHERENT RESOLVE",
+    "references": [
+      {
+        "id": "oir-spins",
+        "path": "oir-spins.json",
+        "revision": "1",
+        "section": "Airspace coordination",
+        "title": "OIR Special Instructions (SPINS)"
+      }
+    ],
+    "revision": "2",
+    "supersedes": {
+      "id": "oir-aco",
+      "path": "oir-aco.json",
+      "revision": "1",
+      "section": "Entire order",
+      "title": "OIR preliminary ACO"
+    },
+    "title": "OIR Airspace Control Order"
+  },
+  "period": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "references": [
+    {
+      "id": "oir-spins",
+      "path": "oir-spins.json",
+      "revision": "1",
+      "section": "Airspace coordination",
+      "title": "OIR Special Instructions (SPINS)"
+    }
+  ],
+  "resources": {
+    "agencies": {
+      "banshee": {
+        "callsign": "Banshee",
+        "channels": [
+          "banshee-uhf"
+        ],
+        "id": "banshee",
+        "kind": "c2-agency",
+        "position": {
+          "latitude": 32.546,
+          "longitude": 38.214
+        },
+        "role": "CRC"
+      },
+      "caoc": {
+        "callsign": "Kingpin",
+        "channels": [
+          "ops-uhf"
+        ],
+        "id": "caoc",
+        "kind": "c2-agency",
+        "position": {
+          "latitude": 31.838,
+          "longitude": 36.803
+        },
+        "role": "AOC"
+      },
+      "darkstar": {
+        "callsign": "Darkstar",
+        "channels": [
+          "control-uhf"
+        ],
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "kind": "unit",
+                  "mission_id": "oir-syria",
+                  "name": "OIR Darkstar E-3A",
+                  "object_id": 11,
+                  "unit_type": "E-3A"
+                }
+              ]
+            }
+          }
+        },
+        "id": "darkstar",
+        "kind": "c2-agency",
+        "role": "AWACS"
+      },
+      "salti-tower": {
+        "callsign": "Salti Tower",
+        "channels": [
+          "salti-uhf"
+        ],
+        "id": "salti-tower",
+        "kind": "c2-agency",
+        "position": {
+          "latitude": 31.825431,
+          "longitude": 36.781257
+        },
+        "role": "ATC"
+      }
+    },
+    "areas": {},
+    "channels": {
+      "banshee-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 305.0
+        },
+        "name": "Banshee",
+        "notes": "Banshee gives kill box open and closed calls; read back the status.",
+        "usage": "Kill box status, rescue reservation and procedural control east of H4"
+      },
+      "control-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 251.0
+        },
+        "name": "Darkstar control",
+        "notes": "Primary air control frequency; Link 16 carries the same air picture.",
+        "usage": "Orbit, corridor and holding coordination"
+      },
+      "ops-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 255.4
+        },
+        "name": "Kingpin",
+        "notes": "Monitored 0300Z to 2100Z; outside those hours relay through Darkstar.",
+        "usage": "Mission changes, aborts and battle-damage reports"
+      },
+      "salti-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 253.15
+        },
+        "name": "Salti Tower",
+        "notes": "VHF 120.5 is the same position.",
+        "usage": "Muwaffaq Salti tower, ground and approach (combined)"
+      }
+    },
+    "control_measures": {
+      "cedar": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf",
+          "banshee-uhf"
+        ],
+        "contact_agency": "darkstar",
+        "coordination_instructions": [
+          "Darkstar hands outbound flights to Banshee at Cedar."
+        ],
+        "description": "Egress gate where flights leave the operating area for recovery to Muwaffaq Salti or Prince Hassan.",
+        "handover_agency": "banshee",
+        "id": "cedar",
+        "instructions": [
+          "Report Cedar with fuel state; give BDA to Warhawk before check-out."
+        ],
+        "name": "Cedar",
+        "notes": "Report Cedar with fuel state; Banshee gives the recovery altimeter.",
+        "position": {
+          "latitude": 33.59,
+          "longitude": 39.002
+        },
+        "position_description": "Southeastern egress gate reached after release from Mesa holding.",
+        "reference_agency": "darkstar",
+        "restrictions": [
+          "Do not route through the rescue reservation from Cedar while it is active."
+        ],
+        "roles": [
+          "control",
+          "egress",
+          "gate"
+        ],
+        "route": "marshal-exit",
+        "type": "POINT"
+      },
+      "cobalt-box": {
+        "$schema": "urn:openaix:schema:measure-kb:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "banshee-uhf"
+        ],
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "bindings": [
+                    {
+                      "kind": "drawing",
+                      "layer": "Blue",
+                      "mission_id": "oir-syria",
+                      "name": "OIR Cobalt Boundary",
+                      "object_id": 42,
+                      "polygon_mode": "free",
+                      "primitive_type": "Polygon",
+                      "style": {
+                        "color": "0x3366FFFF",
+                        "fill_color": "0x3366FF20",
+                        "thickness": 2,
+                        "visible": true
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.225
+                  },
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.374
+                  },
+                  {
+                    "latitude": 35.155,
+                    "longitude": 40.375
+                  },
+                  {
+                    "latitude": 35.155,
+                    "longitude": 40.225
+                  },
+                  {
+                    "latitude": 35.035,
+                    "longitude": 40.225
+                  }
+                ]
+              ]
+            },
+            "id": "cobalt-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "name": "Cobalt volume",
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 13000
+            }
+          }
+        ],
+        "controlling_agency": "banshee",
+        "coordination_instructions": [
+          "Enter only from Marshal after Banshee reports the box open."
+        ],
+        "description": "Kill Box (KB) over the Cobalt compound west of the Euphrates, north of the transit and rescue areas.",
+        "establishing_authority": "caoc",
+        "grid_label": "Cobalt 1",
+        "id": "cobalt-box",
+        "killbox_kind": "blue",
+        "name": "Cobalt kill box",
+        "notes": "Banshee opens the box only after Sweeper reports the area clear of civilian traffic.",
+        "purpose": "Air-to-surface attacks on the Cobalt compound and vehicle park.",
+        "restrictions": [
+          "Firing status follows the assignment intervals below; no attacks on the river crossings."
+        ],
+        "type": "KB"
+      },
+      "falcon": {
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 220
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 260
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "coordination_instructions": [
+          "Report Falcon on station and off station to Darkstar on 251.000 MHz AM."
+        ],
+        "description": "Combat air patrol racetrack north of the support orbits, facing the northern threat axis.",
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "closed": true,
+                  "kind": "drawing",
+                  "layer": "Blue",
+                  "line_mode": "segments",
+                  "mission_id": "oir-syria",
+                  "name": "OIR Falcon Track",
+                  "object_id": 43,
+                  "primitive_type": "Line",
+                  "style": {
+                    "color": "0x66CCFFFF",
+                    "thickness": 2,
+                    "visible": true
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "geometry": {
+          "kind": "racetrack",
+          "leg_length": {
+            "unit": "nm",
+            "value": 20
+          },
+          "point": {
+            "latitude": 34.885,
+            "longitude": 40.275
+          },
+          "radial": {
+            "reference": "true",
+            "value": 270
+          },
+          "turn_radius": {
+            "unit": "nm",
+            "value": 2
+          },
+          "turns": "right"
+        },
+        "id": "falcon",
+        "name": "Falcon patrol",
+        "purpose": "Falcon protects the strike package and the high-value orbits from the north.",
+        "restrictions": [
+          "Remain between FL220 and FL260; do not cross south of Shell without Darkstar approval."
+        ],
+        "type": "ORBIT"
+      },
+      "juniper": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf",
+          "banshee-uhf"
+        ],
+        "contact_agency": "banshee",
+        "coordination_instructions": [
+          "Banshee hands inbound flights to Darkstar at Juniper."
+        ],
+        "description": "Ingress gate west of At Tanf where traffic from Muwaffaq Salti enters the operating area under Darkstar control.",
+        "handover_agency": "darkstar",
+        "id": "juniper",
+        "instructions": [
+          "Report Juniper with altitude and playtime; Darkstar assigns the corridor slot."
+        ],
+        "name": "Juniper",
+        "notes": "Expect a Darkstar picture call at Juniper; squawk the ATO Mode 3 code before the gate.",
+        "position": {
+          "latitude": 33.59,
+          "longitude": 38.552
+        },
+        "position_description": "Southwestern ingress gate; beginning of the Juniper-to-Marshal transit corridor.",
+        "reference_agency": "darkstar",
+        "restrictions": [
+          "Do not pass Juniper northbound without a Darkstar check-in."
+        ],
+        "roles": [
+          "control",
+          "ingress",
+          "gate"
+        ],
+        "route": "marshal-entry",
+        "type": "POINT"
+      },
+      "marshal": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf",
+          "banshee-uhf"
+        ],
+        "contact_agency": "darkstar",
+        "coordination_instructions": [
+          "Darkstar keeps control from Marshal to the push from holding."
+        ],
+        "description": "Holding fix at the north end of the transit corridor and the anchor of Mesa holding.",
+        "handover_agency": "darkstar",
+        "id": "marshal",
+        "instructions": [
+          "Report Marshal level; expect a Mesa holding level of 14000 or 16000 feet MSL."
+        ],
+        "name": "Marshal",
+        "notes": "Marshal is the hand-off point from Banshee procedural control to Darkstar.",
+        "position": {
+          "latitude": 34.059,
+          "longitude": 39.477
+        },
+        "position_description": "Northern end of the inbound corridor and the reference point for Mesa holding.",
+        "reference_agency": "darkstar",
+        "restrictions": [
+          "A Marshal report does not clear a flight into the Cobalt kill box."
+        ],
+        "roles": [
+          "control",
+          "marshalling"
+        ],
+        "route": "marshal-entry",
+        "type": "POINT"
+      },
+      "mesa": {
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 14000
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 16000
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "coordination_instructions": [
+          "Leave Mesa only on Darkstar release, via Cedar for recovery or Marshal for the push."
+        ],
+        "description": "Holding racetrack at Marshal for flights that wait for the kill box or the tanker.",
+        "geometry": {
+          "kind": "racetrack",
+          "leg_length": {
+            "unit": "nm",
+            "value": 10
+          },
+          "point": {
+            "latitude": 34.059,
+            "longitude": 39.477
+          },
+          "radial": {
+            "reference": "true",
+            "value": 180
+          },
+          "turn_radius": {
+            "unit": "nm",
+            "value": 2
+          },
+          "turns": "right"
+        },
+        "id": "mesa",
+        "name": "Mesa holding",
+        "purpose": "Mesa separates holding flights by level above the transit corridor.",
+        "restrictions": [
+          "One flight per level at 14000 or 16000 feet MSL, as Darkstar assigns."
+        ],
+        "type": "ORBIT"
+      },
+      "rescue-reservation": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "banshee-uhf"
+        ],
+        "components": [
+          {
+            "active": {
+              "end": "2026-10-02T15:00:00Z",
+              "start": "2026-10-02T13:00:00Z"
+            },
+            "extensions": {
+              "sim": {
+                "dcs": {
+                  "bindings": [
+                    {
+                      "kind": "trigger_zone",
+                      "mission_id": "oir-syria",
+                      "name": "OIR Rescue Search",
+                      "object_id": 41,
+                      "zone_type": "circle"
+                    }
+                  ]
+                }
+              }
+            },
+            "geometry": {
+              "center": {
+                "latitude": 34.529,
+                "longitude": 40.551
+              },
+              "kind": "circle",
+              "radius": {
+                "unit": "nm",
+                "value": 3
+              }
+            },
+            "id": "search-volume",
+            "lower_limit": {
+              "surface": true
+            },
+            "name": "Search volume",
+            "operation": "add",
+            "upper_limit": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 10000
+            }
+          }
+        ],
+        "controlling_agency": "banshee",
+        "coordination_instructions": [
+          "Contact Banshee on 305.000 MHz AM before approaching the boundary."
+        ],
+        "description": "Restricted Operating Zone (ROZ) that protects the search for the isolated aircrew of Hawg 2, east of the transit route.",
+        "id": "rescue-reservation",
+        "name": "Rescue reservation",
+        "notes": "Survivor last reported on the eastern edge; Pedro has on-scene command.",
+        "purpose": "Reserve the search area for the rescue package.",
+        "restrictions": [
+          "Other aircraft remain outside until Banshee releases the reservation."
+        ],
+        "type": "ROZ"
+      },
+      "sentinel": {
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 280
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 300
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "coordination_instructions": [
+          "Darkstar reports any move of Sentinel to Kingpin on 255.400 MHz AM."
+        ],
+        "description": "Airborne early warning orbit over eastern Jordan for Darkstar.",
+        "geometry": {
+          "kind": "racetrack",
+          "leg_length": {
+            "unit": "nm",
+            "value": 20
+          },
+          "point": {
+            "latitude": 32.7,
+            "longitude": 38.4
+          },
+          "radial": {
+            "reference": "true",
+            "value": 180
+          },
+          "turn_radius": {
+            "unit": "nm",
+            "value": 2
+          },
+          "turns": "right"
+        },
+        "id": "sentinel",
+        "name": "Sentinel surveillance",
+        "purpose": "Sentinel gives Darkstar radar cover from H4 to the Euphrates valley.",
+        "restrictions": [
+          "Remain between FL280 and FL300; fighters stay clear of Sentinel by 5 nm."
+        ],
+        "type": "ORBIT"
+      },
+      "shell": {
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 180
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 200
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "coordination_instructions": [
+          "Contact Shell on 276.100 MHz AM 20 nm from the anchor; Darkstar keeps radar control."
+        ],
+        "description": "Air-to-air refuelling anchor east of the transit corridor, south of the Cobalt kill box.",
+        "geometry": {
+          "kind": "racetrack",
+          "leg_length": {
+            "unit": "nm",
+            "value": 15
+          },
+          "point": {
+            "latitude": 33.06,
+            "longitude": 39.05
+          },
+          "radial": {
+            "reference": "true",
+            "value": 270
+          },
+          "turn_radius": {
+            "unit": "nm",
+            "value": 2
+          },
+          "turns": "right"
+        },
+        "id": "shell",
+        "name": "Shell refuelling",
+        "purpose": "Shell gives fuel to the fighters and the strike package before and after the push.",
+        "restrictions": [
+          "Receivers join 1000 feet below the tanker and stay between FL180 and FL200."
+        ],
+        "type": "ORBIT"
+      },
+      "south-transit": {
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 10000
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 12000
+          }
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "controlling_agency": "darkstar",
+        "coordination_instructions": [
+          "Request climb at Marshal; do not climb into the stack without clearance."
+        ],
+        "description": "Special Corridor (SC) for the inbound route from Juniper to Marshal, below Mesa holding.",
+        "geometry": {
+          "kind": "corridor",
+          "one_way": true,
+          "points": [
+            {
+              "latitude": 33.59,
+              "longitude": 38.552
+            },
+            {
+              "latitude": 34.059,
+              "longitude": 39.477
+            }
+          ],
+          "width": {
+            "unit": "nm",
+            "value": 3
+          }
+        },
+        "id": "south-transit",
+        "name": "South transit corridor",
+        "notes": "Maximum 300 knots indicated; outside the period the published Jordanian routes apply.",
+        "purpose": "Keep inbound traffic below the holding stack.",
+        "restrictions": [
+          "Inbound only; outbound traffic uses Marshal to Cedar."
+        ],
+        "type": "SC"
+      }
+    },
+    "places": {},
+    "procedures": {},
+    "reports": {},
+    "routes": {
+      "marshal-entry": {
+        "contingencies": [
+          "If no holding level is available, remain below 12000 feet MSL and follow Darkstar instructions."
+        ],
+        "name": "Juniper to Marshal",
+        "points": [
+          {
+            "action": "ingress",
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 10000
+            },
+            "id": "entry-juniper",
+            "instructions": [
+              "Check in with Darkstar before entering the corridor."
+            ],
+            "name": "Juniper",
+            "position": {
+              "latitude": 33.59,
+              "longitude": 38.552
+            },
+            "speed": {
+              "unit": "knots_ias",
+              "value": 250
+            },
+            "timing": {
+              "kind": "window",
+              "window": {
+                "end": "2026-10-02T15:00:00Z",
+                "start": "2026-10-02T13:00:00Z"
+              }
+            }
+          },
+          {
+            "action": "hold",
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 12000
+            },
+            "id": "entry-marshal",
+            "instructions": [
+              "Request a climb to the assigned Mesa holding level."
+            ],
+            "name": "Marshal",
+            "position": {
+              "latitude": 34.059,
+              "longitude": 39.477
+            },
+            "speed": {
+              "unit": "knots_ias",
+              "value": 250
+            },
+            "timing": {
+              "kind": "window",
+              "window": {
+                "end": "2026-10-02T15:00:00Z",
+                "start": "2026-10-02T13:00:00Z"
+              }
+            }
+          }
+        ]
+      },
+      "marshal-exit": {
+        "contingencies": [
+          "For lost communications, continue to Cedar at the last assigned altitude; do not enter an active reservation."
+        ],
+        "name": "Marshal to Cedar",
+        "points": [
+          {
+            "action": "egress",
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 12000
+            },
+            "id": "exit-marshal",
+            "instructions": [
+              "Descend only after Darkstar releases the holding level."
+            ],
+            "name": "Marshal",
+            "position": {
+              "latitude": 34.059,
+              "longitude": 39.477
+            },
+            "speed": {
+              "unit": "knots_ias",
+              "value": 250
+            },
+            "timing": {
+              "kind": "window",
+              "window": {
+                "end": "2026-10-02T15:00:00Z",
+                "start": "2026-10-02T13:00:00Z"
+              }
+            }
+          },
+          {
+            "action": "egress",
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 10000
+            },
+            "id": "exit-cedar",
+            "instructions": [
+              "Contact Banshee after handover."
+            ],
+            "name": "Cedar",
+            "position": {
+              "latitude": 33.59,
+              "longitude": 39.002
+            },
+            "speed": {
+              "unit": "knots_ias",
+              "value": 250
+            },
+            "timing": {
+              "kind": "window",
+              "window": {
+                "end": "2026-10-02T15:00:00Z",
+                "start": "2026-10-02T13:00:00Z"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "scls": {},
+    "stores": {},
+    "targets": {},
+    "threats": {}
+  },
+  "schema_version": "0.1.0-draft.1"
+}

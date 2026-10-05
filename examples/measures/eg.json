@@ -1,0 +1,20 @@
+{
+  "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "description": "Entry and exit gate where recovering and departing aircraft begin their transit in the Silver transit corridor.",
+  "id": "silver-gate",
+  "name": "Silver gate",
+  "position": {
+    "latitude": 32.807,
+    "longitude": 37.775
+  },
+  "roles": [
+    "gate",
+    "ingress",
+    "egress"
+  ],
+  "type": "POINT"
+}

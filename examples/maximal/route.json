@@ -1,0 +1,81 @@
+{
+  "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "altitude": {
+    "lower": {
+      "reference": "MSL",
+      "unit": "ft",
+      "value": 10000
+    },
+    "upper": {
+      "reference": "MSL",
+      "unit": "ft",
+      "value": 12000
+    }
+  },
+  "channels": [
+    "control-uhf"
+  ],
+  "controlling_agency": "darkstar",
+  "coordination_instructions": [
+    "Request climb at Marshal; do not climb into the stack without clearance."
+  ],
+  "description": "Special Corridor (SC) for the inbound route from Juniper to Marshal, below Mesa holding.",
+  "extensions": {
+    "sim": {
+      "dcs": {
+        "bindings": [
+          {
+            "closed": true,
+            "kind": "drawing",
+            "layer": "Blue",
+            "line_mode": "segments",
+            "mission_id": "oir-syria",
+            "name": "OIR South transit",
+            "object_id": 44,
+            "primitive_type": "Line",
+            "style": {
+              "color": "0x3366FFFF",
+              "fill_color": "0x3366FF20",
+              "thickness": 2,
+              "visible": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "geometry": {
+    "kind": "corridor",
+    "one_way": true,
+    "points": [
+      {
+        "latitude": 33.59,
+        "longitude": 38.552
+      },
+      {
+        "latitude": 34.059,
+        "longitude": 39.477
+      }
+    ],
+    "width": {
+      "unit": "nm",
+      "value": 3
+    }
+  },
+  "id": "south-transit",
+  "name": "South transit corridor",
+  "notes": "Maximum 300 knots indicated; outside the period the published Jordanian routes apply.",
+  "purpose": "Keep inbound traffic below the holding stack.",
+  "resources_ref": {
+    "id": "oir-resources",
+    "revision": "1"
+  },
+  "restrictions": [
+    "Inbound only; outbound traffic uses Marshal to Cedar."
+  ],
+  "type": "SC"
+}

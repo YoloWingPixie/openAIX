@@ -1,0 +1,63 @@
+{
+  "$schema": "urn:openaix:schema:measure-kb:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T14:30:00Z",
+    "start": "2026-10-02T13:30:00Z"
+  },
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T14:30:00Z",
+        "start": "2026-10-02T13:30:00Z"
+      },
+      "geometry": {
+        "kind": "polygon",
+        "rings": [
+          [
+            {
+              "latitude": 35.035,
+              "longitude": 40.374
+            },
+            {
+              "latitude": 35.035,
+              "longitude": 40.525
+            },
+            {
+              "latitude": 35.155,
+              "longitude": 40.525
+            },
+            {
+              "latitude": 35.155,
+              "longitude": 40.374
+            },
+            {
+              "latitude": 35.035,
+              "longitude": 40.374
+            }
+          ]
+        ]
+      },
+      "id": "onyx-volume",
+      "lower_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 8000
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 18000
+      }
+    }
+  ],
+  "description": "Purple kill box east of Cobalt for combined air and surface fires against the Cobalt compound and its supply routes.",
+  "grid_label": "Onyx 2, keypad 5",
+  "id": "onyx-box",
+  "killbox_kind": "purple",
+  "name": "Onyx kill box",
+  "restrictions": [
+    "Aircraft remain at or above the 8000 ft MSL floor while the box is open."
+  ],
+  "type": "KB"
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "urn:openaix:schema:holding:0.1.0-draft.1",
+  "hold": {
+    "altitude": {
+      "kind": "at_or_above",
+      "lower": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 10000
+      }
+    },
+    "fix": {
+      "ident": "ZOOKS",
+      "position": {
+        "latitude": 39.6603527778,
+        "longitude": -105.0911916667
+      }
+    },
+    "inbound_course": {
+      "reference": "magnetic",
+      "value": 229.1
+    },
+    "leg_time": {
+      "unit": "min",
+      "value": 1.0
+    },
+    "turn_direction": "right"
+  },
+  "id": "kden-zooks-hold",
+  "kind": "holding",
+  "name": "ZOOKS missed-approach hold, KDEN I16R",
+  "source": "FAA CIFP cycle 2610"
+}

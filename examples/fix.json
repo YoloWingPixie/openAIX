@@ -1,0 +1,16 @@
+{
+  "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+  "active": {
+    "continuous": true
+  },
+  "id": "zooks",
+  "name": "ZOOKS",
+  "position": {
+    "latitude": 39.6603527778,
+    "longitude": -105.0911916667
+  },
+  "roles": [
+    "fix"
+  ],
+  "type": "POINT"
+}

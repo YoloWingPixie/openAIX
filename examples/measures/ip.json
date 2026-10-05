@@ -1,0 +1,18 @@
+{
+  "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "description": "Initial point for attack runs into the Cobalt and Onyx kill boxes.",
+  "id": "bolt-ip",
+  "name": "Bolt",
+  "position": {
+    "latitude": 34.935,
+    "longitude": 40.175
+  },
+  "roles": [
+    "initial"
+  ],
+  "type": "POINT"
+}

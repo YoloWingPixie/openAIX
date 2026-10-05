@@ -1,0 +1,22 @@
+{
+  "$schema": "urn:openaix:schema:procedure:0.1.0-draft.1",
+  "id": "ojms-i31",
+  "kind": "procedure",
+  "name": "Muwaffaq Salti ILS runway 31 approach (I31)",
+  "transitions": [
+    {
+      "legs": [
+        {
+          "fix": {
+            "ident": "FAF31",
+            "position": {
+              "latitude": 31.767214,
+              "longitude": 36.869855
+            }
+          },
+          "leg_type": "initial_fix"
+        }
+      ]
+    }
+  ]
+}

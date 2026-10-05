@@ -1,0 +1,38 @@
+{
+  "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+  "active": {
+    "continuous": true
+  },
+  "components": [
+    {
+      "geometry": {
+        "center": {
+          "latitude": 35.195,
+          "longitude": 40.075
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 3
+        }
+      },
+      "id": "lantern-volume",
+      "lower_limit": {
+        "surface": true
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 10000
+      }
+    }
+  ],
+  "description": "No-fly zone over the Lantern village inside the objective area.",
+  "id": "lantern-nfz",
+  "name": "Lantern no-fly zone",
+  "restrictions": [
+    "No aircraft operations except those authorised by Banshee as the enforcing authority."
+  ],
+  "type": "NFZ"
+}

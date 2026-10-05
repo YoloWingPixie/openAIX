@@ -1,0 +1,49 @@
+{
+  "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T14:30:00Z",
+    "start": "2026-10-02T13:30:00Z"
+  },
+  "altitude": {
+    "lower": {
+      "reference": "AGL",
+      "unit": "ft",
+      "value": 300
+    },
+    "upper": {
+      "reference": "AGL",
+      "unit": "ft",
+      "value": 1500
+    }
+  },
+  "description": "Low-level minimum-risk route from Cedar across the forward line of own troops for helicopter and low-flying traffic.",
+  "geometry": {
+    "kind": "corridor",
+    "points": [
+      {
+        "latitude": 33.59,
+        "longitude": 39.002
+      },
+      {
+        "latitude": 34.372,
+        "longitude": 40.225
+      },
+      {
+        "latitude": 34.835,
+        "longitude": 40.627
+      },
+      {
+        "latitude": 34.935,
+        "longitude": 40.574
+      }
+    ],
+    "width": {
+      "unit": "nm",
+      "value": 2
+    }
+  },
+  "id": "bastion-mrr",
+  "name": "Bastion minimum-risk route",
+  "purpose": "Cross the FLOT with the least known hazard from friendly fires.",
+  "type": "MRR"
+}

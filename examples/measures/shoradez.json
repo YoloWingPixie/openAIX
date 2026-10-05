@@ -1,0 +1,44 @@
+{
+  "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "center": {
+          "latitude": 34.735,
+          "longitude": 40.225
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 2.5
+        }
+      },
+      "id": "sage-shorad-volume",
+      "lower_limit": {
+        "surface": true
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 8000
+      }
+    }
+  ],
+  "coordination_instructions": [
+    "Helicopters inbound to Sage enter on the Sage FARP approach after the air defence controller confirms weapons hold."
+  ],
+  "description": "Short-range air defence engagement zone over the Sage FARP, where an Avenger platoon has engagement responsibility.",
+  "id": "sage-shoradez",
+  "mez_kind": "short_range",
+  "name": "Sage SHORADEZ",
+  "type": "MEZ"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "urn:openaix:schema:c2-agency:0.1.0-draft.1",
+  "callsign": "Warhawk",
+  "channels": [
+    "cas-uhf"
+  ],
+  "id": "warhawk",
+  "kind": "c2-agency",
+  "position": {
+    "latitude": 32.965,
+    "longitude": 37.794
+  },
+  "resources_ref": {
+    "id": "oir-resources",
+    "revision": "1"
+  },
+  "role": "ASOC"
+}

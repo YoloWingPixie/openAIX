@@ -1,0 +1,44 @@
+{
+  "$schema": "urn:openaix:schema:localizer:0.1.0-draft.1",
+  "airfield": "kden",
+  "course": {
+    "declination_deg": 8.0,
+    "reference": "magnetic",
+    "value": 172.5
+  },
+  "frequency": {
+    "unit": "MHz",
+    "value": 111.9
+  },
+  "glide_slope": {
+    "angle_deg": 3.0,
+    "elevation": {
+      "reference": "MSL",
+      "unit": "ft",
+      "value": 5317
+    },
+    "position": {
+      "latitude": 39.8930055556,
+      "longitude": -104.6975777778
+    }
+  },
+  "id": "kden-idqq",
+  "ident": "IDQQ",
+  "ils_category": "I",
+  "kind": "localizer",
+  "name": "KDEN ILS runway 16R localizer IDQQ",
+  "position": {
+    "latitude": 39.8491055556,
+    "longitude": -104.6966194444
+  },
+  "resources_ref": {
+    "id": "kden-navigation",
+    "revision": "2610"
+  },
+  "runway": "16R",
+  "source": "FAA CIFP cycle 2610, position N39505678W104414783 (PackedDMS)",
+  "threshold_crossing_height": {
+    "unit": "ft",
+    "value": 55
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "airspace_type": "ATCAA",
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "kind": "polygon",
+        "rings": [
+          [
+            {
+              "latitude": 36.4,
+              "longitude": -116.45
+            },
+            {
+              "latitude": 36.4,
+              "longitude": -116.05
+            },
+            {
+              "latitude": 36.75,
+              "longitude": -116.05
+            },
+            {
+              "latitude": 36.75,
+              "longitude": -116.45
+            },
+            {
+              "latitude": 36.4,
+              "longitude": -116.45
+            }
+          ]
+        ]
+      },
+      "id": "desert-atcaa-volume",
+      "lower_limit": {
+        "reference": "FL",
+        "unit": "flight_level",
+        "value": 180
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "FL",
+        "unit": "flight_level",
+        "value": 260
+      }
+    }
+  ],
+  "coordination_instructions": [
+    "The using agency requests the ATCAA from the air route traffic control centre; it is not charted."
+  ],
+  "description": "ATC-assigned airspace over the Desert MOA, from flight level 180 to flight level 260; it extends the MOA activity into Class A airspace.",
+  "designator": "DESERT ATCAA",
+  "id": "desert-atcaa",
+  "name": "Desert ATCAA",
+  "type": "AIRSPACE"
+}

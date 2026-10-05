@@ -1,0 +1,37 @@
+{
+  "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+  "active": {
+    "continuous": true
+  },
+  "airspace_class_code": "D",
+  "airspace_type": "ClassD",
+  "components": [
+    {
+      "geometry": {
+        "center": {
+          "latitude": 36.7,
+          "longitude": -115.3
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 4
+        }
+      },
+      "id": "cedar-strip",
+      "lower_limit": {
+        "surface": true
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 6500
+      }
+    }
+  ],
+  "description": "US Class D airspace around the Cedar Strip airfield, from the surface to 2500 feet above it.",
+  "id": "cedar-strip-class-d",
+  "name": "Cedar Strip Class D",
+  "type": "AIRSPACE"
+}

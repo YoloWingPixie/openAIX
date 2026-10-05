@@ -1,0 +1,489 @@
+{
+  "$schema": "urn:openaix:schema:grid-mora:0.1.0-draft.1",
+  "cells": [
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 13000
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -119
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -120
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 12300
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -118
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -119
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 13800
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -117
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -118
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 13300
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -116
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -117
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 13300
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -115
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -116
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 15300
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -114
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -115
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 14400
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -113
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -114
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 12400
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -112
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -113
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 14200
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -111
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -112
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 12600
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -110
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -111
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 11800
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -109
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -110
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 13300
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -108
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -109
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 16300
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -107
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -108
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 16800
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -106
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -107
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 16600
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -105
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -106
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 12100
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -104
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -105
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 9100
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -103
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -104
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 6800
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -102
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -103
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 5800
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -101
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -102
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 4900
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -100
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -101
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 4300
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -99
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -100
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 3800
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -98
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -99
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 3600
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -97
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -98
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 3700
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -96
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -97
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 3700
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -95
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -96
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 3200
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -94
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -95
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 3100
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -93
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -94
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 3200
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -92
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -93
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 3000
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -91
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -92
+      },
+      "status": "known"
+    },
+    {
+      "minimum_altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 2800
+      },
+      "northeast": {
+        "latitude": 40,
+        "longitude": -90
+      },
+      "southwest": {
+        "latitude": 39,
+        "longitude": -91
+      },
+      "status": "known"
+    }
+  ],
+  "id": "mora-n39w120",
+  "kind": "grid-mora",
+  "name": "Grid MORA row N39 W120 eastward",
+  "source": "FAA CIFP cycle 2610"
+}

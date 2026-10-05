@@ -1,0 +1,62 @@
+{
+  "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "airspace_type": "MTA",
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "kind": "polygon",
+        "rings": [
+          [
+            {
+              "latitude": 37.85,
+              "longitude": -116.4
+            },
+            {
+              "latitude": 37.85,
+              "longitude": -115.9
+            },
+            {
+              "latitude": 38.1,
+              "longitude": -115.9
+            },
+            {
+              "latitude": 38.1,
+              "longitude": -116.4
+            },
+            {
+              "latitude": 37.85,
+              "longitude": -116.4
+            }
+          ]
+        ]
+      },
+      "id": "sierra-block",
+      "lower_limit": {
+        "reference": "AGL",
+        "unit": "ft",
+        "value": 500
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 12000
+      }
+    }
+  ],
+  "description": "Military training area north of the Desert MOA for air combat training.",
+  "id": "sierra-mta",
+  "name": "Sierra Training Area",
+  "restrictions": [
+    "Coordinate entry with the scheduling agency."
+  ],
+  "type": "AIRSPACE"
+}

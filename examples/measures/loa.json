@@ -1,0 +1,27 @@
+{
+  "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "coordination_instructions": [
+    "No Task Force Bastion element advances beyond PL ZINC; security forces may push to it."
+  ],
+  "description": "Phase line ZINC, the limit of advance of Task Force Bastion, short of the FSCL and the Cobalt and Onyx kill boxes.",
+  "geometry": {
+    "kind": "line",
+    "points": [
+      {
+        "latitude": 35.015,
+        "longitude": 40.125
+      },
+      {
+        "latitude": 35.015,
+        "longitude": 40.476
+      }
+    ]
+  },
+  "id": "pl-zinc",
+  "name": "PL ZINC",
+  "type": "LOA"
+}

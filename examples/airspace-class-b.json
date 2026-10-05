@@ -1,0 +1,87 @@
+{
+  "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+  "active": {
+    "continuous": true
+  },
+  "airspace_class_code": "B",
+  "airspace_type": "ClassB",
+  "components": [
+    {
+      "geometry": {
+        "center": {
+          "latitude": 36.35,
+          "longitude": -115.25
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 5
+        }
+      },
+      "id": "surface",
+      "lower_limit": {
+        "surface": true
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 10000
+      }
+    },
+    {
+      "geometry": {
+        "center": {
+          "latitude": 36.35,
+          "longitude": -115.25
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 10
+        }
+      },
+      "id": "inner-shelf",
+      "lower_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 2500
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 10000
+      }
+    },
+    {
+      "geometry": {
+        "center": {
+          "latitude": 36.35,
+          "longitude": -115.25
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 20
+        }
+      },
+      "id": "outer-shelf",
+      "lower_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 5000
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 9000
+      }
+    }
+  ],
+  "description": "US Class B airspace with a surface area and two shelves around Juniper Field; each shelf has its own floor and ceiling.",
+  "id": "juniper-field-class-b",
+  "name": "Juniper Field Class B",
+  "type": "AIRSPACE"
+}

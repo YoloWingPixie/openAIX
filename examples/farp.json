@@ -1,0 +1,72 @@
+{
+  "$schema": "urn:openaix:schema:airfield:0.1.0-draft.1",
+  "coalition": "blue",
+  "controlling_agency": "banshee",
+  "elevation": {
+    "reference": "MSL",
+    "unit": "ft",
+    "value": 1150
+  },
+  "extensions": {
+    "sim": {
+      "dcs": {
+        "bindings": [
+          {
+            "kind": "static",
+            "mission_id": "oir-syria",
+            "name": "OIR Sage FARP"
+          }
+        ]
+      }
+    }
+  },
+  "frequencies": [
+    {
+      "callsign": "Sage Ops",
+      "frequency": {
+        "band": "fm",
+        "modulation": "FM",
+        "unit": "MHz",
+        "value": 41.5
+      },
+      "role": "ops"
+    },
+    {
+      "callsign": "Sage Ops",
+      "frequency": {
+        "band": "uhf",
+        "modulation": "AM",
+        "unit": "MHz",
+        "value": 285.0
+      },
+      "role": "ops"
+    }
+  ],
+  "id": "farp-sage",
+  "kind": "farp",
+  "name": "Sage FARP",
+  "pads": [
+    {
+      "name": "Pad 1",
+      "position": {
+        "latitude": 34.73527,
+        "longitude": 40.225
+      }
+    },
+    {
+      "name": "Pad 2",
+      "position": {
+        "latitude": 34.73473,
+        "longitude": 40.225
+      }
+    }
+  ],
+  "position": {
+    "latitude": 34.735,
+    "longitude": 40.225
+  },
+  "resources_ref": {
+    "id": "oir-resources",
+    "revision": "1"
+  }
+}

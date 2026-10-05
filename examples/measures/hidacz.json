@@ -1,0 +1,92 @@
+{
+  "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "kind": "polygon",
+        "rings": [
+          [
+            {
+              "latitude": 35.035,
+              "longitude": 39.825
+            },
+            {
+              "latitude": 35.035,
+              "longitude": 40.175
+            },
+            {
+              "latitude": 35.335,
+              "longitude": 40.175
+            },
+            {
+              "latitude": 35.335,
+              "longitude": 39.825
+            },
+            {
+              "latitude": 35.035,
+              "longitude": 39.825
+            }
+          ]
+        ]
+      },
+      "id": "basin-main",
+      "lower_limit": {
+        "surface": true
+      },
+      "name": "Objective area",
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 17000
+      }
+    },
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "center": {
+          "latitude": 35.195,
+          "longitude": 40.075
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 3
+        }
+      },
+      "id": "lantern-cutout",
+      "lower_limit": {
+        "surface": true
+      },
+      "name": "Lantern exclusion",
+      "operation": "subtract",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 10000
+      }
+    }
+  ],
+  "coordination_instructions": [
+    "Check in on the Basin control frequency 10 nm before the boundary."
+  ],
+  "description": "High-density airspace control zone over the northern objective area, where helicopters, observation drones and fires are concentrated; the Lantern no-fly zone is cut out of it.",
+  "id": "basin-hidacz",
+  "name": "Basin HIDACZ",
+  "purpose": "Coordinate the concentrated objective-area users under one controlling agency.",
+  "restrictions": [
+    "Enter only with a clearance from the Basin airspace control element."
+  ],
+  "type": "HIDACZ"
+}

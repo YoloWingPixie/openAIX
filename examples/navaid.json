@@ -1,0 +1,36 @@
+{
+  "$schema": "urn:openaix:schema:navaid:0.1.0-draft.1",
+  "airfield": "kden",
+  "class": "VORTAC",
+  "dme_position": {
+    "latitude": 39.8946888889,
+    "longitude": -104.6243361111
+  },
+  "elevation": {
+    "reference": "MSL",
+    "unit": "ft",
+    "value": 5279
+  },
+  "frequency": {
+    "unit": "MHz",
+    "value": 114.7
+  },
+  "id": "dvv",
+  "ident": "DVV",
+  "magnetic_variation_deg": 8.0,
+  "name": "Mile High VORTAC",
+  "position": {
+    "latitude": 39.8946888889,
+    "longitude": -104.6243361111
+  },
+  "resources_ref": {
+    "id": "kden-navigation",
+    "revision": "2610"
+  },
+  "source": "FAA CIFP cycle 2610, position N39534088W104372761 (PackedDMS)",
+  "tacan": {
+    "band": "X",
+    "channel": 94
+  },
+  "type": "NAVAID"
+}

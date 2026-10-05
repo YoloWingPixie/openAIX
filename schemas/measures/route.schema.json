@@ -1,0 +1,196 @@
+{
+  "$id": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "LLTR",
+              "SC",
+              "TMRR",
+              "TC",
+              "TR",
+              "SL",
+              "APPCOR",
+              "MRR",
+              "AIRCOR"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "geometry": {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_corridor"
+          }
+        }
+      }
+    }
+  ],
+  "description": "An air route or corridor is a centreline with points in sequence and with mandatory vertical limits. Corridor codes also have a lateral width. The type code gives the task of the route, and it tells if the route has air traffic services. It also gives the area that the route is for: a rear area, a forward area, a maritime force or a base defence zone. Aircraft can fly a corridor in the two directions, but not when its geometry has the `one_way` flag.",
+  "properties": {
+    "$schema": {
+      "description": "This field identifies the schema that validates this document.",
+      "type": "string"
+    },
+    "active": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Activation",
+      "description": "This field gives the time interval during which this route is active. The value is an interval with a start and an end, a schedule for each week, or continuous activation."
+    },
+    "altitude": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/AltitudeBlock",
+      "description": "This field gives the vertical limits of the route or corridor, as an altitude block with a floor and a ceiling."
+    },
+    "channels": {
+      "description": "This list identifies the communications channels of this route.",
+      "items": {
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier"
+      },
+      "type": "array",
+      "x-catalog": "channels"
+    },
+    "controlling_agency": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "description": "This field identifies the agency that controls the operations in this route.",
+      "x-catalog": "agencies"
+    },
+    "coordination_instructions": {
+      "description": "This list contains the instructions that coordinate entry, operations and handover. The instructions are for the agencies or forces that this route has an effect on.",
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "description": {
+      "description": "This field gives the information about this route and its local conditions, as free text.",
+      "type": "string"
+    },
+    "extensions": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+      "allOf": [
+        {
+          "properties": {
+            "sim": {
+              "properties": {
+                "dcs": {
+                  "properties": {
+                    "bindings": {
+                      "items": {
+                        "properties": {
+                          "kind": {
+                            "enum": [
+                              "drawing"
+                            ]
+                          },
+                          "primitive_type": {
+                            "enum": [
+                              "Polygon",
+                              "Line"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "propertyNames": {
+                    "enum": [
+                      "bindings"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
+    },
+    "geometry": {
+      "description": "This field gives the horizontal geometry of the route: a centreline, or a corridor with its total lateral width. When doctrine gives a code as a corridor, the code shall use the corridor geometry.",
+      "oneOf": [
+        {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_line"
+        },
+        {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_corridor"
+        }
+      ]
+    },
+    "id": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "description": "This field identifies this route. Other records and orders use it to refer to this route."
+    },
+    "name": {
+      "description": "This field gives the name of this route, for display.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "notes": {
+      "description": "This field gives the notes about this route, as free text.",
+      "type": "string"
+    },
+    "purpose": {
+      "description": "This field gives the task or objective of this route, as free text.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "resources_ref": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
+      "description": "This field identifies the resource catalogue that resolves the references of this route. The reference gives the identifier and the revision of the catalogue."
+    },
+    "restrictions": {
+      "description": "This list contains the conditions that control the operations in this route.",
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "type": {
+      "description": "This field gives the catalogue code of this control measure, as one of the enumerated values. The code identifies the definition of the control measure in doctrine. The catalogue of control measures gives its class and the source of its definition.",
+      "enum": [
+        "AIRRTE",
+        "LLTR",
+        "SAAFR",
+        "SC",
+        "TMRR",
+        "TC",
+        "TR",
+        "SL",
+        "APPCOR",
+        "MRR",
+        "AIRCOR"
+      ],
+      "x-enum-descriptions": {
+        "AIRCOR": "An air corridor (AIRCOR) is a restricted air route of travel for friendly aircraft. Its function is to prevent friendly forces from firing on friendly aircraft. Its altitudes are not more than the coordinating altitude, when there is one.",
+        "AIRRTE": "An air route (AIRRTE) is the navigable airspace between two points, with only the identification that is necessary to apply flight rules. It is a bi-directional route. It can go through air defences as a minimum-risk route. Only support traffic uses it.",
+        "APPCOR": "An approach corridor (APPCOR) is airspace for the safe passage of land-based aircraft that join a maritime force or go from it. The corridor usually goes from an entry and exit gate to the centre of the force. Its inner boundary is the identification safety range (ISR).",
+        "LLTR": "A low-level transit route (LLTR) is a temporary low-level corridor of defined dimensions in the forward area. It decreases the risk to friendly aircraft from friendly air defences or surface forces.",
+        "MRR": "A minimum-risk route (MRR) is a temporary air corridor of defined dimensions that the ground commander recommends for aircraft. It has the minimum known hazards to low-flying aircraft that transit the combat zone. Aircraft usually use it to cross the forward line of own troops (FLOT). It is usually not near close air support (CAS) target areas.",
+        "SAAFR": "A slow aviation assets flight route (SAAFR) is a route below the coordination level for land component aviation assets in the forward area. The route is for their movement in direct support of ground operations.",
+        "SC": "A special corridor (SC) is an air corridor for the special routing requirements of some missions in air operations.",
+        "SL": "A safe lane (SL) is a bi-directional lane from an airbase, a landing site or a base defence zone (BDZ) to adjacent routes or corridors. It can connect more than one of them. Safe lanes can also connect adjacent activated routes or corridors.",
+        "TC": "A transit corridor (TC) is a bi-directional corridor in the rear area that routes aircraft through friendly air defences with minimum risk. Air traffic services are not normally available in it.",
+        "TMRR": "A temporary minimum-risk route (TMRR) is a temporary minimum-risk route for air traffic. It goes between transit routes, or the rear boundary of the forward area, and its operations area. The route is for direct support of ground operations.",
+        "TR": "A transit route (TR) is a temporary air corridor of defined dimensions in the forward area for air operations. It decreases the risks to friendly aircraft from friendly air defences or surface forces. It is a bi-directional route, and it should avoid weapons free zones and base defence zones."
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "type",
+    "geometry",
+    "altitude",
+    "active"
+  ],
+  "title": "Air route or corridor",
+  "type": "object"
+}

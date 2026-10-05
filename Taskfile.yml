@@ -1,0 +1,48 @@
+version: '3'
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  PYTHONPATH: tools
+
+tasks:
+  default:
+    cmds:
+      - task: verify
+
+  generate:
+    desc: Generate schemas, catalogues and examples from sources/ and tools/.
+    cmds:
+      - python3 -m openaix generate
+
+  test:
+    desc: Run the domain tests.
+    preconditions:
+      - sh: python3 -c 'import jsonschema, referencing, rfc3339_validator, yaml'
+        msg: Python jsonschema, referencing, rfc3339-validator and PyYAML are required.
+    cmds:
+      - python3 -m unittest discover -s tests -p '*_test.py'
+      - node --test tests/viewer_model_test.mjs
+
+  check:
+    desc: Check that generated files are current, examples validate, sources resolve and descriptions pass the lint.
+    cmds:
+      - python3 -m openaix generate --check
+      - python3 -m openaix validate
+      - python3 -m openaix source-audit --require-all
+      - python3 -m openaix lint
+
+  verify:
+    desc: Run the tests and checks.
+    cmds:
+      - task: test
+      - task: check
+
+  viewer:
+    desc: Browse schemas and examples at http://127.0.0.1:8090 (PORT=<port>).
+    vars:
+      PORT: '{{default "8090" .PORT}}'
+    preconditions:
+      - sh: python3 -c 'import yaml'
+        msg: PyYAML is required to render examples.
+    cmds:
+      - python3 -m openaix viewer --port '{{.PORT}}'

@@ -1,0 +1,1114 @@
+{
+  "$defs": {
+    "Atis": {
+      "additionalProperties": false,
+      "description": "Automatic terminal information service (ATIS) data is the static data that a simulator puts into the ATIS broadcast. The weather is not part of this data.",
+      "properties": {
+        "remarks": {
+          "description": "This list contains the notes at the end of the broadcast, as free text.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 0,
+          "type": "array"
+        },
+        "runway_in_use": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/RunwayDesignator",
+          "description": "This field gives the designator of the active runway end in the broadcast. The value shall be the designator of an end of a runway of this airfield."
+        },
+        "transition_level": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude"
+            },
+            {
+              "properties": {
+                "reference": {
+                  "const": "FL",
+                  "description": "This field gives the reference of the transition level: flight level (`FL`)."
+                }
+              }
+            }
+          ],
+          "description": "This field gives the transition level that the broadcast gives, as an altitude with its unit and reference."
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "Carrier": {
+      "additionalProperties": false,
+      "description": "An aircraft carrier is a record with the identifier and the recovery data of an aircraft carrier. The carrier moves, and thus its position comes from its unit in the simulator.",
+      "properties": {
+        "case_recovery": {
+          "$ref": "#/$defs/CaseRecovery",
+          "description": "This field gives the case recovery that the carrier plans, and the marshal data."
+        },
+        "hull_number": {
+          "description": "This field identifies this carrier as its hull number. An example is `CVN-72`.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "icls_channel": {
+          "description": "This field gives the channel of the instrument carrier landing system (ICLS) of the carrier, from 1 to 20.",
+          "maximum": 20,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "tacan": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/TACAN",
+          "description": "This field gives the channel and the band of the Tactical Air Navigation (TACAN) of the carrier. The TACAN moves with the ship, and thus it is not a fixed navigation aid in `navaids`."
+        }
+      },
+      "required": [
+        "hull_number"
+      ],
+      "type": "object"
+    },
+    "CaseRecovery": {
+      "additionalProperties": false,
+      "description": "A case recovery is the recovery procedure that a carrier plans, and the position of its marshal stack. The marshal frequency is an item of `frequencies` with the role `marshal`.",
+      "properties": {
+        "case": {
+          "description": "This field gives the case recovery that the carrier plans, as one of the enumerated values.",
+          "enum": [
+            "case_i",
+            "case_ii",
+            "case_iii"
+          ],
+          "x-enum-descriptions": {
+            "case_i": "This value identifies the Case `I` recovery for visual conditions by day.",
+            "case_ii": "This value identifies the Case `II` recovery: a descent in instrument conditions to visual conditions below the cloud.",
+            "case_iii": "This value identifies the Case `III` recovery for instrument conditions, or for a recovery at night."
+          }
+        },
+        "marshal_altitude": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude"
+            },
+            {
+              "properties": {
+                "reference": {
+                  "const": "MSL",
+                  "description": "This field gives the reference of the marshal altitude: mean sea level (`MSL`)."
+                }
+              }
+            }
+          ],
+          "description": "This field gives the altitude of the lowest level of the marshal stack, above mean sea level, as an altitude with its unit and reference."
+        },
+        "marshal_distance": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "description": "This field gives the distance of the marshal stack from the carrier, as a length with its unit."
+        },
+        "marshal_radial": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+          "description": "This field gives the radial from the carrier on which the marshal stack is, as a bearing with its unit and reference."
+        }
+      },
+      "required": [
+        "case"
+      ],
+      "type": "object"
+    },
+    "InitialPoint": {
+      "description": "An initial point is the start of the initial leg of an overhead pattern. It is a point with a name, or a distance and a bearing from the runway threshold.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "point": {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+              "description": "This field gives the point, with its name, at the start of the initial leg.",
+              "x-measure-kinds": [
+                "POINT"
+              ],
+              "x-point-roles": [
+                "initial"
+              ]
+            }
+          },
+          "required": [
+            "point"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "bearing": {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+              "description": "This field gives the bearing from the runway threshold to the initial point, as a bearing with its unit and reference. When the record does not have this field, the point is on the extended centreline of the runway."
+            },
+            "distance": {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+              "description": "This field gives the distance from the runway threshold to the initial point, as a length with its unit."
+            }
+          },
+          "required": [
+            "distance"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "Pad": {
+      "additionalProperties": false,
+      "description": "A landing pad is one helicopter or vertical landing pad.",
+      "properties": {
+        "name": {
+          "description": "This field gives the name of this landing pad, for display.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "position": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "description": "This field gives the geographic position of the centre of the landing pad, as latitude and longitude."
+        }
+      },
+      "required": [
+        "position"
+      ],
+      "type": "object"
+    },
+    "PatternSet": {
+      "additionalProperties": false,
+      "description": "Pattern values are the values of a traffic pattern for one aircraft category. Each value is optional.",
+      "properties": {
+        "altitude": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude"
+            },
+            {
+              "properties": {
+                "reference": {
+                  "description": "This field gives the reference of the pattern altitude: above ground level (`AGL`) or mean sea level (`MSL`).",
+                  "enum": [
+                    "MSL",
+                    "AGL"
+                  ]
+                }
+              }
+            }
+          ],
+          "description": "This field gives the altitude of the rectangular traffic pattern, as an altitude with its unit and reference. The reference is above ground level or mean sea level."
+        },
+        "break_point": {
+          "description": "This field gives the position along the runway at which aircraft start the overhead break, as one of the enumerated values.",
+          "enum": [
+            "approach_end",
+            "midfield",
+            "departure_end"
+          ],
+          "x-enum-descriptions": {
+            "approach_end": "The overhead break starts above the approach end of the runway.",
+            "departure_end": "The overhead break starts above the departure end of the runway.",
+            "midfield": "The overhead break starts above the middle of the runway."
+          }
+        },
+        "direction": {
+          "description": "This field gives the direction of the turns in the traffic pattern, as one of the enumerated values.",
+          "enum": [
+            "left",
+            "right"
+          ],
+          "x-enum-descriptions": {
+            "left": "Each turn in the pattern is a left turn.",
+            "right": "Each turn in the pattern is a right turn."
+          }
+        },
+        "initial": {
+          "description": "This list contains the initial points of the overhead pattern.",
+          "items": {
+            "$ref": "#/$defs/InitialPoint"
+          },
+          "minItems": 0,
+          "type": "array"
+        },
+        "overhead_altitude": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude"
+            },
+            {
+              "properties": {
+                "reference": {
+                  "description": "This field gives the reference of the overhead altitude: above ground level (`AGL`) or mean sea level (`MSL`).",
+                  "enum": [
+                    "MSL",
+                    "AGL"
+                  ]
+                }
+              }
+            }
+          ],
+          "description": "This field gives the altitude of the initial leg and of the overhead break, as an altitude with its unit and reference. The reference is above ground level or mean sea level."
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "Stand": {
+      "additionalProperties": false,
+      "description": "A parking stand is one parking position for one aircraft.",
+      "properties": {
+        "category": {
+          "description": "This field gives the largest aircraft class that can use the parking stand, as one of the enumerated values.",
+          "enum": [
+            "fighter",
+            "medium",
+            "heavy",
+            "helicopter"
+          ],
+          "x-enum-descriptions": {
+            "fighter": "This value identifies fighters and other small aircraft.",
+            "heavy": "This value identifies heavy aircraft, for example a tanker aircraft or a large transport aircraft.",
+            "helicopter": "This value identifies a stand or a taxiway only for helicopters, not for fixed-wing aircraft.",
+            "medium": "This value identifies aircraft of moderate dimensions, for example a transport aircraft with two engines."
+          }
+        },
+        "extensions": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+          "allOf": [
+            {
+              "properties": {
+                "sim": {
+                  "properties": {
+                    "dcs": {
+                      "properties": {
+                        "bindings": {
+                          "items": {
+                            "properties": {
+                              "kind": {
+                                "enum": [
+                                  "stand"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "propertyNames": {
+                        "enum": [
+                          "bindings"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
+        },
+        "heading": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+          "description": "This field gives the heading of an aircraft on the parking stand, as a bearing with its unit and reference."
+        },
+        "helicopters": {
+          "description": "The value is `true` when helicopters can also use the parking stand.",
+          "type": "boolean"
+        },
+        "id": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "description": "This field identifies this parking stand. Each parking stand in its airfield has a different identifier. A taxi node refers to the parking stand with this identifier."
+        },
+        "length": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "description": "This field gives the length of the parking stand, as a length with its unit."
+        },
+        "name": {
+          "description": "This field gives the name of the parking stand in the radio calls of air traffic control (ATC), for example `41`, as free text.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "position": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "description": "This field gives the geographic position of the centre of the parking stand, as latitude and longitude."
+        },
+        "ramp": {
+          "description": "This field gives the name of the ramp or apron of the parking stand, as free text.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "shelter": {
+          "description": "The value is `true` when the parking stand is in an aircraft shelter.",
+          "type": "boolean"
+        },
+        "width": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "description": "This field gives the width of the parking stand, as a length with its unit."
+        }
+      },
+      "required": [
+        "id",
+        "position"
+      ],
+      "type": "object"
+    },
+    "StationFrequency": {
+      "additionalProperties": false,
+      "description": "A station frequency is one radio frequency of a station at an operating location, with the role of the station.",
+      "properties": {
+        "callsign": {
+          "description": "This field gives the radio callsign of the station, for example `Muwaffaq Salti Tower`, as free text.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "frequency": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Frequency"
+            },
+            {
+              "properties": {
+                "unit": {
+                  "const": "MHz",
+                  "description": "This field gives the unit of the station frequency: megahertz (`MHz`)."
+                }
+              },
+              "required": [
+                "modulation"
+              ]
+            }
+          ],
+          "description": "This field gives the frequency of the station, as a frequency with its unit. The unit is megahertz, and the field `modulation` is mandatory."
+        },
+        "hours": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/WeeklySchedule",
+          "description": "This field gives the hours of each week, in Coordinated Universal Time (UTC), when the station uses this frequency. When the record does not have this field, the station uses the frequency during the hours of the operating location."
+        },
+        "notes": {
+          "description": "This field gives the notes about this frequency, as free text.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "role": {
+          "description": "This field gives the role of the station on this frequency, as one of the enumerated values.",
+          "enum": [
+            "tower",
+            "ground",
+            "clearance_delivery",
+            "approach",
+            "departure",
+            "atis",
+            "ops",
+            "pmsv",
+            "unicom",
+            "marshal"
+          ],
+          "x-enum-descriptions": {
+            "approach": "This value identifies the approach control. On a military airfield, it is the radar approach control (RAPCON).",
+            "atis": "This value identifies the automatic terminal information service (ATIS) broadcast, which gives the weather, the active runway and other airfield information all the time.",
+            "clearance_delivery": "This value identifies the clearance delivery for instrument flight rules (IFR) clearances before taxi.",
+            "departure": "This value identifies the departure control. It controls instrument flight rules (IFR) flights after they take off, until the en-route centre controls them.",
+            "ground": "This value identifies the ground control for the movement area.",
+            "marshal": "This value identifies the carrier marshal control for recovery.",
+            "ops": "This value identifies the operations desk of the unit or of the forward arming and refuelling point (FARP).",
+            "pmsv": "This value identifies the pilot-to-metro service (PMSV) for weather information.",
+            "tower": "This value identifies the aerodrome control tower. On a carrier, it is the primary flight control.",
+            "unicom": "This value identifies the universal communications (UNICOM) at an airfield without a control tower."
+          }
+        }
+      },
+      "required": [
+        "role",
+        "frequency"
+      ],
+      "type": "object"
+    },
+    "TaxiEdge": {
+      "additionalProperties": false,
+      "description": "A taxi edge is a taxi route between two taxi nodes.",
+      "properties": {
+        "category": {
+          "description": "This field gives the largest aircraft class that can use the edge, as one of the enumerated values.",
+          "enum": [
+            "fighter",
+            "medium",
+            "heavy",
+            "helicopter"
+          ],
+          "x-enum-descriptions": {
+            "fighter": "This value identifies fighters and other small aircraft.",
+            "heavy": "This value identifies heavy aircraft, for example a tanker aircraft or a large transport aircraft.",
+            "helicopter": "This value identifies a stand or a taxiway only for helicopters, not for fixed-wing aircraft.",
+            "medium": "This value identifies aircraft of moderate dimensions, for example a transport aircraft with two engines."
+          }
+        },
+        "from": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "description": "This field identifies the taxi node that is at the start of the edge. The value shall be the identifier of a node of this graph."
+        },
+        "one_way": {
+          "description": "The value is `true` when aircraft can taxi on the edge only from `from` to `to`. The value is `false` when aircraft can taxi on the edge in the two directions.",
+          "type": "boolean"
+        },
+        "taxiway": {
+          "description": "This field gives the name of the taxiway of the edge, for example `Alpha`, as free text.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "to": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "description": "This field identifies the taxi node that is at the end of the edge. The value shall be the identifier of a different node of this graph."
+        },
+        "width": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "description": "This field gives the width of the taxiway of the edge, as a length with its unit."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ],
+      "type": "object"
+    },
+    "TaxiGraph": {
+      "additionalProperties": false,
+      "description": "A taxi graph is the taxi routes of an airfield as nodes and edges. A program finds a taxi route along the edges from a parking stand to a hold-short node.",
+      "properties": {
+        "edges": {
+          "description": "This list contains the edges between the taxi nodes.",
+          "items": {
+            "$ref": "#/$defs/TaxiEdge"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "nodes": {
+          "description": "This list contains the taxi nodes of the airfield.",
+          "items": {
+            "$ref": "#/$defs/TaxiNode"
+          },
+          "minItems": 2,
+          "type": "array"
+        }
+      },
+      "required": [
+        "nodes",
+        "edges"
+      ],
+      "type": "object"
+    },
+    "TaxiNode": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "hold_short",
+                  "runway_connection"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "runway_end"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "parking"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "stand"
+            ]
+          }
+        }
+      ],
+      "description": "A taxi node is one point of the taxi graph.",
+      "properties": {
+        "id": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "description": "This field identifies this taxi node. Each taxi node in its airfield has a different identifier."
+        },
+        "kind": {
+          "description": "This field gives the type of the taxi node, as one of the enumerated values. A `hold_short` or `runway_connection` node shall have `runway_end`. A `parking` node shall have `stand`.",
+          "enum": [
+            "hold_short",
+            "runway_connection",
+            "runway",
+            "intersection",
+            "parking"
+          ],
+          "x-enum-descriptions": {
+            "hold_short": "This value identifies a hold-short point before a runway. Aircraft stop at this point until they get a clearance.",
+            "intersection": "This value identifies a point where two or more taxiways connect.",
+            "parking": "This value identifies a point where the taxi graph connects to a parking stand.",
+            "runway": "This value identifies a point on the runway centreline.",
+            "runway_connection": "This value identifies a point where a taxiway connects to a runway. Aircraft go onto the runway or off the runway at this point."
+          }
+        },
+        "name": {
+          "description": "This field gives the name of the taxi node, for example `A3`, as free text.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "position": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "description": "This field gives the geographic position of the taxi node, as latitude and longitude."
+        },
+        "runway_end": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/RunwayDesignator",
+          "description": "This field gives the designator of the runway end to which this node connects, or before which aircraft stop at this node. The value shall be the designator of an end of a runway of this airfield."
+        },
+        "stand": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "description": "This field identifies the parking stand that this node connects to. The value shall be the identifier of a stand of this airfield."
+        }
+      },
+      "required": [
+        "id",
+        "position"
+      ],
+      "type": "object"
+    },
+    "TrafficPattern": {
+      "additionalProperties": false,
+      "description": "A traffic pattern is a set of pattern values, with more values for each aircraft category. A consumer gets each value from the runway end first, then from the airfield, and then from the traffic pattern profile. A value for an aircraft category replaces the general value for that aircraft category.",
+      "properties": {
+        "altitude": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude"
+            },
+            {
+              "properties": {
+                "reference": {
+                  "description": "This field gives the reference of the pattern altitude: above ground level (`AGL`) or mean sea level (`MSL`).",
+                  "enum": [
+                    "MSL",
+                    "AGL"
+                  ]
+                }
+              }
+            }
+          ],
+          "description": "This field gives the altitude of the rectangular traffic pattern, as an altitude with its unit and reference. The reference is above ground level or mean sea level."
+        },
+        "break_point": {
+          "description": "This field gives the position along the runway at which aircraft start the overhead break, as one of the enumerated values.",
+          "enum": [
+            "approach_end",
+            "midfield",
+            "departure_end"
+          ],
+          "x-enum-descriptions": {
+            "approach_end": "The overhead break starts above the approach end of the runway.",
+            "departure_end": "The overhead break starts above the departure end of the runway.",
+            "midfield": "The overhead break starts above the middle of the runway."
+          }
+        },
+        "categories": {
+          "additionalProperties": false,
+          "description": "This field gives the pattern values for each aircraft category. Each aircraft category gives only the values that are different.",
+          "properties": {
+            "fighter": {
+              "$ref": "#/$defs/PatternSet",
+              "description": "This field gives the pattern values for fighters and attack aircraft."
+            },
+            "heavy": {
+              "$ref": "#/$defs/PatternSet",
+              "description": "This field gives the pattern values for heavy aircraft and tanker aircraft."
+            },
+            "helicopter": {
+              "$ref": "#/$defs/PatternSet",
+              "description": "This field gives the pattern values for helicopters."
+            },
+            "trainer": {
+              "$ref": "#/$defs/PatternSet",
+              "description": "This field gives the pattern values for trainer aircraft."
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
+        "direction": {
+          "description": "This field gives the direction of the turns in the traffic pattern, as one of the enumerated values.",
+          "enum": [
+            "left",
+            "right"
+          ],
+          "x-enum-descriptions": {
+            "left": "Each turn in the pattern is a left turn.",
+            "right": "Each turn in the pattern is a right turn."
+          }
+        },
+        "initial": {
+          "description": "This list contains the initial points of the overhead pattern.",
+          "items": {
+            "$ref": "#/$defs/InitialPoint"
+          },
+          "minItems": 0,
+          "type": "array"
+        },
+        "overhead_altitude": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude"
+            },
+            {
+              "properties": {
+                "reference": {
+                  "description": "This field gives the reference of the overhead altitude: above ground level (`AGL`) or mean sea level (`MSL`).",
+                  "enum": [
+                    "MSL",
+                    "AGL"
+                  ]
+                }
+              }
+            }
+          ],
+          "description": "This field gives the altitude of the initial leg and of the overhead break, as an altitude with its unit and reference. The reference is above ground level or mean sea level."
+        },
+        "profile": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "description": "This field identifies the traffic pattern profile that gives the values that this pattern does not give.",
+          "x-catalog": "pattern_profiles"
+        }
+      },
+      "required": [],
+      "type": "object"
+    }
+  },
+  "$id": "urn:openaix:schema:airfield:0.1.0-draft.1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "airfield"
+            ]
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "carrier"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "extensions": {
+            "properties": {
+              "sim": {
+                "properties": {
+                  "dcs": {
+                    "properties": {
+                      "bindings": {
+                        "items": {
+                          "properties": {
+                            "kind": {
+                              "enum": [
+                                "airbase",
+                                "drawing",
+                                "trigger_zone"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "propertyNames": {
+                      "enum": [
+                        "bindings"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "runways": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "position",
+          "elevation",
+          "runways"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "farp"
+            ]
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "carrier"
+              ]
+            },
+            {
+              "required": [
+                "runways"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "extensions": {
+            "properties": {
+              "sim": {
+                "properties": {
+                  "dcs": {
+                    "properties": {
+                      "bindings": {
+                        "items": {
+                          "properties": {
+                            "kind": {
+                              "enum": [
+                                "static",
+                                "airbase",
+                                "drawing",
+                                "trigger_zone"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "propertyNames": {
+                      "enum": [
+                        "bindings"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "position",
+          "elevation"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "carrier"
+            ]
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "runways"
+              ]
+            },
+            {
+              "required": [
+                "pads"
+              ]
+            },
+            {
+              "required": [
+                "calm_wind_runway"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "extensions": {
+            "properties": {
+              "sim": {
+                "properties": {
+                  "dcs": {
+                    "properties": {
+                      "bindings": {
+                        "items": {
+                          "properties": {
+                            "kind": {
+                              "enum": [
+                                "unit",
+                                "airbase",
+                                "drawing",
+                                "trigger_zone"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "propertyNames": {
+                      "enum": [
+                        "bindings"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "carrier"
+        ]
+      }
+    }
+  ],
+  "description": "An airfield is an aircraft operating location: a fixed airfield with runways, an aircraft carrier or a forward arming and refuelling point (FARP). The record has the position, the radio frequencies, the traffic pattern and the links to navigation records.",
+  "properties": {
+    "$schema": {
+      "description": "This field identifies the schema that validates this document.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "approach_instructions": {
+      "description": "This list contains the local arrival and approach instructions for mission aircraft, as free text.",
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 0,
+      "type": "array"
+    },
+    "atis": {
+      "$ref": "#/$defs/Atis",
+      "description": "This field gives the static data of the automatic terminal information service (ATIS) broadcast for a simulator. The ATIS frequency is an item of `frequencies` with the role `atis`. The simulator gives the weather."
+    },
+    "calm_wind_runway": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/RunwayDesignator",
+      "description": "This field gives the designator of the calm wind runway: the runway end that the airfield uses for a calm wind. The value shall be the designator of an end of a runway of this airfield."
+    },
+    "carrier": {
+      "$ref": "#/$defs/Carrier",
+      "description": "This field gives the data of an aircraft carrier. The data are the hull number, the Tactical Air Navigation (TACAN), the instrument carrier landing system (ICLS) channel and the case recovery data. A record with a different `kind` shall not have this field."
+    },
+    "coalition": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Coalition",
+      "description": "This field gives the coalition that controls the operating location, as one of the enumerated values."
+    },
+    "controlling_agency": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "description": "This field identifies the agency that controls the air traffic at the airfield.",
+      "x-catalog": "agencies"
+    },
+    "elevation": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Elevation",
+      "description": "This field gives the published elevation of the airfield above mean sea level, as an elevation with its unit."
+    },
+    "extensions": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+      "allOf": [
+        {
+          "properties": {
+            "sim": {
+              "properties": {
+                "dcs": {
+                  "properties": {
+                    "bindings": {
+                      "items": {
+                        "properties": {
+                          "kind": {
+                            "enum": [
+                              "airbase",
+                              "unit",
+                              "static",
+                              "drawing",
+                              "trigger_zone"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "propertyNames": {
+                    "enum": [
+                      "bindings"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
+    },
+    "frequencies": {
+      "description": "This list contains the radio frequencies of the stations at the operating location. Each item has the role of the station, for example tower, ground or automatic terminal information service (ATIS).",
+      "items": {
+        "$ref": "#/$defs/StationFrequency"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "id": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "description": "This field identifies this airfield. Other resources and orders use this stable identifier to refer to this airfield."
+    },
+    "ident": {
+      "description": "This field identifies this airfield in published data. Examples are the International Civil Aviation Organization (ICAO) location indicator and the Federal Aviation Administration (FAA) identifier.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "kind": {
+      "description": "This field gives the type of the operating location, as one of the enumerated values. An `airfield` record shall have `position`, `elevation` and one or more runways. A `farp` record shall have `position` and `elevation`, and no runways. A `carrier` record shall have `carrier`, and no runways or landing pads.",
+      "enum": [
+        "airfield",
+        "carrier",
+        "farp"
+      ],
+      "x-enum-descriptions": {
+        "airfield": "This value identifies a fixed airfield with one or more runways.",
+        "carrier": "This value identifies an aircraft carrier. Its position comes from its unit in the simulator.",
+        "farp": "This value identifies a forward arming and refuelling point (FARP) with landing pads."
+      }
+    },
+    "localizers": {
+      "description": "This list identifies the localizers that are for the runways of this airfield. When a localizer in this list identifies an airfield, that airfield shall be this airfield.",
+      "items": {
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier"
+      },
+      "minItems": 1,
+      "type": "array",
+      "x-catalog": "localizers"
+    },
+    "magnetic_variation_deg": {
+      "description": "This field gives the magnetic variation at the airfield, in degrees. Values for east are more than zero, and values for west are less than zero.",
+      "maximum": 180,
+      "minimum": -180,
+      "type": "number"
+    },
+    "name": {
+      "description": "This field gives the name of this airfield, for display.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "navaids": {
+      "description": "This list contains the navigation aids of the airfield: `VOR`, `VORTAC`, `TACAN`, `NDB` or `DME` stations. The Tactical Air Navigation (TACAN) of a fixed airfield or a forward arming and refuelling point (FARP) is in this list. It is a `TACAN` or `VORTAC` station. When a navigation aid in this list identifies an airfield, that airfield shall be this airfield.",
+      "items": {
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+        "x-measure-kinds": [
+          "NAVAID"
+        ]
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "operating_hours": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/WeeklySchedule",
+      "description": "This field gives the hours of each week, in Coordinated Universal Time (UTC), when the operating location is open. The schedule is the same for all weeks, and the location is not open at other times. When the record does not have this field, the location is always open."
+    },
+    "pads": {
+      "description": "This list contains the landing pads of a forward arming and refuelling point (FARP) or of a helicopter area of an airfield.",
+      "items": {
+        "$ref": "#/$defs/Pad"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "parking": {
+      "description": "This list contains the parking stands of the operating location.",
+      "items": {
+        "$ref": "#/$defs/Stand"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "position": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+      "description": "This field gives the geographic position of the airfield reference point, as latitude and longitude."
+    },
+    "procedures": {
+      "description": "This list identifies the instrument procedures that start or stop at this airfield: standard instrument departure (SID), standard terminal arrival route (STAR) or approach. When a procedure in this list identifies an airfield, that airfield shall be this airfield.",
+      "items": {
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier"
+      },
+      "minItems": 1,
+      "type": "array",
+      "x-catalog": "instrument_procedures"
+    },
+    "resources_ref": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
+      "description": "This field identifies the resource catalogue that resolves the references of this airfield. The reference gives the identifier and the revision of the catalogue."
+    },
+    "runways": {
+      "description": "This list contains the runways of the airfield. Each item is one runway with its two ends.",
+      "items": {
+        "$ref": "urn:openaix:schema:runway:0.1.0-draft.1"
+      },
+      "minItems": 0,
+      "type": "array"
+    },
+    "source": {
+      "description": "This field gives the source of this record. The value gives the authority that publishes the data, and the cycle, for example `FAA CIFP cycle 2610`. A record that an author writes does not have this field.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "taxi": {
+      "$ref": "#/$defs/TaxiGraph",
+      "description": "This field gives the taxi graph of the airfield: the taxi nodes, with their names, and the edges between them. The graph does not give the shape of the taxiways."
+    },
+    "traffic_pattern": {
+      "$ref": "#/$defs/TrafficPattern",
+      "description": "This field gives the traffic pattern of the airfield. Its values are the default values. A runway end can give different values for that end."
+    },
+    "transition_altitude": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude",
+      "description": "This field gives the transition altitude, as an altitude with its unit and reference. At or below this altitude, the vertical position of an aircraft is its altitude above mean sea level."
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "name"
+  ],
+  "title": "Airfield",
+  "type": "object",
+  "x-navigation-profile": "airfield"
+}

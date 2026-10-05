@@ -1,0 +1,44 @@
+{
+  "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "geometry": {
+        "center": {
+          "latitude": 34.735,
+          "longitude": 39.924
+        },
+        "kind": "circle",
+        "radius": {
+          "unit": "nm",
+          "value": 12
+        }
+      },
+      "id": "granite-volume",
+      "lower_limit": {
+        "surface": true
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 15000
+      }
+    }
+  ],
+  "coordination_instructions": [
+    "Coordinate with the air defence controller before entering; use the Silver transit corridor otherwise."
+  ],
+  "description": "Low- to medium-altitude missile engagement zone around the coalition Granite surface-to-air missile battery.",
+  "id": "granite-mez",
+  "mez_kind": "low",
+  "name": "Granite missile engagement zone",
+  "type": "MEZ"
+}

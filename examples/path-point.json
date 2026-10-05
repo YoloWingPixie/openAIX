@@ -1,0 +1,37 @@
+{
+  "$schema": "urn:openaix:schema:path-point:0.1.0-draft.1",
+  "airfield": "kden",
+  "approach": "R16RY",
+  "approach_type": "LPV",
+  "course_width_at_threshold": {
+    "unit": "m",
+    "value": 106.75
+  },
+  "flight_path_alignment_point": {
+    "latitude": 39.8710573611,
+    "longitude": -104.6942006944
+  },
+  "glide_path_angle_deg": 3.0,
+  "id": "kden-r16ry-path-point",
+  "kind": "path-point",
+  "landing_threshold_elevation": {
+    "reference": "MSL",
+    "unit": "m",
+    "value": 1622.1
+  },
+  "landing_threshold_point": {
+    "latitude": 39.8958033333,
+    "longitude": -104.6955986111
+  },
+  "name": "KDEN R16RY final approach path",
+  "resources_ref": {
+    "id": "kden-navigation",
+    "revision": "2610"
+  },
+  "runway": "16R",
+  "source": "FAA CIFP cycle 2610",
+  "threshold_crossing_height": {
+    "unit": "ft",
+    "value": 55.1
+  }
+}

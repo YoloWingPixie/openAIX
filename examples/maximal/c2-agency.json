@@ -1,0 +1,33 @@
+{
+  "$schema": "urn:openaix:schema:c2-agency:0.1.0-draft.1",
+  "callsign": "Darkstar",
+  "channels": [
+    "control-uhf"
+  ],
+  "extensions": {
+    "sim": {
+      "dcs": {
+        "bindings": [
+          {
+            "kind": "unit",
+            "mission_id": "oir-syria",
+            "name": "OIR Darkstar E-3A",
+            "object_id": 11,
+            "unit_type": "E-3A"
+          }
+        ]
+      }
+    }
+  },
+  "id": "darkstar",
+  "kind": "c2-agency",
+  "position": {
+    "latitude": 32.965,
+    "longitude": 37.794
+  },
+  "resources_ref": {
+    "id": "oir-resources",
+    "revision": "1"
+  },
+  "role": "AWACS"
+}

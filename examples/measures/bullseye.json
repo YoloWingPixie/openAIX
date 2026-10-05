@@ -1,0 +1,17 @@
+{
+  "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+  "active": {
+    "continuous": true
+  },
+  "description": "OIR bullseye for bearing and range calls; bearings from it are magnetic.",
+  "id": "bastion-bullseye",
+  "name": "Bastion",
+  "position": {
+    "latitude": 34.735,
+    "longitude": 40.326
+  },
+  "roles": [
+    "bullseye"
+  ],
+  "type": "POINT"
+}

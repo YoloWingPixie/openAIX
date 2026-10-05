@@ -1,0 +1,532 @@
+{
+  "$defs": {
+    "VoxJTACSettings": {
+      "additionalProperties": false,
+      "description": "A joint terminal attack controller (JTAC) extension of Vox Bellica is a group of values for the JTAC function of Vox Bellica. The names and units are the same as in Vox Bellica. Other consumers ignore this extension.",
+      "properties": {
+        "danger_close": {
+          "additionalProperties": false,
+          "description": "Danger close values are the values for the workflow of the danger close authority.",
+          "properties": {
+            "initials": {
+              "description": "This field gives the initials of the ground commander for the workflow of the danger close authority in the consumer, as free text.",
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
+        "fah": {
+          "additionalProperties": false,
+          "description": "Values of the attack heading are the values that the controller uses to plan the final attack heading.",
+          "properties": {
+            "friendly_parallel_reds": {
+              "description": "This field gives the limit for friendly lines that are parallel to the heading, in units of the risk-estimate distance.",
+              "minimum": 0,
+              "type": "number"
+            },
+            "laser_cone": {
+              "description": "The value is `true` when the controller gives priority to attack headings in the laser attack cone.",
+              "type": "boolean"
+            },
+            "laser_cone_deg": {
+              "description": "This field gives the angle of the laser attack cone, in degrees.",
+              "maximum": 180,
+              "minimum": 0,
+              "type": "number"
+            },
+            "laser_prefer_deg": {
+              "description": "This field gives the primary angle in the laser attack cone, in degrees.",
+              "maximum": 180,
+              "minimum": 0,
+              "type": "number"
+            },
+            "observer_buffer_m": {
+              "description": "This field gives the distance that the controller keeps around the observer, in metres.",
+              "minimum": 0,
+              "type": "number"
+            },
+            "road_max_m": {
+              "description": "This field gives the primary maximum distance to roads, in metres.",
+              "minimum": 0,
+              "type": "number"
+            },
+            "terrain": {
+              "description": "The value is `true` when the controller uses terrain and roads to plan the heading.",
+              "type": "boolean"
+            },
+            "valley_min_depth_m": {
+              "description": "This field gives the primary minimum depth of a valley, in metres.",
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
+        "group": {
+          "description": "This field gives the name of a Digital Combat Simulator (DCS) group. Each unit of the group that operates is an observer.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "impact_window_s": {
+          "description": "This field gives the period of the observation for the weapon impact, in seconds.",
+          "minimum": 0,
+          "type": "number"
+        },
+        "laser_range_m": {
+          "description": "This field gives the maximum range at which the observer can lase, in metres.",
+          "minimum": 0,
+          "type": "number"
+        },
+        "last_call_on_loss": {
+          "description": "The value is `true` when the controller transmits a last call after it has no more observers.",
+          "type": "boolean"
+        },
+        "launch_warnings": {
+          "additionalProperties": false,
+          "description": "Launch warning values are the values for the launch warnings about surface-to-air missiles (SAMs).",
+          "properties": {
+            "coalesce": {
+              "description": "This field gives the time interval in which the controller sends one report for all launches, as free text. The value is a time interval in the Go format, such as `500ms`.",
+              "minLength": 1,
+              "type": "string"
+            },
+            "delay_max": {
+              "description": "This field gives the maximum time interval before the controller gives a launch warning, as free text. The value is a time interval in the Go format, such as `500ms`.",
+              "minLength": 1,
+              "type": "string"
+            },
+            "delay_min": {
+              "description": "This field gives the minimum time interval before the controller gives a launch warning, as free text. The value is a time interval in the Go format, such as `500ms`.",
+              "minLength": 1,
+              "type": "string"
+            },
+            "enabled": {
+              "description": "The value is `true` when the controller sends a report of the surface-to-air missile (SAM) launches that it sees.",
+              "type": "boolean"
+            },
+            "range_m": {
+              "description": "This field gives the range of the launch warnings, in metres.",
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
+        "memory_file": {
+          "description": "This field gives the path of the file in which the consumer keeps the pilot memory, as free text. The file is local to the consumer and is not an interchange dependency.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "night": {
+          "additionalProperties": false,
+          "description": "Day and night values are the values for the day mode and the night mode.",
+          "properties": {
+            "end_hour": {
+              "description": "This field gives the time at which the night operation stops, as a local hour.",
+              "maximum": 23,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "ir_mark": {
+              "description": "The value is `true` when the controller uses an infrared pointer to identify targets at night.",
+              "type": "boolean"
+            },
+            "mode": {
+              "description": "This field gives the operation mode: automatic (`auto`), day (`day`) or night (`night`), as one of the enumerated values.",
+              "enum": [
+                "auto",
+                "day",
+                "night"
+              ]
+            },
+            "snake_amplitude_m": {
+              "description": "This field gives the amplitude of the movement of the infrared pointer, in metres.",
+              "minimum": 0,
+              "type": "number"
+            },
+            "snake_period": {
+              "description": "This field gives the period of the movement of the infrared pointer, as free text. The value is a time interval in the Go format, such as `500ms`.",
+              "minLength": 1,
+              "type": "string"
+            },
+            "start_hour": {
+              "description": "This field gives the time at which the night operation starts, as a local hour.",
+              "maximum": 23,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "sun_deg": {
+              "description": "This field gives the solar elevation limit for the night operation, in degrees.",
+              "maximum": 90,
+              "minimum": -90,
+              "type": "number"
+            },
+            "utc_offset_h": {
+              "description": "This field gives the offset of local time from Coordinated Universal Time (UTC), in hours.",
+              "maximum": 14,
+              "minimum": -14,
+              "type": "number"
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
+        "observers": {
+          "description": "This list contains the names of Digital Combat Simulator (DCS) units or groups that are more observers and laser sources of the controller.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "precise_coords_delay_s": {
+          "description": "This field gives the time interval before the controller makes the coordinates more accurate, in seconds. With a negative value, Vox Bellica makes the coordinates more accurate immediately.",
+          "maximum": 120,
+          "type": "number"
+        },
+        "readback_timeout_s": {
+          "description": "This field gives the time interval before the controller gives the readback prompt, in seconds.",
+          "minimum": 0,
+          "type": "number"
+        },
+        "search_range_m": {
+          "description": "This field gives the radius of the search for targets, in metres.",
+          "minimum": 0,
+          "type": "number"
+        },
+        "source_unit": {
+          "description": "This field gives the name of the Digital Combat Simulator (DCS) unit that gives the position of the controller. This unit is also the first observer and the laser source.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "stack": {
+          "additionalProperties": false,
+          "description": "Holding stack values are the values for the holding stack of the aircraft that operate with the controller.",
+          "properties": {
+            "block_ft": {
+              "description": "This field gives the depth of the fixed-wing holding block, in feet.",
+              "minimum": 0,
+              "type": "number"
+            },
+            "concurrent": {
+              "description": "The value is `true` when the controller lets aircraft do engagements in different target areas at the same time.",
+              "type": "boolean"
+            },
+            "fast_floor_ft": {
+              "description": "This field gives the floor of the hold for fast-jets, in feet.",
+              "minimum": 0,
+              "type": "number"
+            },
+            "helo_block_ft": {
+              "description": "This field gives the depth of the helicopter holding block, in feet.",
+              "minimum": 0,
+              "type": "number"
+            },
+            "helo_floor_ft": {
+              "description": "This field gives the floor of the hold for helicopters, in feet.",
+              "minimum": 0,
+              "type": "number"
+            },
+            "radius_m": {
+              "description": "This field gives the radius in which the controller puts targets in one target area, in metres.",
+              "minimum": 0,
+              "type": "number"
+            },
+            "separation_ft": {
+              "description": "This field gives the vertical distance between the blocks of the holding stack, in feet.",
+              "minimum": 0,
+              "type": "number"
+            },
+            "slow_floor_ft": {
+              "description": "This field gives the floor of the slow-mover hold, in feet.",
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [],
+          "type": "object"
+        },
+        "town_ips": {
+          "description": "The value is `true` when the controller may use town names to make a missing initial point.",
+          "type": "boolean"
+        },
+        "voice_id": {
+          "description": "This field identifies the voice that this controller uses.",
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [],
+      "type": "object"
+    }
+  },
+  "$id": "urn:openaix:schema:fac:0.1.0-draft.1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A forward air controller (FAC) is a record of a FAC, a joint terminal attack controller (JTAC) or an airborne forward air controller (FAC(A)). It contains the role, the platform, the communications and the control functions of the controller.",
+  "properties": {
+    "$schema": {
+      "description": "This field identifies the schema that validates this document.",
+      "format": "uri",
+      "minLength": 1,
+      "type": "string"
+    },
+    "callsign": {
+      "description": "This field gives the radio call sign of the controller, as free text.",
+      "minLength": 1,
+      "type": "string"
+    },
+    "channels": {
+      "description": "This list identifies the radio channels that the controller uses.",
+      "items": {
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier"
+      },
+      "minItems": 1,
+      "type": "array",
+      "x-catalog": "channels"
+    },
+    "coalition": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Coalition",
+      "description": "This field gives the coalition of the controller in the simulation, as one of the enumerated values."
+    },
+    "coordinate_source": {
+      "description": "This field gives the method that the controller uses to get target coordinates, as one of the enumerated values. The value is not a type of target location error.",
+      "enum": [
+        "lrf",
+        "visual",
+        "exact"
+      ],
+      "x-enum-descriptions": {
+        "exact": "This value identifies accurate coordinates from the simulator.",
+        "lrf": "This value identifies coordinates from a laser rangefinder at a known observer position.",
+        "visual": "This value identifies a visual estimate by the controller."
+      }
+    },
+    "default_laser_code": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/LaserCode",
+      "description": "This field gives the laser code that the controller uses when the brief gives no other code, as a laser code with its unit."
+    },
+    "egress_points": {
+      "description": "This list identifies the egress points that the controller gives to aircraft. Each one refers to a point with the role egress, gate or fix.",
+      "items": {
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+        "x-measure-kinds": [
+          "POINT"
+        ],
+        "x-point-roles": [
+          "egress",
+          "gate",
+          "fix"
+        ]
+      },
+      "type": "array"
+    },
+    "equipment": {
+      "description": "This list contains the equipment items that the controller or the observer team has. When an item is not in the list, the list does not add or remove that equipment.",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "available": {
+            "description": "The value is `true` when this equipment is available for the operation in the plan.",
+            "type": "boolean"
+          },
+          "horizontal_accuracy": {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+            "description": "This field gives the horizontal precision of the equipment that its data gives, as a length with its unit."
+          },
+          "id": {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "description": "This field identifies this equipment item. Other records and orders use it to refer to this equipment item."
+          },
+          "kind": {
+            "description": "This field gives the type of equipment, as one of the enumerated values.",
+            "enum": [
+              "laser_designator",
+              "laser_rangefinder",
+              "gps",
+              "day_optic",
+              "thermal_imager",
+              "night_vision",
+              "ir_pointer",
+              "smoke",
+              "illumination",
+              "radio",
+              "other"
+            ]
+          },
+          "laser_codes": {
+            "description": "This list contains the laser codes that the equipment can use.",
+            "items": {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/LaserCode"
+            },
+            "type": "array"
+          },
+          "max_range": {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+            "description": "This field gives the maximum range at which the equipment operates, as a length with its unit."
+          },
+          "name": {
+            "description": "This field gives the name of this equipment item, for display. The name is the identification or the type of the equipment.",
+            "minLength": 1,
+            "type": "string"
+          },
+          "notes": {
+            "description": "This field gives the notes about this equipment, such as limits, supply condition or employment, as free text.",
+            "minLength": 1,
+            "type": "string"
+          },
+          "quantity": {
+            "description": "This field gives the number of items of this equipment that are available.",
+            "minimum": 1,
+            "type": "integer"
+          },
+          "vertical_accuracy": {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+            "description": "This field gives the vertical precision of the equipment that its data gives, as a length with its unit."
+          }
+        },
+        "required": [
+          "id",
+          "kind"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "extensions": {
+      "allOf": [
+        {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions"
+        },
+        {
+          "properties": {
+            "org.vox-bellica.jtac": {
+              "$ref": "#/$defs/VoxJTACSettings"
+            }
+          }
+        },
+        {
+          "properties": {
+            "sim": {
+              "properties": {
+                "dcs": {
+                  "properties": {
+                    "bindings": {
+                      "items": {
+                        "properties": {
+                          "kind": {
+                            "enum": [
+                              "unit",
+                              "group",
+                              "static",
+                              "drawing",
+                              "trigger_zone"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "propertyNames": {
+                    "enum": [
+                      "bindings"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record. The data in this field is for one consumer. The controller record keeps the data that all consumers can use. Examples are the identification, the equipment and the functions of the controller."
+    },
+    "id": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "description": "This field identifies this controller. Other records and orders use it to refer to this controller."
+    },
+    "initial_points": {
+      "description": "This list identifies the initial points that the controller uses for attack briefs. Each one refers to a point with the role initial or fix.",
+      "items": {
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+        "x-measure-kinds": [
+          "POINT"
+        ],
+        "x-point-roles": [
+          "initial",
+          "fix"
+        ]
+      },
+      "type": "array"
+    },
+    "kind": {
+      "const": "fac",
+      "description": "The value identifies this record as a forward air controller."
+    },
+    "laser_codes": {
+      "description": "This list contains the laser codes that the designators of the controller can use.",
+      "items": {
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/LaserCode"
+      },
+      "minItems": 0,
+      "type": "array"
+    },
+    "platform": {
+      "description": "This field gives the platform of the controller: on the ground (`ground`) or in an aircraft (`airborne`), as one of the enumerated values.",
+      "enum": [
+        "ground",
+        "airborne"
+      ]
+    },
+    "position": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+      "description": "This field gives the geographic position of the controller, as latitude and longitude."
+    },
+    "resources_ref": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
+      "description": "This field identifies the external resource catalogue that resolves the references of this record. The reference identifies the catalogue and gives its revision."
+    },
+    "role": {
+      "description": "This field gives the qualification of the controller, as one of the enumerated values. The controller is a forward air controller (FAC), a joint terminal attack controller (JTAC) or an airborne forward air controller (FAC(A)).",
+      "enum": [
+        "fac",
+        "jtac",
+        "fac_a"
+      ]
+    },
+    "smoke_color": {
+      "description": "This field gives the colour of the smoke that identifies targets or friendly positions, as one of the enumerated values.",
+      "enum": [
+        "white",
+        "red",
+        "green",
+        "orange",
+        "blue"
+      ]
+    },
+    "terminal_control": {
+      "description": "This list contains the types of terminal attack control that the controller may give.",
+      "items": {
+        "enum": [
+          "type_1",
+          "type_2",
+          "type_3"
+        ]
+      },
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "callsign",
+    "role"
+  ],
+  "title": "Forward air controller",
+  "type": "object"
+}

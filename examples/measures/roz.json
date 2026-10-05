@@ -1,0 +1,64 @@
+{
+  "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T14:45:00Z",
+    "start": "2026-10-02T13:15:00Z"
+  },
+  "components": [
+    {
+      "active": {
+        "end": "2026-10-02T14:45:00Z",
+        "start": "2026-10-02T13:15:00Z"
+      },
+      "geometry": {
+        "kind": "polygon",
+        "rings": [
+          [
+            {
+              "latitude": 34.935,
+              "longitude": 39.954
+            },
+            {
+              "latitude": 34.935,
+              "longitude": 40.065
+            },
+            {
+              "latitude": 35.005,
+              "longitude": 40.065
+            },
+            {
+              "latitude": 35.005,
+              "longitude": 39.954
+            },
+            {
+              "latitude": 34.935,
+              "longitude": 39.954
+            }
+          ]
+        ]
+      },
+      "id": "anvil-volume",
+      "lower_limit": {
+        "surface": true
+      },
+      "operation": "add",
+      "upper_limit": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 12000
+      }
+    }
+  ],
+  "coordination_instructions": [
+    "Request transit from Banshee; expect to hold at Bolt until the battery checks fire."
+  ],
+  "description": "Restricted Operating Zone around the Anvil HIMARS firing point while it fires into the Onyx kill box.",
+  "id": "anvil-roz",
+  "name": "Anvil fires ROZ",
+  "notes": "Hot 1315Z to 1445Z; expect short-notice extension for troops in contact.",
+  "purpose": "Protect aircraft from the surface fires of the Anvil battery.",
+  "restrictions": [
+    "Aircraft other than the Anvil observation flight remain outside while the zone is active."
+  ],
+  "type": "ROZ"
+}

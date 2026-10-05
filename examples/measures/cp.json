@@ -1,0 +1,18 @@
+{
+  "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+  "active": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "description": "Contact point where strike flight leads check in with Banshee.",
+  "id": "dagger-cp",
+  "name": "Dagger",
+  "position": {
+    "latitude": 34.785,
+    "longitude": 40.273
+  },
+  "roles": [
+    "control"
+  ],
+  "type": "POINT"
+}

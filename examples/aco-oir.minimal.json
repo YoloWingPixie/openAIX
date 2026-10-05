@@ -1,0 +1,61 @@
+{
+  "$schema": "urn:openaix:schema:aco:0.1.0-draft.1",
+  "assignments": [
+    {
+      "effective": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "measure": "south-transit",
+      "state": "active"
+    }
+  ],
+  "kind": "aco",
+  "period": {
+    "end": "2026-10-02T15:00:00Z",
+    "start": "2026-10-02T13:00:00Z"
+  },
+  "resources": {
+    "control_measures": {
+      "south-transit": {
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 10000
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 12000
+          }
+        },
+        "geometry": {
+          "kind": "corridor",
+          "one_way": true,
+          "points": [
+            {
+              "latitude": 33.59,
+              "longitude": 38.552
+            },
+            {
+              "latitude": 34.059,
+              "longitude": 39.477
+            }
+          ],
+          "width": {
+            "unit": "nm",
+            "value": 3
+          }
+        },
+        "id": "south-transit",
+        "name": "South transit corridor",
+        "type": "SC"
+      }
+    }
+  }
+}
