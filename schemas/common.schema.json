@@ -4,10 +4,10 @@
       "description": "An activation is the time when a control measure is available. It is an interval, a Coordinated Universal Time (UTC) schedule for each week in an interval, or continuous activation.",
       "oneOf": [
         {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window"
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window"
         },
         {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ScheduledWindow"
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ScheduledWindow"
         },
         {
           "additionalProperties": false,
@@ -29,11 +29,11 @@
       "description": "An airspace component is one part of an airspace in three dimensions, with a boundary, a floor and a ceiling. Each component adds a volume, subtracts a volume or intersects a volume, in sequence.",
       "properties": {
         "active": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Activation",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Activation",
           "description": "This field gives the time interval during which this component is available, in the time interval of the parent control measure. This field is optional."
         },
         "extensions": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
           "allOf": [
             {
               "properties": {
@@ -101,42 +101,42 @@
           "description": "This field gives the horizontal boundary of this component: points, distances and bearings in a format for a simulator.",
           "oneOf": [
             {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_polygon"
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_polygon"
             },
             {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_circle"
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_circle"
             },
             {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_sector"
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_sector"
             },
             {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_polyarc"
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_polyarc"
             },
             {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_corridor"
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_corridor"
             },
             {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_rectangle"
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_rectangle"
             },
             {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_ellipse"
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_ellipse"
             }
           ]
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this component. Each component in its parent airspace has a different identifier."
         },
         "lower_limit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/VerticalLimit",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/VerticalLimit",
           "description": "This field gives the floor of this component: an altitude with its reference, or the surface."
         },
         "maximum_limit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Altitude",
           "description": "This field gives the maximum limit of this component, as an altitude with its unit and reference. Where this value is higher than `upper_limit`, it increases the ceiling. Each value keeps its reference."
         },
         "minimum_limit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Altitude",
           "description": "This field gives the minimum floor of this component, as an altitude with its unit and reference. Where this value is higher than `lower_limit`, it replaces the floor. To compare limits with different references, a consumer uses terrain or atmospheric data."
         },
         "name": {
@@ -153,7 +153,7 @@
           ]
         },
         "upper_limit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/VerticalLimit",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/VerticalLimit",
           "description": "This field gives the ceiling of this component: an altitude with its reference, or no limit."
         }
       },
@@ -304,58 +304,58 @@
       "description": "A control measure is one openAIX control measure: a reference to one control measure contract, or an extension control measure with a namespace. The `type` field selects the contract.",
       "oneOf": [
         {
-          "$ref": "urn:openaix:schema:measure-aca:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-aca:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:airspace:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:airspace:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:airway:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:airway:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-aor:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-aor:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-area:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-area:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-cl:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-cl:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-isr:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-isr:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-kb:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-kb:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-line:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-line:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-mez:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-mez:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-misarc:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-misarc:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:navaid:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:navaid:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:orbit:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:orbit:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:point:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:point:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-route:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-route:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-tl:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-tl:0.1.0-draft.2"
         },
         {
-          "$ref": "urn:openaix:schema:measure-volume:0.1.0-draft.1"
+          "$ref": "urn:openaix:schema:measure-volume:0.1.0-draft.2"
         },
         {
           "additionalProperties": false,
@@ -365,7 +365,7 @@
               "type": "string"
             },
             "active": {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Activation",
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Activation",
               "description": "This field gives the time interval during which the extension control measure is available. The value is a schedule or a flag for continuous activation."
             },
             "description": {
@@ -373,7 +373,7 @@
               "type": "string"
             },
             "extensions": {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
               "allOf": [
                 {
                   "properties": {
@@ -438,11 +438,11 @@
               "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
             },
             "geometry": {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry",
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry",
               "description": "This field gives the horizontal geometry of the extension control measure: a position or a boundary. The geometry uses points, distances and bearings in a format for a simulator."
             },
             "id": {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
               "description": "This field identifies this extension control measure. Other records and orders use it to refer to this extension control measure."
             },
             "name": {
@@ -455,7 +455,7 @@
               "type": "string"
             },
             "resources_ref": {
-              "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ResourceRef",
               "description": "This field identifies the resource catalogue that resolves the references of this extension control measure. The reference gives the identifier and the revision of the catalogue."
             },
             "type": {
@@ -520,7 +520,7 @@
         "bindings": {
           "description": "This list contains the objects in a Digital Combat Simulator (DCS) mission that are this record or show it on the map. The record keeps its geometry in latitude and longitude, independently of these objects.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DCSObjectRef"
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DCSObjectRef"
           },
           "type": "array"
         },
@@ -547,7 +547,7 @@
         "objects": {
           "description": "This list contains the units, groups or static objects in a Digital Combat Simulator (DCS) mission that are parts of the aimpoint.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DCSObjectRef"
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DCSObjectRef"
           },
           "type": "array"
         },
@@ -1324,7 +1324,7 @@
       "description": "An ellipse geometry is an ellipse with a centre in latitude and longitude and with dimensions in metres. It is not a polygon of sample points. A Digital Combat Simulator (DCS) drawing keeps its angle and its theatre projection in `extensions.sim.dcs`.",
       "properties": {
         "center": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the centre of the ellipse, as latitude and longitude."
         },
         "east_radius_m": {
@@ -1333,7 +1333,7 @@
           "type": "number"
         },
         "extensions": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
           "allOf": [
             {
               "properties": {
@@ -1609,11 +1609,11 @@
       "description": "A rectangle geometry is a rectangle with a centre in latitude and longitude and with dimensions in metres. It is not a polygon of sample points. A Digital Combat Simulator (DCS) drawing keeps its angle and its theatre projection in `extensions.sim.dcs`.",
       "properties": {
         "center": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the centre of the rectangle, as latitude and longitude."
         },
         "extensions": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
           "allOf": [
             {
               "properties": {
@@ -1995,7 +1995,7 @@
       "description": "A point location is a geographic point, a location in free text, or the two.",
       "properties": {
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the point, as latitude and longitude."
         },
         "position_description": {
@@ -2040,7 +2040,7 @@
           "type": "string"
         },
         "schedule": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/WeeklySchedule",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/WeeklySchedule",
           "description": "This field gives the Coordinated Universal Time (UTC) schedule for each week in the interval."
         },
         "start": {
@@ -2063,12 +2063,12 @@
       "description": "Simulator data is the data of a record for each simulator, with the simulator identifier as the key, for example `dcs`. The other fields of the record do not change with a simulator. The Digital Combat Simulator (DCS) data has fixed fields, and the data of a different simulator is an object with no fixed fields.",
       "properties": {
         "dcs": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DCSData",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DCSData",
           "description": "This field contains the Digital Combat Simulator (DCS) data of the record."
         }
       },
       "propertyNames": {
-        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier"
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier"
       },
       "type": "object"
     },
@@ -2239,7 +2239,7 @@
         "periods": {
           "description": "This list contains the time intervals in each week.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/WeeklyPeriod"
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/WeeklyPeriod"
           },
           "minItems": 1,
           "type": "array"
@@ -2290,7 +2290,7 @@
       "type": "object"
     }
   },
-  "$id": "urn:openaix:schema:common:0.1.0-draft.1",
+  "$id": "urn:openaix:schema:common:0.1.0-draft.2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "description": "Definitions for all openAIX documents are the identifiers, positions, geometry, units, time intervals and resource references that more than one type of document contains.",
   "title": "openAIX common resources"

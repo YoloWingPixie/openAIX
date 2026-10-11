@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:aco:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:aco:0.1.0-draft.2",
   "assignments": [
     {
       "control_points": [
@@ -286,7 +286,7 @@
     },
     "control_measures": {
       "cobalt-box": {
-        "$schema": "urn:openaix:schema:measure-kb:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-kb:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -395,7 +395,7 @@
         "type": "KB"
       },
       "falcon": {
-        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -477,7 +477,7 @@
         "type": "ORBIT"
       },
       "gainful-misarc": {
-        "$schema": "urn:openaix:schema:measure-misarc:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-misarc:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -577,7 +577,7 @@
         "type": "NAVAID"
       },
       "juniper": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -625,7 +625,7 @@
         "type": "POINT"
       },
       "marshal": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -663,7 +663,7 @@
         "type": "POINT"
       },
       "mesa": {
-        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -717,7 +717,7 @@
         "type": "ORBIT"
       },
       "rescue-reservation": {
-        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -804,7 +804,7 @@
         "type": "ROZ"
       },
       "south-transit": {
-        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -866,7 +866,7 @@
         "type": "SC"
       },
       "zinc-mez": {
-        "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -2671,5 +2671,5 @@
     "targets": {},
     "threats": {}
   },
-  "schema_version": "0.1.0-draft.1"
+  "schema_version": "0.1.0-draft.2"
 }

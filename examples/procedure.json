@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:procedure:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:procedure:0.1.0-draft.2",
   "airfield": "kden",
   "id": "kden-i16r",
   "ident": "I16R",

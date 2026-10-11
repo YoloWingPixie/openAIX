@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:airspace:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:airspace:0.1.0-draft.2",
   "active": {
     "end": "2026-10-02T18:00:00Z",
     "start": "2026-10-02T06:00:00Z"

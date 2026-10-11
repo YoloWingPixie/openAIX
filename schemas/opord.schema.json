@@ -25,12 +25,12 @@
       "description": "An adjacent unit is one adjacent unit and its mission.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that controls the adjacent unit.",
           "x-catalog": "agencies"
         },
         "boundary": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that is the boundary with the adjacent unit.",
           "x-catalog": "control_measures"
         },
@@ -49,7 +49,7 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this adjacent unit. Each adjacent unit in the order has a different identifier. Other parts of the order use it to refer to this adjacent unit."
         },
         "mission": {
@@ -75,11 +75,11 @@
       "description": "An agreement is one agreement with the host nation.",
       "properties": {
         "effective": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the agreement is in effect."
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this agreement. Each agreement in the order has a different identifier. Other parts of the order use it to refer to this agreement."
         },
         "kind": {
@@ -130,7 +130,7 @@
         "engagement_authorities": {
           "description": "This list identifies the command and control agencies that have engagement authority.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "agencies"
           },
           "minItems": 0,
@@ -140,7 +140,7 @@
         "measures": {
           "description": "This list identifies the control measures that are air defence measures.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures",
             "x-measure-categories": [
               "adm"
@@ -185,12 +185,12 @@
           "type": "string"
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the area of the air defence warning.",
           "x-catalog": "control_measures"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the air defence warning is in effect."
         }
       },
@@ -207,7 +207,7 @@
         "agencies": {
           "description": "This list identifies the command and control agencies that control air support.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "agencies"
           },
           "minItems": 0,
@@ -217,7 +217,7 @@
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that give air interdiction and air reconnaissance. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -243,7 +243,7 @@
         "points": {
           "description": "This list identifies the points that are contact points, initial points and holding points for air support. Each point shall have the role `control` or `initial` or `marshalling`.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures",
             "x-point-roles": [
               "control",
@@ -267,7 +267,7 @@
         "agencies": {
           "description": "This list identifies the command and control agencies that control parts of the airspace.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "agencies"
           },
           "minItems": 0,
@@ -275,12 +275,12 @@
           "uniqueItems": true
         },
         "airspace_control_agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that controls the airspace.",
           "x-catalog": "agencies"
         },
         "coordinating_altitude": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the coordinating altitude.",
           "x-catalog": "control_measures",
           "x-measure-categories": [
@@ -290,7 +290,7 @@
         "measures": {
           "description": "This list identifies the control measures that are airspace coordinating measures.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures",
             "x-measure-categories": [
               "acm",
@@ -414,7 +414,7 @@
         "measures": {
           "description": "This list identifies the control measures that give the area of interest.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -438,7 +438,7 @@
         "measures": {
           "description": "This list identifies the control measures that give the area of operations and its boundaries.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -523,25 +523,25 @@
       "description": "An inspector general office is one office where personnel can speak to the inspector general.",
       "properties": {
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that the office refers to.",
           "x-catalog": "channels"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this point. Each point in the order has a different identifier. Other parts of the order use it to refer to this point."
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the office, as latitude and longitude."
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that operates the office.",
           "x-catalog": "order_units"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the office is open."
         }
       },
@@ -561,7 +561,7 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this assumption. Each assumption in the order has a different identifier. Other parts of the order use it to refer to this assumption."
         }
       },
@@ -585,7 +585,7 @@
           "type": "string"
         },
         "effective": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the change."
         },
         "headquarters": {
@@ -594,7 +594,7 @@
           "type": "string"
         },
         "phase": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the phase of the operation that the change occurs in.",
           "x-catalog": "order_phases"
         },
@@ -615,7 +615,7 @@
           "type": "string"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that goes to a different headquarters.",
           "x-catalog": "order_units"
         }
@@ -698,13 +698,13 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this avenue of approach. Each avenue of approach in the order has a different identifier. Other parts of the order use it to refer to this avenue of approach."
         },
         "measures": {
           "description": "This list identifies the control measures that give the path of the avenue of approach.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -731,7 +731,7 @@
         "attendees": {
           "description": "This list identifies the units of the task organization that are at the event.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -739,12 +739,12 @@
           "uniqueItems": true
         },
         "chair": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that controls the event.",
           "x-catalog": "order_units"
         },
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that the event refers to.",
           "x-catalog": "channels"
         },
@@ -754,7 +754,7 @@
           "type": "integer"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this event. Each event in the order has a different identifier. Other parts of the order use it to refer to this event."
         },
         "interval_minutes": {
@@ -780,7 +780,7 @@
           "type": "string"
         },
         "start": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the first event."
         }
       },
@@ -835,7 +835,7 @@
       "description": "A call sign is one call sign of a unit or an agency for a time interval.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that uses the call sign.",
           "x-catalog": "agencies"
         },
@@ -845,12 +845,12 @@
           "type": "string"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that uses the call sign.",
           "x-catalog": "order_units"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the call sign is in effect."
         }
       },
@@ -867,7 +867,7 @@
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that give the close air support (CAS). The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -875,7 +875,7 @@
           "uniqueItems": true
         },
         "phase": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the phase of the operation that the allocation is applicable to.",
           "x-catalog": "order_phases"
         },
@@ -885,12 +885,12 @@
           "type": "integer"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that receives the close air support (CAS).",
           "x-catalog": "order_units"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the close air support (CAS) is available."
         }
       },
@@ -905,7 +905,7 @@
       "description": "A close air support (CAS) brief is one 9-line CAS brief of JP 3-09.3.",
       "properties": {
         "ato_mission": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the mission of the air tasking order (ATO) that receives the brief. The `orders` field identifies the ATO.",
           "x-catalog": "ato_missions"
         },
@@ -919,16 +919,16 @@
           "type": "string"
         },
         "controller": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that gives the brief.",
           "x-catalog": "agencies"
         },
         "distance": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Length",
           "description": "This field gives the distance from the initial point to the target, as a length with its unit."
         },
         "egress_point": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the point that is the egress point. The point shall have the role `egress`.",
           "x-catalog": "control_measures",
           "x-point-roles": [
@@ -950,19 +950,19 @@
           "type": "string"
         },
         "friendly_distance": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Length",
           "description": "This field gives the distance from the target to the nearest friendly forces, as a length with its unit."
         },
         "heading": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Bearing",
           "description": "This field gives the heading from the initial point to the target, as a bearing with its unit and reference."
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this brief. Each brief in the order has a different identifier. Other parts of the order use it to refer to this brief."
         },
         "initial_point": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the point that is the initial point. The point shall have the role `initial`.",
           "x-catalog": "control_measures",
           "x-point-roles": [
@@ -970,11 +970,11 @@
           ]
         },
         "laser_code": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/LaserCode",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/LaserCode",
           "description": "This field gives the code of the laser mark, as a laser code with its unit."
         },
         "laser_target_line": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Bearing",
           "description": "This field gives the laser target line, as a bearing with its unit and reference."
         },
         "mark": {
@@ -1003,7 +1003,7 @@
           "type": "string"
         },
         "target": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the target of the resource catalogue that the brief is for.",
           "x-catalog": "targets"
         },
@@ -1013,15 +1013,15 @@
           "type": "string"
         },
         "target_elevation": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Elevation",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Elevation",
           "description": "This field gives the elevation of the target, as an elevation with its unit."
         },
         "target_position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the target, as latitude and longitude."
         },
         "time_on_target": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the time on target (TOT)."
         }
       },
@@ -1048,7 +1048,7 @@
         "dislocated_civilian_routes": {
           "description": "This list identifies the routes of the resource catalogue for dislocated civilians.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "routes"
           },
           "minItems": 0,
@@ -1103,11 +1103,11 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this entry. Each entry in the order has a different identifier. Other parts of the order use it to refer to this entry."
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the area of the entry.",
           "x-catalog": "control_measures"
         },
@@ -1117,7 +1117,7 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the entry, as latitude and longitude."
         },
         "significance": {
@@ -1126,7 +1126,7 @@
           "type": "string"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the event occurs."
         }
       },
@@ -1165,12 +1165,12 @@
       "description": "A civil-military operations centre is one centre for coordination with organizations of the population.",
       "properties": {
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that the centre refers to.",
           "x-catalog": "channels"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this centre. Each centre in the order has a different identifier. Other parts of the order use it to refer to this centre."
         },
         "name": {
@@ -1179,11 +1179,11 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the centre, as latitude and longitude."
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that operates the centre.",
           "x-catalog": "order_units"
         }
@@ -1212,12 +1212,12 @@
       "description": "A collection task is one row of the information collection plan.",
       "properties": {
         "ato_mission": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the mission of the air tasking order (ATO) that does the task. The `orders` field identifies the ATO.",
           "x-catalog": "ato_missions"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this task. Each task in the order has a different identifier. Other parts of the order use it to refer to this task."
         },
         "indicator": {
@@ -1226,32 +1226,32 @@
           "type": "string"
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that is the named area of interest of the task.",
           "x-catalog": "control_measures"
         },
         "report": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the report of the resource catalogue that gives the results of the task.",
           "x-catalog": "reports"
         },
         "report_to": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that receives the reports.",
           "x-catalog": "agencies"
         },
         "requirement": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the information requirement that the task gives data for.",
           "x-catalog": "order_requirements"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that does the task.",
           "x-catalog": "order_units"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the task is in effect."
         }
       },
@@ -1284,7 +1284,7 @@
         "succession": {
           "description": "This list identifies the units of the task organization. The list gives the succession of command, in order.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -1326,14 +1326,14 @@
       "description": "A command post is one command post, its location and the time when it operates.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that the command post operates as.",
           "x-catalog": "agencies"
         },
         "controls": {
           "description": "This list identifies the phases of the operation that the command post controls.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_phases"
           },
           "minItems": 0,
@@ -1341,7 +1341,7 @@
           "uniqueItems": true
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this command post. Each command post in the order has a different identifier. Other parts of the order use it to refer to this command post."
         },
         "kind": {
@@ -1363,15 +1363,15 @@
           "type": "string"
         },
         "operational": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the command post operates."
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the command post, as latitude and longitude."
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that the command post is for.",
           "x-catalog": "order_units"
         }
@@ -1401,7 +1401,7 @@
       "description": "A command relationship is the command or support relationship of one unit.",
       "properties": {
         "effective": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the start of the entry."
         },
         "headquarters": {
@@ -1410,7 +1410,7 @@
           "type": "string"
         },
         "phase": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the phase of the operation that the entry is applicable to.",
           "x-catalog": "order_phases"
         },
@@ -1431,12 +1431,12 @@
           "type": "string"
         },
         "to": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that is the other unit of the entry.",
           "x-catalog": "order_units"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that the entry is for.",
           "x-catalog": "order_units"
         }
@@ -1481,17 +1481,17 @@
       "description": "A concept of operations is the sequence of tasks of the force, with its main effort, areas and phases.",
       "properties": {
         "close_area": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the close area.",
           "x-catalog": "control_measures"
         },
         "deep_area": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the deep area.",
           "x-catalog": "control_measures"
         },
         "main_effort": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that is the main effort.",
           "x-catalog": "order_units"
         },
@@ -1504,12 +1504,12 @@
           "type": "array"
         },
         "rear_area": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the rear area.",
           "x-catalog": "control_measures"
         },
         "reserve": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that is the reserve.",
           "x-catalog": "order_units"
         },
@@ -1521,7 +1521,7 @@
         "supporting_efforts": {
           "description": "This list identifies the units of the task organization that are supporting efforts of the operation.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -1538,7 +1538,7 @@
       "description": "A contract support requirement is one requirement that contractors support.",
       "properties": {
         "airfield": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the airfield that the support is at.",
           "x-catalog": "places"
         },
@@ -1557,11 +1557,11 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this requirement. Each requirement in the order has a different identifier. Other parts of the order use it to refer to this requirement."
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the support, as latitude and longitude."
         },
         "requirement": {
@@ -1572,7 +1572,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that receive the support.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -1580,7 +1580,7 @@
           "uniqueItems": true
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the contract is in effect."
         }
       },
@@ -1597,12 +1597,12 @@
       "description": "A contracting office is one office that makes and controls contracts.",
       "properties": {
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that the office refers to.",
           "x-catalog": "channels"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this office. Each office in the order has a different identifier. Other parts of the order use it to refer to this office."
         },
         "name": {
@@ -1611,11 +1611,11 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the office, as latitude and longitude."
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that operates the office.",
           "x-catalog": "order_units"
         }
@@ -1634,7 +1634,7 @@
         "airspace_coordinating_measures": {
           "description": "This list identifies the control measures that are airspace coordinating measures that two or more units use.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures",
             "x-measure-categories": [
               "acm",
@@ -1666,13 +1666,13 @@
           "type": "string"
         },
         "effective_time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the start of the effect of the order."
         },
         "fire_support_coordination_measures": {
           "description": "This list identifies the control measures that are fire support coordination measure (FSCM) entries that two or more units use.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures",
             "x-measure-categories": [
               "fscm"
@@ -1737,17 +1737,17 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this decision point. Each decision point in the order has a different identifier. Other parts of the order use it to refer to this decision point."
         },
         "latest_time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the last time at which the commander makes the decision."
         },
         "measures": {
           "description": "This list identifies the control measures that the decision refers to, such as named areas of interest.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -1760,18 +1760,18 @@
           "type": "string"
         },
         "phase": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the phase of the operation that the decision is in.",
           "x-catalog": "order_phases"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the decision point, as latitude and longitude."
         },
         "requirements": {
           "description": "This list identifies the information requirements that support the decision.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_requirements"
           },
           "minItems": 0,
@@ -1797,12 +1797,12 @@
       "description": "A defended asset is one asset that air defence gives protection to, with its priority.",
       "properties": {
         "airfield": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the airfield that is the asset.",
           "x-catalog": "places"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this asset. Each asset in the order has a different identifier. Other parts of the order use it to refer to this asset."
         },
         "name": {
@@ -1811,7 +1811,7 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the asset, as latitude and longitude."
         },
         "priority": {
@@ -1820,7 +1820,7 @@
           "type": "integer"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that is the asset.",
           "x-catalog": "order_units"
         }
@@ -1865,7 +1865,7 @@
       "description": "An essential element of friendly information is one item of friendly information that the operation keeps from the enemy.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this item. Each item in the order has a different identifier. Other parts of the order use it to refer to this item."
         },
         "item": {
@@ -1886,7 +1886,7 @@
       "description": "A measure of effectiveness is one measure of effectiveness (MOE), with its indicators.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this measure. Each measure in the order has a different identifier. Other parts of the order use it to refer to this measure."
         },
         "indicators": {
@@ -1931,7 +1931,7 @@
           "type": "array"
         },
         "jamming_authority": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that gives approval for electromagnetic attack.",
           "x-catalog": "agencies"
         },
@@ -1952,7 +1952,7 @@
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that the level is applicable to. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -1960,7 +1960,7 @@
           "uniqueItems": true
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this period. Each period in the order has a different identifier. Other parts of the order use it to refer to this period."
         },
         "level": {
@@ -1976,7 +1976,7 @@
         "measures": {
           "description": "This list identifies the control measures that give the area of the level.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -1986,7 +1986,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that the level is applicable to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -1994,7 +1994,7 @@
           "uniqueItems": true
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the level is in effect."
         }
       },
@@ -2048,7 +2048,7 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this condition. Each condition in the end state has a different identifier. Other parts of the order use it to refer to this condition."
         }
       },
@@ -2064,7 +2064,7 @@
       "description": "An enemy course of action is one course of action (COA) that the enemy can use.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this enemy course of action (COA). Each enemy COA in the order has a different identifier. Other parts of the order use it to refer to this enemy COA."
         },
         "kind": {
@@ -2079,7 +2079,7 @@
         "measures": {
           "description": "This list identifies the control measures that the enemy course of action (COA) refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -2139,7 +2139,7 @@
       "description": "An enemy unit is one enemy unit, with its composition, disposition and strength.",
       "properties": {
         "as_of": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the data about the enemy unit."
         },
         "echelon": {
@@ -2166,7 +2166,7 @@
         "emitters": {
           "description": "This list identifies the emitters of the resource catalogue that this enemy unit operates.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "emitters"
           },
           "minItems": 0,
@@ -2174,11 +2174,11 @@
           "uniqueItems": true
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this enemy unit. Each enemy unit in the order has a different identifier. Other parts of the order use it to refer to this enemy unit."
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the area of the enemy unit.",
           "x-catalog": "control_measures"
         },
@@ -2188,7 +2188,7 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the enemy unit, as latitude and longitude."
         },
         "strength_percent": {
@@ -2200,7 +2200,7 @@
         "targets": {
           "description": "This list identifies the targets of the resource catalogue that are parts of this enemy unit.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "targets"
           },
           "minItems": 0,
@@ -2210,7 +2210,7 @@
         "threats": {
           "description": "This list identifies the threats of the resource catalogue that this enemy unit has.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "threats"
           },
           "minItems": 0,
@@ -2245,7 +2245,7 @@
         "obstacle_zones": {
           "description": "This list identifies the control measures that are obstacle control areas.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -2300,11 +2300,11 @@
       "description": "An ambulance exchange point is one point where casualties change from one ambulance to a different ambulance.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this ambulance exchange point. Each ambulance exchange point in the order has a different identifier. Other parts of the order use it to refer to this ambulance exchange point."
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the ambulance exchange point.",
           "x-catalog": "control_measures"
         },
@@ -2314,7 +2314,7 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the ambulance exchange point, as latitude and longitude."
         }
       },
@@ -2365,7 +2365,7 @@
         "position_areas": {
           "description": "This list identifies the control measures that are position areas of the field artillery.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -2383,7 +2383,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that give field artillery support.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -2436,7 +2436,7 @@
         "fire_support_coordination_measures": {
           "description": "This list identifies the control measures that are fire support coordination measure (FSCM) entries.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures",
             "x-measure-categories": [
               "fscm"
@@ -2500,7 +2500,7 @@
         "supporting_agencies": {
           "description": "This list identifies the command and control agencies that support the operation.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "agencies"
           },
           "minItems": 0,
@@ -2517,7 +2517,7 @@
       "description": "A program of funds is one source of funds for the operation.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this program. Each program in the order has a different identifier. Other parts of the order use it to refer to this program."
         },
         "limit": {
@@ -2530,7 +2530,7 @@
           "type": "string"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that controls the funds.",
           "x-catalog": "order_units"
         }
@@ -2596,7 +2596,7 @@
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that attack the target. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -2618,16 +2618,16 @@
           "type": "string"
         },
         "emitter": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the emitter of the resource catalogue that this entry is for.",
           "x-catalog": "emitters"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this entry. Each entry in the order has a different identifier. Other parts of the order use it to refer to this entry."
         },
         "phase": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the phase of the operation that the entry is applicable to.",
           "x-catalog": "order_phases"
         },
@@ -2637,12 +2637,12 @@
           "type": "integer"
         },
         "target": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the target of the resource catalogue that this entry is for.",
           "x-catalog": "targets"
         },
         "threat": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the threat of the resource catalogue that this entry is for.",
           "x-catalog": "threats"
         },
@@ -2658,7 +2658,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that attack the target.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -2694,7 +2694,7 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this target. Each target in the order has a different identifier. Other parts of the order use it to refer to this target."
         },
         "name": {
@@ -2703,12 +2703,12 @@
           "type": "string"
         },
         "target": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the target of the resource catalogue that this entry is for.",
           "x-catalog": "targets"
         },
         "threat": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the threat of the resource catalogue that this entry is for.",
           "x-catalog": "threats"
         }
@@ -2746,7 +2746,7 @@
           "type": "string"
         },
         "order": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DocumentRef",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DocumentRef",
           "description": "This field identifies the order of the higher headquarters."
         }
       },
@@ -2761,11 +2761,11 @@
       "description": "A host-nation support item is one type of support that the host nation gives.",
       "properties": {
         "agreement": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field gives the identifier of the agreement for the support, from `agreements`."
         },
         "airfield": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the airfield that receives the support.",
           "x-catalog": "places"
         },
@@ -2790,11 +2790,11 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this item. Each item in the order has a different identifier. Other parts of the order use it to refer to this item."
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the support, as latitude and longitude."
         },
         "provider": {
@@ -2850,7 +2850,7 @@
       "description": "An indicator is one indicator of an assessment measure, with its threshold.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this indicator. Each indicator in its measure has a different identifier. Other parts of the order use it to refer to this indicator."
         },
         "indicator": {
@@ -2886,7 +2886,7 @@
         "handover_lines": {
           "description": "This list identifies the control measures that are intelligence handover lines.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -2896,7 +2896,7 @@
         "named_areas_of_interest": {
           "description": "This list identifies the control measures that give the named areas of interest.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -2923,12 +2923,12 @@
       "description": "An information requirement is one priority intelligence requirement (PIR) or friendly force information requirement (FFIR) of the commander's critical information requirement (CCIR).",
       "properties": {
         "decision_point": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the decision point that the requirement supports.",
           "x-catalog": "order_decision_points"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this requirement. Each requirement in the order has a different identifier. Other parts of the order use it to refer to this requirement."
         },
         "indicators": {
@@ -2941,13 +2941,13 @@
           "type": "array"
         },
         "latest_time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the last time at which the information is of value."
         },
         "measures": {
           "description": "This list identifies the control measures that the requirement refers to, such as named areas of interest.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -2965,7 +2965,7 @@
           "type": "string"
         },
         "report_to": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that receives the reports.",
           "x-catalog": "agencies"
         }
@@ -2984,7 +2984,7 @@
         "channels": {
           "description": "This list identifies the radio channels that the system refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "minItems": 0,
@@ -2992,7 +2992,7 @@
           "uniqueItems": true
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this system. Each system in the order has a different identifier. Other parts of the order use it to refer to this system."
         },
         "name": {
@@ -3008,7 +3008,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that use the system.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -3028,7 +3028,7 @@
       "description": "An inspection is one inspection of the inspector general.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this inspection. Each inspection in the order has a different identifier. Other parts of the order use it to refer to this inspection."
         },
         "subject": {
@@ -3039,7 +3039,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that the inspection is for.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -3047,7 +3047,7 @@
           "uniqueItems": true
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the inspection occurs."
         }
       },
@@ -3098,7 +3098,7 @@
       "description": "An instruction is one instruction of the coordinating instructions, with an identifier.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this instruction. Each instruction in its list has a different identifier. Other parts of the order use it to refer to this instruction."
         },
         "instruction": {
@@ -3109,7 +3109,7 @@
         "measures": {
           "description": "This list identifies the control measures that the instruction refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -3119,7 +3119,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that the instruction is for.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -3127,7 +3127,7 @@
           "uniqueItems": true
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the instruction is in effect."
         }
       },
@@ -3188,7 +3188,7 @@
         "agencies": {
           "description": "This list identifies the command and control agencies that receive the intelligence product.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "agencies"
           },
           "minItems": 0,
@@ -3196,16 +3196,16 @@
           "uniqueItems": true
         },
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that sends the intelligence product.",
           "x-catalog": "channels"
         },
         "due": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the first issue of the intelligence product."
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this intelligence product. Each intelligence product in the order has a different identifier. Other parts of the order use it to refer to this intelligence product."
         },
         "interval_minutes": {
@@ -3221,7 +3221,7 @@
         "recipients": {
           "description": "This list identifies the units of the task organization that receive the intelligence product.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -3278,7 +3278,7 @@
         "channels": {
           "description": "This list identifies the radio channels that the organization uses for coordination.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "minItems": 0,
@@ -3286,7 +3286,7 @@
           "uniqueItems": true
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this organization. Each organization in the order has a different identifier. Other parts of the order use it to refer to this organization."
         },
         "kind": {
@@ -3299,7 +3299,7 @@
           "type": "string"
         },
         "liaison": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that is the liaison to the organization.",
           "x-catalog": "order_units"
         },
@@ -3318,7 +3318,7 @@
           "type": "array"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the office of the organization, as latitude and longitude."
         }
       },
@@ -3345,11 +3345,11 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this task. Each task in the order has a different identifier. Other parts of the order use it to refer to this task."
         },
         "organization": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the interagency organization that the task is with.",
           "x-catalog": "order_organizations"
         },
@@ -3359,11 +3359,11 @@
           "type": "string"
         },
         "time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the milestone."
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that does the task.",
           "x-catalog": "order_units"
         }
@@ -3380,14 +3380,14 @@
       "description": "A jamming coordination is one time interval of electromagnetic attack, with its emitters and the frequencies that it keeps clear.",
       "properties": {
         "area": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the area of the resource catalogue that the jamming aircraft operate in.",
           "x-catalog": "areas"
         },
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that do the jamming. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -3395,14 +3395,14 @@
           "uniqueItems": true
         },
         "authority": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that gives approval for the jamming.",
           "x-catalog": "agencies"
         },
         "emitters": {
           "description": "This list identifies the emitters of the resource catalogue that are the objects of the jamming.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "emitters"
           },
           "minItems": 0,
@@ -3410,7 +3410,7 @@
           "uniqueItems": true
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this entry. Each entry in the order has a different identifier. Other parts of the order use it to refer to this entry."
         },
         "protected_frequencies": {
@@ -3422,7 +3422,7 @@
           "type": "array"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the jamming occurs."
         }
       },
@@ -3440,7 +3440,7 @@
         "channels": {
           "description": "This list identifies the radio channels that use the key.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "minItems": 0,
@@ -3448,7 +3448,7 @@
           "uniqueItems": true
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this key period. Each key period in the order has a different identifier. Other parts of the order use it to refer to this key period."
         },
         "key": {
@@ -3457,7 +3457,7 @@
           "type": "string"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the key is in effect."
         }
       },
@@ -3474,13 +3474,13 @@
       "description": "A key task is one key task of the intent of the commander.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this key task. Each key task in the order has a different identifier. Other parts of the order use it to refer to this key task."
         },
         "measures": {
           "description": "This list identifies the control measures that the key task refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -3517,11 +3517,11 @@
       "description": "Key terrain is one area or point of key terrain.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this key terrain. Each key terrain in the order has a different identifier. Other parts of the order use it to refer to this key terrain."
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the area of the key terrain.",
           "x-catalog": "control_measures"
         },
@@ -3531,7 +3531,7 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the key terrain, as latitude and longitude."
         },
         "significance": {
@@ -3587,15 +3587,15 @@
       "description": "A lane is one lane through an obstacle.",
       "properties": {
         "entry": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the entry of the lane, as latitude and longitude."
         },
         "exit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the exit of the lane, as latitude and longitude."
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this lane. Each lane in the order has a different identifier. Other parts of the order use it to refer to this lane."
         },
         "marking": {
@@ -3609,12 +3609,12 @@
           "type": "string"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that opens the lane.",
           "x-catalog": "order_units"
         },
         "width": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Length",
           "description": "This field gives the width of the lane, as a length with its unit."
         }
       },
@@ -3644,17 +3644,17 @@
       "description": "A leader location is the location of the commander or of one key leader.",
       "properties": {
         "command_post": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command post that the leader is at.",
           "x-catalog": "order_command_posts"
         },
         "phase": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the phase of the operation that the location is applicable to.",
           "x-catalog": "order_phases"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the leader, as latitude and longitude."
         },
         "role": {
@@ -3663,7 +3663,7 @@
           "type": "string"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that the leader is in.",
           "x-catalog": "order_units"
         }
@@ -3691,7 +3691,7 @@
       "description": "A liaison requirement is one liaison element of the operation.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that receives the liaison element.",
           "x-catalog": "agencies"
         },
@@ -3701,15 +3701,15 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this liaison element. Each liaison element in the order has a different identifier. Other parts of the order use it to refer to this liaison element."
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the liaison element, as latitude and longitude."
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that sends the liaison element.",
           "x-catalog": "order_units"
         }
@@ -3725,7 +3725,7 @@
       "description": "Light data is the times of sunrise, sunset, moonrise and moonset for one day of the operation.",
       "properties": {
         "begin_morning_nautical_twilight": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the begin morning nautical twilight."
         },
         "date": {
@@ -3735,7 +3735,7 @@
           "type": "string"
         },
         "end_evening_nautical_twilight": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the end evening nautical twilight."
         },
         "moon_illumination_percent": {
@@ -3745,19 +3745,19 @@
           "type": "integer"
         },
         "moonrise": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of moonrise."
         },
         "moonset": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of moonset."
         },
         "sunrise": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of sunrise."
         },
         "sunset": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of sunset."
         }
       },
@@ -3782,7 +3782,7 @@
         "routes": {
           "description": "This list identifies the supply routes of the resource catalogue that the units follow.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "routes"
           },
           "minItems": 0,
@@ -3812,14 +3812,14 @@
       "description": "A medical evacuation is the medical evacuation plan of the order.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that receives medical evacuation requests.",
           "x-catalog": "agencies"
         },
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that are medical evacuation aircraft. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -3837,7 +3837,7 @@
         "request_channels": {
           "description": "This list identifies the radio channels that units send medical evacuation requests on.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "minItems": 0,
@@ -3859,12 +3859,12 @@
       "description": "A medical treatment facility is one medical facility and its role of care.",
       "properties": {
         "airfield": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the airfield that has the facility.",
           "x-catalog": "places"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this facility. Each facility in the order has a different identifier. Other parts of the order use it to refer to this facility."
         },
         "name": {
@@ -3873,7 +3873,7 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the facility, as latitude and longitude."
         },
         "role": {
@@ -3883,7 +3883,7 @@
           "type": "integer"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that operates the facility.",
           "x-catalog": "order_units"
         }
@@ -3906,7 +3906,7 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this message. Each message in its list has a different identifier. Other parts of the order use it to refer to this message."
         },
         "kind": {
@@ -3938,7 +3938,7 @@
         "objectives": {
           "description": "This list identifies the control measures that are the objectives of the mission.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -3963,7 +3963,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that do the mission.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -3971,7 +3971,7 @@
           "uniqueItems": true
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the unit does the mission."
         }
       },
@@ -4009,34 +4009,34 @@
       "description": "A movement is one movement of a unit on a route.",
       "properties": {
         "arrival": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of arrival at the release point."
         },
         "departure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of departure from the start point."
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this movement. Each movement in the order has a different identifier. Other parts of the order use it to refer to this movement."
         },
         "release_point": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that is the release point.",
           "x-catalog": "control_measures"
         },
         "route": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the route of the resource catalogue that the unit follows.",
           "x-catalog": "routes"
         },
         "start_point": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that is the start point.",
           "x-catalog": "control_measures"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that moves.",
           "x-catalog": "order_units"
         }
@@ -4055,7 +4055,7 @@
         "fire_support_areas": {
           "description": "This list identifies the control measures that are fire support areas and fire support stations.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -4065,7 +4065,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that give naval fire support.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -4082,20 +4082,20 @@
       "description": "A navigation outage is one time interval in which satellite navigation has a large position error.",
       "properties": {
         "expected_error": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Length",
           "description": "This field gives the possible position error, as a length with its unit."
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this navigation outage. Each navigation outage in the order has a different identifier. Other parts of the order use it to refer to this navigation outage."
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the area of the navigation outage.",
           "x-catalog": "control_measures"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which satellite navigation has a large position error."
         }
       },
@@ -4113,7 +4113,7 @@
         "agencies": {
           "description": "This list identifies the command and control agencies that are members of the net.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "agencies"
           },
           "minItems": 0,
@@ -4121,17 +4121,17 @@
           "uniqueItems": true
         },
         "alternate": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that is the alternate channel of the net.",
           "x-catalog": "channels"
         },
         "control": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that controls the net.",
           "x-catalog": "agencies"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this net. Each net in the order has a different identifier. Other parts of the order use it to refer to this net."
         },
         "kind": {
@@ -4150,7 +4150,7 @@
         "members": {
           "description": "This list identifies the units of the task organization that are members of the net.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -4163,7 +4163,7 @@
           "type": "string"
         },
         "primary": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that is the primary channel of the net.",
           "x-catalog": "channels"
         }
@@ -4181,7 +4181,7 @@
       "description": "An objective is one objective with an identifier.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this objective. Each objective in its list has a different identifier. Other parts of the order use it to refer to this objective."
         },
         "objective": {
@@ -4214,7 +4214,7 @@
       "description": "An obstacle is one obstacle, with its effect and its unit.",
       "properties": {
         "complete_by": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the end of the work on the obstacle."
         },
         "effect": {
@@ -4228,7 +4228,7 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this obstacle. Each obstacle in the order has a different identifier. Other parts of the order use it to refer to this obstacle."
         },
         "kind": {
@@ -4246,7 +4246,7 @@
           "type": "string"
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the area of the obstacle.",
           "x-catalog": "control_measures"
         },
@@ -4256,7 +4256,7 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the obstacle, as latitude and longitude."
         },
         "status": {
@@ -4270,7 +4270,7 @@
           "type": "string"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that controls the obstacle.",
           "x-catalog": "order_units"
         }
@@ -4288,7 +4288,7 @@
       "description": "An annex for operational contract support is the annex with the letter `W` in the order.",
       "properties": {
         "accountability_report": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the report of the resource catalogue that gives the accountability of contractors.",
           "x-catalog": "reports"
         },
@@ -4346,7 +4346,7 @@
         "operation_overlay": {
           "description": "This list identifies the control measures that are on the operation overlay.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -4410,7 +4410,7 @@
       "description": "An order reference is the identifier and the revision of one order.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the order that this reference is for. The value is the `meta.id` field of the order."
         },
         "revision": {
@@ -4431,7 +4431,7 @@
       "description": "A communication method is one method of a primary, alternate, contingency and emergency (PACE) plan.",
       "properties": {
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that the method refers to.",
           "x-catalog": "channels"
         },
@@ -4480,7 +4480,7 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this plan. Each plan in the order has a different identifier. Other parts of the order use it to refer to this plan."
         },
         "primary": {
@@ -4501,7 +4501,7 @@
       "description": "A measure of performance is one measure of performance (MOP) for a task.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this measure. Each measure in the order has a different identifier. Other parts of the order use it to refer to this measure."
         },
         "indicator": {
@@ -4517,7 +4517,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that the measure is applicable to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -4538,12 +4538,12 @@
       "description": "A personnel support is the personnel support plan of the order.",
       "properties": {
         "casualty_report": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the report of the resource catalogue that gives the casualties.",
           "x-catalog": "reports"
         },
         "strength_report": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the report of the resource catalogue that gives the personnel strength.",
           "x-catalog": "reports"
         },
@@ -4562,14 +4562,14 @@
       "description": "A measures for personnel recovery is the measures for personnel recovery in the operation.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that controls personnel recovery.",
           "x-catalog": "agencies"
         },
         "channels": {
           "description": "This list identifies the radio channels that are for isolated personnel and recovery forces.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "minItems": 0,
@@ -4579,7 +4579,7 @@
         "measures": {
           "description": "This list identifies the control measures that the recovery refers to, such as safe areas and contact points.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -4589,7 +4589,7 @@
         "recovery_forces": {
           "description": "This list identifies the missions of the air tasking order (ATO) that are personnel recovery forces. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -4613,7 +4613,7 @@
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that are in the phase. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -4621,7 +4621,7 @@
           "uniqueItems": true
         },
         "end": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the end of the phase."
         },
         "end_condition": {
@@ -4630,18 +4630,18 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this phase. Each phase in the order has a different identifier. Other parts of the order use it to refer to this phase."
         },
         "main_effort": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that is the main effort in the phase.",
           "x-catalog": "order_units"
         },
         "measures": {
           "description": "This list identifies the control measures that the phase refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -4659,7 +4659,7 @@
           "type": "integer"
         },
         "start": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the start of the phase."
         },
         "start_condition": {
@@ -4708,12 +4708,12 @@
           "type": "string"
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that has this priority.",
           "x-catalog": "control_measures"
         },
         "phase": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the phase of the operation that this priority is applicable to.",
           "x-catalog": "order_phases"
         },
@@ -4728,7 +4728,7 @@
           "type": "string"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that has this priority.",
           "x-catalog": "order_units"
         }
@@ -4744,16 +4744,16 @@
       "description": "A protection priority is one asset of the list of protection priorities.",
       "properties": {
         "airfield": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the airfield that is the asset.",
           "x-catalog": "places"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this asset. Each asset in the order has a different identifier. Other parts of the order use it to refer to this asset."
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the area of the asset.",
           "x-catalog": "control_measures"
         },
@@ -4763,7 +4763,7 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the asset, as latitude and longitude."
         },
         "priority": {
@@ -4772,7 +4772,7 @@
           "type": "integer"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that is the asset.",
           "x-catalog": "order_units"
         }
@@ -4802,7 +4802,7 @@
       "description": "A protected site is one site that the operation keeps safe from attack.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this site. Each site in the order has a different identifier. Other parts of the order use it to refer to this site."
         },
         "kind": {
@@ -4819,7 +4819,7 @@
           "type": "string"
         },
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the area of the site.",
           "x-catalog": "control_measures"
         },
@@ -4829,7 +4829,7 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the site, as latitude and longitude."
         },
         "restriction": {
@@ -4969,7 +4969,7 @@
       "description": "A reaction force is one reaction force with its area and its time of movement.",
       "properties": {
         "area": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the area of the reaction force.",
           "x-catalog": "control_measures"
         },
@@ -4979,7 +4979,7 @@
           "type": "integer"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that is the reaction force.",
           "x-catalog": "order_units"
         }
@@ -5012,7 +5012,7 @@
       "description": "A recipient is one addressee of the order.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that receives the order.",
           "x-catalog": "agencies"
         },
@@ -5035,7 +5035,7 @@
           "type": "string"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that receives the order.",
           "x-catalog": "order_units"
         }
@@ -5051,14 +5051,14 @@
       "description": "An appendix for personnel recovery is `Appendix 16 (Personnel Recovery)` of Annex C.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that coordinates personnel recovery.",
           "x-catalog": "agencies"
         },
         "channels": {
           "description": "This list identifies the radio channels that are for isolated personnel and recovery forces.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "minItems": 0,
@@ -5068,7 +5068,7 @@
         "contact_points": {
           "description": "This list identifies the points that are contact points for recovery forces. Each point shall have the role `control`.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures",
             "x-point-roles": [
               "control"
@@ -5081,7 +5081,7 @@
         "recovery_forces": {
           "description": "This list identifies the missions of the air tasking order (ATO) that are recovery forces. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -5091,7 +5091,7 @@
         "safe_areas": {
           "description": "This list identifies the control measures that are safe areas for isolated personnel.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5125,7 +5125,7 @@
       "description": "A release authority is the authority that releases information of one type.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that releases the information.",
           "x-catalog": "agencies"
         },
@@ -5135,7 +5135,7 @@
           "type": "string"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that releases the information.",
           "x-catalog": "order_units"
         }
@@ -5153,7 +5153,7 @@
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that send the report. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -5161,18 +5161,18 @@
           "uniqueItems": true
         },
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that sends the report.",
           "x-catalog": "channels"
         },
         "due": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the first report."
         },
         "from_units": {
           "description": "This list identifies the units of the task organization that send the report.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -5185,17 +5185,17 @@
           "type": "integer"
         },
         "report": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the report of the resource catalogue that this requirement is for.",
           "x-catalog": "reports"
         },
         "to_agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that receives the report.",
           "x-catalog": "agencies"
         },
         "to_unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that receives the report.",
           "x-catalog": "order_units"
         },
@@ -5255,17 +5255,17 @@
       "description": "A restricted frequency is one entry of the restricted frequency list.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that controls the frequency.",
           "x-catalog": "agencies"
         },
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that the restriction is for.",
           "x-catalog": "channels"
         },
         "frequency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Frequency",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Frequency",
           "description": "This field gives the frequency of the restriction, when no channel identifies it, as a frequency with its unit."
         },
         "kind": {
@@ -5291,7 +5291,7 @@
         "channels": {
           "description": "This list identifies the radio channels that the retransmission site sends again.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "minItems": 0,
@@ -5299,7 +5299,7 @@
           "uniqueItems": true
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this site. Each site in the order has a different identifier. Other parts of the order use it to refer to this site."
         },
         "name": {
@@ -5308,16 +5308,16 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the site, as latitude and longitude."
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that operates the site.",
           "x-catalog": "order_units"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the site operates."
         }
       },
@@ -5344,7 +5344,7 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this control. Each control in the order has a different identifier. Other parts of the order use it to refer to this control."
         },
         "initial_risk": {
@@ -5370,7 +5370,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that apply the control.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -5403,7 +5403,7 @@
         "fratricide_measures": {
           "description": "This list identifies the control measures that prevent fratricide.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5440,13 +5440,13 @@
       "description": "A rule of engagement is one rule of the rules of engagement (ROE), with its number and its control measures.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this rule. Each rule in the order has a different identifier. Other parts of the order use it to refer to this rule."
         },
         "measures": {
           "description": "This list identifies the control measures that the rule is applicable to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5466,7 +5466,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that the rule is applicable to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -5474,7 +5474,7 @@
           "uniqueItems": true
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the rule is in effect."
         }
       },
@@ -5499,14 +5499,14 @@
           "type": "string"
         },
         "engagement_authority": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that has the engagement authority.",
           "x-catalog": "agencies"
         },
         "measures": {
           "description": "This list identifies the control measures that the scheme of air and missile defence refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5516,7 +5516,7 @@
         "phases": {
           "description": "This list identifies the phases of the operation that the scheme of air and missile defence gives data for.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_phases"
           },
           "minItems": 0,
@@ -5539,7 +5539,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that do the scheme of air and missile defence.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -5567,7 +5567,7 @@
         "agencies": {
           "description": "This list identifies the command and control agencies that control the airspace.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "agencies"
           },
           "minItems": 0,
@@ -5575,7 +5575,7 @@
           "uniqueItems": true
         },
         "coordinating_altitude": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the coordinating altitude.",
           "x-catalog": "control_measures",
           "x-measure-categories": [
@@ -5585,7 +5585,7 @@
         "measures": {
           "description": "This list identifies the control measures that the scheme of airspace control refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5595,7 +5595,7 @@
         "phases": {
           "description": "This list identifies the phases of the operation that the scheme of airspace control gives data for.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_phases"
           },
           "minItems": 0,
@@ -5618,7 +5618,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that do the scheme of airspace control.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -5637,7 +5637,7 @@
         "measures": {
           "description": "This list identifies the control measures that the scheme of engineering refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5647,7 +5647,7 @@
         "phases": {
           "description": "This list identifies the phases of the operation that the scheme of engineering gives data for.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_phases"
           },
           "minItems": 0,
@@ -5670,7 +5670,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that do the scheme of engineering.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -5689,7 +5689,7 @@
         "air_support": {
           "description": "This list identifies the missions of the air tasking order (ATO) that give air support. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -5699,7 +5699,7 @@
         "measures": {
           "description": "This list identifies the control measures that the scheme of fires refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5709,7 +5709,7 @@
         "phases": {
           "description": "This list identifies the phases of the operation that the scheme of fires gives data for.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_phases"
           },
           "minItems": 0,
@@ -5740,7 +5740,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that do the scheme of fires.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -5759,7 +5759,7 @@
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that do reconnaissance or surveillance. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -5769,7 +5769,7 @@
         "measures": {
           "description": "This list identifies the control measures that the scheme of information collection refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5779,7 +5779,7 @@
         "phases": {
           "description": "This list identifies the phases of the operation that the scheme of information collection gives data for.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_phases"
           },
           "minItems": 0,
@@ -5797,7 +5797,7 @@
         "reconnaissance_objectives": {
           "description": "This list identifies the control measures that are the primary reconnaissance objectives.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5812,7 +5812,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that do the scheme of information collection.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -5831,7 +5831,7 @@
         "measures": {
           "description": "This list identifies the control measures that the scheme of intelligence refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5841,7 +5841,7 @@
         "phases": {
           "description": "This list identifies the phases of the operation that the scheme of intelligence gives data for.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_phases"
           },
           "minItems": 0,
@@ -5878,7 +5878,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that do the scheme of intelligence.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -5897,7 +5897,7 @@
         "measures": {
           "description": "This list identifies the control measures that the scheme of manoeuvre refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5907,7 +5907,7 @@
         "phases": {
           "description": "This list identifies the phases of the operation that the scheme of manoeuvre gives data for.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_phases"
           },
           "minItems": 0,
@@ -5923,7 +5923,7 @@
           "type": "array"
         },
         "reserve": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that is the reserve.",
           "x-catalog": "order_units"
         },
@@ -5943,7 +5943,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that do the scheme of manoeuvre.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -5962,7 +5962,7 @@
         "measures": {
           "description": "This list identifies the control measures that the scheme of protection refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -5972,7 +5972,7 @@
         "phases": {
           "description": "This list identifies the phases of the operation that the scheme of protection gives data for.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_phases"
           },
           "minItems": 0,
@@ -5990,7 +5990,7 @@
         "reaction_forces": {
           "description": "This list identifies the units of the task organization that are reaction forces.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -6005,7 +6005,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that do the scheme of protection.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -6065,7 +6065,7 @@
         "channels": {
           "description": "This list identifies the radio channels that the order refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "minItems": 0,
@@ -6207,7 +6207,7 @@
       "description": "A space capability is one space capability that the operation uses.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this capability. Each capability in the order has a different identifier. Other parts of the order use it to refer to this capability."
         },
         "mission_area": {
@@ -6230,7 +6230,7 @@
         "units": {
           "description": "This list identifies the units of the task organization that use the capability.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "order_units"
           },
           "minItems": 0,
@@ -6238,7 +6238,7 @@
           "uniqueItems": true
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the capability is available."
         }
       },
@@ -6277,7 +6277,7 @@
         "satellite_channels": {
           "description": "This list identifies the radio channels that are satellite channels.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "minItems": 0,
@@ -6307,7 +6307,7 @@
           "type": "array"
         },
         "classified_annex": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DocumentRef",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DocumentRef",
           "description": "This field identifies the classified annex that contains the full data."
         },
         "remarks": {
@@ -6330,7 +6330,7 @@
       "description": "Entry for special technical operations are one unclassified entry of the capabilities integration matrix.",
       "properties": {
         "coordinator": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that coordinates the entry.",
           "x-catalog": "order_units"
         },
@@ -6343,7 +6343,7 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this entry. Each entry in the order has a different identifier. Other parts of the order use it to refer to this entry."
         },
         "name": {
@@ -6352,7 +6352,7 @@
           "type": "string"
         },
         "phase": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the phase of the operation that the entry is applicable to.",
           "x-catalog": "order_phases"
         }
@@ -6395,7 +6395,7 @@
           "type": "string"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that receives the allocation.",
           "x-catalog": "order_units"
         },
@@ -6439,7 +6439,7 @@
       "description": "A supply point is one point where units get supplies or services.",
       "properties": {
         "airfield": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the airfield that has the supply point.",
           "x-catalog": "places"
         },
@@ -6465,7 +6465,7 @@
           "uniqueItems": true
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this supply point. Each supply point in the order has a different identifier. Other parts of the order use it to refer to this supply point."
         },
         "kind": {
@@ -6489,16 +6489,16 @@
           "type": "string"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the supply point, as latitude and longitude."
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that operates the supply point.",
           "x-catalog": "order_units"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the supply point operates."
         }
       },
@@ -6626,7 +6626,7 @@
         "target_reference_points": {
           "description": "This list identifies the control measures that are target reference points.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -6653,7 +6653,7 @@
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that do the task. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -6661,13 +6661,13 @@
           "uniqueItems": true
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this task. Each task in the order has a different identifier. Other parts of the order use it to refer to this task."
         },
         "measures": {
           "description": "This list identifies the control measures that the task refers to.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "control_measures"
           },
           "minItems": 0,
@@ -6675,7 +6675,7 @@
           "uniqueItems": true
         },
         "phase": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the phase of the operation that the task is in.",
           "x-catalog": "order_phases"
         },
@@ -6690,7 +6690,7 @@
           "type": "string"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the unit does the task."
         }
       },
@@ -6787,7 +6787,7 @@
       "description": "A threat assessment is the assessment of one threat of the resource catalogue.",
       "properties": {
         "as_of": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the assessment."
         },
         "capability": {
@@ -6807,7 +6807,7 @@
         "emitters": {
           "description": "This list identifies the emitters of the resource catalogue that the assessment refers to. Each emitter gives the position and the engagement ring.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "emitters"
           },
           "minItems": 0,
@@ -6815,16 +6815,16 @@
           "uniqueItems": true
         },
         "enemy_unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the enemy unit of paragraph 1 that has the threat.",
           "x-catalog": "order_enemy_units"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the threat at the time of the assessment, as latitude and longitude."
         },
         "threat": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the threat of the resource catalogue that the assessment refers to.",
           "x-catalog": "threats"
         }
@@ -6842,7 +6842,7 @@
         "ato_missions": {
           "description": "This list identifies the missions of the air tasking order (ATO) that can attack the target. The `orders` field identifies the ATO.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "ato_missions"
           },
           "minItems": 0,
@@ -6850,12 +6850,12 @@
           "uniqueItems": true
         },
         "engagement_authority": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that gives approval for the engagement.",
           "x-catalog": "agencies"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this entry. Each entry in the order has a different identifier. Other parts of the order use it to refer to this entry."
         },
         "priority": {
@@ -6864,7 +6864,7 @@
           "type": "integer"
         },
         "target": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the target of the resource catalogue that this time-sensitive target (TST) is for.",
           "x-catalog": "targets"
         },
@@ -6874,7 +6874,7 @@
           "type": "string"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the target is possibly active."
         }
       },
@@ -6913,16 +6913,16 @@
           "type": "string"
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this event. Each event in the timeline has a different identifier. Other parts of the order use it to refer to this event."
         },
         "phase": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the phase of the operation that starts or stops at this event.",
           "x-catalog": "order_phases"
         },
         "time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of the event."
         }
       },
@@ -6938,7 +6938,7 @@
       "description": "A unit is one unit of the task organization of the order.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that this unit operates.",
           "x-catalog": "agencies"
         },
@@ -6948,7 +6948,7 @@
           "type": "string"
         },
         "coalition": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Coalition",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Coalition",
           "description": "This field gives the coalition of the unit, as one of the enumerated values."
         },
         "commander": {
@@ -6983,12 +6983,12 @@
           "type": "string"
         },
         "parent": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that is the parent of this unit in the task organization.",
           "x-catalog": "order_units"
         },
         "position": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
           "description": "This field gives the geographic position of the unit at the time of issue, as latitude and longitude."
         },
         "remarks": {
@@ -7021,7 +7021,7 @@
           "type": "array"
         },
         "unit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the unit of the task organization that receives the tasks.",
           "x-catalog": "order_units"
         }
@@ -7038,7 +7038,7 @@
       "description": "A weapons control order is one weapons control status for an area and a time interval.",
       "properties": {
         "measure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the control measure that gives the area of the weapons control status.",
           "x-catalog": "control_measures"
         },
@@ -7052,7 +7052,7 @@
           "type": "string"
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the weapons control status is in effect."
         }
       },
@@ -7097,7 +7097,7 @@
       "description": "A weather forecast is the forecast weather for one time interval.",
       "properties": {
         "ceiling": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Altitude",
           "description": "This field gives the lowest cloud ceiling, as an altitude with its unit and reference."
         },
         "effects": {
@@ -7122,19 +7122,19 @@
           "description": "This field gives the temperature at the surface, with its unit."
         },
         "visibility": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Length",
           "description": "This field gives the horizontal visibility, as a length with its unit."
         },
         "wind_direction": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Bearing",
           "description": "This field gives the direction from which the wind blows, as a bearing with its unit and reference."
         },
         "wind_speed": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Speed",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Speed",
           "description": "This field gives the speed of the wind, as a speed with its unit."
         },
         "window": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
           "description": "This field gives the time interval during which the forecast is applicable."
         }
       },
@@ -7145,7 +7145,7 @@
       "type": "object"
     }
   },
-  "$id": "urn:openaix:schema:opord:0.1.0-draft.1",
+  "$id": "urn:openaix:schema:opord:0.1.0-draft.2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "description": "An operation order (OPORD) is a directive that coordinates the execution of an operation, in five paragraphs with annexes. The structure follows FM 5-0 and FM 6-0.",
@@ -7173,11 +7173,11 @@
       "description": "This field gives paragraph 5 (Command and Signal)."
     },
     "date_time": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
       "description": "This field gives the time of signature of the order."
     },
     "effective_time": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
       "description": "This field gives the time of the start of the effect of the order."
     },
     "execution": {
@@ -7185,7 +7185,7 @@
       "description": "This field gives paragraph 3 (Execution)."
     },
     "extensions": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
       "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record. The namespace `org.opord-builder.print` contains the data that `opord-builder` puts on each page."
     },
     "issuing_headquarters": {
@@ -7199,7 +7199,7 @@
       "type": "string"
     },
     "meta": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Metadata",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Metadata",
       "description": "This field gives the identification, revision and issue data of this document."
     },
     "mission": {
@@ -7221,23 +7221,23 @@
       "description": "This field gives the air tasking order (ATO), airspace control order (ACO) and special instructions (SPINS) of the order."
     },
     "period": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Period",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Period",
       "description": "This field gives the time interval during which the operation occurs."
     },
     "references": {
       "description": "This list contains the maps, charts and documents that the order refers to.",
       "items": {
-        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DocumentRef"
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DocumentRef"
       },
       "minItems": 0,
       "type": "array"
     },
     "resources_ref": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ResourceRef",
       "description": "This field identifies the resource catalogue that resolves the references of this order."
     },
     "schema_version": {
-      "const": "0.1.0-draft.1",
+      "const": "0.1.0-draft.2",
       "description": "This field gives the version of the openAIX schema that this document agrees with.",
       "type": "string"
     },
@@ -7255,7 +7255,7 @@
       },
       "description": "This map contains the units of the task organization. The key of each item is its identifier.",
       "propertyNames": {
-        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier"
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier"
       },
       "type": "object"
     },

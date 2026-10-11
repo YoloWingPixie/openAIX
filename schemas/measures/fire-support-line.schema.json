@@ -1,5 +1,5 @@
 {
-  "$id": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.1",
+  "$id": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "description": "A fire support line is one of four lines for the coordination of fires. The headquarters of a ground force, of an amphibious force or of the two forces together sets it. On the far side of a coordinated fire line (CFL), in the boundaries of its headquarters, standard indirect fires can occur without more coordination. Other forces should coordinate their fires on the far side of a fire support coordination line (FSCL) with its commander. A restrictive fire line (RFL) between friendly forces that come together prevents fires and their effects across it without coordination. Between a battlefield coordination line (BCL) and the FSCL, Marine aircraft can attack surface targets without approval from the ground combat element (GCE) commander.",
@@ -9,7 +9,7 @@
       "type": "string"
     },
     "active": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Activation",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Activation",
       "description": "This field gives the time interval during which this fire support line is active. The value is an interval with a start and an end, a schedule for each week, or continuous activation."
     },
     "coordination_instructions": {
@@ -25,12 +25,12 @@
       "type": "string"
     },
     "establishing_authority": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies the headquarters that set the line.",
       "x-catalog": "agencies"
     },
     "extensions": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
       "allOf": [
         {
           "properties": {
@@ -72,11 +72,11 @@
       "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
     },
     "geometry": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_line",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_line",
       "description": "This field gives the horizontal geometry of the line: geographic positions in sequence."
     },
     "id": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies this fire support line. Other records and orders use it to refer to this fire support line."
     },
     "name": {
@@ -89,7 +89,7 @@
       "type": "string"
     },
     "resources_ref": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ResourceRef",
       "description": "This field identifies the resource catalogue that resolves the references of this fire support line. The reference gives the identifier and the revision of the catalogue."
     },
     "type": {

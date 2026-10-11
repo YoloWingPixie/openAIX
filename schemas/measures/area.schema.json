@@ -1,5 +1,5 @@
 {
-  "$id": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+  "$id": "urn:openaix:schema:measure-area:0.1.0-draft.2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "allOf": [
@@ -28,7 +28,7 @@
       "type": "string"
     },
     "active": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Activation",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Activation",
       "description": "This field gives the time interval during which this area is active. The value is an interval with a start and an end, a schedule for each week, or continuous activation."
     },
     "coordination_instructions": {
@@ -44,12 +44,12 @@
       "type": "string"
     },
     "establishing_authority": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies the headquarters that set the area.",
       "x-catalog": "agencies"
     },
     "extensions": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
       "allOf": [
         {
           "properties": {
@@ -117,24 +117,24 @@
       "description": "This field gives the horizontal geometry of the area on the ground or at sea: a polygon, or a radius from a centre point. The boundary follows terrain features that are easy to identify.",
       "oneOf": [
         {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_polygon"
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_polygon"
         },
         {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_circle"
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_circle"
         },
         {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_polyarc"
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_polyarc"
         },
         {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_rectangle"
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_rectangle"
         },
         {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Geometry_ellipse"
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_ellipse"
         }
       ]
     },
     "id": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies this area. Other records and orders use it to refer to this area."
     },
     "name": {
@@ -147,7 +147,7 @@
       "type": "string"
     },
     "resources_ref": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ResourceRef",
       "description": "This field identifies the resource catalogue that resolves the references of this area. The reference gives the identifier and the revision of the catalogue."
     },
     "restrictions": {

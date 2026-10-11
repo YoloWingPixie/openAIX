@@ -28,7 +28,7 @@ CANDIDATE_LIMIT = 12
 # Fields that belong to one record: a value from another record would not describe this one. Simulator data
 # (`extensions`) links one record to its own simulator objects.
 OWN_FIELDS = {"extensions", "name", "description", "notes", "remarks", "purpose", "callsign", "title", "path"}
-COMMON_ID = "urn:openaix:schema:common:0.1.0-draft.1"
+COMMON_ID = "urn:openaix:schema:common:0.1.0-draft.2"
 FORMAT_CHECKER = FormatChecker()
 
 

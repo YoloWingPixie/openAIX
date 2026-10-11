@@ -1,10 +1,10 @@
 {
-  "$id": "urn:openaix:schema:point:0.1.0-draft.1",
+  "$id": "urn:openaix:schema:point:0.1.0-draft.2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "allOf": [
     {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/PointLocation"
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/PointLocation"
     }
   ],
   "description": "A point is a position with a name, for navigation or control. The roles tell how aircraft use the point, for example for ingress, egress, initial approach, contact point and handover. The air reference points of Annex B (`ACP`, `CP`, `EG`, `HG`, `MG`, `ISP`) are points with the applicable role. The initial point, the bullseye, a target reference point and a fire support station are also points with the applicable role.",
@@ -14,24 +14,24 @@
       "type": "string"
     },
     "active": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Activation",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Activation",
       "description": "This field gives the time interval during which this point is active. The value is an interval with a start and an end, a schedule for each week, or continuous activation."
     },
     "aor": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies the area of responsibility that this gate is for.",
       "x-catalog": "control_measures"
     },
     "channels": {
       "description": "This list identifies the communications channels of this point.",
       "items": {
-        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier"
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier"
       },
       "type": "array",
       "x-catalog": "channels"
     },
     "contact_agency": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies the agency that aircraft speak to at this point.",
       "x-catalog": "agencies"
     },
@@ -48,7 +48,7 @@
       "type": "string"
     },
     "extensions": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
       "allOf": [
         {
           "properties": {
@@ -88,12 +88,12 @@
       "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
     },
     "handover_agency": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies the agency that controls the aircraft after this gate.",
       "x-catalog": "agencies"
     },
     "id": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies this point. Other records and orders use it to refer to this point."
     },
     "instructions": {
@@ -114,20 +114,20 @@
       "type": "string"
     },
     "position": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/PointLocation/properties/position",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/PointLocation/properties/position",
       "description": "This field gives the geographic position of the point, as latitude and longitude."
     },
     "position_description": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/PointLocation/properties/position_description",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/PointLocation/properties/position_description",
       "description": "This field gives the location, as free text. The text is for a location without accurate coordinates, or it gives more information about the coordinates."
     },
     "reference_agency": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies the agency for this point or line.",
       "x-catalog": "agencies"
     },
     "resources_ref": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ResourceRef",
       "description": "This field identifies the resource catalogue that resolves the references of this point. The reference gives the identifier and the revision of the catalogue."
     },
     "restrictions": {
@@ -161,7 +161,7 @@
       "uniqueItems": true
     },
     "route": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies the route of this task or connection.",
       "x-catalog": "routes"
     },

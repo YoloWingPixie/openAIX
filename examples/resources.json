@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:resources:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:resources:0.1.0-draft.2",
   "kind": "resources",
   "meta": {
     "id": "oir-resources",
@@ -623,7 +623,7 @@
         "type": "NAVAID"
       },
       "bastion-basin-boundary": {
-        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -650,7 +650,7 @@
         "type": "BOUNDARY"
       },
       "bastion-bullseye": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -673,7 +673,7 @@
         "type": "POINT"
       },
       "bastion-ca": {
-        "$schema": "urn:openaix:schema:measure-cl:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-cl:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -696,7 +696,7 @@
         "type": "CA"
       },
       "carp-tin": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -719,7 +719,7 @@
         "type": "POINT"
       },
       "cedar": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -758,7 +758,7 @@
         "type": "POINT"
       },
       "cobalt-box": {
-        "$schema": "urn:openaix:schema:measure-kb:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-kb:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -853,7 +853,7 @@
         "type": "KB"
       },
       "dz-tin": {
-        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -904,7 +904,7 @@
         "type": "DZ"
       },
       "falcon": {
-        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -981,7 +981,7 @@
         "type": "ORBIT"
       },
       "gainful-misarc": {
-        "$schema": "urn:openaix:schema:measure-misarc:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-misarc:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1037,7 +1037,7 @@
         "type": "NAVAID"
       },
       "iffoff-zinc": {
-        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1061,7 +1061,7 @@
         "type": "IFFOFF"
       },
       "iffon-nickel": {
-        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1085,7 +1085,7 @@
         "type": "IFFON"
       },
       "ip-silver": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1121,7 +1121,7 @@
         "type": "POINT"
       },
       "isp-tinsel": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1143,7 +1143,7 @@
         "type": "POINT"
       },
       "jettison-tin": {
-        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1187,7 +1187,7 @@
         "type": "ROZ"
       },
       "juniper": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1226,7 +1226,7 @@
         "type": "POINT"
       },
       "lz-nickel": {
-        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1277,7 +1277,7 @@
         "type": "LZ"
       },
       "marshal": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1315,7 +1315,7 @@
         "type": "POINT"
       },
       "mesa": {
-        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1369,7 +1369,7 @@
         "type": "ORBIT"
       },
       "mrr-tinsel": {
-        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1417,7 +1417,7 @@
         "type": "MRR"
       },
       "nai-gainful": {
-        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1534,7 +1534,7 @@
         "type": "OBJ"
       },
       "oir-aor": {
-        "$schema": "urn:openaix:schema:measure-aor:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-aor:0.1.0-draft.2",
         "active": {
           "continuous": true
         },
@@ -1571,7 +1571,7 @@
         "type": "AOR"
       },
       "oir-fscl": {
-        "$schema": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1602,7 +1602,7 @@
         "type": "FSCL"
       },
       "pewter-rfl": {
-        "$schema": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-fire-support-line:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:30:00Z"
@@ -1633,7 +1633,7 @@
         "type": "RFL"
       },
       "pi-tin": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1656,7 +1656,7 @@
         "type": "POINT"
       },
       "pl-brass": {
-        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1687,7 +1687,7 @@
         "type": "LD"
       },
       "pl-nickel": {
-        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1718,7 +1718,7 @@
         "type": "PL"
       },
       "pl-zinc": {
-        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-line:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1745,7 +1745,7 @@
         "type": "LOA"
       },
       "pz-sage": {
-        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1796,7 +1796,7 @@
         "type": "PZ"
       },
       "quarry-nfa": {
-        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1821,7 +1821,7 @@
         "type": "NFA"
       },
       "range-camp-nfa": {
-        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1851,7 +1851,7 @@
         "type": "NFA"
       },
       "rescue-reservation": {
-        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1919,7 +1919,7 @@
         "type": "ROZ"
       },
       "rp-nickel": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1942,7 +1942,7 @@
         "type": "POINT"
       },
       "sage-shoradez": {
-        "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1986,7 +1986,7 @@
         "type": "MEZ"
       },
       "sentinel": {
-        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -2040,7 +2040,7 @@
         "type": "ORBIT"
       },
       "shell": {
-        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -2094,7 +2094,7 @@
         "type": "ORBIT"
       },
       "sl-sage": {
-        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -2138,7 +2138,7 @@
         "type": "SL"
       },
       "south-transit": {
-        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -2191,7 +2191,7 @@
         "type": "SC"
       },
       "sp-sage": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -2214,7 +2214,7 @@
         "type": "POINT"
       },
       "trp-01": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -2233,7 +2233,7 @@
         "type": "POINT"
       },
       "zinc-mez": {
-        "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -2279,7 +2279,7 @@
         "type": "MEZ"
       },
       "zinc-pump-nfa": {
-        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.1",
+        "$schema": "urn:openaix:schema:measure-area:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -7792,5 +7792,5 @@
       }
     }
   },
-  "schema_version": "0.1.0-draft.1"
+  "schema_version": "0.1.0-draft.2"
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:ato:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:ato:0.1.0-draft.2",
   "aco": {
     "id": "oir-aco",
     "revision": "2",
@@ -3240,7 +3240,7 @@
     "id": "oir-resources",
     "revision": "1"
   },
-  "schema_version": "0.1.0-draft.1",
+  "schema_version": "0.1.0-draft.2",
   "spins": {
     "id": "oir-spins",
     "path": "spins.json",

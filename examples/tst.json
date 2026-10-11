@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:tst:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:tst:0.1.0-draft.2",
   "kind": "tst",
   "meta": {
     "id": "oir-tst",
@@ -11,7 +11,7 @@
     "id": "oir-resources",
     "revision": "1"
   },
-  "schema_version": "0.1.0-draft.1",
+  "schema_version": "0.1.0-draft.2",
   "targets": [
     {
       "activity_window": {

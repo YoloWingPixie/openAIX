@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:spins:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:spins:0.1.0-draft.2",
   "air_defense": {
     "commit_criteria": [
       {
@@ -1005,7 +1005,7 @@
     ],
     "summary": "Positive identification before any attack."
   },
-  "schema_version": "0.1.0-draft.1",
+  "schema_version": "0.1.0-draft.2",
   "scope": "standing",
   "tanker_procedures": [
     {

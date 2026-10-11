@@ -157,7 +157,7 @@
         "corridors": {
           "description": "This list identifies the air corridors and transit routes that are for the serials.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "AIRCOR",
               "SAAFR",
@@ -173,20 +173,20 @@
         "escort_missions": {
           "description": "This list identifies the escort and attack missions that defend the serials.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "missions"
           },
           "type": "array",
           "uniqueItems": true
         },
         "h_hour": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time at which the first serial is on the landing zone (LZ)."
         },
         "landing_zones": {
           "description": "This list identifies the landing zones (LZs) that the troops go out of the aircraft at.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "LZ"
             ]
@@ -198,7 +198,7 @@
         "pickup_zones": {
           "description": "This list identifies the pickup zones (PZs) that the troops go into the aircraft at.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "PZ"
             ]
@@ -215,7 +215,7 @@
         "routes": {
           "description": "This list identifies the routes that the serials fly between the pickup zones (PZs) and the landing zones (LZs).",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "routes"
           },
           "type": "array",
@@ -243,7 +243,7 @@
           "uniqueItems": true
         },
         "flight": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the flight that flies the serial.",
           "x-catalog": "flights"
         },
@@ -259,15 +259,15 @@
           ]
         },
         "landing_heading": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Bearing",
           "description": "This field gives the heading of the serial when it lands, as a bearing with its unit and reference."
         },
         "landing_time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time at which the serial is on the landing zone (LZ)."
         },
         "landing_zone": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the landing zone (LZ) that is the end of the flight of the serial.",
           "x-measure-kinds": [
             "LZ"
@@ -293,25 +293,25 @@
           "description": "This field gives the personnel and the cargo of the serial."
         },
         "load_time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time at which the troops go into the aircraft at the pickup zone (PZ)."
         },
         "pickup_zone": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the pickup zone (PZ) that the serial loads at.",
           "x-measure-kinds": [
             "PZ"
           ]
         },
         "release_point": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the release point that the serial flies through before the landing zone (LZ).",
           "x-measure-kinds": [
             "POINT"
           ]
         },
         "release_point_time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time at which the serial is at the release point."
         },
         "remarks": {
@@ -320,7 +320,7 @@
           "type": "string"
         },
         "route": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the route that is for the serial.",
           "x-catalog": "routes"
         },
@@ -330,18 +330,18 @@
           "type": "integer"
         },
         "start_point": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the start point that the serial flies through after the pickup zone (PZ).",
           "x-measure-kinds": [
             "POINT"
           ]
         },
         "start_point_time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time at which the serial is at the start point."
         },
         "takeoff_time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time of of the departure of the serial from the pickup zone (PZ)."
         }
       },
@@ -360,7 +360,7 @@
       "description": "An air-to-air brief is the data for a combat air patrol (CAP), a fighter sweep, an air intercept or an escort.",
       "properties": {
         "bullseye": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the bullseye that is the reference point of the controller and the fighters. The point shall have the role `bullseye`.",
           "x-measure-kinds": [
             "POINT"
@@ -382,14 +382,14 @@
           "description": "This field gives the agency that controls the fighters, such as an Airborne Warning and Control System (AWACS), with its radio channels."
         },
         "identification_procedure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the procedure that gives the identification matrix and the rules of engagement (ROE) for air tracks.",
           "x-catalog": "procedures"
         },
         "protected_measures": {
           "description": "This list identifies the orbits and areas that the fighters defend, such as tanker and Airborne Warning and Control System (AWACS) orbits.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "ORBIT",
               "AARA",
@@ -402,7 +402,7 @@
         "protected_missions": {
           "description": "This list identifies the missions that the fighters defend.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "missions"
           },
           "type": "array",
@@ -420,7 +420,7 @@
         "threat_emitters": {
           "description": "This list identifies the surface-to-air emitters that the fighters avoid.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "emitters"
           },
           "type": "array",
@@ -528,7 +528,7 @@
       "description": "An airborne control brief is the data that an airborne control aircrew gets before the mission.",
       "properties": {
         "bullseye": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the bullseye that is the reference point of the controllers. The point shall have the role `bullseye`.",
           "x-measure-kinds": [
             "POINT"
@@ -540,7 +540,7 @@
         "controlled_channels": {
           "description": "This list identifies the radio channels that the control aircraft uses to control flights.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "type": "array",
@@ -549,7 +549,7 @@
         "handover_points": {
           "description": "This list identifies the points that flights change controller at. Each point shall have the role `handover` or `control`.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "POINT"
             ],
@@ -562,7 +562,7 @@
           "uniqueItems": true
         },
         "orbit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the orbit or airborne early warning area that is the station of the control aircraft.",
           "x-measure-kinds": [
             "ORBIT",
@@ -631,7 +631,7 @@
       "additionalProperties": false,
       "properties": {
         "extensions": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
           "allOf": [
             {
               "properties": {
@@ -695,7 +695,7 @@
       "description": "An airdrop brief is the data for an airdrop mission. FM 3-99 (2015) Chapter 5 and FM 3-21.38 (2006) Chapter 6 give these data.",
       "properties": {
         "authentication_procedure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the procedure that gives the authentication between the aircrew and the drop zone (DZ) support team.",
           "x-catalog": "procedures"
         },
@@ -726,7 +726,7 @@
           "description": "This field gives the time interval during which the aircraft release the load."
         },
         "drop_zone": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the drop zone (DZ) that receives the airdrop.",
           "x-measure-kinds": [
             "DZ"
@@ -788,7 +788,7 @@
           }
         },
         "point_of_impact": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the point that is the point of impact on the drop zone (DZ).",
           "x-measure-kinds": [
             "POINT"
@@ -810,7 +810,7 @@
           }
         },
         "release_point": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the point that is the release point in the plan.",
           "x-measure-kinds": [
             "POINT"
@@ -822,7 +822,7 @@
           "type": "string"
         },
         "run_in_heading": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Bearing",
           "description": "This field gives the heading of the aircraft on the run-in to the drop zone (DZ), as a bearing with its unit and reference."
         }
       },
@@ -832,7 +832,7 @@
       "type": "object"
     },
     "AirspaceSelection": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection"
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection"
     },
     "AlertLaunch": {
       "additionalProperties": false,
@@ -872,11 +872,11 @@
       "type": "object"
     },
     "Altitude": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Altitude",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Altitude",
       "description": "An altitude is a vertical position with its unit and its reference: mean sea level (MSL), above ground level (AGL) or flight level (FL)."
     },
     "AltitudeBlock": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/AltitudeBlock",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/AltitudeBlock",
       "description": "An altitude block is a vertical band between a floor and a ceiling. The floor can be the surface, and the ceiling can have no limit."
     },
     "AreaSelection": {
@@ -1112,7 +1112,7 @@
         "egress_points": {
           "description": "This list identifies the egress points or gates that the flights fly through after the attack. Each point shall have the role `egress` or `gate`.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "POINT"
             ],
@@ -1125,19 +1125,19 @@
           "uniqueItems": true
         },
         "egress_route": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the route that the flights use after the attack.",
           "x-catalog": "routes"
         },
         "ingress_route": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the route that the flights use to fly to the target area.",
           "x-catalog": "routes"
         },
         "initial_points": {
           "description": "This list identifies the initial points that start the attack runs. Each point shall have the role `initial`.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "POINT"
             ],
@@ -1156,7 +1156,7 @@
         "restricted_areas": {
           "description": "This list identifies the no-fire areas, restrictive fire areas or no-fly zones that are applicable to the attack. Each no-strike site near a target has a no-fire area around it.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "NFA",
               "RFA",
@@ -1173,7 +1173,7 @@
         "threat_emitters": {
           "description": "This list identifies the emitters that can engage the flights on the route or at the target.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "emitters"
           },
           "type": "array",
@@ -1188,7 +1188,7 @@
       "description": "A battle damage assessment (BDA) requirement is the BDA that the aircrew collects after the attack.",
       "properties": {
         "deadline": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time before which the aircrew sends the battle damage assessment (BDA)."
         },
         "method": {
@@ -1201,12 +1201,12 @@
           ]
         },
         "recipient": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that receives the battle damage assessment (BDA).",
           "x-catalog": "agencies"
         },
         "report": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the report definition that the aircrew uses to send the battle damage assessment (BDA).",
           "x-catalog": "reports"
         }
@@ -1255,7 +1255,7 @@
         "contact_points": {
           "description": "This list identifies the contact points that the aircraft fly to before the controller gives them a task. Each point shall have the role `control`.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "POINT"
             ],
@@ -1278,7 +1278,7 @@
         "fire_support_measures": {
           "description": "This list identifies the fire support coordination measures and airspace coordination areas that are applicable to the close air support (CAS) mission.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "BCL",
               "CFL",
@@ -1297,7 +1297,7 @@
         "friendly_lines": {
           "description": "This list identifies the lines and boundaries that show the positions of the friendly ground forces.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "FLOT",
               "FEBA",
@@ -1318,7 +1318,7 @@
         "holding": {
           "description": "This list identifies the orbits, points or zones that the aircraft use to hold before they get a task.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "ORBIT",
               "POINT",
@@ -1335,7 +1335,7 @@
         "initial_points": {
           "description": "This list identifies the initial points that start the attack runs of the close air support (CAS) mission. Each point shall have the role `initial`.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "POINT"
             ],
@@ -1349,7 +1349,7 @@
         "laser_codes": {
           "description": "This list contains the laser codes for the controller and the aircraft in this close air support (CAS) mission.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/LaserCode"
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/LaserCode"
           },
           "type": "array",
           "uniqueItems": true
@@ -1447,7 +1447,7 @@
           }
         },
         "procedure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the procedure that gives the check-in steps.",
           "x-catalog": "procedures"
         }
@@ -1479,7 +1479,7 @@
             "additionalProperties": false,
             "properties": {
               "id": {
-                "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+                "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
                 "description": "This field identifies this essential element of information (EEI). Each EEI in its collection entry has a different identifier."
               },
               "priority": {
@@ -1595,20 +1595,20 @@
       "description": "A commit criterion is a condition in which the fighters start an engagement of an air track. A commit criterion shall give a range, a boundary or a procedure.",
       "properties": {
         "boundary": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the control measure that is the boundary of this commit criterion."
         },
         "procedure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the procedure that gives the full commit criteria.",
           "x-catalog": "procedures"
         },
         "range": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Length",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Length",
           "description": "This field gives the range from the fighters or from their defended asset at which they start the engagement, as a length with its unit."
         },
         "threat": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the threat that this commit criterion is for.",
           "x-catalog": "threats"
         }
@@ -1677,7 +1677,7 @@
           "type": "string"
         },
         "decision_authority": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that makes the decision for this contingency.",
           "x-catalog": "agencies"
         },
@@ -1715,14 +1715,14 @@
           "description": "This field identifies the planning area or control measure that is the sector."
         },
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that is for the controller of the sector.",
           "x-catalog": "channels"
         },
         "flights": {
           "description": "This list identifies the flights that the controller of the sector controls.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "flights"
           },
           "type": "array",
@@ -1731,7 +1731,7 @@
         "missions": {
           "description": "This list identifies the missions that the controller of the sector controls.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "missions"
           },
           "type": "array",
@@ -1753,17 +1753,17 @@
       "description": "An agency channel is an agency for the aircrew, with its radio channels.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the agency that the aircrew speaks to. The agency is a controller, a joint terminal attack controller (JTAC) or a different agency of the resource catalogue.",
           "x-catalog": "agencies"
         },
         "alternate_channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the alternative radio channel that connects the aircrew and the agency when the primary channel is not available.",
           "x-catalog": "channels"
         },
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the primary radio channel that connects the aircrew and the agency.",
           "x-catalog": "channels"
         }
@@ -2073,7 +2073,7 @@
           "type": "string"
         },
         "extensions": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
           "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
         },
         "kind": {
@@ -2128,7 +2128,7 @@
       "type": "object"
     },
     "DocumentRef": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DocumentRef",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DocumentRef",
       "description": "A document reference is a document that a record refers to. Consumers do not get the document automatically through a network."
     },
     "ElectromagneticBrief": {
@@ -2144,7 +2144,7 @@
           "uniqueItems": true
         },
         "orbit": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the orbit or zone that is the station of the aircraft during the electromagnetic attack.",
           "x-measure-kinds": [
             "ORBIT",
@@ -2154,7 +2154,7 @@
         "protected_channels": {
           "description": "This list identifies the radio channels that stay clear of the electromagnetic attack.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "channels"
           },
           "type": "array",
@@ -2276,7 +2276,7 @@
       "description": "An emitter target is an emitter that is a target of the mission, with its priority.",
       "properties": {
         "emitter": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the emitter that is a target of the mission.",
           "x-catalog": "emitters"
         },
@@ -2286,7 +2286,7 @@
           "type": "integer"
         },
         "target": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the target that contains the emitter, when the resource catalogue has a target record for it.",
           "x-catalog": "targets"
         }
@@ -2400,7 +2400,7 @@
         "cas_missions": {
           "description": "This list identifies the close air support (CAS) missions that the airborne forward air controller (FAC(A)) can control.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "missions"
           },
           "type": "array",
@@ -2409,7 +2409,7 @@
         "contact_points": {
           "description": "This list identifies the contact points that the aircraft fly to before the controller gives them a task. Each point shall have the role `control`.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "POINT"
             ],
@@ -2432,7 +2432,7 @@
         "fire_support_measures": {
           "description": "This list identifies the fire support coordination measures and airspace coordination areas that are applicable to the airborne forward air controller (FAC(A)) mission.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "BCL",
               "CFL",
@@ -2451,7 +2451,7 @@
         "friendly_lines": {
           "description": "This list identifies the lines and boundaries that show the positions of the friendly ground forces.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "FLOT",
               "FEBA",
@@ -2472,7 +2472,7 @@
         "holding": {
           "description": "This list identifies the orbits, points or zones that the aircraft use to hold before they get a task.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "ORBIT",
               "POINT",
@@ -2489,7 +2489,7 @@
         "initial_points": {
           "description": "This list identifies the initial points that start the attack runs of the airborne forward air controller (FAC(A)) mission. Each point shall have the role `initial`.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "POINT"
             ],
@@ -2503,7 +2503,7 @@
         "laser_codes": {
           "description": "This list contains the laser codes for the controller and the aircraft in this airborne forward air controller (FAC(A)) mission.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/LaserCode"
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/LaserCode"
           },
           "type": "array",
           "uniqueItems": true
@@ -2601,7 +2601,7 @@
           "type": "array"
         },
         "aircraft_type": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the aircraft type that the aircraft of this flight have.",
           "x-catalog": "aircraft_types"
         },
@@ -2636,7 +2636,7 @@
           "type": "integer"
         },
         "extensions": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
           "allOf": [
             {
               "properties": {
@@ -2812,7 +2812,7 @@
       "type": "object"
     },
     "GeoPoint": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/GeoPoint",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
       "description": "A geographic point is a position in WGS 84 decimal degrees. An adapter is necessary for the Cartesian coordinates of a simulator."
     },
     "Identification": {
@@ -2988,7 +2988,7 @@
       "type": "object"
     },
     "Metadata": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Metadata"
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Metadata"
     },
     "Mission": {
       "additionalProperties": false,
@@ -3021,7 +3021,7 @@
           ]
         },
         "extensions": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
           "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
         },
         "flights": {
@@ -3169,7 +3169,7 @@
       "type": "object"
     },
     "Offset": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Offset",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Offset",
       "description": "An offset is a number of minutes from the start of the period of the air tasking order (ATO) that contains it. The value can be less than zero."
     },
     "OnCallCAS": {
@@ -3324,7 +3324,7 @@
           "type": "array"
         },
         "extensions": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
           "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
         },
         "id": {
@@ -3459,7 +3459,7 @@
       "type": "object"
     },
     "Period": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Period",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Period",
       "description": "A period is a time interval between two absolute date-times in the RFC 3339 format."
     },
     "PersonnelRecovery": {
@@ -3591,14 +3591,14 @@
       "description": "A personnel recovery brief is the data that a recovery aircrew gets before the mission. The brief identifies the isolated personnel report (ISOPREP) of a survivor and contains no other data about the person.",
       "properties": {
         "egress_route": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the route that the recovery flights use after the recovery.",
           "x-catalog": "routes"
         },
         "holding": {
           "description": "This list identifies the orbits, points or zones that the recovery flights use to hold.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "ORBIT",
               "POINT",
@@ -3609,12 +3609,12 @@
           "uniqueItems": true
         },
         "ingress_route": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the route that the recovery flights use to fly to the objective area.",
           "x-catalog": "routes"
         },
         "on_scene_commander": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the flight that is the on-scene commander.",
           "x-catalog": "flights"
         },
@@ -3630,7 +3630,7 @@
         "rescort_missions": {
           "description": "This list identifies the rescue escort (RESCORT) missions that defend the recovery.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "missions"
           },
           "type": "array",
@@ -3649,7 +3649,7 @@
       "type": "object"
     },
     "PinnedRef": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/PinnedRef",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/PinnedRef",
       "description": "A pinned reference is a dependency on a local document that consumers examine by identifier and revision."
     },
     "PreplannedAttack": {
@@ -3880,7 +3880,7 @@
         "named_areas": {
           "description": "This list identifies the named areas of interest, target areas of interest or reconnaissance areas that the aircraft look at.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "NAI",
               "TAI",
@@ -4067,7 +4067,7 @@
       "description": "A refuelling brief is the data that tanker and receiver aircrews get before the refuelling. The tasking gives the track, the altitude block, the refuelling method, the channel, the Tactical Air Navigation (TACAN) and the receivers.",
       "properties": {
         "anchor": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the orbit, point or air-to-air refuelling area that is the anchor of the refuelling track.",
           "x-measure-kinds": [
             "ORBIT",
@@ -4076,7 +4076,7 @@
           ]
         },
         "control_time": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time at which the tanker and the first receiver are at the rendezvous point."
         },
         "receiver_altitude": {
@@ -4097,7 +4097,7 @@
           ]
         },
         "rendezvous_point": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
           "description": "This field identifies the point that is the rendezvous point of the tanker and the receivers.",
           "x-measure-kinds": [
             "POINT"
@@ -4112,12 +4112,12 @@
       "description": "A report plan is the reports that an aircrew sends, with the method and the time of the reports.",
       "properties": {
         "channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that is for the reports.",
           "x-catalog": "channels"
         },
         "deadline": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
           "description": "This field gives the time before which the aircrew sends the reports."
         },
         "method": {
@@ -4131,14 +4131,14 @@
           ]
         },
         "recipient": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that receives the reports.",
           "x-catalog": "agencies"
         },
         "reports": {
           "description": "This list identifies the report definitions of the reports.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "reports"
           },
           "type": "array",
@@ -4155,7 +4155,7 @@
         "attack_missions": {
           "description": "This list identifies the attack missions that the strike coordination and reconnaissance (SCAR) aircraft coordinate.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "missions"
           },
           "type": "array",
@@ -4168,7 +4168,7 @@
         "entry_points": {
           "description": "This list identifies the points that the attack flights fly through when they go into the area. Each point shall have the role `control` or `ingress` or `gate`.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "POINT"
             ],
@@ -4184,7 +4184,7 @@
         "holding": {
           "description": "This list identifies the orbits, points or zones that the attack flights use to hold.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "ORBIT",
               "POINT",
@@ -4213,7 +4213,7 @@
                 "description": "This field gives the vertical limits of this level of the stack, as an altitude block with a floor and a ceiling."
               },
               "mission": {
-                "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+                "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
                 "description": "This field identifies the attack mission that holds at this level of the stack.",
                 "x-catalog": "missions"
               }
@@ -4269,7 +4269,7 @@
       "additionalProperties": false,
       "properties": {
         "authority": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that gives approval for the standard conventional load (SCL) of this alternative.",
           "x-catalog": "agencies"
         },
@@ -4306,14 +4306,14 @@
           "uniqueItems": true
         },
         "employment_procedure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the procedure that gives the employment and the rules of engagement (ROE) of the anti-radiation missiles.",
           "x-catalog": "procedures"
         },
         "protected_missions": {
           "description": "This list identifies the missions that the suppression helps.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
             "x-catalog": "missions"
           },
           "type": "array",
@@ -4493,7 +4493,7 @@
       "description": "A survivor is an isolated person for this recovery.",
       "properties": {
         "authentication_procedure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the procedure that gives the authentication of the survivor.",
           "x-catalog": "procedures"
         },
@@ -4511,7 +4511,7 @@
           ]
         },
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies this survivor. Each survivor in its brief has a different identifier."
         },
         "isoprep_ref": {
@@ -4520,7 +4520,7 @@
           "type": "string"
         },
         "last_known": {
-          "$ref": "urn:openaix:schema:resources:0.1.0-draft.1#/$defs/LastKnownPosition",
+          "$ref": "urn:openaix:schema:resources:0.1.0-draft.2#/$defs/LastKnownPosition",
           "description": "This field gives the last known position of the survivor and the time of the report."
         }
       },
@@ -4530,7 +4530,7 @@
       "type": "object"
     },
     "TACAN": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/TACAN",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/TACAN",
       "description": "A Tactical Air Navigation (TACAN) is the channel, band and identifier of a TACAN station."
     },
     "TargetListEntry": {
@@ -4643,7 +4643,7 @@
       "description": "A training brief is the data that aircrews get before a training task.",
       "properties": {
         "knock_it_off_channel": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the radio channel that is for safety calls.",
           "x-catalog": "channels"
         },
@@ -4661,14 +4661,14 @@
           "type": "string"
         },
         "safety_procedure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the procedure that gives the safety instructions of the training.",
           "x-catalog": "procedures"
         },
         "training_areas": {
           "description": "This list identifies the training areas, zones and airspace that are for the training.",
           "items": {
-            "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ControlMeasureSelection",
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
             "x-measure-kinds": [
               "TRNG",
               "ROZ",
@@ -4690,17 +4690,17 @@
       "description": "A load point is an airfield where the load goes into or out of the aircraft, with the time and the procedure.",
       "properties": {
         "agency": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the command and control agency that controls the operations with the load.",
           "x-catalog": "agencies"
         },
         "place": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the airfield, carrier or forward arming and refuelling point (FARP) that receives or sends the load.",
           "x-catalog": "places"
         },
         "procedure": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the procedure that gives the steps for the load.",
           "x-catalog": "procedures"
         },
@@ -4958,7 +4958,7 @@
             "additionalProperties": false,
             "properties": {
               "flight": {
-                "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+                "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
                 "description": "This field identifies the flight that has this load.",
                 "x-catalog": "flights"
               },
@@ -5021,20 +5021,20 @@
       "description": "A weapon load is the weapons of one flight for an attack assignment, with their fuze settings and altitudes.",
       "properties": {
         "attack_heading": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Bearing",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Bearing",
           "description": "This field gives the attack heading of the flight, as a bearing with its unit and reference."
         },
         "flight": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the flight that releases the weapons.",
           "x-catalog": "flights"
         },
         "fuze": {
-          "$ref": "urn:openaix:schema:scl:0.1.0-draft.1#/$defs/Fuze",
+          "$ref": "urn:openaix:schema:scl:0.1.0-draft.2#/$defs/Fuze",
           "description": "This field gives the fuze setting of the weapons for this attack. If the weapon load does not give it, the fuze of the store in the standard conventional load (SCL) of the flight is applicable."
         },
         "laser_code": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/LaserCode",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/LaserCode",
           "description": "This field gives the laser code of the weapons for this attack. If the weapon load does not give it, the laser code of the standard conventional load (SCL) of the flight is applicable."
         },
         "quantity": {
@@ -5047,12 +5047,12 @@
           "description": "This field gives the altitude at which the flight releases the weapons, as an altitude with its unit and reference."
         },
         "scl": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the standard conventional load (SCL) that contains the weapons. It shall be an SCL of the flight.",
           "x-catalog": "scls"
         },
         "store": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the store that is the weapon. When the flight has a standard conventional load (SCL), an SCL of the flight shall contain the store.",
           "x-catalog": "stores"
         }
@@ -5063,11 +5063,11 @@
       "type": "object"
     },
     "Window": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Window",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Window",
       "description": "A window is a time interval with limits that are absolute date-times or offsets from the period of the order that contains it."
     }
   },
-  "$id": "urn:openaix:schema:ato:0.1.0-draft.1",
+  "$id": "urn:openaix:schema:ato:0.1.0-draft.2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "description": "An air tasking order (ATO) is an order that tasks missions and gives their flights and packages. It also gives the control of the missions and the resources that help them.",
@@ -5101,11 +5101,11 @@
       "type": "string"
     },
     "aco": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DocumentRef",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DocumentRef",
       "description": "This field identifies the airspace control order (ACO) that this air tasking order (ATO) coordinates with. The reference identifies a document. It does not activate airspace."
     },
     "extensions": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
       "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
     },
     "general_instructions": {
@@ -5145,15 +5145,15 @@
       "description": "This field gives the time interval during which the order tasks missions."
     },
     "resources": {
-      "$ref": "urn:openaix:schema:resources:0.1.0-draft.1#/$defs/ResourceData",
+      "$ref": "urn:openaix:schema:resources:0.1.0-draft.2#/$defs/ResourceData",
       "description": "This field contains a resource catalogue in the order. The catalogue resolves the references of the order. The order shall have `resources` or `resources_ref`, but not the two fields."
     },
     "resources_ref": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ResourceRef",
       "description": "This field identifies the external resource catalogue that resolves the references of the order. More than one document can use the same catalogue. The reference identifies the catalogue and gives its revision. The order shall have `resources` or `resources_ref`, but not the two fields."
     },
     "schema_version": {
-      "const": "0.1.0-draft.1",
+      "const": "0.1.0-draft.2",
       "description": "This field gives the version of the openAIX schema that this air tasking order (ATO) agrees with.",
       "type": "string"
     },

@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:jiptl:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:jiptl:0.1.0-draft.2",
   "kind": "jiptl",
   "meta": {
     "id": "oir-jiptl",
@@ -11,7 +11,7 @@
     "id": "oir-resources",
     "revision": "1"
   },
-  "schema_version": "0.1.0-draft.1",
+  "schema_version": "0.1.0-draft.2",
   "targets": [
     {
       "authorized_engagement_means": [

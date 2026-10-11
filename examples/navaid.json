@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:navaid:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:navaid:0.1.0-draft.2",
   "airfield": "kden",
   "class": "VORTAC",
   "dme_position": {

@@ -62,7 +62,7 @@ def order_measures():
 def spins_measures():
     """Safe lane, IFF lines, minimum-risk route, identification safety point and jettison area of the SPINS."""
     def base(identifier, code, name, schema, description, **fields):
-        return {"$schema": "urn:openaix:schema:" + schema + ":0.1.0-draft.1", "id": identifier, "type": code, "name": name,
+        return {"$schema": "urn:openaix:schema:" + schema + ":0.1.0-draft.2", "id": identifier, "type": code, "name": name,
                 "active": deepcopy(PERIOD), "description": description, **fields}
 
     def line(west, east):

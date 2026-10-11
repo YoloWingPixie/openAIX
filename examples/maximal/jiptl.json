@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:jiptl:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:jiptl:0.1.0-draft.2",
   "extensions": {
     "org.cjtf-oir.ato": {
       "ato_day": "214"
@@ -41,7 +41,7 @@
     "id": "oir-resources",
     "revision": "1"
   },
-  "schema_version": "0.1.0-draft.1",
+  "schema_version": "0.1.0-draft.2",
   "targets": [
     {
       "authorized_engagement_means": [

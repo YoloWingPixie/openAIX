@@ -56,7 +56,7 @@
       "description": "A change target is the type, identifier and revision of the order that a change is for.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the order that the change is for. The value is the `meta.id` field of the order."
         },
         "kind": {
@@ -154,7 +154,7 @@
       "description": "An order reference is the identifier and the revision of one order.",
       "properties": {
         "id": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Identifier",
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the order that this reference is for. The value is the `meta.id` field of the order."
         },
         "revision": {
@@ -171,7 +171,7 @@
       "type": "object"
     }
   },
-  "$id": "urn:openaix:schema:frago:0.1.0-draft.1",
+  "$id": "urn:openaix:schema:frago:0.1.0-draft.2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "anyOf": [
@@ -225,15 +225,15 @@
       "type": "string"
     },
     "date_time": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
       "description": "This field gives the time of signature of the fragmentary order (FRAGO)."
     },
     "effective_time": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DateTime",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DateTime",
       "description": "This field gives the time of the start of the effect of the fragmentary order (FRAGO)."
     },
     "extensions": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Extensions",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
       "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record. The namespace `org.opord-builder.print` contains the data that `opord-builder` puts on each page."
     },
     "frago_number": {
@@ -252,7 +252,7 @@
       "type": "string"
     },
     "meta": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/Metadata",
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Metadata",
       "description": "This field gives the identification, revision and issue data of this document."
     },
     "mission": {
@@ -263,13 +263,13 @@
     "references": {
       "description": "This list contains the documents that the fragmentary order (FRAGO) refers to.",
       "items": {
-        "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/DocumentRef"
+        "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/DocumentRef"
       },
       "minItems": 0,
       "type": "array"
     },
     "schema_version": {
-      "const": "0.1.0-draft.1",
+      "const": "0.1.0-draft.2",
       "description": "This field gives the version of the openAIX schema that this document agrees with.",
       "type": "string"
     },

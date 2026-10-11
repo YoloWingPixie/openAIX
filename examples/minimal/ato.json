@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:ato:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:ato:0.1.0-draft.2",
   "kind": "ato",
   "missions": [
     {

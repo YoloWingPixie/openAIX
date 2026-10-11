@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
   "active": {
     "continuous": true
   },

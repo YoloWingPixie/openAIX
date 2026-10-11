@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.1",
+  "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
   "active": {
     "end": "2026-10-02T14:45:00Z",
     "start": "2026-10-02T13:15:00Z"
