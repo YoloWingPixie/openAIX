@@ -52,6 +52,32 @@ RECOVERY_CASES = ("case_i", "case_ii", "case_iii")
 STAND_CATEGORIES = ("fighter", "medium", "heavy", "helicopter")
 TAXI_NODE_KINDS = ("hold_short", "runway_connection", "runway", "intersection", "parking")
 RUNWAY_PAIR = r"^(0[1-9]|[12][0-9]|3[0-6])[LRCWSGU]?/(0[1-9]|[12][0-9]|3[0-6])[LRCWSGU]?$"
+# Approach types by the guidance of the final approach segment (FAA AIM 5-4-5, ICAO Doc 8168 Volume II).
+APPROACH_TYPES = ("ils", "localizer", "gls", "rnav", "vor", "tacan", "ndb", "par", "asr")
+RADAR_APPROACHES = ("par", "asr")
+# Minima lines of an approach chart, by the guidance that each line uses (FAA Order 8260.3G, ICAO Doc 8168).
+MINIMA_LINES = ("ils", "gls", "par", "lpv", "lnav_vnav", "rnp", "lp", "lnav", "localizer", "vor", "tacan", "ndb", "asr")
+# Lines with vertical guidance: their straight-in minima are a decision altitude; the others are a minimum descent altitude.
+DECISION_LINES = ("ils", "gls", "par", "lpv", "lnav_vnav", "rnp")
+MANOEUVRES = ("straight_in", "circling", "sidestep")
+HEIGHT_REFERENCES = ("touchdown_zone", "threshold", "aerodrome")
+# Aircraft approach categories A to E by threshold speed (ICAO Doc 8168 Volume I, FAA Order 8260.3G); H for helicopters.
+APPROACH_CATEGORIES = ("A", "B", "C", "D", "E", "H")
+VISIBILITY_UNITS = ("m", "km", "sm")
+# Navigation specifications of the ICAO Performance-based Navigation (PBN) Manual, Doc 9613.
+NAVIGATION_TYPES = ("conventional", "rnav", "rnp")
+RNAV_SPECIFICATIONS = ("rnav_10", "rnav_5", "rnav_2", "rnav_1")
+RNP_SPECIFICATIONS = ("rnp_4", "rnp_2", "rnp_1", "advanced_rnp", "rnp_apch", "rnp_ar_apch", "rnp_0_3")
+SENSORS = ("gnss", "gbas", "dme_dme", "dme_dme_iru", "vor_dme", "vor", "dme", "tacan", "ndb", "ils")
+CLIMB_GRADIENT_REASONS = ("obstacle", "atc")
+GRADIENT_UNITS = ("ft/nm", "percent")
+PROCEDURE_TURN_TYPES = ("turn_45_180", "turn_80_260", "base_turn")
+# Procedure segments that an obstacle clearance assessment covers (ICAO Doc 8168 Volume II, FAA Order 8260.3G).
+ASSESSED_SEGMENTS = ("departure", "arrival", "feeder", "initial", "intermediate", "final", "missed_approach", "circling", "holding")
+OBSTACLE_TYPES = ("terrain", "structure", "vegetation")
+ASSESSMENT_CRITERIA = ("pans_ops", "terps", "other")
+DERIVATIONS = ("published", "derived", "synthesized", "authored")
+AIRAC_CYCLE = r"^[0-9]{2}(0[1-9]|1[0-4])$"
 
 
 def schemas(base, version, dialect, common):
@@ -86,7 +112,7 @@ def schemas(base, version, dialect, common):
         return {"$ref": procedure_id + "#/$defs/" + name}
 
     def root(properties, required, kind=None, measure=None, catalogue=False):
-        fields = {"$schema": text(), "id": ref("Identifier"), "name": text(), "source": text()}
+        fields = {"$schema": text(), "id": ref("Identifier"), "name": text(), "source": text(), "provenance": shared("Provenance")}
         if kind:
             fields["kind"] = {"const": kind}
         if measure:
@@ -115,6 +141,15 @@ def schemas(base, version, dialect, common):
                 when("kind", ["at_or_below"], {"required": ["upper"], "not": {"required": ["lower"]}})])
         return node
 
+    def msl():
+        return {"allOf": [ref("Altitude"), {"properties": {"reference": {"const": "MSL"}}}]}
+
+    def rnp():
+        return unit("Length", "nm")
+
+    def rvr():
+        return {"allOf": [ref("Length"), {"properties": {"unit": {"enum": ["ft", "m"]}}}]}
+
     definitions = {
         "Fix": {"oneOf": [fix, ref("ControlMeasureSelection") | {"x-measure-kinds": ["POINT", "NAVAID"]}]},
         "NavaidRef": {"oneOf": [deepcopy(fix), ref("ControlMeasureSelection") | {"x-measure-kinds": ["NAVAID"]}]},
@@ -134,14 +169,87 @@ def schemas(base, version, dialect, common):
                     "arc_center": {"$ref": "#/$defs/Fix"}, "arc_radius": ref("Length"), "hold": {"$ref": "#/$defs/Hold"},
                     "fly_over": {"type": "boolean"},
                     "approach_fix": {"enum": ["initial_approach_fix", "intermediate_fix", "final_approach_course_fix", "final_approach_fix", "missed_approach_point"]},
-                    "missed_approach": {"type": "boolean"}},
+                    "missed_approach": {"type": "boolean"}, "rnp_value": rnp(),
+                    "procedure_turn": {"$ref": "#/$defs/ProcedureTurn"}},
                    ("leg_type",), allOf=[
                        when("leg_type", FIX_LEGS, {"required": ["fix"]}),
                        when("leg_type", COURSE_LEGS, {"required": ["course"]}),
                        when("leg_type", ALTITUDE_LEGS, {"required": ["altitude"]}),
                        when("leg_type", ["radius_to_fix"], {"required": ["arc_center", "arc_radius"]}),
-                       when("leg_type", HOLD_LEGS, {"required": ["hold"]}, {"not": {"required": ["hold"]}})]),
+                       when("leg_type", HOLD_LEGS, {"required": ["hold"]}, {"not": {"required": ["hold"]}}),
+                       when("leg_type", [leg for leg in LEG_TYPES if leg != "procedure_turn"], {"not": {"required": ["procedure_turn"]}})]),
         "Transition": obj({"ident": text(), "legs": array({"$ref": "#/$defs/Leg"}, 1)}, ("legs",)),
+        "ProcedureTurn": obj({"turn_type": {"enum": list(PROCEDURE_TURN_TYPES)}, "remain_within": ref("Length"),
+                              "outbound_time": {"$ref": "#/$defs/Duration"}, "inbound_course": ref("Bearing")}, ("turn_type",)),
+        "Visibility": obj({"value": {"type": "number", "exclusiveMinimum": 0}, "unit": {"enum": list(VISIBILITY_UNITS)}}, ("value", "unit")),
+        "Gradient": obj({"value": {"type": "number", "exclusiveMinimum": 0}, "unit": {"enum": list(GRADIENT_UNITS)}}, ("value", "unit")),
+        "MinimaLine": obj({"line": {"enum": list(MINIMA_LINES)}, "label": text(), "manoeuvre": {"enum": list(MANOEUVRES)},
+                           "runway": ref("RunwayDesignator"), "ils_category": {"enum": list(ILS_CATEGORIES)}, "rnp_value": rnp(),
+                           "height_reference": {"enum": list(HEIGHT_REFERENCES)}, "condition": text(),
+                           "category_minima": array({"$ref": "#/$defs/CategoryMinimum"}, 1), "remarks": array(text(), 1)},
+                          ("line", "manoeuvre", "category_minima"), allOf=[
+                              when("manoeuvre", ["circling"],
+                                   {"not": {"required": ["runway"]},
+                                    "properties": {"height_reference": {"const": "aerodrome"},
+                                                   "category_minima": {"items": {"not": {"required": ["decision_altitude"]}}}}},
+                                   {"required": ["runway"]}),
+                              when("line", [line for line in MINIMA_LINES if line not in DECISION_LINES],
+                                   {"properties": {"category_minima": {"items": {"not": {"required": ["decision_altitude"]}}}}}),
+                              {"if": {"properties": {"line": {"enum": list(DECISION_LINES)}, "manoeuvre": {"const": "straight_in"}},
+                                      "required": ["line", "manoeuvre"]},
+                               "then": {"properties": {"category_minima": {"items": {"not": {"required": ["minimum_descent_altitude"]}}}}}},
+                              when("line", [line for line in MINIMA_LINES if line not in ("ils", "gls")], {"not": {"required": ["ils_category"]}}),
+                              when("line", [line for line in MINIMA_LINES if line != "rnp"], {"not": {"required": ["rnp_value"]}})]),
+        "CategoryMinimum": obj({"categories": {**array({"enum": list(APPROACH_CATEGORIES)}, 1), "uniqueItems": True},
+                                "decision_altitude": msl(), "minimum_descent_altitude": msl(), "height": ref("Length"),
+                                "visibility": {"$ref": "#/$defs/Visibility"}, "runway_visual_range": rvr()},
+                               ("categories",), oneOf=[{"required": ["decision_altitude"]}, {"required": ["minimum_descent_altitude"]}]),
+        "NavigationSpecification": obj({"navigation_type": {"enum": list(NAVIGATION_TYPES)},
+                                        "specification": {"enum": list(RNAV_SPECIFICATIONS + RNP_SPECIFICATIONS)}, "rnp_value": rnp(),
+                                        "sensors": {**array({"enum": list(SENSORS)}, 1), "uniqueItems": True},
+                                        "required_navaids": array({"$ref": "#/$defs/NavaidRef"}, 1), "notes": text()},
+                                       ("navigation_type",), allOf=[
+                                           when("navigation_type", ["conventional"],
+                                                {"not": {"anyOf": [{"required": ["specification"]}, {"required": ["rnp_value"]}]}}),
+                                           when("navigation_type", ["rnav"], {"required": ["specification"],
+                                                                              "properties": {"specification": {"enum": list(RNAV_SPECIFICATIONS)}},
+                                                                              "not": {"required": ["rnp_value"]}}),
+                                           when("navigation_type", ["rnp"], {"required": ["specification"],
+                                                                             "properties": {"specification": {"enum": list(RNP_SPECIFICATIONS)}}})]),
+        "RadarApproach": obj({"runway": ref("RunwayDesignator"), "final_approach_course": ref("Bearing"),
+                              "glide_path_angle_deg": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 90},
+                              "threshold_crossing_height": ref("Length"), "position": ref("GeoPoint"),
+                              "coverage": {"$ref": "#/$defs/RadarCoverage"},
+                              "recommended_altitudes": array({"$ref": "#/$defs/RecommendedAltitude"}, 1),
+                              "missed_approach_point_distance": ref("Length"), "lost_communications": array(text(), 1)},
+                             ("runway", "final_approach_course")),
+        "RadarCoverage": obj({"range": ref("Length"), "azimuth_left_deg": {"type": "number", "minimum": 0, "maximum": 90},
+                              "azimuth_right_deg": {"type": "number", "minimum": 0, "maximum": 90},
+                              "elevation_lower_deg": {"type": "number", "minimum": -10, "maximum": 90},
+                              "elevation_upper_deg": {"type": "number", "exclusiveMinimum": 0, "maximum": 90}}, ("range",)),
+        "RecommendedAltitude": obj({"distance": ref("Length"), "altitude": msl()}, ("distance", "altitude")),
+        "ClimbGradient": obj({"gradient": {"$ref": "#/$defs/Gradient"}, "until": msl(), "until_fix": {"$ref": "#/$defs/Fix"},
+                              "reason": {"enum": list(CLIMB_GRADIENT_REASONS)}, "runway": ref("RunwayDesignator"), "notes": text()},
+                             ("gradient", "reason"), anyOf=[{"required": ["until"]}, {"required": ["until_fix"]}]),
+        "TakeoffMinimum": obj({"runway": ref("RunwayDesignator"), "ceiling": ref("Length"), "visibility": {"$ref": "#/$defs/Visibility"},
+                               "runway_visual_range": rvr(), "climb_gradient": {"$ref": "#/$defs/ClimbGradient"}, "condition": text(),
+                               "remarks": array(text(), 1)},
+                              (), anyOf=[{"required": ["visibility"]}, {"required": ["runway_visual_range"]}]),
+        "ObstacleAssessment": obj({"criteria": {"enum": list(ASSESSMENT_CRITERIA)}, "criteria_document": text(), "obstacle_data": text(),
+                                   "assessed_at": ref("DateTime"), "tool": {"$ref": "#/$defs/Tool"},
+                                   "segments": array({"$ref": "#/$defs/SegmentAssessment"}, 1), "notes": text()},
+                                  ("criteria", "segments")),
+        "SegmentAssessment": obj({"segment": {"enum": list(ASSESSED_SEGMENTS)}, "transition": text(), "from_fix": text(), "to_fix": text(),
+                                  "controlling_obstacle": {"$ref": "#/$defs/Obstacle"}, "obstacle_clearance": ref("Length"),
+                                  "minimum_altitude": msl(), "satisfied": {"type": "boolean"}, "notes": text()},
+                                 ("segment", "obstacle_clearance", "minimum_altitude")),
+        "Obstacle": obj({"ident": text(), "obstacle_type": {"enum": list(OBSTACLE_TYPES)}, "position": ref("GeoPoint"),
+                         "elevation": ref("Elevation"), "height": ref("Length")}, ("obstacle_type", "elevation")),
+        "Tool": obj({"name": text(), "version": text()}, ("name",)),
+        "Provenance": obj({"derivation": {"enum": list(DERIVATIONS)}, "authority": text(),
+                           "airac_cycle": {"type": "string", "pattern": AIRAC_CYCLE}, "effective_from": ref("DateTime"),
+                           "effective_until": ref("DateTime"), "publication": ref("DocumentRef"), "tool": {"$ref": "#/$defs/Tool"},
+                           "generated_at": ref("DateTime")}, ("derivation",)),
     }
     navigation = {}
     airfield_id = base + "airfield:" + version
@@ -239,9 +347,32 @@ def schemas(base, version, dialect, common):
         ("frequency", "course", "position"), kind="localizer", catalogue=True),
         "$defs": {"GlideSlope": obj({"angle_deg": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 90}, "position": ref("GeoPoint"),
                                      "elevation": ref("Elevation")}, ("angle_deg", "position"))}})
-    navigation["procedure"] = schema("procedure", {**root(
+    procedure = root(
         {"airfield": airfield_ref(), "ident": text(), "procedure_type": {"enum": ["departure", "arrival", "approach"]},
-         "transitions": array({"$ref": "#/$defs/Transition"}, 1)}, ("transitions",), kind="procedure", catalogue=True), "$defs": definitions})
+         "approach_type": {"enum": list(APPROACH_TYPES)},
+         "transitions": array({"$ref": "#/$defs/Transition"}, 1),
+         "navigation_specification": {"$ref": "#/$defs/NavigationSpecification"},
+         "minima": array({"$ref": "#/$defs/MinimaLine"}, 1), "radar_approach": {"$ref": "#/$defs/RadarApproach"},
+         "climb_gradients": array({"$ref": "#/$defs/ClimbGradient"}, 1), "takeoff_minima": array({"$ref": "#/$defs/TakeoffMinimum"}, 1),
+         "obstacle_assessment": {"$ref": "#/$defs/ObstacleAssessment"}}, (), kind="procedure", catalogue=True)
+    procedure["properties"]["provenance"] = {"$ref": "#/$defs/Provenance"}
+
+    def excluded(*fields):
+        return {"not": {"anyOf": [{"required": [field]} for field in fields]}}
+
+    procedure["allOf"] = [
+        when("procedure_type", ["departure", "arrival"], excluded("approach_type", "minima", "radar_approach")),
+        when("procedure_type", ["arrival", "approach"], excluded("takeoff_minima")),
+        when("procedure_type", ["arrival"], excluded("climb_gradients")),
+        # A radar approach can have no coded legs: the controller gives the final approach from the radar.
+        when("approach_type", RADAR_APPROACHES, {"required": ["radar_approach"]}, {**excluded("radar_approach"), "required": ["transitions"]}),
+        when("approach_type", ["par"], {"properties": {"radar_approach": {
+            "required": ["glide_path_angle_deg"], **excluded("recommended_altitudes", "missed_approach_point_distance")}}}),
+        when("approach_type", ["asr"], {"properties": {"radar_approach": {
+            **excluded("glide_path_angle_deg", "threshold_crossing_height"),
+            "properties": {"coverage": excluded("elevation_lower_deg", "elevation_upper_deg")}}}}),
+    ]
+    navigation["procedure"] = schema("procedure", {**procedure, "$defs": definitions})
     navigation["holding"] = schema("holding", root({"hold": shared("Hold")}, ("hold",), kind="holding", catalogue=True))
     navigation["path-point"] = schema("path-point", root(
         {"airfield": airfield_ref(), "approach": text(), "runway": ref("RunwayDesignator"), "approach_type": text(),

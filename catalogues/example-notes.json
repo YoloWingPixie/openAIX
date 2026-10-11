@@ -1,5 +1,5 @@
 {
-  "$inputs_sha256": "de0627e859942efb456b0c8343ac1718e304bfffb2465c436828f50990188633",
+  "$inputs_sha256": "4262de29974e35c3807d839bbed816f83b896f8fe92638c7c05a8ac13b5cccd8",
   "urn:openaix:schema:aco:0.1.0-draft.1": [
     {
       "alternatives": [
@@ -188,12 +188,23 @@
       ],
       "path": "resources/instrument_procedures/*/transitions/*/legs/*/recommended_navaid",
       "selected": "control_measure"
+    },
+    {
+      "alternatives": [
+        "minimum_descent_altitude"
+      ],
+      "path": "resources/instrument_procedures/*/minima/*/category_minima/*",
+      "selected": "decision_altitude"
     }
   ],
   "urn:openaix:schema:airfield:0.1.0-draft.1": [
     {
       "path": "carrier",
       "reason": "conditional"
+    },
+    {
+      "path": "runways/*/provenance/publication/path",
+      "reason": "no_value"
     },
     {
       "alternatives": [
@@ -495,6 +506,26 @@
     },
     {
       "path": "extensions/sim/dcs/bindings/*/style/font_size",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/airac_cycle",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_from",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_until",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/publication",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/generated_at",
       "reason": "conditional"
     }
   ],
@@ -1825,6 +1856,26 @@
     {
       "path": "extensions/sim/dcs/bindings/*/style/font_size",
       "reason": "conditional"
+    },
+    {
+      "path": "provenance/airac_cycle",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_from",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_until",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/publication",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/generated_at",
+      "reason": "conditional"
     }
   ],
   "urn:openaix:schema:holding:0.1.0-draft.1": [
@@ -1925,6 +1976,26 @@
     {
       "path": "extensions/sim/dcs/bindings/*/style/font_size",
       "reason": "conditional"
+    },
+    {
+      "path": "provenance/airac_cycle",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_from",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_until",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/publication",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/generated_at",
+      "reason": "conditional"
     }
   ],
   "urn:openaix:schema:jiptl:0.1.0-draft.1": [
@@ -2008,6 +2079,10 @@
     },
     {
       "path": "extensions/sim/dcs/bindings/*/native_fields",
+      "reason": "no_value"
+    },
+    {
+      "path": "provenance/publication/path",
       "reason": "no_value"
     }
   ],
@@ -2968,6 +3043,26 @@
     {
       "path": "extensions/sim/dcs/bindings/*/style/font_size",
       "reason": "conditional"
+    },
+    {
+      "path": "provenance/airac_cycle",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_from",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_until",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/publication",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/generated_at",
+      "reason": "conditional"
     }
   ],
   "urn:openaix:schema:navaid:0.1.0-draft.1": [
@@ -3049,6 +3144,26 @@
     },
     {
       "path": "extensions/sim/dcs/bindings/*/style/font_size",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/airac_cycle",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_from",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_until",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/publication",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/generated_at",
       "reason": "conditional"
     }
   ],
@@ -3252,6 +3367,10 @@
     {
       "path": "extensions/sim/dcs/bindings/*/native_fields",
       "reason": "no_value"
+    },
+    {
+      "path": "provenance/publication/path",
+      "reason": "no_value"
     }
   ],
   "urn:openaix:schema:point:0.1.0-draft.1": [
@@ -3269,6 +3388,17 @@
     }
   ],
   "urn:openaix:schema:procedure:0.1.0-draft.1": [
+    {
+      "path": "radar_approach",
+      "reason": "conditional"
+    },
+    {
+      "instead_of": [
+        "procedure_type"
+      ],
+      "path": "takeoff_minima",
+      "reason": "alternative"
+    },
     {
       "path": "transitions/*/legs/*/hold",
       "reason": "conditional"
@@ -3290,6 +3420,29 @@
       ],
       "path": "transitions/*/legs/*/recommended_navaid",
       "selected": "control_measure"
+    },
+    {
+      "path": "navigation_specification/specification",
+      "reason": "conditional"
+    },
+    {
+      "path": "navigation_specification/rnp_value",
+      "reason": "conditional"
+    },
+    {
+      "path": "minima/*/rnp_value",
+      "reason": "conditional"
+    },
+    {
+      "alternatives": [
+        "minimum_descent_altitude"
+      ],
+      "path": "minima/*/category_minima/*",
+      "selected": "decision_altitude"
+    },
+    {
+      "path": "provenance/publication/path",
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/objects",
@@ -3429,6 +3582,13 @@
       ],
       "path": "resources/instrument_procedures/*/transitions/*/legs/*/recommended_navaid",
       "selected": "control_measure"
+    },
+    {
+      "alternatives": [
+        "minimum_descent_altitude"
+      ],
+      "path": "resources/instrument_procedures/*/minima/*/category_minima/*",
+      "selected": "decision_altitude"
     },
     {
       "alternatives": [
@@ -3646,6 +3806,26 @@
     },
     {
       "path": "extensions/sim/dcs/bindings/*/style/font_size",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/airac_cycle",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_from",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/effective_until",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/publication",
+      "reason": "conditional"
+    },
+    {
+      "path": "provenance/generated_at",
       "reason": "conditional"
     }
   ],

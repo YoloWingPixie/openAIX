@@ -10,7 +10,7 @@ from copy import deepcopy
 
 from openaix.examples.aco import (MISSION_ID, START, agencies, build_aco_example, channels, frequency, point, position,
                                   window)
-from openaix.examples.airfields import carrier, prince_hassan, farp, ojms, ojms_navigation, tacans, h4, usaf_standard
+from openaix.examples.airfields import carrier, prince_hassan, farp, ojms, ojms_navigation, ojms_procedures, tacans, h4, usaf_standard
 from openaix.examples.briefs import add_briefs, brief_resources, role_missions
 from openaix.examples.measures import measures as measure_examples
 from openaix.examples.opord import order_channels, order_examples, order_measures, spins_measures
@@ -70,7 +70,7 @@ def base_resources(version):
     return {
         "places": {"ojms": ojms(), "prince-hassan": prince_hassan(), "h4": h4(), "farp-sage": farp()},
         "localizers": {localizer["id"]: localizer for localizer in localizers},
-        "instrument_procedures": {procedure["id"]: procedure},
+        "instrument_procedures": {record["id"]: record for record in (procedure, *ojms_procedures(version))},
         "pattern_profiles": {"usaf-standard": usaf_standard()},
         "agencies": {**agencies(), "warhawk": {"id": "warhawk", "kind": "c2-agency", "callsign": "Warhawk", "role": "ASOC",
                                                 "channels": ["cas-uhf"], "position": position(32.965, 37.794)}},

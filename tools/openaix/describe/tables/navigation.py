@@ -36,7 +36,8 @@ SUBJECTS = {
 }
 
 SOURCE_NOTES = ("The value gives the authority that publishes the data, and the cycle, for example `FAA CIFP cycle 2610`",
-                "A record that an author writes does not have this field")
+                "A record that an author writes does not have this field",
+                "The field `provenance` gives the same facts as structured data")
 
 
 def _record(schema, subject, kind=True, resources=True):
@@ -46,6 +47,9 @@ def _record(schema, subject, kind=True, resources=True):
         (schema, "id"): d.identifier(subject, None, "Other resources and orders use this stable identifier to refer to this " + subject),
         (schema, "name"): d.name(subject),
         (schema, "source"): d.source("record", *SOURCE_NOTES),
+        (schema, "provenance"): d.statement(
+            "This field gives the provenance of this " + subject + " as structured data: how the data were made, the authority, "
+            "the AIRAC cycle and the tool that made them"),
         (schema, "extensions"): d.extension(),
     }
     if kind:
@@ -376,9 +380,28 @@ DESCRIPTIONS = {
                    "validator:openaix.check.navigation.airfield_links")),
     ("procedure", "ident"): d.identifier("procedure as published", None, "An example is `I16R`"),
     ("procedure", "procedure_type"): d.enum("type of the procedure"),
+    ("procedure", "approach_type"): d.enum(
+        "guidance of the final approach segment of an approach",
+        d.enforced("Only an approach shall have this field", "schema:not"),
+        d.enforced("A `par` or `asr` approach shall have `radar_approach`, and other procedures shall not have it", "schema:then")),
+    ("procedure", "navigation_specification"): d.statement(
+        "This field gives the navigation specification of the procedure: conventional navigation, RNAV or RNP, "
+        "and the sensors and navigation aids that it needs"),
+    ("procedure", "minima"): d.list_of(
+        "published minima lines of the approach", None, d.enforced("Only an approach shall have this field", "schema:not")),
+    ("procedure", "radar_approach"): d.statement(
+        "This field gives the final approach of a PAR or an ASR approach: the runway, the course, the glide path and the radar coverage"),
+    ("procedure", "climb_gradients"): d.list_of(
+        "minimum climb gradients of a departure or of the missed approach of an approach", None,
+        d.enforced("An arrival shall not have this field", "schema:not")),
+    ("procedure", "takeoff_minima"): d.list_of(
+        "takeoff minima of a departure", None, d.enforced("Only a departure shall have this field", "schema:not")),
+    ("procedure", "obstacle_assessment"): d.statement(
+        "This field gives the result of the obstacle clearance assessment of the procedure, segment by segment"),
     ("procedure", "transitions"): d.list_of(
         "transitions and common route segments of the procedure", None,
-        "A transition without an identifier is the common route or the final approach"),
+        "A transition without an identifier is the common route or the final approach",
+        d.enforced("A procedure shall have this field, except a `par` or `asr` approach", "schema:else")),
 
     ("Transition", None): d.entity("Transition", "one transition or route segment of a procedure"),
     ("Transition", "ident"): d.identifier(
@@ -428,6 +451,231 @@ DESCRIPTIONS = {
     ("Leg", "turn_direction"): d.enum("direction of the turn onto this leg"),
     ("Leg", "vertical_angle_deg"): d.quantity(
         "vertical path angle to the fix", None, "degrees", "A value less than zero is a descent"),
+
+    ("Leg", "rnp_value"): d.quantity(
+        "lateral navigation accuracy that the leg needs, as an RNP value in nautical miles", "Length", None,
+        "It applies to this leg only, for example a leg of an RNP approach with authorization required",
+        "When the leg does not have this field, the value of the navigation specification applies"),
+    ("Leg", "procedure_turn"): d.statement(
+        "This field gives the type and the limits of the procedure turn of a `procedure_turn` leg.",
+        "The field `course` of the leg is the outbound course, `turn_direction` is the direction of the first turn, "
+        "and `altitude` is the procedure turn altitude",
+        d.enforced("Other leg types shall not have this field", "schema:not")),
+
+    ("ProcedureTurn", None): d.entity(
+        "Procedure turn", "a course reversal from the outbound course onto the inbound course of an approach",
+        "The aircraft stays on the manoeuvring side of the outbound course and in the distance in `remain_within`"),
+    ("ProcedureTurn", "turn_type"): d.enum("type of the course reversal"),
+    ("ProcedureTurn", "remain_within"): d.quantity(
+        "distance from the fix of the leg in which the aircraft completes the procedure turn", "Length"),
+    ("ProcedureTurn", "outbound_time"): d.statement(
+        "This field gives the flight time on the outbound leg before the aircraft turns back, in minutes.",
+        "Base turns and some procedure turns publish this time"),
+    ("ProcedureTurn", "inbound_course"): d.quantity("course of the inbound leg after the course reversal", "Bearing"),
+
+    # ---- approach minima -----------------------------------------------------------------------
+    ("MinimaLine", None): d.entity(
+        "Minima line", "one line of the published minima of an approach: the minima for one type of guidance and one manoeuvre",
+        "It gives the minima for each aircraft approach category"),
+    ("MinimaLine", "line"): d.enum("guidance that the minima line uses"),
+    ("MinimaLine", "label"): d.statement(
+        "This field gives the name of the minima line as the chart shows it, for example `S-ILS 31` or `LNAV/VNAV`"),
+    ("MinimaLine", "manoeuvre"): d.enum(
+        "manoeuvre after the approach",
+        d.enforced("A `circling` line shall not have `runway`, and other lines shall have it", "schema:then"),
+        d.enforced("The minima of a `circling` line shall be minimum descent altitudes, with the height above the aerodrome",
+                   "schema:then")),
+    ("MinimaLine", "runway"): d.statement(
+        "This field gives the designator of the runway of a straight-in line, or of the runway after a sidestep"),
+    ("MinimaLine", "ils_category"): d.enum(
+        "ILS category of the minima",
+        d.enforced("Only a line of type `ils` or `gls` shall have this field", "schema:not")),
+    ("MinimaLine", "rnp_value"): d.quantity(
+        "RNP value of the minima line, in nautical miles", "Length", None,
+        "An approach with authorization required can publish one line for each RNP value",
+        d.enforced("Only a line of type `rnp` shall have this field", "schema:not")),
+    ("MinimaLine", "height_reference"): d.enum(
+        "elevation from which the heights of the line are measured"),
+    ("MinimaLine", "condition"): d.text(
+        "condition in which this line applies, for example a remote altimeter setting or inoperative approach lights",
+        "A line without this field gives the standard minima"),
+    ("MinimaLine", "category_minima"): d.list_of(
+        "minima of the line for the aircraft approach categories", None,
+        "Each item gives the minima for one or more categories",
+        d.enforced("A straight-in line with vertical guidance shall give decision altitudes, and other lines shall give "
+                   "minimum descent altitudes", "schema:then")),
+    ("MinimaLine", "remarks"): d.list_of("remarks for this minima line, as free text"),
+
+    ("CategoryMinimum", None): d.entity(
+        "Category minimum", "the minima of a minima line for one or more aircraft approach categories",
+        "It has a decision altitude or an MDA, a height and a visibility or an RVR"),
+    ("CategoryMinimum", "categories"): d.list_of(
+        "aircraft approach categories to which these minima apply", None,
+        "Categories `A` to `E` follow the speed at the threshold, and category `H` is for helicopters"),
+    ("CategoryMinimum", "decision_altitude"): d.quantity(
+        "decision altitude above mean sea level", "Altitude", None,
+        "At this altitude the pilot starts the missed approach when the required visual references are not visible",
+        d.enforced("The minima shall have this field or `minimum_descent_altitude`, but not both", "schema:oneOf")),
+    ("CategoryMinimum", "minimum_descent_altitude"): d.quantity(
+        "MDA above mean sea level", "Altitude", None,
+        "The aircraft does not descend below this altitude without the required visual references"),
+    ("CategoryMinimum", "height"): d.quantity(
+        "height of the decision altitude or the MDA above the elevation that `height_reference` of the line names",
+        "Length", None, "For a decision altitude, this height is the decision height"),
+    ("CategoryMinimum", "visibility"): d.statement(
+        "This field gives the minimum visibility for the approach, as a visibility with its unit"),
+    ("CategoryMinimum", "runway_visual_range"): d.quantity(
+        "minimum RVR for the approach", "Length", None, "The unit is feet or metres"),
+
+    ("Visibility", None): d.entity("Visibility", "a horizontal visibility with its unit"),
+    ("Visibility", "value"): d.statement("This field gives the value of the visibility, in the unit of `unit`"),
+    ("Visibility", "unit"): d.enum("unit of the visibility"),
+
+    # ---- navigation specification --------------------------------------------------------------
+    ("NavigationSpecification", None): d.entity(
+        "Navigation specification", "the navigation that the procedure needs: conventional navigation, RNAV or RNP",
+        "It gives the PBN navigation specification, the RNP value, the sensors and the navigation aids"),
+    ("NavigationSpecification", "navigation_type"): d.enum(
+        "type of navigation of the procedure",
+        d.enforced("A `conventional` procedure shall not have `specification` or `rnp_value`", "schema:then"),
+        d.enforced("An `rnav` or `rnp` procedure shall have a `specification` of its type", "schema:then")),
+    ("NavigationSpecification", "specification"): d.enum("PBN navigation specification of the procedure"),
+    ("NavigationSpecification", "rnp_value"): d.quantity(
+        "lateral navigation accuracy of the procedure, as an RNP value in nautical miles", "Length", None,
+        d.enforced("An `rnav` procedure shall not have this field", "schema:not")),
+    ("NavigationSpecification", "sensors"): d.list_of(
+        "navigation sensors that the procedure needs", None, "The aircraft uses one or more of them"),
+    ("NavigationSpecification", "required_navaids"): d.list_of(
+        "navigation aids that are necessary to fly the procedure", None,
+        "Each item is a navigation aid with its identifier and position, or a reference to a navigation aid in the resource catalogue"),
+    ("NavigationSpecification", "notes"): d.text("notes about the navigation equipment of the procedure"),
+
+    # ---- radar approach ------------------------------------------------------------------------
+    ("RadarApproach", None): d.entity(
+        "Radar approach", "the final approach of a PAR or an ASR approach, which a controller gives from the radar",
+        "The field `approach_type` of the procedure gives the type of radar"),
+    ("RadarApproach", "runway"): d.statement("This field gives the designator of the runway of the radar approach"),
+    ("RadarApproach", "final_approach_course"): d.quantity("final approach course of the radar approach", "Bearing"),
+    ("RadarApproach", "glide_path_angle_deg"): d.quantity(
+        "angle between the PAR glide path and a horizontal line", None, "degrees",
+        d.enforced("A PAR approach shall have this field, and an ASR approach shall not have it", "schema:then")),
+    ("RadarApproach", "threshold_crossing_height"): d.quantity(
+        "TCH of the PAR glide path", "Length", None, "It is the height of the glide path above the landing threshold"),
+    ("RadarApproach", "position"): d.position("the radar antenna"),
+    ("RadarApproach", "coverage"): d.statement("This field gives the volume in which the radar gives the approach"),
+    ("RadarApproach", "recommended_altitudes"): d.list_of(
+        "altitudes that the controller recommends at distances from the runway on an ASR approach", None,
+        d.enforced("A PAR approach shall not have this field", "schema:not")),
+    ("RadarApproach", "missed_approach_point_distance"): d.quantity(
+        "distance of the missed approach point of an ASR approach from the runway threshold", "Length", None,
+        d.enforced("A PAR approach shall not have this field", "schema:not")),
+    ("RadarApproach", "lost_communications"): d.list_of("lost communications instructions for the radar approach, as free text"),
+
+    ("RadarCoverage", None): d.entity(
+        "Radar coverage", "the volume of the radar on the final approach",
+        "The azimuth limits are angles from the final approach course, and the elevation limits are angles above a horizontal line"),
+    ("RadarCoverage", "range"): d.quantity("range of the radar coverage on the final approach, from the runway threshold", "Length"),
+    ("RadarCoverage", "azimuth_left_deg"): d.quantity("azimuth limit left of the final approach course", None, "degrees"),
+    ("RadarCoverage", "azimuth_right_deg"): d.quantity("azimuth limit right of the final approach course", None, "degrees"),
+    ("RadarCoverage", "elevation_lower_deg"): d.quantity(
+        "lower elevation limit of the PAR", None, "degrees", "A value less than zero is below the horizontal",
+        d.enforced("An ASR approach shall not have this field", "schema:not")),
+    ("RadarCoverage", "elevation_upper_deg"): d.quantity(
+        "upper elevation limit of the PAR", None, "degrees", d.enforced("An ASR approach shall not have this field", "schema:not")),
+
+    ("RecommendedAltitude", None): d.entity(
+        "Recommended altitude", "an altitude that the controller recommends at one distance from the runway on an ASR approach"),
+    ("RecommendedAltitude", "distance"): d.quantity("distance from the runway threshold", "Length"),
+    ("RecommendedAltitude", "altitude"): d.quantity("recommended altitude above mean sea level at this distance", "Altitude"),
+
+    # ---- climb gradients and takeoff minima ----------------------------------------------------
+    ("ClimbGradient", None): d.entity(
+        "Climb gradient", "a minimum climb gradient of a departure or a missed approach",
+        "The aircraft climbs at this gradient or more until the altitude in `until` or the fix in `until_fix`"),
+    ("ClimbGradient", "gradient"): d.statement("This field gives the minimum climb gradient, as a gradient with its unit"),
+    ("ClimbGradient", "until"): d.quantity(
+        "altitude above mean sea level up to which the climb gradient applies", "Altitude", None,
+        d.enforced("The climb gradient shall have this field or `until_fix`", "schema:anyOf")),
+    ("ClimbGradient", "until_fix"): d.statement("This field gives the fix up to which the climb gradient applies"),
+    ("ClimbGradient", "reason"): d.enum("reason for the climb gradient"),
+    ("ClimbGradient", "runway"): d.statement("This field gives the designator of the departure runway of the climb gradient"),
+    ("ClimbGradient", "notes"): d.text("notes about the climb gradient"),
+
+    ("Gradient", None): d.entity("Gradient", "a climb gradient with its unit"),
+    ("Gradient", "value"): d.statement("This field gives the value of the gradient, in the unit of `unit`"),
+    ("Gradient", "unit"): d.enum("unit of the gradient"),
+
+    ("TakeoffMinimum", None): d.entity(
+        "Takeoff minimum", "the lowest weather for a takeoff on this departure",
+        d.enforced("It shall have `visibility` or `runway_visual_range`", "schema:anyOf")),
+    ("TakeoffMinimum", "runway"): d.statement("This field gives the designator of the runway of the takeoff minimum"),
+    ("TakeoffMinimum", "ceiling"): d.quantity("lowest ceiling for the takeoff, above the aerodrome", "Length"),
+    ("TakeoffMinimum", "visibility"): d.statement("This field gives the lowest visibility for the takeoff"),
+    ("TakeoffMinimum", "runway_visual_range"): d.quantity("lowest RVR for the takeoff", "Length", None, "The unit is feet or metres"),
+    ("TakeoffMinimum", "climb_gradient"): d.statement(
+        "This field gives the climb gradient that the aircraft needs to use these minima"),
+    ("TakeoffMinimum", "condition"): d.text("condition in which this takeoff minimum applies, for example the number of engines"),
+    ("TakeoffMinimum", "remarks"): d.list_of("remarks for the takeoff, for example obstacle notes, as free text"),
+
+    # ---- obstacle clearance assessment ---------------------------------------------------------
+    ("ObstacleAssessment", None): d.entity(
+        "Obstacle clearance assessment", "the result of an assessment of the terrain and the obstacles under the procedure",
+        "For each segment it gives the controlling obstacle, the obstacle clearance and the lowest altitude"),
+    ("ObstacleAssessment", "criteria"): d.enum("design criteria of the assessment"),
+    ("ObstacleAssessment", "criteria_document"): d.statement(
+        "This field gives the document and the edition of the criteria, for example `FAA Order 8260.3G`"),
+    ("ObstacleAssessment", "obstacle_data"): d.text(
+        "terrain data and obstacle data of the assessment, for example the name of the elevation model and its resolution"),
+    ("ObstacleAssessment", "assessed_at"): d.time("the assessment"),
+    ("ObstacleAssessment", "tool"): d.statement("This field gives the software that made the assessment"),
+    ("ObstacleAssessment", "segments"): d.list_of("results of the assessment for the segments of the procedure"),
+    ("ObstacleAssessment", "notes"): d.text("notes about the assessment"),
+
+    ("SegmentAssessment", None): d.entity(
+        "Segment assessment", "the obstacle clearance result for one segment of the procedure"),
+    ("SegmentAssessment", "segment"): d.enum("type of the segment"),
+    ("SegmentAssessment", "transition"): d.statement(
+        "This field gives the identifier of the transition of the segment, as in `ident` of the transition"),
+    ("SegmentAssessment", "from_fix"): d.statement("This field gives the identifier of the fix at the start of the segment"),
+    ("SegmentAssessment", "to_fix"): d.statement("This field gives the identifier of the fix at the end of the segment"),
+    ("SegmentAssessment", "controlling_obstacle"): d.statement(
+        "This field gives the controlling obstacle: the obstacle that sets the lowest altitude of the segment"),
+    ("SegmentAssessment", "obstacle_clearance"): d.quantity(
+        "obstacle clearance that the assessment applies above the controlling obstacle", "Length", None,
+        "It is the minimum obstacle clearance of ICAO Doc 8168 or the required obstacle clearance of FAA Order 8260.3"),
+    ("SegmentAssessment", "minimum_altitude"): d.quantity(
+        "lowest altitude of the segment above mean sea level that keeps the obstacle clearance", "Altitude"),
+    ("SegmentAssessment", "satisfied"): d.flag(
+        "the published altitudes of the segment are at or above `minimum_altitude`",
+        "a published altitude of the segment is below `minimum_altitude`"),
+    ("SegmentAssessment", "notes"): d.text("notes about the result for the segment"),
+
+    ("Obstacle", None): d.entity("Obstacle", "terrain or an object that the assessment of a segment uses"),
+    ("Obstacle", "ident"): d.identifier("obstacle in its source data", None, "An example is the number of the obstacle in an obstacle file"),
+    ("Obstacle", "obstacle_type"): d.enum("type of the obstacle"),
+    ("Obstacle", "position"): d.position("the obstacle"),
+    ("Obstacle", "elevation"): d.quantity("elevation of the top of the obstacle above mean sea level", "Elevation"),
+    ("Obstacle", "height"): d.quantity("height of the obstacle above the ground", "Length"),
+
+    # ---- provenance ----------------------------------------------------------------------------
+    ("Tool", None): d.entity("Tool", "a software tool with its version"),
+    ("Tool", "name"): d.statement("This field gives the name of the software tool"),
+    ("Tool", "version"): d.statement("This field gives the version of the software tool"),
+
+    ("Provenance", None): d.entity(
+        "Provenance", "the origin of a navigation record: how its data were made, by which authority, for which AIRAC cycle "
+        "and with which tool"),
+    ("Provenance", "derivation"): d.enum("way in which the data of the record were made"),
+    ("Provenance", "authority"): d.statement(
+        "This field gives the name of the authority that publishes the source data, for example `FAA`"),
+    ("Provenance", "airac_cycle"): d.statement(
+        "This field gives the AIRAC cycle of the data, as two digits of the year and two digits of the cycle, for example `2610`"),
+    ("Provenance", "effective_from"): d.time("the start of the period in which the data are effective"),
+    ("Provenance", "effective_until"): d.time("the end of the period in which the data are effective"),
+    ("Provenance", "publication"): d.reference(
+        "publication from which the data come", None, "An example is the chart of the procedure"),
+    ("Provenance", "tool"): d.statement("This field gives the software tool that converted or made the data"),
+    ("Provenance", "generated_at"): d.time("the conversion or the generation of the data"),
 
     ("Hold", None): d.entity(
         "Hold", "a holding pattern with a fix, an inbound course, a turn direction, and a leg length or a leg time",
@@ -729,6 +977,130 @@ ENUMS = {
         "left": d.value_sentence("The aircraft makes a left turn onto the leg."),
         "right": d.value_sentence("The aircraft makes a right turn onto the leg."),
         "either": d.value_sentence("The aircraft can make a left turn or a right turn onto the leg."),
+    }),
+    ("procedure", "approach_type"): d.values({
+        "ils": "an ILS approach, with a localizer and a glide slope",
+        "localizer": "a localizer approach, with lateral guidance from a localizer and no glide slope",
+        "gls": "a GLS approach, with lateral and vertical guidance from a GBAS ground station",
+        "rnav": "an RNAV or RNP approach with satellite navigation, for example `RNAV (GPS)` or `RNP`",
+        "vor": "an approach with lateral guidance from a VOR station, with or without DME",
+        "tacan": "an approach with lateral guidance from a TACAN station",
+        "ndb": "an approach with guidance from an NDB station",
+        "par": "a PAR approach: a controller gives the course and the glide path from a precision radar",
+        "asr": "an ASR approach: a controller gives the course and recommended altitudes from a surveillance radar",
+    }),
+    ("MinimaLine", "line"): d.values({
+        "ils": "minima for an ILS approach, with a decision altitude",
+        "gls": "minima for a GLS approach, with a decision altitude",
+        "par": "minima for a PAR approach, with a decision altitude",
+        "lpv": "minima with LPV vertical guidance from satellite augmentation, with a decision altitude",
+        "lnav_vnav": "minima with LNAV and barometric or satellite vertical guidance, with a decision altitude",
+        "rnp": "minima of an RNP approach with authorization required, with a decision altitude for one RNP value",
+        "lp": "minima with LP lateral guidance and no vertical guidance, with an MDA",
+        "lnav": "minima with LNAV lateral guidance only, with an MDA",
+        "localizer": "minima for a localizer approach without the glide slope, with an MDA",
+        "vor": "minima for an approach with guidance from a VOR station, with an MDA",
+        "tacan": "minima for an approach with guidance from a TACAN station, with an MDA",
+        "ndb": "minima for an approach with guidance from an NDB station, with an MDA",
+        "asr": "minima for an ASR approach, with an MDA",
+    }),
+    ("MinimaLine", "manoeuvre"): d.values({
+        "straight_in": "a landing straight ahead on the runway of the final approach course",
+        "circling": "a visual manoeuvre around the aerodrome to land on a different runway or direction",
+        "sidestep": "a visual manoeuvre to land on a parallel runway next to the runway of the final approach",
+    }),
+    ("MinimaLine", "ils_category"): d.values({
+        "I": "Category `I` minima with a decision height of 200 feet or more",
+        "II": "Category `II` minima with a decision height from 100 feet to less than 200 feet",
+        "III": "Category `III` minima with a decision height of less than 100 feet, or with no decision height",
+    }),
+    ("MinimaLine", "height_reference"): d.values({
+        "touchdown_zone": "the highest elevation of the first 3000 feet of the landing surface, as for FAA heights above touchdown",
+        "threshold": "the elevation of the runway threshold, as for ICAO decision heights",
+        "aerodrome": "the published elevation of the aerodrome, as for circling heights",
+    }),
+    ("CategoryMinimum", "categories"): d.values({
+        "A": "aircraft with a threshold speed of less than 91 knots",
+        "B": "aircraft with a threshold speed from 91 knots to less than 121 knots",
+        "C": "aircraft with a threshold speed from 121 knots to less than 141 knots",
+        "D": "aircraft with a threshold speed from 141 knots to less than 166 knots",
+        "E": "aircraft with a threshold speed from 166 knots to less than 211 knots",
+        "H": "helicopters that fly a procedure for helicopters",
+    }),
+    ("Visibility", "unit"): d.values({
+        "m": "a visibility in metres",
+        "km": "a visibility in kilometres",
+        "sm": "a visibility in statute miles, as United States charts publish it",
+    }),
+    ("NavigationSpecification", "navigation_type"): d.values({
+        "conventional": "navigation on courses and radials of ground navigation aids, without area navigation",
+        "rnav": "an RNAV navigation specification, without on-board performance monitoring and alerting",
+        "rnp": "an RNP navigation specification, with on-board performance monitoring and alerting",
+    }),
+    ("NavigationSpecification", "specification"): d.values({
+        "rnav_10": "the `RNAV 10` specification for oceanic and remote routes, with 10 nautical miles accuracy",
+        "rnav_5": "the `RNAV 5` specification for continental routes, with 5 nautical miles accuracy",
+        "rnav_2": "the `RNAV 2` specification for routes and terminal areas, with 2 nautical miles accuracy",
+        "rnav_1": "the `RNAV 1` specification for departures, arrivals and terminal areas, with 1 nautical mile accuracy",
+        "rnp_4": "the `RNP 4` specification for oceanic and remote routes, with 4 nautical miles accuracy",
+        "rnp_2": "the `RNP 2` specification for continental and remote routes, with 2 nautical miles accuracy",
+        "rnp_1": "the `RNP 1` specification for departures and arrivals, with 1 nautical mile accuracy",
+        "advanced_rnp": "the `A-RNP` specification for routes, terminal areas and approaches, with radius-to-fix legs",
+        "rnp_apch": "the `RNP APCH` specification for approaches with LNAV, LNAV/VNAV, LP or LPV minima",
+        "rnp_ar_apch": "the `RNP AR APCH` specification for approaches that need a special authorization",
+        "rnp_0_3": "the `RNP 0.3` specification for helicopter routes and terminal areas",
+    }),
+    ("NavigationSpecification", "sensors"): d.values({
+        "gnss": "a GNSS receiver for satellite navigation, for example GPS",
+        "gbas": "a GBAS receiver for a GLS approach",
+        "dme_dme": "area navigation from the distances to two or more DME stations",
+        "dme_dme_iru": "area navigation from DME distances with an IRU for gaps in DME coverage",
+        "vor_dme": "area navigation from the bearing and the distance of a VOR station with DME",
+        "vor": "a VOR receiver for courses and radials",
+        "dme": "an interrogator in the aircraft that measures the slant range to a DME station",
+        "tacan": "TACAN equipment for the bearing and the distance of a TACAN station",
+        "ndb": "an automatic direction finder for the bearing to an NDB station",
+        "ils": "an ILS receiver for the localizer and the glide slope",
+    }),
+    ("ClimbGradient", "reason"): d.values({
+        "obstacle": "a gradient that keeps the obstacle clearance above the obstacles under the climb",
+        "atc": "a gradient that ATC needs for airspace or for separation from other traffic",
+    }),
+    ("Gradient", "unit"): d.values({
+        "ft/nm": "a gradient in feet of climb for each nautical mile of distance",
+        "percent": "a gradient as a percentage of vertical climb to horizontal distance",
+    }),
+    ("ProcedureTurn", "turn_type"): d.values({
+        "turn_45_180": "a 45 degree turn away from the outbound course, a straight leg, then a 180 degree turn back to the inbound course",
+        "turn_80_260": "an 80 degree turn away from the outbound course and then a 260 degree turn the other way to the inbound course",
+        "base_turn": "a turn from an outbound course that diverges from the inbound course, as in a teardrop course reversal",
+    }),
+    ("ObstacleAssessment", "criteria"): d.values({
+        "pans_ops": "the ICAO criteria for the construction of instrument procedures in Doc 8168",
+        "terps": "the United States Standard for Terminal Instrument Procedures in FAA Order 8260.3",
+        "other": "national or military criteria that `criteria_document` names",
+    }),
+    ("SegmentAssessment", "segment"): d.values({
+        "departure": "the climb from the runway along a departure route",
+        "arrival": "the route from the en-route structure to the start of the approach",
+        "feeder": "a route from the en-route structure to the initial approach fix",
+        "initial": "the initial approach segment, from the initial approach fix to the intermediate fix",
+        "intermediate": "the intermediate approach segment, from the intermediate fix to the final approach fix",
+        "final": "the final approach segment, from the final approach fix to the runway or the missed approach point",
+        "missed_approach": "the climb from the missed approach point to the holding fix or the en-route structure",
+        "circling": "the visual manoeuvring area around the aerodrome for a circling approach",
+        "holding": "the protected area of a holding pattern of the procedure",
+    }),
+    ("Obstacle", "obstacle_type"): d.values({
+        "terrain": "the ground surface, for example a ridge or a peak",
+        "structure": "a building, a tower, an antenna or another object that people built",
+        "vegetation": "trees or other plants above the ground surface",
+    }),
+    ("Provenance", "derivation"): d.values({
+        "published": "data that an authority publishes, taken without changes",
+        "derived": "data that a tool converted or computed from published data",
+        "synthesized": "data that a tool designed where no published procedure or record exists",
+        "authored": "data that a person wrote for a mission or a scenario",
     }),
     ("Leg.altitude", "kind"): ALTITUDE_CONSTRAINT_KINDS,
     ("Hold.altitude", "kind"): ALTITUDE_CONSTRAINT_KINDS,

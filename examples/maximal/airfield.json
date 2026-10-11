@@ -256,8 +256,20 @@
     "longitude": 36.781257
   },
   "procedures": [
-    "ojms-i31"
+    "ojms-i31",
+    "ojms-par31",
+    "ojms-asr13",
+    "ojms-r13",
+    "ojms-salat1"
   ],
+  "provenance": {
+    "authority": "Eagle Dynamics",
+    "derivation": "derived",
+    "tool": {
+      "name": "DCS map file reader",
+      "version": "2.9.8"
+    }
+  },
   "resources_ref": {
     "id": "oir-resources",
     "revision": "1"
@@ -327,6 +339,20 @@
         "value": 7598
       },
       "name": "08/26",
+      "provenance": {
+        "airac_cycle": "2610",
+        "authority": "CJTF-OIR airspace control cell",
+        "derivation": "authored",
+        "effective_from": "2026-10-01T00:00:00Z",
+        "effective_until": "2026-10-29T00:00:00Z",
+        "generated_at": "2026-09-28T10:00:00Z",
+        "publication": {
+          "id": "ojms-i31-chart",
+          "revision": "2610",
+          "section": "DTA05",
+          "title": "Muwaffaq Salti ILS runway 31 chart"
+        }
+      },
       "resources_ref": {
         "id": "oir-resources",
         "revision": "1"

@@ -49,6 +49,14 @@
     "latitude": 31.834683,
     "longitude": 36.778475
   },
+  "provenance": {
+    "authority": "Eagle Dynamics",
+    "derivation": "derived",
+    "tool": {
+      "name": "DCS map file reader",
+      "version": "2.9.8"
+    }
+  },
   "resources_ref": {
     "id": "oir-resources",
     "revision": "1"

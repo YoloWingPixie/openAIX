@@ -461,6 +461,174 @@ class NavigationTests(unittest.TestCase):
         airfield["runways"][0]["ends"][0]["heading"] = {"value": 400, "reference": "magnetic"}
         rejected(self, document)
 
+    def test_approach_minima_follow_the_line_and_the_manoeuvre(self):
+        def ils_line(document):
+            return document["minima"][0]
+
+        def circling(document):
+            return next(line for line in document["minima"] if line["manoeuvre"] == "circling")
+
+        def swap(item, old, new):
+            item[new] = item.pop(old)
+
+        cases = (
+            ("decision line with a minimum descent altitude", lambda doc: swap(ils_line(doc)["category_minima"][0], "decision_altitude", "minimum_descent_altitude")),
+            ("both altitudes", lambda doc: ils_line(doc)["category_minima"][0].update(minimum_descent_altitude=feet(1900))),
+            ("neither altitude", lambda doc: ils_line(doc)["category_minima"][0].pop("decision_altitude")),
+            ("circling with a runway", lambda doc: circling(doc).update(runway="31")),
+            ("circling with a decision altitude", lambda doc: swap(circling(doc)["category_minima"][0], "minimum_descent_altitude", "decision_altitude")),
+            ("circling height from the threshold", lambda doc: circling(doc).update(height_reference="threshold")),
+            ("straight-in without a runway", lambda doc: ils_line(doc).pop("runway")),
+            ("localizer line with an ILS category", lambda doc: doc["minima"][2].update(ils_category="I")),
+            ("ILS line with an RNP value", lambda doc: ils_line(doc).update(rnp_value={"value": 0.3, "unit": "nm"})),
+            ("unknown approach category", lambda doc: ils_line(doc)["category_minima"][0]["categories"].append("F")),
+            ("repeated approach category", lambda doc: ils_line(doc)["category_minima"][0]["categories"].append("A")),
+            ("visibility in an unknown unit", lambda doc: ils_line(doc)["category_minima"][0]["visibility"].update(unit="ft")),
+            ("RVR in nautical miles", lambda doc: ils_line(doc)["category_minima"][0]["runway_visual_range"].update(unit="nm")),
+            ("minima on a departure", lambda doc: doc.update(procedure_type="departure")),
+        )
+        validate_procedure(self, "ojms-i31")
+        for name, change in cases:
+            with self.subTest(case=name):
+                validate_procedure(self, "ojms-i31", change, valid=False)
+
+    def test_radar_approach_follows_the_approach_type(self):
+        cases = (
+            ("ojms-par31", "PAR without a glide path angle", lambda doc: doc["radar_approach"].pop("glide_path_angle_deg")),
+            ("ojms-par31", "PAR with recommended altitudes",
+             lambda doc: doc["radar_approach"].update(recommended_altitudes=[{"distance": {"value": 3, "unit": "nm"}, "altitude": feet(2600)}])),
+            ("ojms-par31", "PAR with an ASR missed approach point",
+             lambda doc: doc["radar_approach"].update(missed_approach_point_distance={"value": 1, "unit": "nm"})),
+            ("ojms-par31", "radar approach without its data", lambda doc: doc.pop("radar_approach")),
+            ("ojms-asr13", "ASR with a glide path angle", lambda doc: doc["radar_approach"].update(glide_path_angle_deg=3.0)),
+            ("ojms-asr13", "ASR with a threshold crossing height", lambda doc: doc["radar_approach"].update(threshold_crossing_height={"value": 50, "unit": "ft"})),
+            ("ojms-asr13", "ASR with elevation limits", lambda doc: doc["radar_approach"]["coverage"].update(elevation_upper_deg=7)),
+            ("ojms-asr13", "ASR with a decision altitude", lambda doc: doc["minima"][0]["category_minima"][0].update(
+                decision_altitude=doc["minima"][0]["category_minima"][0].pop("minimum_descent_altitude"))),
+            ("ojms-i31", "ILS with radar approach data", lambda doc: doc.update(radar_approach=procedure("ojms-par31")["radar_approach"])),
+            ("ojms-i31", "radar approach data without an approach type",
+             lambda doc: (doc.pop("approach_type"), doc.update(radar_approach=procedure("ojms-par31")["radar_approach"]))),
+        )
+        for identifier in ("ojms-par31", "ojms-asr13"):
+            with self.subTest(procedure=identifier):
+                validate_procedure(self, identifier)
+        for identifier, name, change in cases:
+            with self.subTest(procedure=identifier, case=name):
+                validate_procedure(self, identifier, change, valid=False)
+
+    def test_only_radar_approaches_may_omit_transitions(self):
+        self.assertNotIn("transitions", procedure("ojms-par31"))
+        self.assertTrue(procedure("ojms-asr13")["transitions"])
+        cases = (
+            ("ojms-par31", "PAR without legs", None, True),
+            ("ojms-asr13", "ASR without legs", lambda doc: doc.pop("transitions"), True),
+            ("ojms-asr13", "ASR with legs", None, True),
+            ("ojms-par31", "PAR with an empty transition list", lambda doc: doc.update(transitions=[]), False),
+            ("ojms-i31", "ILS without legs", lambda doc: doc.pop("transitions"), False),
+            ("ojms-salat1", "departure without legs", lambda doc: doc.pop("transitions"), False),
+            ("ojms-par31", "approach without a type and without legs", lambda doc: (doc.pop("approach_type"), doc.pop("radar_approach")), False),
+        )
+        for identifier, name, change, valid in cases:
+            with self.subTest(procedure=identifier, case=name):
+                validate_procedure(self, identifier, change, valid=valid)
+
+    def test_navigation_specification_matches_the_navigation_type(self):
+        cases = (
+            ("ojms-i31", "conventional with a specification", lambda spec: spec.update(specification="rnav_1")),
+            ("ojms-i31", "conventional with an RNP value", lambda spec: spec.update(rnp_value={"value": 1, "unit": "nm"})),
+            ("ojms-salat1", "RNAV with an RNP specification", lambda spec: spec.update(specification="rnp_1")),
+            ("ojms-salat1", "RNAV with an RNP value", lambda spec: spec.update(rnp_value={"value": 1, "unit": "nm"})),
+            ("ojms-salat1", "RNAV without a specification", lambda spec: spec.pop("specification")),
+            ("ojms-r13", "RNP with an RNAV specification", lambda spec: spec.update(specification="rnav_2")),
+            ("ojms-r13", "RNP value in kilometres", lambda spec: spec["rnp_value"].update(unit="km")),
+            ("ojms-r13", "unknown sensor", lambda spec: spec["sensors"].append("loran")),
+            ("ojms-i31", "plain fix as a required navigation aid", lambda spec: spec["required_navaids"].append({"kind": "control_measure", "id": "ip-silver"})),
+        )
+        for identifier in ("ojms-i31", "ojms-salat1", "ojms-r13"):
+            with self.subTest(procedure=identifier):
+                validate_procedure(self, identifier)
+        for identifier, name, change in cases:
+            with self.subTest(procedure=identifier, case=name):
+                validate_procedure(self, identifier, lambda doc: change(doc["navigation_specification"]), valid=False)
+        legs_of = procedure("ojms-r13")["transitions"][0]["legs"]
+        self.assertEqual({leg["rnp_value"]["value"] for leg in legs_of}, {1, 0.3})
+
+    def test_climb_gradients_and_takeoff_minima_belong_to_their_procedure_types(self):
+        cases = (
+            ("ojms-salat1", "gradient without a limit", lambda doc: doc["climb_gradients"][1].pop("until_fix")),
+            ("ojms-salat1", "gradient in an unknown unit", lambda doc: doc["climb_gradients"][0]["gradient"].update(unit="m/km")),
+            ("ojms-salat1", "gradient reason outside the list", lambda doc: doc["climb_gradients"][0].update(reason="noise")),
+            ("ojms-salat1", "takeoff minimum without visibility or RVR", lambda doc: doc["takeoff_minima"][1].pop("runway_visual_range")),
+            ("ojms-salat1", "climb gradients on an arrival", lambda doc: (doc.update(procedure_type="arrival"), doc.pop("takeoff_minima"))),
+            ("ojms-salat1", "takeoff minima on an arrival", lambda doc: (doc.update(procedure_type="arrival"), doc.pop("climb_gradients"))),
+            ("ojms-i31", "takeoff minima on an approach", lambda doc: doc.update(takeoff_minima=procedure("ojms-salat1")["takeoff_minima"])),
+        )
+        validate_procedure(self, "ojms-salat1")
+        for identifier, name, change in cases:
+            with self.subTest(procedure=identifier, case=name):
+                validate_procedure(self, identifier, change, valid=False)
+
+    def test_procedure_turn_data_stay_on_procedure_turn_legs(self):
+        def turn_leg(document):
+            return next(leg for leg in legs(document) if leg["leg_type"] == "procedure_turn")
+
+        turn = turn_leg(procedure("ojms-i31"))
+        self.assertEqual((turn["procedure_turn"]["turn_type"], turn["turn_direction"]), ("turn_45_180", "left"))
+        self.assertEqual(turn["procedure_turn"]["remain_within"], {"value": 10, "unit": "nm"})
+        cases = (
+            ("course reversal type outside the list", lambda doc: turn_leg(doc)["procedure_turn"].update(turn_type="racetrack")),
+            ("procedure turn data without a type", lambda doc: turn_leg(doc)["procedure_turn"].pop("turn_type")),
+            ("procedure turn data on another leg", lambda doc: legs(doc)[0].update(procedure_turn={"turn_type": "base_turn"})),
+        )
+        for name, change in cases:
+            with self.subTest(case=name):
+                validate_procedure(self, "ojms-i31", change, valid=False)
+
+    def test_obstacle_assessment_and_provenance_are_typed(self):
+        cases = (
+            ("AIRAC cycle 15", lambda doc: doc["provenance"].update(airac_cycle="2615")),
+            ("AIRAC cycle as a date", lambda doc: doc["provenance"].update(airac_cycle="2026-10-01")),
+            ("unknown derivation", lambda doc: doc["provenance"].update(derivation="guessed")),
+            ("provenance without a derivation", lambda doc: doc["provenance"].pop("derivation")),
+            ("segment without its minimum altitude", lambda doc: doc["obstacle_assessment"]["segments"][0].pop("minimum_altitude")),
+            ("obstacle clearance of zero", lambda doc: doc["obstacle_assessment"]["segments"][0]["obstacle_clearance"].update(value=0)),
+            ("obstacle elevation above ground level",
+             lambda doc: doc["obstacle_assessment"]["segments"][0]["controlling_obstacle"]["elevation"].update(reference="AGL")),
+            ("unknown criteria", lambda doc: doc["obstacle_assessment"].update(criteria="faa")),
+        )
+        for name, change in cases:
+            with self.subTest(case=name):
+                validate_procedure(self, "ojms-i31", change, valid=False)
+        published = {"derivation": "published", "authority": "FAA", "airac_cycle": "2610",
+                     "effective_from": "2026-10-01T09:01:00Z", "effective_until": "2026-10-29T09:01:00Z"}
+        for name in NAVIGATION:
+            with self.subTest(name=name):
+                document = example(name)
+                document["provenance"] = deepcopy(published)
+                validate(document)
+
+
+def feet(value):
+    return {"value": value, "unit": "ft", "reference": "MSL"}
+
+
+def procedure(identifier):
+    """An OJMS procedure of the OIR resource catalogue, as a standalone document."""
+    resources = example("resources")
+    record = deepcopy(resources["resources"]["instrument_procedures"][identifier])
+    return {"$schema": example("procedure")["$schema"], **record,
+            "resources_ref": {"id": resources["meta"]["id"], "revision": resources["meta"]["revision"]}}
+
+
+def validate_procedure(test, identifier, change=None, valid=True):
+    document = procedure(identifier)
+    if change:
+        change(document)
+    if valid:
+        validate(document)
+    else:
+        rejected(test, document)
+
 
 if __name__ == "__main__":
     unittest.main()

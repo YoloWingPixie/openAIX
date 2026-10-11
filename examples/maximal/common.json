@@ -1050,6 +1050,25 @@
         "latitude": 31.834683,
         "longitude": 36.778475
       },
+      "provenance": {
+        "airac_cycle": "2610",
+        "authority": "CJTF-OIR airspace control cell",
+        "derivation": "authored",
+        "effective_from": "2026-10-01T00:00:00Z",
+        "effective_until": "2026-10-29T00:00:00Z",
+        "generated_at": "2026-09-28T10:00:00Z",
+        "publication": {
+          "id": "ojms-i31-chart",
+          "path": "spins.json",
+          "revision": "2610",
+          "section": "DTA05",
+          "title": "Muwaffaq Salti ILS runway 31 chart"
+        },
+        "tool": {
+          "name": "DCS map file reader",
+          "version": "2.9.8"
+        }
+      },
       "resources_ref": {
         "id": "oir-resources",
         "revision": "1"

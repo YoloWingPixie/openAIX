@@ -208,6 +208,8 @@ def field_values():
                           "notes": "Monitor guard 243.0 MHz outside the tower hours."}]},
         {"edges": [{"taxiway": "A"}]},
         {"hold": {"speed": {"kind": "at_or_below", "value": {"value": 230, "unit": "kt"}}}},
+        # Provenance of the records that come from the DCS Syria map files.
+        {"provenance": {"derivation": "derived", "authority": "Eagle Dynamics", "tool": {"name": "DCS map file reader", "version": "2.9.8"}}},
         {"legs": [{"fly_over": True, "recommended_navaid": {"kind": "control_measure", "id": "ghi"},
                    "speed": {"kind": "at_or_below", "value": {"value": 210, "unit": "kt"}}, "time": {"value": 1.0, "unit": "min"},
                    "vertical_angle_deg": -3.0, "arc_center": {"kind": "control_measure", "id": "ghi"}, "arc_radius": length(10, "nm")}]},
@@ -323,7 +325,7 @@ def complete(name, seed, resources):
         source = resources["resources"]
         catalogue = seed.setdefault("resources", {})
         for group, keys in (("places", ("ojms",)), ("localizers", ("ojms-ils-31", "ojms-ils-26")),
-                            ("instrument_procedures", ("ojms-i31",)), ("pattern_profiles", ("usaf-standard",)),
+                            ("instrument_procedures", tuple(ojms()["procedures"])), ("pattern_profiles", ("usaf-standard",)),
                             ("control_measures", ("ghi", "gainful-misarc", "zinc-mez")), ("emitters", ("sa6-gainful", "sa3-zinc"))):
             for key in keys:
                 catalogue.setdefault(group, {}).setdefault(key, deepcopy(source[group][key]))

@@ -29,6 +29,14 @@
   "ident": "W610",
   "level": "low",
   "name": "ATS route W610, GHI to ABC",
+  "provenance": {
+    "authority": "Eagle Dynamics",
+    "derivation": "derived",
+    "tool": {
+      "name": "DCS map file reader",
+      "version": "2.9.8"
+    }
+  },
   "resources_ref": {
     "id": "oir-resources",
     "revision": "1"

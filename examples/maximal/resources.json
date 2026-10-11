@@ -771,6 +771,11 @@
           "latitude": 31.834683,
           "longitude": 36.778475
         },
+        "provenance": {
+          "airac_cycle": "2610",
+          "authority": "CJTF-OIR airspace control cell",
+          "derivation": "authored"
+        },
         "resources_ref": {
           "id": "oir-resources",
           "revision": "1"
@@ -1395,8 +1400,178 @@
       }
     },
     "instrument_procedures": {
+      "ojms-asr13": {
+        "airfield": "ojms",
+        "approach_type": "asr",
+        "id": "ojms-asr13",
+        "ident": "ASR13",
+        "kind": "procedure",
+        "minima": [
+          {
+            "category_minima": [
+              {
+                "categories": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "height": {
+                  "unit": "ft",
+                  "value": 484
+                },
+                "minimum_descent_altitude": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 2120
+                },
+                "visibility": {
+                  "unit": "sm",
+                  "value": 1
+                }
+              }
+            ],
+            "height_reference": "touchdown_zone",
+            "label": "ASR 13",
+            "line": "asr",
+            "manoeuvre": "straight_in",
+            "runway": "13"
+          },
+          {
+            "category_minima": [
+              {
+                "categories": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "height": {
+                  "unit": "ft",
+                  "value": 564
+                },
+                "minimum_descent_altitude": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 2200
+                },
+                "visibility": {
+                  "unit": "sm",
+                  "value": 1.5
+                }
+              }
+            ],
+            "height_reference": "aerodrome",
+            "label": "ASR circling",
+            "line": "asr",
+            "manoeuvre": "circling"
+          }
+        ],
+        "name": "Muwaffaq Salti ASR runway 13",
+        "procedure_type": "approach",
+        "provenance": {
+          "airac_cycle": "2610",
+          "authority": "CJTF-OIR airspace control cell",
+          "derivation": "authored"
+        },
+        "radar_approach": {
+          "coverage": {
+            "range": {
+              "unit": "nm",
+              "value": 15
+            }
+          },
+          "final_approach_course": {
+            "declination_deg": 5.0,
+            "reference": "magnetic",
+            "value": 126.1
+          },
+          "lost_communications": [
+            "If no transmission is received for one minute on final, climb to 5000 feet on the runway heading and contact Salti Tower on 253.15."
+          ],
+          "missed_approach_point_distance": {
+            "unit": "nm",
+            "value": 1
+          },
+          "position": {
+            "latitude": 31.8297,
+            "longitude": 36.7866
+          },
+          "recommended_altitudes": [
+            {
+              "altitude": {
+                "reference": "MSL",
+                "unit": "ft",
+                "value": 2900
+              },
+              "distance": {
+                "unit": "nm",
+                "value": 4
+              }
+            }
+          ],
+          "runway": "13"
+        },
+        "transitions": [
+          {
+            "legs": [
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 3200
+                  }
+                },
+                "approach_fix": "final_approach_fix",
+                "fix": {
+                  "ident": "FAF13",
+                  "position": {
+                    "latitude": 31.8958,
+                    "longitude": 36.69935
+                  }
+                },
+                "leg_type": "initial_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 5000
+                  }
+                },
+                "course": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 126.1
+                },
+                "leg_type": "course_to_altitude",
+                "missed_approach": true
+              }
+            ]
+          }
+        ]
+      },
       "ojms-i31": {
         "airfield": "ojms",
+        "approach_type": "ils",
+        "climb_gradients": [
+          {
+            "gradient": {
+              "unit": "ft/nm",
+              "value": 250
+            },
+            "notes": "Missed approach climb over the ridge 6 nm north-west of the airfield.",
+            "reason": "obstacle",
+            "until": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 5000
+            }
+          }
+        ],
         "extensions": {
           "org.cjtf-oir.ato": {
             "ato_day": "214"
@@ -1405,8 +1580,214 @@
         "id": "ojms-i31",
         "ident": "I31",
         "kind": "procedure",
+        "minima": [
+          {
+            "category_minima": [
+              {
+                "categories": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "decision_altitude": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1836
+                },
+                "height": {
+                  "unit": "ft",
+                  "value": 200
+                },
+                "runway_visual_range": {
+                  "unit": "m",
+                  "value": 550
+                },
+                "visibility": {
+                  "unit": "m",
+                  "value": 800
+                }
+              }
+            ],
+            "height_reference": "threshold",
+            "ils_category": "I",
+            "label": "S-ILS 31",
+            "line": "ils",
+            "manoeuvre": "straight_in",
+            "runway": "31"
+          },
+          {
+            "category_minima": [
+              {
+                "categories": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "decision_altitude": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1836
+                },
+                "height": {
+                  "unit": "ft",
+                  "value": 200
+                },
+                "visibility": {
+                  "unit": "m",
+                  "value": 1200
+                }
+              }
+            ],
+            "condition": "Approach lights of runway 31 out of service.",
+            "height_reference": "threshold",
+            "ils_category": "I",
+            "label": "S-ILS 31",
+            "line": "ils",
+            "manoeuvre": "straight_in",
+            "runway": "31"
+          },
+          {
+            "category_minima": [
+              {
+                "categories": [
+                  "A",
+                  "B"
+                ],
+                "height": {
+                  "unit": "ft",
+                  "value": 564
+                },
+                "minimum_descent_altitude": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 2200
+                },
+                "visibility": {
+                  "unit": "m",
+                  "value": 1600
+                }
+              }
+            ],
+            "height_reference": "aerodrome",
+            "label": "CIRCLING",
+            "line": "localizer",
+            "manoeuvre": "circling",
+            "remarks": [
+              "Circling north-east of runway 13/31 is not authorized: the shelters are there."
+            ]
+          }
+        ],
         "name": "Muwaffaq Salti ILS runway 31 approach (I31)",
+        "navigation_specification": {
+          "navigation_type": "conventional",
+          "notes": "GHI DME is necessary for the procedure turn entry from the GHI transition.",
+          "required_navaids": [
+            {
+              "id": "ghi",
+              "kind": "control_measure"
+            }
+          ],
+          "sensors": [
+            "ils",
+            "vor",
+            "dme"
+          ]
+        },
+        "obstacle_assessment": {
+          "assessed_at": "2026-09-28T10:00:00Z",
+          "criteria": "pans_ops",
+          "criteria_document": "ICAO Doc 8168 Volume II, seventh edition",
+          "notes": "The missed approach needs 250 ft/nm to 5000 feet to clear the ridge north-west of the airfield.",
+          "obstacle_data": "DCS Syria terrain sampled every 100 m in each protection area",
+          "segments": [
+            {
+              "controlling_obstacle": {
+                "elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 2580
+                },
+                "ident": "T-0412",
+                "obstacle_type": "terrain",
+                "position": {
+                  "latitude": 31.776,
+                  "longitude": 36.851
+                }
+              },
+              "from_fix": "GHI",
+              "minimum_altitude": {
+                "reference": "MSL",
+                "unit": "ft",
+                "value": 3600
+              },
+              "obstacle_clearance": {
+                "unit": "ft",
+                "value": 1000
+              },
+              "satisfied": true,
+              "segment": "initial",
+              "to_fix": "FAF31",
+              "transition": "GHI"
+            },
+            {
+              "controlling_obstacle": {
+                "elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1795
+                },
+                "height": {
+                  "unit": "ft",
+                  "value": 120
+                },
+                "ident": "OB-0031",
+                "obstacle_type": "structure",
+                "position": {
+                  "latitude": 31.809,
+                  "longitude": 36.815
+                }
+              },
+              "from_fix": "FAF31",
+              "minimum_altitude": {
+                "reference": "MSL",
+                "unit": "ft",
+                "value": 2050
+              },
+              "notes": "The radio mast south-east of the threshold controls the localizer minimum descent altitude.",
+              "obstacle_clearance": {
+                "unit": "ft",
+                "value": 250
+              },
+              "satisfied": true,
+              "segment": "final",
+              "to_fix": "RW31"
+            }
+          ],
+          "tool": {
+            "name": "Salti procedure check",
+            "version": "1.2.0"
+          }
+        },
         "procedure_type": "approach",
+        "provenance": {
+          "airac_cycle": "2610",
+          "authority": "CJTF-OIR airspace control cell",
+          "derivation": "synthesized",
+          "effective_from": "2026-10-01T00:00:00Z",
+          "effective_until": "2026-10-29T00:00:00Z",
+          "generated_at": "2026-09-28T10:00:00Z",
+          "publication": {
+            "id": "ojms-i31-chart",
+            "revision": "2610",
+            "title": "Muwaffaq Salti ILS runway 31 chart"
+          },
+          "tool": {
+            "name": "Salti procedure check",
+            "version": "1.2.0"
+          }
+        },
         "resources_ref": {
           "id": "oir-resources",
           "revision": "1"
@@ -1414,35 +1795,27 @@
         "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
         "transitions": [
           {
-            "ident": "I31",
+            "ident": "GHI",
             "legs": [
               {
                 "altitude": {
-                  "kind": "at",
+                  "kind": "at_or_above",
                   "lower": {
                     "reference": "MSL",
                     "unit": "ft",
-                    "value": 3300
+                    "value": 5000
                   }
                 },
-                "approach_fix": "final_approach_fix",
-                "arc_center": {
-                  "id": "ghi",
-                  "kind": "control_measure"
-                },
-                "arc_radius": {
-                  "unit": "nm",
-                  "value": 10
-                },
+                "approach_fix": "initial_approach_fix",
                 "distance": {
                   "unit": "nm",
                   "value": 5
                 },
                 "fix": {
-                  "ident": "FAF31",
+                  "ident": "GHI",
                   "position": {
-                    "latitude": 31.767214,
-                    "longitude": 36.869855
+                    "latitude": 31.834683,
+                    "longitude": 36.778475
                   }
                 },
                 "fly_over": true,
@@ -1461,10 +1834,225 @@
                 "time": {
                   "unit": "min",
                   "value": 1.0
-                },
-                "turn_direction": "right",
-                "vertical_angle_deg": -3.0
+                }
               },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 4000
+                  }
+                },
+                "course": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 127.2
+                },
+                "fix": {
+                  "ident": "FAF31",
+                  "position": {
+                    "latitude": 31.767214,
+                    "longitude": 36.869855
+                  }
+                },
+                "leg_type": "procedure_turn",
+                "procedure_turn": {
+                  "inbound_course": {
+                    "declination_deg": 5.0,
+                    "reference": "magnetic",
+                    "value": 307.2
+                  },
+                  "outbound_time": {
+                    "unit": "min",
+                    "value": 1.0
+                  },
+                  "remain_within": {
+                    "unit": "nm",
+                    "value": 10
+                  },
+                  "turn_type": "turn_45_180"
+                },
+                "turn_direction": "left"
+              }
+            ]
+          },
+          {
+            "legs": [
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 3300
+                  }
+                },
+                "approach_fix": "final_approach_fix",
+                "fix": {
+                  "ident": "FAF31",
+                  "position": {
+                    "latitude": 31.767214,
+                    "longitude": 36.869855
+                  }
+                },
+                "leg_type": "initial_fix"
+              }
+            ]
+          }
+        ]
+      },
+      "ojms-par31": {
+        "airfield": "ojms",
+        "approach_type": "par",
+        "id": "ojms-par31",
+        "ident": "PAR31",
+        "kind": "procedure",
+        "minima": [
+          {
+            "category_minima": [
+              {
+                "categories": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E"
+                ],
+                "decision_altitude": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1836
+                },
+                "height": {
+                  "unit": "ft",
+                  "value": 200
+                },
+                "runway_visual_range": {
+                  "unit": "ft",
+                  "value": 2400
+                },
+                "visibility": {
+                  "unit": "sm",
+                  "value": 0.5
+                }
+              }
+            ],
+            "height_reference": "touchdown_zone",
+            "label": "PAR 31",
+            "line": "par",
+            "manoeuvre": "straight_in",
+            "runway": "31"
+          }
+        ],
+        "name": "Muwaffaq Salti PAR runway 31",
+        "procedure_type": "approach",
+        "provenance": {
+          "airac_cycle": "2610",
+          "authority": "CJTF-OIR airspace control cell",
+          "derivation": "authored"
+        },
+        "radar_approach": {
+          "coverage": {
+            "azimuth_left_deg": 10,
+            "azimuth_right_deg": 10,
+            "elevation_lower_deg": -1,
+            "elevation_upper_deg": 7,
+            "range": {
+              "unit": "nm",
+              "value": 10
+            }
+          },
+          "final_approach_course": {
+            "declination_deg": 5.0,
+            "reference": "magnetic",
+            "value": 306.1
+          },
+          "glide_path_angle_deg": 3.0,
+          "lost_communications": [
+            "If no transmission is received for one minute on final, climb to 5000 feet on the runway heading and contact Salti Tower on 253.15.",
+            "If no transmission is received for five seconds below the glide path intercept altitude, execute the missed approach."
+          ],
+          "position": {
+            "latitude": 31.826,
+            "longitude": 36.7955
+          },
+          "runway": "31",
+          "threshold_crossing_height": {
+            "unit": "ft",
+            "value": 50
+          }
+        }
+      },
+      "ojms-r13": {
+        "airfield": "ojms",
+        "approach_type": "rnav",
+        "id": "ojms-r13",
+        "ident": "R13",
+        "kind": "procedure",
+        "minima": [
+          {
+            "category_minima": [
+              {
+                "categories": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "decision_altitude": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1920
+                },
+                "height": {
+                  "unit": "ft",
+                  "value": 284
+                },
+                "visibility": {
+                  "unit": "m",
+                  "value": 1200
+                }
+              }
+            ],
+            "height_reference": "threshold",
+            "label": "RNP 0.30",
+            "line": "rnp",
+            "manoeuvre": "straight_in",
+            "rnp_value": {
+              "unit": "nm",
+              "value": 0.3
+            },
+            "runway": "13"
+          }
+        ],
+        "name": "Muwaffaq Salti RNP runway 13 approach (R13)",
+        "navigation_specification": {
+          "navigation_type": "rnp",
+          "rnp_value": {
+            "unit": "nm",
+            "value": 0.3
+          },
+          "sensors": [
+            "gnss"
+          ],
+          "specification": "rnp_ar_apch"
+        },
+        "procedure_type": "approach",
+        "provenance": {
+          "airac_cycle": "2610",
+          "authority": "CJTF-OIR airspace control cell",
+          "derivation": "synthesized",
+          "generated_at": "2026-09-28T10:00:00Z",
+          "tool": {
+            "name": "Salti procedure check",
+            "version": "1.2.0"
+          }
+        },
+        "transitions": [
+          {
+            "legs": [
               {
                 "altitude": {
                   "kind": "at_or_above",
@@ -1474,13 +2062,217 @@
                     "value": 5000
                   }
                 },
+                "approach_fix": "initial_approach_fix",
+                "fix": {
+                  "ident": "SALTI",
+                  "position": {
+                    "latitude": 31.901888,
+                    "longitude": 36.601464
+                  }
+                },
+                "leg_type": "initial_fix",
+                "rnp_value": {
+                  "unit": "nm",
+                  "value": 1
+                }
+              },
+              {
+                "altitude": {
+                  "kind": "at",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 3200
+                  }
+                },
+                "approach_fix": "final_approach_fix",
+                "arc_center": {
+                  "ident": "CTR13",
+                  "position": {
+                    "latitude": 31.939547,
+                    "longitude": 36.640155
+                  }
+                },
+                "arc_radius": {
+                  "unit": "nm",
+                  "value": 3
+                },
+                "fix": {
+                  "ident": "FAF13",
+                  "position": {
+                    "latitude": 31.8958,
+                    "longitude": 36.69935
+                  }
+                },
+                "leg_type": "radius_to_fix",
+                "rnp_value": {
+                  "unit": "nm",
+                  "value": 1
+                },
+                "turn_direction": "left"
+              },
+              {
+                "approach_fix": "missed_approach_point",
+                "fix": {
+                  "ident": "RW13",
+                  "position": {
+                    "latitude": 31.841077,
+                    "longitude": 36.773265
+                  }
+                },
+                "leg_type": "track_to_fix",
+                "rnp_value": {
+                  "unit": "nm",
+                  "value": 0.3
+                },
+                "vertical_angle_deg": -3.0
+              }
+            ]
+          }
+        ]
+      },
+      "ojms-salat1": {
+        "airfield": "ojms",
+        "climb_gradients": [
+          {
+            "gradient": {
+              "unit": "ft/nm",
+              "value": 350
+            },
+            "notes": "Terrain rises to 3900 feet 9 nm north-west of the airfield.",
+            "reason": "obstacle",
+            "runway": "31",
+            "until": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 5000
+            }
+          },
+          {
+            "gradient": {
+              "unit": "percent",
+              "value": 5.0
+            },
+            "notes": "Keeps departures below the Marshal stack until SALAT.",
+            "reason": "atc",
+            "runway": "31",
+            "until_fix": {
+              "ident": "SALAT",
+              "position": {
+                "latitude": 31.998585,
+                "longitude": 36.962669
+              }
+            }
+          }
+        ],
+        "id": "ojms-salat1",
+        "ident": "SALAT1",
+        "kind": "procedure",
+        "name": "Muwaffaq Salti SALAT 1 departure",
+        "navigation_specification": {
+          "navigation_type": "rnav",
+          "sensors": [
+            "gnss",
+            "dme_dme_iru"
+          ],
+          "specification": "rnav_1"
+        },
+        "obstacle_assessment": {
+          "assessed_at": "2026-09-28T10:00:00Z",
+          "criteria": "terps",
+          "criteria_document": "FAA Order 8260.3G",
+          "segments": [
+            {
+              "controlling_obstacle": {
+                "elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 3920
+                },
+                "obstacle_type": "terrain",
+                "position": {
+                  "latitude": 31.905,
+                  "longitude": 36.69
+                }
+              },
+              "minimum_altitude": {
+                "reference": "MSL",
+                "unit": "ft",
+                "value": 4900
+              },
+              "obstacle_clearance": {
+                "unit": "ft",
+                "value": 1000
+              },
+              "satisfied": true,
+              "segment": "departure",
+              "to_fix": "SALAT",
+              "transition": "RW31"
+            }
+          ]
+        },
+        "procedure_type": "departure",
+        "provenance": {
+          "airac_cycle": "2610",
+          "authority": "CJTF-OIR airspace control cell",
+          "derivation": "authored"
+        },
+        "takeoff_minima": [
+          {
+            "ceiling": {
+              "unit": "ft",
+              "value": 500
+            },
+            "climb_gradient": {
+              "gradient": {
+                "unit": "ft/nm",
+                "value": 350
+              },
+              "reason": "obstacle",
+              "until": {
+                "reference": "MSL",
+                "unit": "ft",
+                "value": 5000
+              }
+            },
+            "condition": "Aircraft with one or two engines.",
+            "remarks": [
+              "Radio mast 0.6 nm from the departure end of runway 31, 120 feet above ground, 1795 feet MSL."
+            ],
+            "runway": "31",
+            "visibility": {
+              "unit": "m",
+              "value": 1600
+            }
+          },
+          {
+            "condition": "Aircraft with three or more engines.",
+            "runway": "31",
+            "runway_visual_range": {
+              "unit": "m",
+              "value": 550
+            }
+          }
+        ],
+        "transitions": [
+          {
+            "ident": "RW31",
+            "legs": [
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 2200
+                  }
+                },
                 "course": {
                   "declination_deg": 5.0,
                   "reference": "magnetic",
-                  "value": 307.2
+                  "value": 306.1
                 },
-                "leg_type": "course_to_altitude",
-                "missed_approach": true
+                "leg_type": "course_to_altitude"
               }
             ]
           }
@@ -1547,6 +2339,11 @@
         "position": {
           "latitude": 31.844333,
           "longitude": 36.768847
+        },
+        "provenance": {
+          "airac_cycle": "2610",
+          "authority": "CJTF-OIR airspace control cell",
+          "derivation": "authored"
         },
         "resources_ref": {
           "id": "oir-resources",
@@ -1915,8 +2712,17 @@
           "longitude": 36.781257
         },
         "procedures": [
-          "ojms-i31"
+          "ojms-i31",
+          "ojms-par31",
+          "ojms-asr13",
+          "ojms-r13",
+          "ojms-salat1"
         ],
+        "provenance": {
+          "airac_cycle": "2610",
+          "authority": "CJTF-OIR airspace control cell",
+          "derivation": "authored"
+        },
         "resources_ref": {
           "id": "oir-resources",
           "revision": "1"
@@ -1986,6 +2792,11 @@
               "value": 7598
             },
             "name": "08/26",
+            "provenance": {
+              "airac_cycle": "2610",
+              "authority": "CJTF-OIR airspace control cell",
+              "derivation": "authored"
+            },
             "resources_ref": {
               "id": "oir-resources",
               "revision": "1"

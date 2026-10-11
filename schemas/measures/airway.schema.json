@@ -93,6 +93,10 @@
       "minLength": 1,
       "type": "string"
     },
+    "provenance": {
+      "$ref": "urn:openaix:schema:procedure:0.1.0-draft.1#/$defs/Provenance",
+      "description": "This field gives the provenance of this airway as structured data: how the data were made, the authority, the aeronautical information regulation and control (AIRAC) cycle and the tool that made them."
+    },
     "resources_ref": {
       "$ref": "urn:openaix:schema:common:0.1.0-draft.1#/$defs/ResourceRef",
       "description": "This field identifies the resource catalogue that resolves the references of this airway. The reference gives the identifier and the revision of the catalogue."
@@ -148,7 +152,7 @@
       "type": "array"
     },
     "source": {
-      "description": "This field gives the source of this record. The value gives the authority that publishes the data, and the cycle, for example `FAA CIFP cycle 2610`. A record that an author writes does not have this field.",
+      "description": "This field gives the source of this record. The value gives the authority that publishes the data, and the cycle, for example `FAA CIFP cycle 2610`. A record that an author writes does not have this field. The field `provenance` gives the same facts as structured data.",
       "minLength": 1,
       "type": "string"
     },

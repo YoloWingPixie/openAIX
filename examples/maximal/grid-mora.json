@@ -44,5 +44,13 @@
   "id": "mora-n31e035",
   "kind": "grid-mora",
   "name": "Grid MORA row N31 E035 eastward",
+  "provenance": {
+    "authority": "Eagle Dynamics",
+    "derivation": "derived",
+    "tool": {
+      "name": "DCS map file reader",
+      "version": "2.9.8"
+    }
+  },
   "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua"
 }

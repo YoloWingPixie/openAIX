@@ -187,6 +187,14 @@
     "value": 8691
   },
   "name": "Muwaffaq Salti runway 13/31",
+  "provenance": {
+    "authority": "Eagle Dynamics",
+    "derivation": "derived",
+    "tool": {
+      "name": "DCS map file reader",
+      "version": "2.9.8"
+    }
+  },
   "resources_ref": {
     "id": "oir-resources",
     "revision": "1"

@@ -8,10 +8,10 @@
       "legs": [
         {
           "fix": {
-            "ident": "FAF31",
+            "ident": "GHI",
             "position": {
-              "latitude": 31.767214,
-              "longitude": 36.869855
+              "latitude": 31.834683,
+              "longitude": 36.778475
             }
           },
           "leg_type": "initial_fix"
