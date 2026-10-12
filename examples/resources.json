@@ -1224,6 +1224,12 @@
         "description": "Land that ISIS holds north of the FLOT, drawn in a GIS tool: a GeoJSON multipolygon (longitude first).",
         "geometry": {
           "geometry": {
+            "bbox": [
+              39.7,
+              34.4,
+              41.0,
+              35.6
+            ],
             "coordinates": [
               [
                 [

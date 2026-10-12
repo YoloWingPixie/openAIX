@@ -403,10 +403,10 @@
   ],
   "GeoJSONMultiPolygon": {
     "bbox": [
-      37.8,
-      33.2,
+      39.7,
+      34.4,
       41.0,
-      36.4
+      35.6
     ],
     "coordinates": [
       [
@@ -670,10 +670,10 @@
   "Geometry_geojson_polygon": {
     "geometry": {
       "bbox": [
-        37.8,
-        33.2,
+        39.7,
+        34.4,
         41.0,
-        36.4
+        35.6
       ],
       "coordinates": [
         [
@@ -1406,10 +1406,10 @@
       "geometry": {
         "geometry": {
           "bbox": [
-            37.8,
-            33.2,
+            39.7,
+            34.4,
             41.0,
-            36.4
+            35.6
           ],
           "coordinates": [
             [

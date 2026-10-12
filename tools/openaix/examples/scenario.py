@@ -173,7 +173,8 @@ def air_defense(version):
                "description": "Land that ISIS holds north of the FLOT, drawn in a GIS tool: a GeoJSON multipolygon (longitude first).",
                "geometry": {"kind": "geojson", "geometry": {"type": "MultiPolygon", "coordinates": [
                    [[[39.7, 34.85], [40.75, 34.85], [40.75, 35.6], [39.7, 35.6], [39.7, 34.85]]],
-                   [[[40.8, 34.4], [41.0, 34.4], [41.0, 34.6], [40.8, 34.6], [40.8, 34.4]]]]}},
+                   [[[40.8, 34.4], [41.0, 34.4], [41.0, 34.6], [40.8, 34.6], [40.8, 34.4]]]],
+                   "bbox": [39.7, 34.4, 41.0, 35.6]}},
                "countries": ["SYR"], "active": deepcopy(PERIOD),
                "notes": "The boundary follows the FLOT; it moves when the FLOT moves."}
     friendly = {"$schema": f"urn:openaix:schema:territory:{version}", "id": "jordan", "name": "Jordan", "type": "TERRITORY",

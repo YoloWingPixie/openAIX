@@ -53,6 +53,32 @@ class GeoJSONTests(unittest.TestCase):
             self.assertIn("bounding box", error.exception.code)
         validate_definitions({"Geometry": {"kind": "geojson", "geometry": {"type": "Polygon", "coordinates": [ring], "bbox": [40.1, 35.1, 40.3, 35.3]}}})
 
+    def test_example_bounding_boxes_are_exact(self):
+        def positions(coordinates):
+            if coordinates and isinstance(coordinates[0], (int, float)):
+                yield coordinates
+                return
+            for child in coordinates:
+                yield from positions(child)
+
+        def boxes(value, path=""):
+            if isinstance(value, dict):
+                if "bbox" in value and "coordinates" in value:
+                    yield path, value
+                for key, child in value.items():
+                    yield from boxes(child, f"{path}/{key}")
+            elif isinstance(value, list):
+                for index, child in enumerate(value):
+                    yield from boxes(child, f"{path}/{index}")
+
+        for file in sorted((ROOT / "examples").rglob("*.json")):
+            for path, geometry in boxes(json.loads(file.read_text())):
+                points = list(positions(geometry["coordinates"]))
+                half = len(geometry["bbox"]) // 2
+                extent = [min(p[0] for p in points), min(p[1] for p in points), max(p[0] for p in points), max(p[1] for p in points)]
+                with self.subTest(file=file.name, path=path):
+                    self.assertEqual(geometry["bbox"][:2] + geometry["bbox"][half:half + 2], extent)
+
     def test_bounding_box_may_cross_the_antimeridian(self):
         ring = [[179.5, 10.0], [-179.5, 10.0], [-179.5, 11.0], [179.5, 11.0], [179.5, 10.0]]
         validate_definitions({"Geometry": {"kind": "geojson", "geometry": {"type": "Polygon", "coordinates": [ring], "bbox": [179.5, 10.0, -179.5, 11.0]}}})
