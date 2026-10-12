@@ -80,8 +80,13 @@ def agencies():
     return {
         "caoc": {"id": "caoc", "kind": "c2-agency", "callsign": "Kingpin", "role": "AOC", "channels": ["ops-uhf"],
             "position": position(31.838, 36.803)},
-        "darkstar": {"id": "darkstar", "kind": "c2-agency", "callsign": "Darkstar", "role": "AWACS", "channels": ["control-uhf"],
-            "extensions": dcs([{"kind": "unit", "name": "OIR Darkstar E-3A", "mission_id": MISSION_ID, "object_id": 11, "unit_type": "E-3A"}])},
+        "darkstar": {"id": "darkstar", "kind": "c2-agency", "callsign": "Darkstar", "role": "AWACS", "platform": "airborne",
+            "channels": ["control-uhf"],
+            # The surveillance area of Darkstar, drawn in a GIS tool: a GeoJSON polygon (longitude first).
+            "areas": [{"kind": "geojson", "geometry": {"type": "Polygon", "coordinates": [[
+                [37.8, 33.2], [41.0, 33.2], [41.0, 36.4], [37.8, 36.4], [37.8, 33.2]]]}}],
+            "extensions": dcs([{"kind": "unit", "name": "OIR Darkstar E-3A", "mission_id": MISSION_ID, "object_id": 11, "unit_type": "E-3A"}],
+                              coalition="blue")},
         "salti-tower": {"id": "salti-tower", "kind": "c2-agency", "callsign": "Salti Tower", "role": "ATC", "channels": ["salti-uhf"],
             "position": position(31.825431, 36.781257)},
         "banshee": {"id": "banshee", "kind": "c2-agency", "callsign": "Banshee", "role": "CRC", "channels": ["banshee-uhf"],
@@ -125,7 +130,9 @@ def build_aco_example(version):
         "notes": "Expect a Darkstar picture call at Juniper; squawk the ATO Mode 3 code before the gate.",
         "instructions": ["Report Juniper with altitude and playtime; Darkstar assigns the corridor slot."],
         "restrictions": ["Do not pass Juniper northbound without a Darkstar check-in."],
-        "coordination_instructions": ["Banshee hands inbound flights to Darkstar at Juniper."]})
+        "coordination_instructions": ["Banshee hands inbound flights to Darkstar at Juniper."],
+        "altitude": {"lower": {"value": 180, "unit": "flight_level", "reference": "FL"},
+                     "upper": {"value": 240, "unit": "flight_level", "reference": "FL"}}})
     points["marshal"].update({
         "description": "Holding fix at the north end of the transit corridor and the anchor of Mesa holding.",
         "notes": "Marshal is the hand-off point from Banshee procedural control to Darkstar.",
@@ -236,14 +243,14 @@ def build_aco_example(version):
     reference = document_ref("oir-spins", "OIR Special Instructions (SPINS)", "Airspace coordination")
     return {"$schema": f"urn:openaix:schema:aco:{version}", "kind": "aco", "schema_version": version,
         "meta": {"id": "oir-aco", "revision": "2", "title": "OIR Airspace Control Order", "author": "CAOC airspace cell",
-            "classification": "UNCLASSIFIED", "coalition": "blue", "distribution": ["Darkstar", "Banshee", "Salti Tower", "All OIR flights"],
+            "classification": "UNCLASSIFIED", "distribution": ["Darkstar", "Banshee", "Salti Tower", "All OIR flights"],
             "issued_at": "2026-10-02T12:30:00Z", "issuing_unit": "CJTF-OIR CAOC", "operation": "INHERENT RESOLVE",
             "references": [deepcopy(reference)], "supersedes": {**document_ref("oir-aco", "OIR preliminary ACO", "Entire order"), "revision": "1"}},
         "period": window(), "resources": resources, "assignments": assignments, "references": [reference],
         "instructions": ["All times are UTC. Altimeter: QNH below the Jordanian transition altitude of 13000 feet, standard pressure above.",
             "Use the explicit vertical reference: flight levels use standard pressure; MSL and AGL values are feet. No pressure-to-height conversion is implied. Orbit radials are true bearings.",
             "This order allocates airspace. Flight tasking and permissions to engage remain separate."],
-        "extensions": {"org.cjtf-oir.ato": {"mission_id": MISSION_ID, "ato_day": "214"}}}
+        "extensions": {"org.cjtf-oir.ato": {"mission_id": MISSION_ID, "ato_day": "214"}, **dcs(coalition="blue")}}
 
 
 def build_minimal_aco_example(version):

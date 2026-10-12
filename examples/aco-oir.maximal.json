@@ -247,6 +247,11 @@
     "org.cjtf-oir.ato": {
       "ato_day": "214",
       "mission_id": "oir-syria"
+    },
+    "sim": {
+      "dcs": {
+        "coalition": "blue"
+      }
     }
   },
   "instructions": [
@@ -258,7 +263,6 @@
   "meta": {
     "author": "CAOC airspace cell",
     "classification": "UNCLASSIFIED",
-    "coalition": "blue",
     "distribution": [
       "Darkstar",
       "Banshee",
@@ -330,6 +334,38 @@
         "role": "AOC"
       },
       "darkstar": {
+        "areas": [
+          {
+            "geometry": {
+              "coordinates": [
+                [
+                  [
+                    37.8,
+                    33.2
+                  ],
+                  [
+                    41.0,
+                    33.2
+                  ],
+                  [
+                    41.0,
+                    36.4
+                  ],
+                  [
+                    37.8,
+                    36.4
+                  ],
+                  [
+                    37.8,
+                    33.2
+                  ]
+                ]
+              ],
+              "type": "Polygon"
+            },
+            "kind": "geojson"
+          }
+        ],
         "callsign": "Darkstar",
         "channels": [
           "control-uhf"
@@ -345,12 +381,14 @@
                   "object_id": 11,
                   "unit_type": "E-3A"
                 }
-              ]
+              ],
+              "coalition": "blue"
             }
           }
         },
         "id": "darkstar",
         "kind": "c2-agency",
+        "platform": "airborne",
         "role": "AWACS"
       },
       "salti-tower": {
@@ -631,6 +669,18 @@
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 180
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 240
+          }
         },
         "channels": [
           "control-uhf",

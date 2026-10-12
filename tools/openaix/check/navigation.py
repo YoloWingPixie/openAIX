@@ -1,4 +1,5 @@
-"""Navigation semantic checks: MSA sector sweep, Grid MORA cell bounds, radio bands, runway ends and airfield links.
+"""Navigation semantic checks: MSA sector sweep, Grid MORA cell bounds, radio bands, runway ends, airfield links and the
+runways of a NOTAM.
 
 check/validate.py calls every area module's hooks:
 - semantic(value, path, period): once per JSON object node.
@@ -68,7 +69,7 @@ def reference_errors(airfield, path):
             if end.get("designator") in seen:
                 yield (*path, "runways", index, "ends", number, "designator"), "runway end designators must be unique in an airfield"
             seen.add(end.get("designator"))
-    for field in (("calm_wind_runway",), ("atis", "runway_in_use")):
+    for field in (("calm_wind_runway",), ("hung_ordnance_runway",), ("atis", "runway_in_use")):
         value = airfield
         for key in field:
             value = value.get(key) if isinstance(value, dict) else None
@@ -116,7 +117,7 @@ def object_errors(value, path):
         yield from band_errors(value, path)
     if value.get("kind") == "runway" and isinstance(value.get("ends"), list) and "designator" in value:
         yield from end_errors(value, path)
-    if value.get("kind") in AIRFIELD_KINDS and ({"runways", "calm_wind_runway", "atis", "parking", "taxi"} & value.keys()):
+    if value.get("kind") in AIRFIELD_KINDS and ({"runways", "calm_wind_runway", "hung_ordnance_runway", "atis", "parking", "taxi"} & value.keys()):
         yield from reference_errors(value, path)
 
 
@@ -183,6 +184,16 @@ def link_errors(document, resources):
         designators = [runway.get("designator") for runway in target.get("runways", [])]
         if designators and document.get("designator") not in designators:
             errors.append((("designator",), "the airfield of this runway has no runway with this designator"))
+    notams = entries("notams")
+    if document.get("kind") == "notam":
+        notams[own] = (document, ())
+    for identifier, (notam, base) in notams.items():
+        target = airfields.get(notam.get("location"))
+        if target is None or not target[0].get("runways"):
+            continue
+        for index, item in enumerate(notam.get("affects", [])):
+            if item.get("kind") == "runway" and item.get("designator") not in end_designators(target[0]):
+                errors.append((at(base, "affects", index, "designator"), "the NOTAM runway is not an end of a runway of its location"))
     if inline:
         for key, profile in (resources.get("pattern_profiles") or {}).items():
             if isinstance(profile, dict) and "profile" in profile:

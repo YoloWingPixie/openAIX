@@ -59,18 +59,16 @@
   "Altitude": {
     "reference": "FL",
     "unit": "flight_level",
-    "value": 220
+    "value": 180
   },
   "AltitudeBlock": {
     "lower": {
-      "reference": "FL",
-      "unit": "flight_level",
-      "value": 220
+      "surface": true
     },
     "upper": {
-      "reference": "FL",
-      "unit": "flight_level",
-      "value": 260
+      "reference": "MSL",
+      "unit": "ft",
+      "value": 8000
     }
   },
   "Bearing": {
@@ -155,6 +153,132 @@
     "unit": "MHz",
     "value": 308.475
   },
+  "GeoJSONLineString": {
+    "coordinates": [
+      [
+        39.724,
+        34.835
+      ],
+      [
+        40.025,
+        34.855
+      ]
+    ],
+    "type": "LineString"
+  },
+  "GeoJSONLinearRing": [
+    [
+      39.7,
+      34.85
+    ],
+    [
+      40.75,
+      34.85
+    ],
+    [
+      40.75,
+      35.6
+    ],
+    [
+      39.7,
+      35.6
+    ],
+    [
+      39.7,
+      34.85
+    ]
+  ],
+  "GeoJSONMultiPolygon": {
+    "coordinates": [
+      [
+        [
+          [
+            39.7,
+            34.85
+          ],
+          [
+            40.75,
+            34.85
+          ],
+          [
+            40.75,
+            35.6
+          ],
+          [
+            39.7,
+            35.6
+          ],
+          [
+            39.7,
+            34.85
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            40.8,
+            34.4
+          ],
+          [
+            41.0,
+            34.4
+          ],
+          [
+            41.0,
+            34.6
+          ],
+          [
+            40.8,
+            34.6
+          ],
+          [
+            40.8,
+            34.4
+          ]
+        ]
+      ]
+    ],
+    "type": "MultiPolygon"
+  },
+  "GeoJSONPoint": {
+    "coordinates": [
+      40.17,
+      35.21
+    ],
+    "type": "Point"
+  },
+  "GeoJSONPolygon": {
+    "coordinates": [
+      [
+        [
+          37.8,
+          33.2
+        ],
+        [
+          41.0,
+          33.2
+        ],
+        [
+          41.0,
+          36.4
+        ],
+        [
+          37.8,
+          36.4
+        ],
+        [
+          37.8,
+          33.2
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "GeoJSONPosition": [
+    40.025,
+    34.855
+  ],
   "GeoPoint": {
     "latitude": 31.825431,
     "longitude": 36.781257
@@ -258,6 +382,88 @@
       "latitude": 34.95,
       "longitude": 39.8
     }
+  },
+  "Geometry_geojson_line": {
+    "geometry": {
+      "coordinates": [
+        [
+          39.724,
+          34.835
+        ],
+        [
+          40.025,
+          34.855
+        ]
+      ],
+      "type": "LineString"
+    },
+    "kind": "geojson"
+  },
+  "Geometry_geojson_point": {
+    "geometry": {
+      "coordinates": [
+        40.17,
+        35.21
+      ],
+      "type": "Point"
+    },
+    "kind": "geojson"
+  },
+  "Geometry_geojson_polygon": {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            [
+              39.7,
+              34.85
+            ],
+            [
+              40.75,
+              34.85
+            ],
+            [
+              40.75,
+              35.6
+            ],
+            [
+              39.7,
+              35.6
+            ],
+            [
+              39.7,
+              34.85
+            ]
+          ]
+        ],
+        [
+          [
+            [
+              40.8,
+              34.4
+            ],
+            [
+              41.0,
+              34.4
+            ],
+            [
+              41.0,
+              34.6
+            ],
+            [
+              40.8,
+              34.6
+            ],
+            [
+              40.8,
+              34.4
+            ]
+          ]
+        ]
+      ],
+      "type": "MultiPolygon"
+    },
+    "kind": "geojson"
   },
   "Geometry_line": {
     "kind": "line",
@@ -485,7 +691,7 @@
   "VerticalLimit": {
     "reference": "FL",
     "unit": "flight_level",
-    "value": 220
+    "value": 180
   },
   "WeeklyPeriod": {
     "end_day_offset": 1,

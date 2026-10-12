@@ -22,20 +22,21 @@ POLICIES = {name: BINDINGS[name] for name in (
 MEASURE_POLICIES = {
     "volume": "area", "area": "area", "aor": "area", "kb": "area", "mez": "area", "aca": "area", "isr": "area", "misarc": "area",
     "airspace": "area", "route": "route", "airway": "route", "line": "line", "fire-support-line": "line",
-    "point": "point", "navaid": "navaid", "orbit": "orbit", "cl": None, "tl": None,
+    "point": "point", "navaid": "navaid", "orbit": "orbit", "cl": None, "tl": None, "territory": "area",
 }
 ROOT_POLICIES = {
     "airfield": "airfield", "c2-agency": "host", "fac": "host",
     "runway": "area", "localizer": "navaid", "procedure": "route", "holding": "hold",
-    "path-point": "map_point", "msa": "area", "grid-mora": "area",
+    "path-point": "map_point", "msa": "area", "grid-mora": "area", "notam": None,
 }
 DEFINITION_POLICIES = {
     "AirspaceComponent": "area", "Aimpoint": "fixed_target", "RoutePoint": "point",
     "Agency": "host", "Area": "area", "FixedTarget": "fixed_target", "MobileTarget": "mobile_target", "AreaTarget": "area",
     "Flight": "flight", "AircraftOverride": "aircraft", "Stand": "stand", "Emitter": "emitter",
 }
-# Records whose simulator data has keys other than `bindings` (dcs.DATA_KEYS), by schema or definition name.
-DATA_ROLES = {"Aimpoint": "aimpoint", "Emitter": "emitter", "Store": "store", "AircraftType": "aircraft_type",
+# Records whose simulator data has keys other than `bindings` (dcs.DATA_KEYS), by schema or definition name. A
+# `sided` record (agency, controller, operating location) has a DCS coalition.
+DATA_ROLES = {"c2-agency": "sided", "fac": "sided", "airfield": "sided", "Unit": "side", "Aimpoint": "aimpoint", "Emitter": "emitter", "Store": "store", "AircraftType": "aircraft_type",
               "scl": "scl", "StationLoad": "station", "Geometry_rectangle": "shape", "Geometry_ellipse": "shape"}
 # Binding lists other than `bindings`, with their policy, by data role.
 ROLE_LISTS = {"aimpoint": {"objects": "aimpoint_object"}}

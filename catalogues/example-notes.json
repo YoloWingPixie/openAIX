@@ -1,5 +1,5 @@
 {
-  "$inputs_sha256": "918732a3653a5a4023d1b502d88751d28e1163c1561d3115e984b441dbd27d0f",
+  "$inputs_sha256": "0490af8a8d7bd98056bd119827efd0be79e8e6b31a85641f5b1c7d7b0a4dbb0b",
   "urn:openaix:schema:aco:0.1.0-draft.2": [
     {
       "alternatives": [
@@ -14,6 +14,28 @@
       ],
       "path": "resources_ref",
       "reason": "alternative"
+    },
+    {
+      "path": "resources/facs",
+      "reason": "no_value"
+    },
+    {
+      "alternatives": [
+        "polygon",
+        "area",
+        "control_measure",
+        "rectangle",
+        "ellipse"
+      ],
+      "path": "resources/agencies/*/areas/*",
+      "selected": "geojson"
+    },
+    {
+      "alternatives": [
+        "MultiPolygon"
+      ],
+      "path": "resources/agencies/*/areas/*/geometry",
+      "selected": "Polygon"
     },
     {
       "path": "resources/agencies/*/extensions/sim/dcs/objects",
@@ -94,16 +116,13 @@
         "NAVAID",
         "ORBIT",
         "Air route or corridor",
+        "TERRITORY",
         "TL",
         "Airspace coordination volume",
         "name + type + geometry + extensions"
       ],
       "path": "resources/control_measures/*",
       "selected": "POINT"
-    },
-    {
-      "path": "resources/control_measures/*/aor",
-      "reason": "no_value"
     },
     {
       "alternatives": [
@@ -115,18 +134,6 @@
     },
     {
       "alternatives": [
-        "circle",
-        "track_racetrack",
-        "figure_eight",
-        "line",
-        "point",
-        "description"
-      ],
-      "path": "resources/control_measures/*/geometry",
-      "selected": "racetrack"
-    },
-    {
-      "alternatives": [
         "surface",
         "unlimited"
       ],
@@ -134,12 +141,27 @@
       "selected": "Altitude"
     },
     {
+      "alternatives": [
+        "circle",
+        "track_racetrack",
+        "figure_eight",
+        "line",
+        "point",
+        "description",
+        "geojson",
+        "geojson"
+      ],
+      "path": "resources/control_measures/*/geometry",
+      "selected": "racetrack"
+    },
+    {
       "path": "resources/control_measures/*/extensions/sim/dcs/bindings/*/style/font_size",
       "reason": "conditional"
     },
     {
       "alternatives": [
-        "line"
+        "line",
+        "geojson"
       ],
       "path": "resources/control_measures/*/geometry",
       "selected": "corridor"
@@ -151,9 +173,35 @@
         "polyarc",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "resources/control_measures/*/components/*/geometry",
+      "selected": "circle"
+    },
+    {
+      "path": "resources/control_measures/*/gates",
+      "reason": "no_value"
+    },
+    {
+      "alternatives": [
+        "circle",
+        "rectangle",
+        "ellipse",
+        "geojson"
+      ],
+      "path": "resources/control_measures/*/geometry",
+      "selected": "polygon"
+    },
+    {
+      "alternatives": [
+        "polygon",
+        "corridor",
+        "rectangle",
+        "ellipse",
+        "geojson"
+      ],
+      "path": "resources/areas/*/geometry",
       "selected": "circle"
     },
     {
@@ -195,6 +243,14 @@
       ],
       "path": "resources/instrument_procedures/*/minima/*/category_minima/*",
       "selected": "decision_altitude"
+    },
+    {
+      "alternatives": [
+        "control_measure",
+        "instrument_procedure"
+      ],
+      "path": "resources/notams/*/affects/*",
+      "selected": "runway"
     }
   ],
   "urn:openaix:schema:airfield:0.1.0-draft.2": [
@@ -205,6 +261,14 @@
     {
       "path": "runways/*/provenance/publication/path",
       "reason": "no_value"
+    },
+    {
+      "alternatives": [
+        "surface",
+        "unlimited"
+      ],
+      "path": "runways/*/ends/*/traffic_pattern/sfo/high_key/lower",
+      "selected": "Altitude"
     },
     {
       "alternatives": [
@@ -318,7 +382,8 @@
         "polyarc",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "components/*/geometry",
       "selected": "circle"
@@ -381,6 +446,10 @@
     },
     {
       "path": "extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -470,6 +539,10 @@
     },
     {
       "path": "extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -747,6 +820,24 @@
   ],
   "urn:openaix:schema:c2-agency:0.1.0-draft.2": [
     {
+      "alternatives": [
+        "polygon",
+        "area",
+        "control_measure",
+        "rectangle",
+        "ellipse"
+      ],
+      "path": "areas/*",
+      "selected": "geojson"
+    },
+    {
+      "alternatives": [
+        "MultiPolygon"
+      ],
+      "path": "areas/*/geometry",
+      "selected": "Polygon"
+    },
+    {
       "path": "extensions/sim/dcs/objects",
       "reason": "conditional"
     },
@@ -842,11 +933,11 @@
   "urn:openaix:schema:common:0.1.0-draft.2": [
     {
       "alternatives": [
-        "surface",
+        "Altitude",
         "unlimited"
       ],
       "path": "AltitudeBlock/lower",
-      "selected": "Altitude"
+      "selected": "surface"
     },
     {
       "path": "Extensions/sim/dcs/objects",
@@ -874,6 +965,10 @@
     },
     {
       "path": "Extensions/sim/dcs/bindings/*/zone_type",
+      "reason": "conditional"
+    },
+    {
+      "path": "Extensions/sim/dcs/bindings/*/unit_type",
       "reason": "conditional"
     },
     {
@@ -1076,6 +1171,13 @@
     },
     {
       "alternatives": [
+        "Polygon"
+      ],
+      "path": "Geometry_geojson_polygon/geometry",
+      "selected": "MultiPolygon"
+    },
+    {
+      "alternatives": [
         "point",
         "line",
         "polygon",
@@ -1087,6 +1189,9 @@
         "figure_eight",
         "Geometry_vertical",
         "description",
+        "geojson",
+        "geojson",
+        "geojson",
         "rectangle",
         "ellipse"
       ],
@@ -1125,6 +1230,7 @@
         "NAVAID",
         "ORBIT",
         "Air route or corridor",
+        "TERRITORY",
         "TL",
         "Airspace coordination volume",
         "name + type + geometry + extensions"
@@ -1142,23 +1248,25 @@
     },
     {
       "alternatives": [
-        "circle",
-        "track_racetrack",
-        "figure_eight",
-        "line",
-        "point",
-        "description"
-      ],
-      "path": "MeasureCatalogue/*/geometry",
-      "selected": "racetrack"
-    },
-    {
-      "alternatives": [
         "surface",
         "unlimited"
       ],
       "path": "MeasureCatalogue/*/altitude/lower",
       "selected": "Altitude"
+    },
+    {
+      "alternatives": [
+        "circle",
+        "track_racetrack",
+        "figure_eight",
+        "line",
+        "point",
+        "description",
+        "geojson",
+        "geojson"
+      ],
+      "path": "MeasureCatalogue/*/geometry",
+      "selected": "racetrack"
     },
     {
       "path": "MeasureCatalogue/*/extensions/sim/dcs/objects",
@@ -1205,6 +1313,10 @@
       "reason": "conditional"
     },
     {
+      "path": "MeasureCatalogue/*/extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "MeasureCatalogue/*/extensions/sim/dcs/bindings/*/unit_type",
       "reason": "conditional"
     },
@@ -1234,7 +1346,8 @@
     },
     {
       "alternatives": [
-        "line"
+        "line",
+        "geojson"
       ],
       "path": "MeasureCatalogue/*/geometry",
       "selected": "corridor"
@@ -1246,10 +1359,25 @@
         "polyarc",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "MeasureCatalogue/*/components/*/geometry",
       "selected": "circle"
+    },
+    {
+      "alternatives": [
+        "geojson"
+      ],
+      "path": "MeasureCatalogue/*/geometry",
+      "selected": "line"
+    },
+    {
+      "alternatives": [
+        "geojson"
+      ],
+      "path": "MeasureCatalogue/*/geometry",
+      "selected": "line"
     },
     {
       "alternatives": [
@@ -1262,7 +1390,8 @@
       "alternatives": [
         "circle",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "MeasureCatalogue/*/geometry",
       "selected": "polygon"
@@ -1272,10 +1401,34 @@
         "polygon",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "MeasureCatalogue/*/geometry",
       "selected": "circle"
+    },
+    {
+      "alternatives": [
+        "control_measure"
+      ],
+      "path": "MeasureCatalogue/*/segments/*/fix",
+      "selected": "ident + position"
+    },
+    {
+      "alternatives": [
+        "polygon",
+        "rectangle",
+        "ellipse"
+      ],
+      "path": "MeasureCatalogue/*/geometry",
+      "selected": "geojson"
+    },
+    {
+      "alternatives": [
+        "Polygon"
+      ],
+      "path": "MeasureCatalogue/*/geometry/geometry",
+      "selected": "MultiPolygon"
     },
     {
       "alternatives": [
@@ -1292,7 +1445,8 @@
         "polyarc",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "AirspaceComponent/geometry",
       "selected": "polygon"
@@ -1358,6 +1512,10 @@
       "reason": "conditional"
     },
     {
+      "path": "AirspaceComponent/extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "AirspaceComponent/extensions/sim/dcs/bindings/*/line_mode",
       "reason": "conditional"
     },
@@ -1414,6 +1572,7 @@
         "ORBIT",
         "POINT",
         "Air route or corridor",
+        "TERRITORY",
         "TL",
         "Airspace coordination volume",
         "name + type + geometry + extensions"
@@ -1436,7 +1595,8 @@
         "polyarc",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "ControlMeasure/components/*/geometry",
       "selected": "polygon"
@@ -1491,6 +1651,10 @@
     },
     {
       "path": "ControlMeasure/components/*/extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "ControlMeasure/components/*/extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -1552,6 +1716,7 @@
         "ORBIT",
         "POINT",
         "Air route or corridor",
+        "TERRITORY",
         "TL",
         "Airspace coordination volume",
         "name + type + geometry + extensions"
@@ -1574,7 +1739,8 @@
         "polyarc",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "components/*/geometry",
       "selected": "polygon"
@@ -1629,6 +1795,10 @@
     },
     {
       "path": "components/*/extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "components/*/extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -1818,6 +1988,10 @@
       "reason": "conditional"
     },
     {
+      "path": "extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "extensions/sim/dcs/bindings/*/line_mode",
       "reason": "conditional"
     },
@@ -1942,6 +2116,10 @@
       "reason": "conditional"
     },
     {
+      "path": "extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
       "reason": "conditional"
     },
@@ -2050,6 +2228,10 @@
       "reason": "conditional"
     },
     {
+      "path": "extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
       "reason": "conditional"
     },
@@ -2102,7 +2284,8 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "components/*/geometry",
       "selected": "corridor"
@@ -2160,6 +2343,10 @@
       "reason": "conditional"
     },
     {
+      "path": "extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "extensions/sim/dcs/bindings/*/line_mode",
       "reason": "conditional"
     },
@@ -2213,7 +2400,8 @@
       "alternatives": [
         "circle",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "geometry",
       "selected": "polygon"
@@ -2260,6 +2448,10 @@
     },
     {
       "path": "extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -2313,7 +2505,8 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "geometry",
       "selected": "polygon"
@@ -2352,6 +2545,13 @@
       ],
       "path": "active",
       "selected": "Window"
+    },
+    {
+      "alternatives": [
+        "geojson"
+      ],
+      "path": "geometry",
+      "selected": "line"
     },
     {
       "path": "extensions/sim/dcs/objects",
@@ -2395,6 +2595,10 @@
     },
     {
       "path": "extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -2488,6 +2692,10 @@
       "reason": "conditional"
     },
     {
+      "path": "extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "extensions/sim/dcs/bindings/*/layer",
       "reason": "conditional"
     },
@@ -2552,7 +2760,8 @@
         "polyarc",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "components/*/geometry",
       "selected": "polygon"
@@ -2610,6 +2819,10 @@
       "reason": "conditional"
     },
     {
+      "path": "components/*/extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "components/*/extensions/sim/dcs/bindings/*/line_mode",
       "reason": "conditional"
     },
@@ -2660,6 +2873,13 @@
       "selected": "Window"
     },
     {
+      "alternatives": [
+        "geojson"
+      ],
+      "path": "geometry",
+      "selected": "line"
+    },
+    {
       "path": "extensions/sim/dcs/objects",
       "reason": "conditional"
     },
@@ -2701,6 +2921,10 @@
     },
     {
       "path": "extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -2756,7 +2980,8 @@
         "polyarc",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "components/*/geometry",
       "selected": "circle"
@@ -2807,7 +3032,8 @@
     },
     {
       "alternatives": [
-        "line"
+        "line",
+        "geojson"
       ],
       "path": "geometry",
       "selected": "corridor"
@@ -2862,6 +3088,10 @@
     },
     {
       "path": "extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -2938,7 +3168,8 @@
         "polyarc",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "components/*/geometry",
       "selected": "polygon"
@@ -3006,6 +3237,10 @@
     },
     {
       "path": "extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -3111,6 +3346,10 @@
       "reason": "conditional"
     },
     {
+      "path": "extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
       "reason": "conditional"
     },
@@ -3167,17 +3406,83 @@
       "reason": "conditional"
     }
   ],
+  "urn:openaix:schema:notam:0.1.0-draft.2": [
+    {
+      "alternatives": [
+        "Altitude",
+        "unlimited"
+      ],
+      "path": "lower",
+      "selected": "surface"
+    },
+    {
+      "alternatives": [
+        "runway",
+        "instrument_procedure"
+      ],
+      "path": "affects/*",
+      "selected": "control_measure"
+    },
+    {
+      "path": "extensions/sim",
+      "reason": "no_value"
+    }
+  ],
   "urn:openaix:schema:opord:0.1.0-draft.2": [
+    {
+      "path": "task_organization/*/extensions/sim/dcs/bindings",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/objects",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/type",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/clsids",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/payload",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/pylon",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/label",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/clsid",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/settings",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/alic_code",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/angle_deg",
+      "reason": "conditional"
+    },
+    {
+      "path": "task_organization/*/extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
     {
       "path": "sustainment/personnel/strength_report",
       "reason": "no_value"
     },
     {
       "path": "annexes/D/field_artillery/position_areas",
-      "reason": "no_value"
-    },
-    {
-      "path": "extensions/sim",
       "reason": "no_value"
     }
   ],
@@ -3197,7 +3502,9 @@
         "figure_eight",
         "line",
         "point",
-        "description"
+        "description",
+        "geojson",
+        "geojson"
       ],
       "path": "geometry",
       "selected": "racetrack"
@@ -3252,6 +3559,10 @@
     },
     {
       "path": "extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -3337,6 +3648,10 @@
       "reason": "conditional"
     },
     {
+      "path": "extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
       "reason": "conditional"
     },
@@ -3381,6 +3696,14 @@
       ],
       "path": "active",
       "selected": "Window"
+    },
+    {
+      "alternatives": [
+        "surface",
+        "unlimited"
+      ],
+      "path": "altitude/lower",
+      "selected": "Altitude"
     },
     {
       "path": "extensions/sim",
@@ -3489,6 +3812,10 @@
       "reason": "conditional"
     },
     {
+      "path": "extensions/sim/dcs/coalition",
+      "reason": "conditional"
+    },
+    {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
       "reason": "conditional"
     },
@@ -3592,6 +3919,40 @@
     },
     {
       "alternatives": [
+        "surface",
+        "unlimited"
+      ],
+      "path": "resources/pattern_profiles/*/sfo/high_key/lower",
+      "selected": "Altitude"
+    },
+    {
+      "alternatives": [
+        "polygon",
+        "area",
+        "control_measure",
+        "rectangle",
+        "ellipse"
+      ],
+      "path": "resources/agencies/*/areas/*",
+      "selected": "geojson"
+    },
+    {
+      "alternatives": [
+        "MultiPolygon"
+      ],
+      "path": "resources/agencies/*/areas/*/geometry",
+      "selected": "Polygon"
+    },
+    {
+      "alternatives": [
+        "control_measure",
+        "instrument_procedure"
+      ],
+      "path": "resources/notams/*/affects/*",
+      "selected": "runway"
+    },
+    {
+      "alternatives": [
         "at",
         "not_after",
         "not_before",
@@ -3617,6 +3978,7 @@
         "NAVAID",
         "ORBIT",
         "Air route or corridor",
+        "TERRITORY",
         "TL",
         "Airspace coordination volume",
         "name + type + geometry + extensions"
@@ -3639,18 +4001,12 @@
         "figure_eight",
         "line",
         "point",
-        "description"
+        "description",
+        "geojson",
+        "geojson"
       ],
       "path": "resources/control_measures/*/geometry",
       "selected": "racetrack"
-    },
-    {
-      "alternatives": [
-        "surface",
-        "unlimited"
-      ],
-      "path": "resources/control_measures/*/altitude/lower",
-      "selected": "Altitude"
     },
     {
       "path": "resources/control_measures/*/extensions/sim/dcs/bindings/*/style/font_size",
@@ -3658,7 +4014,8 @@
     },
     {
       "alternatives": [
-        "line"
+        "line",
+        "geojson"
       ],
       "path": "resources/control_measures/*/geometry",
       "selected": "corridor"
@@ -3670,10 +4027,25 @@
         "polyarc",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "resources/control_measures/*/components/*/geometry",
       "selected": "circle"
+    },
+    {
+      "alternatives": [
+        "geojson"
+      ],
+      "path": "resources/control_measures/*/geometry",
+      "selected": "line"
+    },
+    {
+      "alternatives": [
+        "geojson"
+      ],
+      "path": "resources/control_measures/*/geometry",
+      "selected": "line"
     },
     {
       "alternatives": [
@@ -3686,7 +4058,8 @@
       "alternatives": [
         "circle",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "resources/control_measures/*/geometry",
       "selected": "polygon"
@@ -3696,17 +4069,28 @@
         "polygon",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "resources/control_measures/*/geometry",
       "selected": "circle"
     },
     {
       "alternatives": [
+        "polygon",
+        "rectangle",
+        "ellipse"
+      ],
+      "path": "resources/control_measures/*/geometry",
+      "selected": "geojson"
+    },
+    {
+      "alternatives": [
         "circle",
         "corridor",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson"
       ],
       "path": "resources/areas/*/geometry",
       "selected": "polygon"
@@ -3727,6 +4111,14 @@
       ],
       "path": "ends/*/traffic_pattern/initial/*",
       "selected": "distance"
+    },
+    {
+      "alternatives": [
+        "surface",
+        "unlimited"
+      ],
+      "path": "ends/*/traffic_pattern/sfo/high_key/lower",
+      "selected": "Altitude"
     },
     {
       "path": "extensions/sim/dcs/objects",
@@ -3770,6 +4162,10 @@
     },
     {
       "path": "extensions/sim/dcs/projection",
+      "reason": "conditional"
+    },
+    {
+      "path": "extensions/sim/dcs/coalition",
       "reason": "conditional"
     },
     {
@@ -3857,6 +4253,10 @@
     {
       "path": "stations/*/extensions/sim/dcs/projection",
       "reason": "conditional"
+    },
+    {
+      "path": "stations/*/extensions/sim/dcs/coalition",
+      "reason": "conditional"
     }
   ],
   "urn:openaix:schema:spins:0.1.0-draft.2": [
@@ -3867,6 +4267,36 @@
       ],
       "path": "tanker_procedures/*/altitude/lower",
       "selected": "Altitude"
+    },
+    {
+      "path": "extensions/sim",
+      "reason": "no_value"
+    }
+  ],
+  "urn:openaix:schema:territory:0.1.0-draft.2": [
+    {
+      "alternatives": [
+        "polygon",
+        "rectangle",
+        "ellipse"
+      ],
+      "path": "geometry",
+      "selected": "geojson"
+    },
+    {
+      "alternatives": [
+        "Polygon"
+      ],
+      "path": "geometry/geometry",
+      "selected": "MultiPolygon"
+    },
+    {
+      "alternatives": [
+        "start + end + schedule",
+        "continuous"
+      ],
+      "path": "active",
+      "selected": "Window"
     },
     {
       "path": "extensions/sim",

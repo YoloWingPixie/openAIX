@@ -146,6 +146,9 @@ def semantic(value, resources, period, path=()):
             for index, ring in enumerate(value["rings"]):
                 if ring[0] != ring[-1] or len({json.dumps(p, sort_keys=True) for p in ring[:-1]}) < 3:
                     raise ContractError(pointer((*path, "rings", index)), "polygon ring must close around three distinct points")
+        if value.get("kind") == "geojson" and isinstance(value.get("geometry"), dict):
+            for location, reason in geojson_errors(value["geometry"]):
+                raise ContractError(pointer((*path, "geometry", *location)), reason)
         if value.get("kind") == "track_racetrack" and value["a"] == value["b"]:
             raise ContractError(pointer(path), "racetrack anchors coincide")
         if value.get("kind") == "sector" and "inner_radius" in value:
@@ -162,6 +165,17 @@ def semantic(value, resources, period, path=()):
     elif isinstance(value, list):
         for index, child in enumerate(value):
             semantic(child, resources, period, (*path, index))
+
+
+def geojson_errors(geometry):
+    """RFC 7946 section 3.1.6: a linear ring is closed (its first and last positions are the same) and has four or more
+    positions; a ring that closes around fewer than three distinct positions has no area."""
+    polygons = {"Polygon": [((), geometry.get("coordinates", []))],
+                "MultiPolygon": [((index,), rings) for index, rings in enumerate(geometry.get("coordinates", []))]}.get(geometry.get("type"), [])
+    for base, rings in polygons:
+        for index, ring in enumerate(rings):
+            if ring[0] != ring[-1] or len({tuple(position) for position in ring[:-1]}) < 3:
+                yield ("coordinates", *base, index), "GeoJSON linear ring must close around three distinct positions"
 
 
 def references(value, node, base_uri, registry, resources, path=()):

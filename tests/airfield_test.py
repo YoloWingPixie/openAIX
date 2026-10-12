@@ -92,9 +92,13 @@ class AirfieldKindTests(unittest.TestCase):
         document["carrier"]["icls_channel"] = 21
         self.assertRejected(document)
 
-    def test_coalition_and_operating_hours(self):
+    def test_coalition_is_dcs_data_and_operating_hours(self):
         document = ojms()
-        document["coalition"] = "green"
+        self.assertEqual(document["extensions"]["sim"]["dcs"]["coalition"], "blue")
+        document["extensions"]["sim"]["dcs"]["coalition"] = "green"
+        self.assertRejected(document, BASTION)
+        document = ojms()
+        document["coalition"] = "blue"
         self.assertRejected(document, BASTION)
         prince_hassan = deepcopy(BASTION["resources"]["places"]["prince-hassan"])
         self.assertEqual(prince_hassan["operating_hours"]["periods"][0]["end_day_offset"], 1)
@@ -337,6 +341,53 @@ class ParkingAndTaxiTests(unittest.TestCase):
                 change(document)
                 with self.assertRaises(ContractError):
                     check(document, BASTION)
+
+
+
+class AirfieldUseAndPatternTests(unittest.TestCase):
+    def assertRejected(self, document, catalogue=BASTION):
+        with self.assertRaises(ContractError):
+            check(document, catalogue)
+
+    def test_use_pads_and_final_frequency(self):
+        document = ojms()
+        self.assertEqual(document["use"], "military")
+        self.assertIn("final", {item["role"] for item in document["frequencies"]})
+        self.assertEqual({use for pad in document["pads"] for use in pad["use"]}, {"arm_dearm", "hot_brake", "hung_ordnance"})
+        check(document, BASTION)
+        for field, value in (("use", "private"), ("pads", [{"position": document["position"], "use": ["refuelling"]}]),
+                             ("pads", [{"position": document["position"], "use": []}])):
+            changed = deepcopy(document)
+            changed[field] = value
+            with self.subTest(field=field, value=value):
+                self.assertRejected(changed)
+
+    def test_hung_ordnance_runway_is_an_end_of_a_runway_of_the_airfield(self):
+        document = ojms()
+        self.assertEqual(document["hung_ordnance_runway"], "31")
+        document["hung_ordnance_runway"] = "18"
+        with self.assertRaises(ContractError) as error:
+            check(document, BASTION)
+        self.assertEqual(error.exception.path, "/hung_ordnance_runway")
+        carrier = example("carrier")
+        carrier["hung_ordnance_runway"] = "31"
+        self.assertRejected(carrier)
+
+    def test_pattern_reentry_go_around_departure_ceiling_and_sfo(self):
+        profile = BASTION["resources"]["pattern_profiles"]["usaf-standard"]
+        self.assertEqual(set(profile["sfo"]), {"high_key", "low_key"})
+        self.assertIn("departure_ceiling", profile["categories"]["heavy"])
+        document = ojms()
+        self.assertEqual(document["traffic_pattern"]["reentry"]["point"]["id"], "vrp-salti-dam")
+        for change in ({"reentry": {"altitude": {"value": 2000, "unit": "ft", "reference": "AGL"}}},
+                       {"go_around": {}},
+                       {"sfo": {"high_key": {"lower": {"value": 7000, "unit": "ft", "reference": "AGL"}}}},
+                       {"departure_ceiling": {"value": 10, "unit": "flight_level", "reference": "FL"}},
+                       {"reentry": {"point": {"kind": "control_measure", "id": "ghi"}}}):
+            changed = deepcopy(document)
+            changed["traffic_pattern"].update(change)
+            with self.subTest(change=change):
+                self.assertRejected(changed)
 
 
 if __name__ == "__main__":

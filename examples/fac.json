@@ -4,7 +4,6 @@
   "channels": [
     "cas-uhf"
   ],
-  "coalition": "blue",
   "coordinate_source": "lrf",
   "default_laser_code": "1688",
   "egress_points": [
@@ -57,24 +56,6 @@
     }
   ],
   "extensions": {
-    "org.vox-bellica.jtac": {
-      "group": "OIR Axeman team",
-      "laser_range_m": 8000,
-      "observers": [
-        "OIR Axeman OP"
-      ],
-      "readback_timeout_s": 60,
-      "search_range_m": 10000,
-      "source_unit": "OIR Axeman",
-      "stack": {
-        "block_ft": 2000,
-        "concurrent": false,
-        "fast_floor_ft": 16000,
-        "radius_m": 3000,
-        "separation_ft": 1000,
-        "slow_floor_ft": 12000
-      }
-    },
     "sim": {
       "dcs": {
         "bindings": [
@@ -85,7 +66,8 @@
             "object_id": 42,
             "unit_type": "Hummer"
           }
-        ]
+        ],
+        "coalition": "blue"
       }
     }
   },

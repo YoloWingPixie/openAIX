@@ -113,13 +113,16 @@
       "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
     },
     "geometry": {
-      "description": "This field gives the horizontal geometry of the route: a centreline, or a corridor with its total lateral width. When doctrine gives a code as a corridor, the code shall use the corridor geometry.",
+      "description": "This field gives the horizontal geometry of the route: a centreline, or a corridor with its total lateral width. A `geojson` geometry (RFC 7946) of the same shape is also correct. When doctrine gives a code as a corridor, the code shall use the corridor geometry.",
       "oneOf": [
         {
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_line"
         },
         {
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_corridor"
+        },
+        {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_geojson_line"
         }
       ]
     },

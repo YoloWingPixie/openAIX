@@ -46,6 +46,7 @@
       }
     ]
   },
+  "hostile_side": "left",
   "id": "bastion-basin-boundary",
   "name": "Task Force Bastion and Task Force Basin boundary",
   "notes": "Fires across the boundary need coordination between Task Force Bastion and Task Force Basin.",

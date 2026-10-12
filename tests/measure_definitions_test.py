@@ -18,6 +18,7 @@ DEFINING_TERMS = {
     "ACCA": ["defined dimensions", "battlefield command and control"],
     "ACP": ["navigation", "command and control", "communication", "without coordination|no coordination"],
     "ADIZ": ["defined dimensions", "identification", "location", "control of aircraft"],
+    "ADS": ["geographical subdivision", "air defence region|air defense region", "air defence area|air defense area"],
     "ADVRTE": ["designated route", "advisory service"],
     "AEWA": ["defined dimensions", "early warning"],
     "AIRRTE": ["navigable airspace", "two points", "flight rules", "bi-directional", "minimum-risk", "support traffic"],

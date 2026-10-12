@@ -89,6 +89,11 @@
     "org.cjtf-oir.ato": {
       "ato_day": "214",
       "mission_id": "oir-syria"
+    },
+    "sim": {
+      "dcs": {
+        "coalition": "blue"
+      }
     }
   },
   "instructions": [
@@ -100,7 +105,6 @@
   "meta": {
     "author": "CAOC airspace cell",
     "classification": "UNCLASSIFIED",
-    "coalition": "blue",
     "distribution": [
       "Darkstar",
       "Banshee",
@@ -176,6 +180,44 @@
         "role": "AOC"
       },
       "darkstar": {
+        "areas": [
+          {
+            "geometry": {
+              "bbox": [
+                40.17,
+                35.21,
+                40.17,
+                35.21
+              ],
+              "coordinates": [
+                [
+                  [
+                    37.8,
+                    33.2
+                  ],
+                  [
+                    41.0,
+                    33.2
+                  ],
+                  [
+                    41.0,
+                    36.4
+                  ],
+                  [
+                    37.8,
+                    36.4
+                  ],
+                  [
+                    37.8,
+                    33.2
+                  ]
+                ]
+              ],
+              "type": "Polygon"
+            },
+            "kind": "geojson"
+          }
+        ],
         "callsign": "Darkstar",
         "channels": [
           "control-uhf"
@@ -191,12 +233,14 @@
                   "object_id": 11,
                   "unit_type": "E-3A"
                 }
-              ]
+              ],
+              "coalition": "blue"
             }
           }
         },
         "id": "darkstar",
         "kind": "c2-agency",
+        "platform": "airborne",
         "role": "AWACS"
       },
       "salti-tower": {
@@ -211,6 +255,29 @@
           "longitude": 36.781257
         },
         "role": "ATC"
+      },
+      "warhawk": {
+        "areas": [
+          {
+            "id": "oir-aor",
+            "kind": "control_measure"
+          },
+          {
+            "area": "range-sweep"
+          }
+        ],
+        "callsign": "Warhawk",
+        "channels": [
+          "cas-uhf"
+        ],
+        "id": "warhawk",
+        "kind": "c2-agency",
+        "platform": "ground",
+        "position": {
+          "latitude": 32.965,
+          "longitude": 37.794
+        },
+        "role": "ASOC"
       }
     },
     "aircraft_types": {
@@ -226,7 +293,44 @@
         "name": "CH-47F Chinook"
       }
     },
-    "areas": {},
+    "areas": {
+      "range-sweep": {
+        "active": {
+          "end": "2026-10-02T13:20:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "surface": true
+          },
+          "upper": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 1000
+          }
+        },
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "geometry": {
+          "center": {
+            "latitude": 35.095,
+            "longitude": 40.305
+          },
+          "kind": "circle",
+          "radius": {
+            "unit": "nm",
+            "value": 6
+          }
+        },
+        "name": "Cobalt clearance area",
+        "restrictions": [
+          "Inbound only; outbound traffic uses Marshal to Cedar."
+        ]
+      }
+    },
     "channels": {
       "banshee-uhf": {
         "frequency": {
@@ -249,6 +353,17 @@
         "name": "Warhawk CAS alternate",
         "notes": "Use when Warhawk CAS is jammed or saturated; Axeman monitors both.",
         "usage": "Alternate CAS check-in and terminal control with Axeman"
+      },
+      "cas-uhf": {
+        "frequency": {
+          "band": "uhf",
+          "modulation": "AM",
+          "unit": "MHz",
+          "value": 309.2
+        },
+        "name": "Warhawk CAS",
+        "notes": "Check in 10 nm before Dagger; Warhawk stacks CAS from 15000 feet.",
+        "usage": "CAS check-in and terminal control with Axeman"
       },
       "control-uhf": {
         "frequency": {
@@ -582,6 +697,19 @@
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
         },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 180
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 240
+          }
+        },
+        "aor": "oir-aor",
         "channels": [
           "control-uhf",
           "banshee-uhf"
@@ -715,6 +843,54 @@
           "One flight per level at 14000 or 16000 feet MSL, as Darkstar assigns."
         ],
         "type": "ORBIT"
+      },
+      "oir-aor": {
+        "$schema": "urn:openaix:schema:measure-aor:0.1.0-draft.2",
+        "active": {
+          "continuous": true
+        },
+        "description": "Area of responsibility of the CJTF-OIR air component in this order, from eastern Jordan to the Euphrates valley; the airspace control area follows it.",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "geometry": {
+          "kind": "polygon",
+          "rings": [
+            [
+              {
+                "latitude": 32.54,
+                "longitude": 36.9
+              },
+              {
+                "latitude": 32.54,
+                "longitude": 40.9
+              },
+              {
+                "latitude": 35.8,
+                "longitude": 40.9
+              },
+              {
+                "latitude": 35.8,
+                "longitude": 36.9
+              },
+              {
+                "latitude": 32.54,
+                "longitude": 36.9
+              }
+            ]
+          ]
+        },
+        "id": "oir-aor",
+        "name": "OIR area of responsibility",
+        "notes": "VHF 120.5 is the same position.",
+        "resources_ref": {
+          "id": "oir-resources",
+          "revision": "1"
+        },
+        "responsible_agency": "caoc",
+        "type": "AOR"
       },
       "rescue-reservation": {
         "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
@@ -865,6 +1041,23 @@
         ],
         "type": "SC"
       },
+      "vrp-salti-dam": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
+        "active": {
+          "continuous": true
+        },
+        "description": "Visual reporting point at the dam north-east of Muwaffaq Salti; the re-entry point of the overhead pattern.",
+        "id": "vrp-salti-dam",
+        "name": "Salti Dam",
+        "position": {
+          "latitude": 31.950627,
+          "longitude": 36.834965
+        },
+        "roles": [
+          "visual_reporting"
+        ],
+        "type": "POINT"
+      },
       "zinc-mez": {
         "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.2",
         "active": {
@@ -955,7 +1148,8 @@
                   "mission_id": "oir-syria",
                   "name": "OIR Gainful battery"
                 }
-              ]
+              ],
+              "coalition": "red"
             }
           }
         },
@@ -991,7 +1185,6 @@
         "remarks": "Relocates up to 5 nautical miles after it emits; last seen on the river road north of Cobalt.",
         "reporting_name": "Gainful",
         "rwr_symbol": "6",
-        "side": "red",
         "status": "active",
         "system_id": "SA-6"
       }
@@ -1959,6 +2152,73 @@
         }
       }
     },
+    "notams": {
+      "ojms-a0214": {
+        "affects": [
+          {
+            "designator": "13",
+            "kind": "runway"
+          },
+          {
+            "id": "ojms-i31",
+            "kind": "instrument_procedure"
+          }
+        ],
+        "code": "QMRLC",
+        "effective": {
+          "end": "2026-10-02T14:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "ojms-a0214",
+        "kind": "notam",
+        "location": "ojms",
+        "number": {
+          "number": 214,
+          "series": "A",
+          "year": 2026
+        },
+        "resources_ref": {
+          "id": "oir-resources",
+          "revision": "1"
+        },
+        "text": "RWY 13/31 CLSD DUE TO BAK-12 MAINT"
+      },
+      "ojms-a0215": {
+        "affects": [
+          {
+            "id": "ghi",
+            "kind": "control_measure"
+          }
+        ],
+        "code": "QRTCA",
+        "effective": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:30:00Z"
+        },
+        "id": "ojms-a0215",
+        "kind": "notam",
+        "location": "ojms",
+        "lower": {
+          "surface": true
+        },
+        "number": {
+          "number": 215,
+          "series": "A",
+          "year": 2026
+        },
+        "text": "TEMPO RESTRICTED AREA ACT FOR LIVE FIRING WI 5NM OF GHI",
+        "upper": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 8000
+        }
+      }
+    },
     "pattern_profiles": {
       "usaf-standard": {
         "altitude": {
@@ -1981,10 +2241,17 @@
             }
           },
           "heavy": {
-            "altitude": {
+            "departure_ceiling": {
               "reference": "AGL",
               "unit": "ft",
-              "value": 2000
+              "value": 1000
+            },
+            "go_around": {
+              "altitude": {
+                "reference": "AGL",
+                "unit": "ft",
+                "value": 2500
+              }
             }
           },
           "helicopter": {
@@ -2014,10 +2281,51 @@
               "reference": "AGL",
               "unit": "ft",
               "value": 1500
+            },
+            "reentry": {
+              "altitude": {
+                "reference": "AGL",
+                "unit": "ft",
+                "value": 2000
+              },
+              "name": "Re-entry point"
+            },
+            "sfo": {
+              "high_key": {
+                "lower": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 7000
+                },
+                "upper": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 9000
+                }
+              },
+              "low_key": {
+                "lower": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 3000
+                },
+                "upper": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 5000
+                }
+              }
             }
           }
         },
         "direction": "left",
+        "go_around": {
+          "altitude": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 2000
+          }
+        },
         "initial": [
           {
             "distance": {
@@ -2030,6 +2338,40 @@
           "reference": "AGL",
           "unit": "ft",
           "value": 2000
+        },
+        "reentry": {
+          "altitude": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 2000
+          },
+          "name": "Re-entry point"
+        },
+        "sfo": {
+          "high_key": {
+            "lower": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 7000
+            },
+            "upper": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 9000
+            }
+          },
+          "low_key": {
+            "lower": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 3000
+            },
+            "upper": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 5000
+            }
+          }
         }
       }
     },
@@ -2052,7 +2394,6 @@
           }
         },
         "calm_wind_runway": "13",
-        "coalition": "blue",
         "controlling_agency": "salti-tower",
         "elevation": {
           "reference": "MSL",
@@ -2068,7 +2409,8 @@
                   "mission_id": "oir-syria",
                   "name": "Muwaffaq Salti"
                 }
-              ]
+              ],
+              "coalition": "blue"
             }
           }
         },
@@ -2104,6 +2446,7 @@
             "role": "tower"
           }
         ],
+        "hung_ordnance_runway": "31",
         "id": "ojms",
         "ident": "OJMS",
         "kind": "airfield",
@@ -2138,11 +2481,15 @@
         },
         "pads": [
           {
-            "name": "Pad 1",
+            "name": "EOR 31",
             "position": {
-              "latitude": 34.73527,
-              "longitude": 40.225
-            }
+              "latitude": 31.826633,
+              "longitude": 36.795642
+            },
+            "use": [
+              "arm_dearm",
+              "hot_brake"
+            ]
           }
         ],
         "parking": [
@@ -2450,6 +2797,11 @@
                   "value": 1636
                 },
                 "traffic_pattern": {
+                  "departure_ceiling": {
+                    "reference": "AGL",
+                    "unit": "ft",
+                    "value": 1000
+                  },
                   "direction": "right"
                 }
               }
@@ -2558,6 +2910,17 @@
           ]
         },
         "traffic_pattern": {
+          "go_around": {
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 4600
+            },
+            "heading": {
+              "reference": "magnetic",
+              "value": 306
+            }
+          },
           "initial": [
             {
               "bearing": {
@@ -2576,13 +2939,25 @@
             "unit": "ft",
             "value": 3600
           },
-          "profile": "usaf-standard"
+          "profile": "usaf-standard",
+          "reentry": {
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 3600
+            },
+            "point": {
+              "id": "vrp-salti-dam",
+              "kind": "control_measure"
+            }
+          }
         },
         "transition_altitude": {
           "reference": "MSL",
           "unit": "ft",
           "value": 13000
-        }
+        },
+        "use": "military"
       }
     },
     "procedures": {},

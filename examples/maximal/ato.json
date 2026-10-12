@@ -8,6 +8,11 @@
   "extensions": {
     "org.cjtf-oir.ato": {
       "ato_day": "214"
+    },
+    "sim": {
+      "dcs": {
+        "coalition": "blue"
+      }
     }
   },
   "general_instructions": [
@@ -18,7 +23,6 @@
   "meta": {
     "author": "CAOC airspace cell",
     "classification": "UNCLASSIFIED",
-    "coalition": "blue",
     "distribution": [
       "Darkstar",
       "Banshee",

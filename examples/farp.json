@@ -1,6 +1,5 @@
 {
   "$schema": "urn:openaix:schema:airfield:0.1.0-draft.2",
-  "coalition": "blue",
   "controlling_agency": "banshee",
   "elevation": {
     "reference": "MSL",
@@ -16,7 +15,8 @@
             "mission_id": "oir-syria",
             "name": "OIR Sage FARP"
           }
-        ]
+        ],
+        "coalition": "blue"
       }
     }
   },
@@ -68,5 +68,6 @@
   "resources_ref": {
     "id": "oir-resources",
     "revision": "1"
-  }
+  },
+  "use": "military"
 }

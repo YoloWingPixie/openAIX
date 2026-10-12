@@ -1754,8 +1754,8 @@
       "properties": {
         "agency": {
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
-          "description": "This field identifies the agency that the aircrew speaks to. The agency is a controller, a joint terminal attack controller (JTAC) or a different agency of the resource catalogue.",
-          "x-catalog": "agencies"
+          "description": "This field identifies the agency or forward air controller that the aircrew speaks to. The value is the identifier of a command and control agency or of a forward air controller (FAC) of the resource catalogue.",
+          "x-catalog": "controllers"
         },
         "alternate_channel": {
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",

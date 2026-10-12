@@ -80,6 +80,23 @@
       "definition": "Airspace of defined dimensions in which the identification, location and control of aircraft is immediately necessary.",
       "verified": true
     },
+    "ADS": {
+      "name": "Air Defense Sector",
+      "category": "adm",
+      "source": "joint-jp-3-01-2017",
+      "locator": "Glossary, Part II, page GL-7",
+      "references": [
+        {
+          "source": "joint-dod-dictionary-2021",
+          "locator": "Entry air defense sector, page 11; acronym ADS, page 240",
+          "note": "The DOD Dictionary gives the same definition, with JP 3-01 as its source. An air defense region is a geographical subdivision of an air defense area (JP 3-01, page GL-7)."
+        }
+      ],
+      "source_text": "A geographical subdivision of an air defense region",
+      "paraphrase": "A geographic part of an air defense region, which in turn is a part of an air defense area.",
+      "definition": "A geographical subdivision of an air defence region. An air defence region is a geographical subdivision of an air defence area.",
+      "verified": true
+    },
     "ADVRTE": {
       "name": "Advisory Route",
       "category": "atcm",

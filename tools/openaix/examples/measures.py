@@ -111,7 +111,8 @@ def measures(version):
         # Lines.
         "measures/flot.json": measure("line", "oir-flot", "OIR FLOT", "FLOT", window("13:00", "15:00"),
             "Forward line of own troops of the partner land force at the start of the period.",
-            geometry={"kind": "line", "points": [at(34.835, 39.724), at(34.855, 40.025), at(34.815, 40.374), at(34.835, 40.725)]}),
+            geometry={"kind": "line", "points": [at(34.835, 39.724), at(34.855, 40.025), at(34.815, 40.374), at(34.835, 40.725)]},
+            hostile_side="left"),
         "measures/fscl.json": measure("fire-support-line", "oir-fscl", "OIR FSCL", "FSCL", window("13:00", "15:00"),
             "Fire support coordination line set by the partner land force north of the FLOT; the Cobalt and Onyx kill boxes lie beyond it.",
             coordination_instructions=["Fires short of the line that may affect the land force are coordinated with its fire support element."],

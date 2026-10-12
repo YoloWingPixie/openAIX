@@ -9,7 +9,6 @@
   "meta": {
     "author": "CAOC airspace cell",
     "classification": "UNCLASSIFIED",
-    "coalition": "blue",
     "distribution": [
       "Darkstar",
       "Banshee",
@@ -70,6 +69,44 @@
         "role": "AOC"
       },
       "darkstar": {
+        "areas": [
+          {
+            "geometry": {
+              "bbox": [
+                40.17,
+                35.21,
+                40.17,
+                35.21
+              ],
+              "coordinates": [
+                [
+                  [
+                    37.8,
+                    33.2
+                  ],
+                  [
+                    41.0,
+                    33.2
+                  ],
+                  [
+                    41.0,
+                    36.4
+                  ],
+                  [
+                    37.8,
+                    36.4
+                  ],
+                  [
+                    37.8,
+                    33.2
+                  ]
+                ]
+              ],
+              "type": "Polygon"
+            },
+            "kind": "geojson"
+          }
+        ],
         "callsign": "Darkstar",
         "channels": [
           "control-uhf"
@@ -85,12 +122,14 @@
                   "object_id": 11,
                   "unit_type": "E-3A"
                 }
-              ]
+              ],
+              "coalition": "blue"
             }
           }
         },
         "id": "darkstar",
         "kind": "c2-agency",
+        "platform": "airborne",
         "role": "AWACS"
       },
       "salti-tower": {
@@ -107,12 +146,22 @@
         "role": "ATC"
       },
       "warhawk": {
+        "areas": [
+          {
+            "id": "oir-aor",
+            "kind": "control_measure"
+          },
+          {
+            "area": "range-sweep"
+          }
+        ],
         "callsign": "Warhawk",
         "channels": [
           "cas-uhf"
         ],
         "id": "warhawk",
         "kind": "c2-agency",
+        "platform": "ground",
         "position": {
           "latitude": 32.965,
           "longitude": 37.794
@@ -193,6 +242,34 @@
       }
     },
     "areas": {
+      "range-sweep": {
+        "active": {
+          "end": "2026-10-02T13:20:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "surface": true
+          },
+          "upper": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 1000
+          }
+        },
+        "geometry": {
+          "center": {
+            "latitude": 35.095,
+            "longitude": 40.305
+          },
+          "kind": "circle",
+          "radius": {
+            "unit": "nm",
+            "value": 6
+          }
+        },
+        "name": "Cobalt clearance area"
+      },
       "recce-box": {
         "active": {
           "end": "2026-10-02T15:00:00Z",
@@ -238,6 +315,42 @@
           ]
         },
         "name": "Gainful search box"
+      },
+      "red-air": {
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 150
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 350
+          }
+        },
+        "geometry": {
+          "kind": "corridor",
+          "points": [
+            {
+              "latitude": 35.485,
+              "longitude": 39.825
+            },
+            {
+              "latitude": 35.485,
+              "longitude": 40.525
+            }
+          ],
+          "width": {
+            "unit": "nm",
+            "value": 10
+          }
+        },
+        "name": "Northern threat axis"
       },
       "sweep-north": {
         "active": {
@@ -390,6 +503,60 @@
         },
         "type": "NAVAID"
       },
+      "ads-north": {
+        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf"
+        ],
+        "components": [
+          {
+            "geometry": {
+              "kind": "polygon",
+              "rings": [
+                [
+                  {
+                    "latitude": 34.6,
+                    "longitude": 39.2
+                  },
+                  {
+                    "latitude": 34.6,
+                    "longitude": 41.0
+                  },
+                  {
+                    "latitude": 36.0,
+                    "longitude": 41.0
+                  },
+                  {
+                    "latitude": 36.0,
+                    "longitude": 39.2
+                  },
+                  {
+                    "latitude": 34.6,
+                    "longitude": 39.2
+                  }
+                ]
+              ]
+            },
+            "id": "ads-north-1",
+            "lower_limit": {
+              "surface": true
+            },
+            "operation": "add",
+            "upper_limit": {
+              "unlimited": true
+            }
+          }
+        ],
+        "controlling_agency": "darkstar",
+        "description": "Northern air defence sector of the OIR air defence region, along the Euphrates valley.",
+        "id": "ads-north",
+        "name": "North sector",
+        "type": "ADS"
+      },
       "bastion-bullseye": {
         "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
@@ -447,6 +614,45 @@
         "responsibility_above": "darkstar",
         "responsibility_below": "warhawk",
         "type": "CA"
+      },
+      "cedar": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf",
+          "banshee-uhf"
+        ],
+        "contact_agency": "darkstar",
+        "coordination_instructions": [
+          "Darkstar hands outbound flights to Banshee at Cedar."
+        ],
+        "description": "Egress gate where flights leave the operating area for recovery to Muwaffaq Salti or Prince Hassan.",
+        "handover_agency": "banshee",
+        "id": "cedar",
+        "instructions": [
+          "Report Cedar with fuel state; give BDA to Warhawk before check-out."
+        ],
+        "name": "Cedar",
+        "notes": "Report Cedar with fuel state; Banshee gives the recovery altimeter.",
+        "position": {
+          "latitude": 33.59,
+          "longitude": 39.002
+        },
+        "position_description": "Southeastern egress gate reached after release from Mesa holding.",
+        "reference_agency": "darkstar",
+        "restrictions": [
+          "Do not route through the rescue reservation from Cedar while it is active."
+        ],
+        "roles": [
+          "control",
+          "egress",
+          "gate"
+        ],
+        "route": "marshal-exit",
+        "type": "POINT"
       },
       "cobalt-box": {
         "$schema": "urn:openaix:schema:measure-kb:0.1.0-draft.2",
@@ -788,11 +994,146 @@
         },
         "type": "NAVAID"
       },
+      "ip-silver": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "channels": [
+          "control-uhf",
+          "banshee-uhf"
+        ],
+        "contact_agency": "darkstar",
+        "coordination_instructions": [
+          "Retain the current controller until the handover is acknowledged."
+        ],
+        "description": "Initial point for attacks into the Cobalt kill box from the southwest.",
+        "handover_agency": "banshee",
+        "id": "ip-silver",
+        "instructions": [
+          "Report this point by name; bearings elsewhere in the order are true."
+        ],
+        "name": "Silver",
+        "position": {
+          "latitude": 34.955,
+          "longitude": 40.045
+        },
+        "position_description": "Desert road bend south-west of the Cobalt compound.",
+        "reference_agency": "darkstar",
+        "restrictions": [
+          "A point report does not authorize entry into the restricted operating zone."
+        ],
+        "roles": [
+          "initial"
+        ],
+        "route": "marshal-entry",
+        "type": "POINT"
+      },
+      "isis-held": {
+        "$schema": "urn:openaix:schema:territory:0.1.0-draft.2",
+        "active": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "affiliation": "hostile",
+        "countries": [
+          "SYR"
+        ],
+        "description": "Land that ISIS holds north of the FLOT, drawn in a GIS tool: a GeoJSON multipolygon (longitude first).",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "geometry": {
+          "geometry": {
+            "bbox": [
+              40.17,
+              35.21,
+              40.17,
+              35.21
+            ],
+            "coordinates": [
+              [
+                [
+                  [
+                    39.7,
+                    34.85
+                  ],
+                  [
+                    40.75,
+                    34.85
+                  ],
+                  [
+                    40.75,
+                    35.6
+                  ],
+                  [
+                    39.7,
+                    35.6
+                  ],
+                  [
+                    39.7,
+                    34.85
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    40.8,
+                    34.4
+                  ],
+                  [
+                    41.0,
+                    34.4
+                  ],
+                  [
+                    41.0,
+                    34.6
+                  ],
+                  [
+                    40.8,
+                    34.6
+                  ],
+                  [
+                    40.8,
+                    34.4
+                  ]
+                ]
+              ]
+            ],
+            "type": "MultiPolygon"
+          },
+          "kind": "geojson"
+        },
+        "id": "isis-held",
+        "name": "ISIS-held Euphrates valley",
+        "notes": "The boundary follows the FLOT; it moves when the FLOT moves.",
+        "resources_ref": {
+          "id": "oir-resources",
+          "revision": "1"
+        },
+        "type": "TERRITORY"
+      },
       "juniper": {
         "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
+        },
+        "altitude": {
+          "lower": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 180
+          },
+          "upper": {
+            "reference": "FL",
+            "unit": "flight_level",
+            "value": 240
+          }
         },
         "aor": "oir-aor",
         "channels": [
@@ -959,6 +1300,7 @@
             }
           ]
         },
+        "hostile_side": "left",
         "id": "pl-brass",
         "name": "PL BRASS",
         "notes": "VHF 120.5 is the same position.",
@@ -1249,6 +1591,92 @@
         ],
         "type": "POINT"
       },
+      "vfr-salti-north": {
+        "$schema": "urn:openaix:schema:airway:0.1.0-draft.2",
+        "airway_type": "vfr",
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "vfr-salti-north",
+        "ident": "SALTI NORTH",
+        "level": "low",
+        "name": "Salti north VFR route",
+        "provenance": {
+          "airac_cycle": "2610",
+          "authority": "CJTF-OIR airspace control cell",
+          "derivation": "authored"
+        },
+        "resources_ref": {
+          "id": "oir-resources",
+          "revision": "1"
+        },
+        "segments": [
+          {
+            "directional_restriction": "forward",
+            "distance": {
+              "unit": "nm",
+              "value": 5
+            },
+            "fix": {
+              "ident": "DAM",
+              "position": {
+                "latitude": 31.950627,
+                "longitude": 36.834965
+              }
+            },
+            "inbound_course": {
+              "declination_deg": 5.0,
+              "reference": "magnetic",
+              "value": 307.2
+            },
+            "maximum_altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 4500
+            },
+            "minimum_altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 3500
+            },
+            "outbound_course": {
+              "declination_deg": 5.0,
+              "reference": "magnetic",
+              "value": 38.6
+            }
+          },
+          {
+            "fix": {
+              "ident": "OJMS",
+              "position": {
+                "latitude": 31.825431,
+                "longitude": 36.781257
+              }
+            }
+          }
+        ],
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+        "type": "AIRWAY"
+      },
+      "vrp-salti-dam": {
+        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
+        "active": {
+          "continuous": true
+        },
+        "description": "Visual reporting point at the dam north-east of Muwaffaq Salti; the re-entry point of the overhead pattern.",
+        "id": "vrp-salti-dam",
+        "name": "Salti Dam",
+        "position": {
+          "latitude": 31.950627,
+          "longitude": 36.834965
+        },
+        "roles": [
+          "visual_reporting"
+        ],
+        "type": "POINT"
+      },
       "zinc-mez": {
         "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.2",
         "active": {
@@ -1353,7 +1781,8 @@
                   "mission_id": "oir-syria",
                   "name": "OIR Gainful battery"
                 }
-              ]
+              ],
+              "coalition": "red"
             }
           }
         },
@@ -1389,7 +1818,6 @@
         "remarks": "Relocates up to 5 nautical miles after it emits; last seen on the river road north of Cobalt.",
         "reporting_name": "Gainful",
         "rwr_symbol": "6",
-        "side": "red",
         "status": "active",
         "system_id": "SA-6"
       }
@@ -1397,6 +1825,103 @@
     "extensions": {
       "org.cjtf-oir.ato": {
         "ato_day": "214"
+      }
+    },
+    "facs": {
+      "axeman": {
+        "callsign": "Axeman 1-1",
+        "channels": [
+          "cas-uhf"
+        ],
+        "coordinate_source": "lrf",
+        "default_laser_code": "1688",
+        "egress_points": [
+          {
+            "id": "cedar",
+            "kind": "control_measure"
+          }
+        ],
+        "equipment": [
+          {
+            "available": true,
+            "id": "designator",
+            "kind": "laser_designator",
+            "laser_codes": [
+              "1688",
+              "1511"
+            ],
+            "max_range": {
+              "unit": "km",
+              "value": 10
+            },
+            "name": "Ground laser target designator",
+            "notes": "Spare batteries for 24 hours of operation.",
+            "quantity": 1
+          },
+          {
+            "available": true,
+            "horizontal_accuracy": {
+              "unit": "m",
+              "value": 10
+            },
+            "id": "rangefinder",
+            "kind": "laser_rangefinder",
+            "max_range": {
+              "unit": "km",
+              "value": 8
+            },
+            "name": "Handheld laser rangefinder",
+            "quantity": 1,
+            "vertical_accuracy": {
+              "unit": "m",
+              "value": 5
+            }
+          }
+        ],
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "kind": "unit",
+                  "mission_id": "oir-syria",
+                  "name": "OIR Axeman",
+                  "object_id": 42,
+                  "unit_type": "Hummer"
+                }
+              ],
+              "coalition": "blue"
+            }
+          }
+        },
+        "id": "axeman",
+        "initial_points": [
+          {
+            "id": "ip-silver",
+            "kind": "control_measure"
+          }
+        ],
+        "kind": "fac",
+        "laser_codes": [
+          "1688",
+          "1511"
+        ],
+        "platform": "ground",
+        "position": {
+          "latitude": 35.005,
+          "longitude": 40.265
+        },
+        "resources_ref": {
+          "id": "oir-resources",
+          "revision": "1"
+        },
+        "role": "jtac",
+        "smoke_color": "white",
+        "terminal_control": [
+          "type_1",
+          "type_2",
+          "type_3"
+        ]
       }
     },
     "instrument_procedures": {
@@ -2357,6 +2882,73 @@
         }
       }
     },
+    "notams": {
+      "ojms-a0214": {
+        "affects": [
+          {
+            "designator": "13",
+            "kind": "runway"
+          },
+          {
+            "id": "ojms-i31",
+            "kind": "instrument_procedure"
+          }
+        ],
+        "code": "QMRLC",
+        "effective": {
+          "end": "2026-10-02T14:00:00Z",
+          "start": "2026-10-02T13:00:00Z"
+        },
+        "extensions": {
+          "org.cjtf-oir.ato": {
+            "ato_day": "214"
+          }
+        },
+        "id": "ojms-a0214",
+        "kind": "notam",
+        "location": "ojms",
+        "number": {
+          "number": 214,
+          "series": "A",
+          "year": 2026
+        },
+        "resources_ref": {
+          "id": "oir-resources",
+          "revision": "1"
+        },
+        "text": "RWY 13/31 CLSD DUE TO BAK-12 MAINT"
+      },
+      "ojms-a0215": {
+        "affects": [
+          {
+            "id": "ghi",
+            "kind": "control_measure"
+          }
+        ],
+        "code": "QRTCA",
+        "effective": {
+          "end": "2026-10-02T15:00:00Z",
+          "start": "2026-10-02T13:30:00Z"
+        },
+        "id": "ojms-a0215",
+        "kind": "notam",
+        "location": "ojms",
+        "lower": {
+          "surface": true
+        },
+        "number": {
+          "number": 215,
+          "series": "A",
+          "year": 2026
+        },
+        "text": "TEMPO RESTRICTED AREA ACT FOR LIVE FIRING WI 5NM OF GHI",
+        "upper": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 8000
+        }
+      }
+    },
     "pattern_profiles": {
       "usaf-standard": {
         "altitude": {
@@ -2379,10 +2971,17 @@
             }
           },
           "heavy": {
-            "altitude": {
+            "departure_ceiling": {
               "reference": "AGL",
               "unit": "ft",
-              "value": 2000
+              "value": 1000
+            },
+            "go_around": {
+              "altitude": {
+                "reference": "AGL",
+                "unit": "ft",
+                "value": 2500
+              }
             }
           },
           "helicopter": {
@@ -2412,10 +3011,51 @@
               "reference": "AGL",
               "unit": "ft",
               "value": 1500
+            },
+            "reentry": {
+              "altitude": {
+                "reference": "AGL",
+                "unit": "ft",
+                "value": 2000
+              },
+              "name": "Re-entry point"
+            },
+            "sfo": {
+              "high_key": {
+                "lower": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 7000
+                },
+                "upper": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 9000
+                }
+              },
+              "low_key": {
+                "lower": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 3000
+                },
+                "upper": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 5000
+                }
+              }
             }
           }
         },
         "direction": "left",
+        "go_around": {
+          "altitude": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 2000
+          }
+        },
         "initial": [
           {
             "distance": {
@@ -2428,12 +3068,45 @@
           "reference": "AGL",
           "unit": "ft",
           "value": 2000
+        },
+        "reentry": {
+          "altitude": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 2000
+          },
+          "name": "Re-entry point"
+        },
+        "sfo": {
+          "high_key": {
+            "lower": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 7000
+            },
+            "upper": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 9000
+            }
+          },
+          "low_key": {
+            "lower": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 3000
+            },
+            "upper": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 5000
+            }
+          }
         }
       }
     },
     "places": {
       "farp-sage": {
-        "coalition": "blue",
         "controlling_agency": "banshee",
         "elevation": {
           "reference": "MSL",
@@ -2449,7 +3122,8 @@
                   "mission_id": "oir-syria",
                   "name": "OIR Sage FARP"
                 }
-              ]
+              ],
+              "coalition": "blue"
             }
           }
         },
@@ -2480,7 +3154,8 @@
         "position": {
           "latitude": 34.735,
           "longitude": 40.225
-        }
+        },
+        "use": "military"
       },
       "ojms": {
         "approach_instructions": [
@@ -2500,7 +3175,6 @@
           }
         },
         "calm_wind_runway": "13",
-        "coalition": "blue",
         "controlling_agency": "salti-tower",
         "elevation": {
           "reference": "MSL",
@@ -2516,7 +3190,8 @@
                   "mission_id": "oir-syria",
                   "name": "Muwaffaq Salti"
                 }
-              ]
+              ],
+              "coalition": "blue"
             }
           }
         },
@@ -2552,6 +3227,7 @@
             "role": "tower"
           }
         ],
+        "hung_ordnance_runway": "31",
         "id": "ojms",
         "ident": "OJMS",
         "kind": "airfield",
@@ -2565,6 +3241,19 @@
           {
             "id": "ghi",
             "kind": "control_measure"
+          }
+        ],
+        "pads": [
+          {
+            "name": "EOR 31",
+            "position": {
+              "latitude": 31.826633,
+              "longitude": 36.795642
+            },
+            "use": [
+              "arm_dearm",
+              "hot_brake"
+            ]
           }
         ],
         "parking": [
@@ -2872,6 +3561,11 @@
                   "value": 1636
                 },
                 "traffic_pattern": {
+                  "departure_ceiling": {
+                    "reference": "AGL",
+                    "unit": "ft",
+                    "value": 1000
+                  },
                   "direction": "right"
                 }
               }
@@ -2980,6 +3674,17 @@
           ]
         },
         "traffic_pattern": {
+          "go_around": {
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 4600
+            },
+            "heading": {
+              "reference": "magnetic",
+              "value": 306
+            }
+          },
           "initial": [
             {
               "bearing": {
@@ -2998,17 +3703,28 @@
             "unit": "ft",
             "value": 3600
           },
-          "profile": "usaf-standard"
+          "profile": "usaf-standard",
+          "reentry": {
+            "altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 3600
+            },
+            "point": {
+              "id": "vrp-salti-dam",
+              "kind": "control_measure"
+            }
+          }
         },
         "transition_altitude": {
           "reference": "MSL",
           "unit": "ft",
           "value": 13000
-        }
+        },
+        "use": "military"
       },
       "prince-hassan": {
         "calm_wind_runway": "31",
-        "coalition": "blue",
         "elevation": {
           "reference": "MSL",
           "unit": "ft",
@@ -3023,7 +3739,8 @@
                   "mission_id": "oir-syria",
                   "name": "Prince Hassan"
                 }
-              ]
+              ],
+              "coalition": "blue"
             }
           }
         },
@@ -3132,7 +3849,110 @@
           "reference": "MSL",
           "unit": "ft",
           "value": 13000
-        }
+        },
+        "use": "military"
+      },
+      "tiyas": {
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 1797
+        },
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "kind": "airbase",
+                  "mission_id": "oir-syria",
+                  "name": "Tiyas"
+                }
+              ],
+              "coalition": "red"
+            }
+          }
+        },
+        "frequencies": [
+          {
+            "callsign": "Tiyas Tower",
+            "frequency": {
+              "band": "vhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 120.5
+            },
+            "role": "tower"
+          }
+        ],
+        "id": "tiyas",
+        "ident": "OSTF",
+        "kind": "airfield",
+        "magnetic_variation_deg": 5.0,
+        "name": "Tiyas",
+        "position": {
+          "latitude": 34.5225,
+          "longitude": 37.6297
+        },
+        "runways": [
+          {
+            "designator": "09/27",
+            "ends": [
+              {
+                "designator": "09",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 84.8
+                },
+                "threshold": {
+                  "latitude": 34.52271,
+                  "longitude": 37.6125
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1797
+                }
+              },
+              {
+                "designator": "27",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 264.8
+                },
+                "threshold": {
+                  "latitude": 34.52229,
+                  "longitude": 37.6455
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 1797
+                }
+              }
+            ],
+            "id": "tiyas-rw09-27",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 9941
+            },
+            "name": "09/27",
+            "surface": "hard",
+            "width": {
+              "unit": "ft",
+              "value": 148
+            }
+          }
+        ],
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+        "transition_altitude": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 13000
+        },
+        "use": "military"
       }
     },
     "procedures": {
@@ -6189,6 +7009,16 @@
       }
     },
     "threats": {
+      "red-air-fighters": {
+        "airfield": "tiyas",
+        "area": {
+          "area": "red-air"
+        },
+        "expected_activity": "Two to four aircraft can approach from the north-west between 1310Z and 1400Z.",
+        "kind": "air",
+        "name": "Third-party fighters",
+        "system": "MiG-29"
+      },
       "sa-6": {
         "area": {
           "area": "recce-box"

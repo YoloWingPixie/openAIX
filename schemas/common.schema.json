@@ -98,7 +98,7 @@
           "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
         },
         "geometry": {
-          "description": "This field gives the horizontal boundary of this component: points, distances and bearings in a format for a simulator.",
+          "description": "This field gives the horizontal boundary of this component: points, distances and bearings in a format for a simulator. A `geojson` geometry (RFC 7946) of the same shape is also correct.",
           "oneOf": [
             {
               "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_polygon"
@@ -120,6 +120,9 @@
             },
             {
               "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_ellipse"
+            },
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_geojson_polygon"
             }
           ]
         },
@@ -292,7 +295,7 @@
       "type": "string"
     },
     "Coalition": {
-      "description": "A coalition is the side of a record in the simulation: `blue`, `red` or `neutral`.",
+      "description": "A coalition is the side of a record in the simulation: `blue`, `red` or `neutral`. It is simulator data, not real-world data.",
       "enum": [
         "blue",
         "red",
@@ -350,6 +353,9 @@
         },
         {
           "$ref": "urn:openaix:schema:measure-route:0.1.0-draft.2"
+        },
+        {
+          "$ref": "urn:openaix:schema:territory:0.1.0-draft.2"
         },
         {
           "$ref": "urn:openaix:schema:measure-tl:0.1.0-draft.2"
@@ -439,7 +445,7 @@
             },
             "geometry": {
               "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry",
-              "description": "This field gives the horizontal geometry of the extension control measure: a position or a boundary. The geometry uses points, distances and bearings in a format for a simulator."
+              "description": "This field gives the horizontal geometry of the extension control measure: a position or a boundary. The geometry uses points, distances and bearings in a format for a simulator, or a GeoJSON geometry (RFC 7946)."
             },
             "id": {
               "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
@@ -538,6 +544,10 @@
           "minItems": 1,
           "type": "array",
           "uniqueItems": true
+        },
+        "coalition": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Coalition",
+          "description": "This field gives the Digital Combat Simulator (DCS) coalition of the record: `blue`, `red` or `neutral`, as one of the enumerated values. The coalition is the side of the record in the DCS mission."
         },
         "label": {
           "description": "This field gives the label of the pylon in the mission editor.",
@@ -1173,6 +1183,164 @@
       ],
       "type": "object"
     },
+    "GeoJSONLineString": {
+      "additionalProperties": false,
+      "description": "A GeoJSON line string is a GeoJSON geometry object of the type `LineString`, as in RFC 7946.",
+      "properties": {
+        "bbox": {
+          "description": "This list contains the limits of the bounding box of the geometry, as in RFC 7946 section 5.",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 6,
+          "minItems": 4,
+          "type": "array"
+        },
+        "coordinates": {
+          "description": "This list contains the positions of the line string, in order. Each item is a GeoJSON position.",
+          "items": {
+            "$ref": "#/$defs/GeoJSONPosition"
+          },
+          "minItems": 2,
+          "type": "array"
+        },
+        "type": {
+          "const": "LineString",
+          "description": "The value identifies this record as a GeoJSON `LineString`."
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "type": "object"
+    },
+    "GeoJSONLinearRing": {
+      "description": "A GeoJSON linear ring is a closed sequence of four or more positions. The first position and the last position shall be the same.",
+      "items": {
+        "$ref": "#/$defs/GeoJSONPosition"
+      },
+      "minItems": 4,
+      "type": "array"
+    },
+    "GeoJSONMultiPolygon": {
+      "additionalProperties": false,
+      "description": "A GeoJSON multipolygon is a GeoJSON geometry object of the type `MultiPolygon`, as in RFC 7946.",
+      "properties": {
+        "bbox": {
+          "description": "This list contains the limits of the bounding box of the geometry, as in RFC 7946 section 5.",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 6,
+          "minItems": 4,
+          "type": "array"
+        },
+        "coordinates": {
+          "description": "This list contains the polygons of the multipolygon. Each polygon is a list of linear rings, as in a GeoJSON polygon.",
+          "items": {
+            "items": {
+              "$ref": "#/$defs/GeoJSONLinearRing"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "type": {
+          "const": "MultiPolygon",
+          "description": "The value identifies this record as a GeoJSON `MultiPolygon`."
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "type": "object"
+    },
+    "GeoJSONPoint": {
+      "additionalProperties": false,
+      "description": "A GeoJSON point is a GeoJSON geometry object of the type `Point`, as in RFC 7946.",
+      "properties": {
+        "bbox": {
+          "description": "This list contains the limits of the bounding box of the geometry, as in RFC 7946 section 5.",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 6,
+          "minItems": 4,
+          "type": "array"
+        },
+        "coordinates": {
+          "$ref": "#/$defs/GeoJSONPosition",
+          "description": "This field gives the GeoJSON position of the point: longitude first, then latitude."
+        },
+        "type": {
+          "const": "Point",
+          "description": "The value identifies this record as a GeoJSON `Point`."
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "type": "object"
+    },
+    "GeoJSONPolygon": {
+      "additionalProperties": false,
+      "description": "A GeoJSON polygon is a GeoJSON geometry object of the type `Polygon`, as in RFC 7946.",
+      "properties": {
+        "bbox": {
+          "description": "This list contains the limits of the bounding box of the geometry, as in RFC 7946 section 5.",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 6,
+          "minItems": 4,
+          "type": "array"
+        },
+        "coordinates": {
+          "description": "This list contains the linear rings of the polygon. The first ring is the outer boundary; the other rings are holes.",
+          "items": {
+            "$ref": "#/$defs/GeoJSONLinearRing"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "type": {
+          "const": "Polygon",
+          "description": "The value identifies this record as a GeoJSON `Polygon`."
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "type": "object"
+    },
+    "GeoJSONPosition": {
+      "description": "A GeoJSON position is a longitude and a latitude in WGS 84 decimal degrees, in this sequence. A third number, the height, is optional. This sequence is the opposite of a geographic point.",
+      "items": false,
+      "maxItems": 3,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "maximum": 180,
+          "minimum": -180,
+          "type": "number"
+        },
+        {
+          "maximum": 90,
+          "minimum": -90,
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "type": "array"
+    },
     "GeoPoint": {
       "additionalProperties": false,
       "description": "A geographic point is a position in WGS 84 decimal degrees. An adapter is necessary for the Cartesian coordinates of a simulator.",
@@ -1234,6 +1402,15 @@
         },
         {
           "$ref": "#/$defs/Geometry_description"
+        },
+        {
+          "$ref": "#/$defs/Geometry_geojson_point"
+        },
+        {
+          "$ref": "#/$defs/Geometry_geojson_line"
+        },
+        {
+          "$ref": "#/$defs/Geometry_geojson_polygon"
         },
         {
           "$ref": "#/$defs/Geometry_rectangle"
@@ -1403,6 +1580,70 @@
         "point",
         "axis",
         "leg_length"
+      ],
+      "type": "object"
+    },
+    "Geometry_geojson_line": {
+      "additionalProperties": false,
+      "description": "A GeoJSON line geometry is a line as a GeoJSON geometry object (RFC 7946), unchanged. Shapes from a geographic information system (GIS) tool go in as they are. GeoJSON has no curves: circles, arcs and racetracks use their openAIX kinds.",
+      "properties": {
+        "geometry": {
+          "$ref": "#/$defs/GeoJSONLineString",
+          "description": "This field contains the GeoJSON `LineString` object."
+        },
+        "kind": {
+          "const": "geojson",
+          "description": "The value identifies this record as a GeoJSON geometry. The value is `geojson`."
+        }
+      },
+      "required": [
+        "kind",
+        "geometry"
+      ],
+      "type": "object"
+    },
+    "Geometry_geojson_point": {
+      "additionalProperties": false,
+      "description": "A GeoJSON point geometry is a point as a GeoJSON geometry object (RFC 7946), unchanged. Shapes from a geographic information system (GIS) tool go in as they are. GeoJSON has no curves: circles, arcs and racetracks use their openAIX kinds.",
+      "properties": {
+        "geometry": {
+          "$ref": "#/$defs/GeoJSONPoint",
+          "description": "This field contains the GeoJSON `Point` object."
+        },
+        "kind": {
+          "const": "geojson",
+          "description": "The value identifies this record as a GeoJSON geometry. The value is `geojson`."
+        }
+      },
+      "required": [
+        "kind",
+        "geometry"
+      ],
+      "type": "object"
+    },
+    "Geometry_geojson_polygon": {
+      "additionalProperties": false,
+      "description": "A GeoJSON polygon or multipolygon geometry is a polygon or multipolygon as a GeoJSON geometry object (RFC 7946), unchanged. Shapes from a geographic information system (GIS) tool go in as they are. GeoJSON has no curves: circles, arcs and racetracks use their openAIX kinds.",
+      "properties": {
+        "geometry": {
+          "description": "This field contains the GeoJSON `Polygon` or `MultiPolygon` object.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GeoJSONPolygon"
+            },
+            {
+              "$ref": "#/$defs/GeoJSONMultiPolygon"
+            }
+          ]
+        },
+        "kind": {
+          "const": "geojson",
+          "description": "The value identifies this record as a GeoJSON geometry. The value is `geojson`."
+        }
+      },
+      "required": [
+        "kind",
+        "geometry"
       ],
       "type": "object"
     },
@@ -1856,10 +2097,6 @@
         "classification": {
           "$ref": "#/$defs/ClassificationLevel",
           "description": "This field gives the security classification of the document, as one of the enumerated values."
-        },
-        "coalition": {
-          "$ref": "#/$defs/Coalition",
-          "description": "This field gives the coalition of the document: `blue`, `red` or `neutral`, as one of the enumerated values."
         },
         "distribution": {
           "description": "This list contains the addressees that receive the document.",

@@ -1,6 +1,7 @@
 """Shared constants, schema-building helpers and the common.schema.json primitive set."""
 import copy
 import json
+from copy import deepcopy
 
 from openaix import ROOT
 from openaix.build.points import point_location
@@ -21,6 +22,10 @@ LASER_CODE = r"^1[1-7][1-8][1-8]$"
 RUNWAY_DESIGNATOR = r"^(0[1-9]|[12][0-9]|3[0-6])[LRCWSGU]?$"
 COALITIONS = ("blue", "red", "neutral")
 GEOMETRY_NAMES = ("point", "line", "polygon", "circle", "corridor", "racetrack", "track_racetrack", "sector", "polyarc", "figure_eight", "vertical", "description")
+# GeoJSON geometry (IETF RFC 7946) that an openAIX geometry may carry as it is: the `geojson` kind. Each definition
+# takes the GeoJSON types of one openAIX shape, and a contract that accepts the shape also accepts its definition
+# (build/measures.py extend_area_geometry). GeoJSON has no curves: circles, arcs and racetracks keep their openAIX kinds.
+GEOJSON_SHAPES = {"point": ("Point",), "line": ("LineString",), "polygon": ("Polygon", "MultiPolygon")}
 
 
 def read(path):
@@ -94,8 +99,9 @@ def common_schema(source):
     defs["Speed"] = obj({"value": {"type": "number", "exclusiveMinimum": 0}, "unit": {"enum": ["kt", "mach", "km/h"]}}, ("value", "unit"))
     defs["Frequency"] = obj({"value": {"type": "number", "exclusiveMinimum": 0}, "unit": {"enum": ["kHz", "MHz"]}, "modulation": {"enum": ["AM", "FM"]},
                              "band": {"enum": list(RADIO_BANDS)}}, ("value", "unit"))
+    # The coalition is a simulator side, not real-world data: it is in `extensions.sim.dcs` (sim/dcs.py).
     defs["Coalition"] = {"type": "string", "enum": list(COALITIONS)}
-    defs["Metadata"]["properties"]["coalition"] = ref("Coalition")
+    defs["Metadata"]["properties"].pop("coalition", None)
     defs["LaserCode"] = {"type": "string", "pattern": LASER_CODE}
     defs["RunwayDesignator"] = {"type": "string", "pattern": RUNWAY_DESIGNATOR}
     for name, definition in defs.items():
@@ -128,7 +134,9 @@ def common_schema(source):
     line = obj({"kind": {"const": "line"}, "start": point, "end": point}, ("kind", "start", "end"))
     arc = obj({"kind": {"const": "arc"}, "center": point, "radius": ref("Length"), "start_bearing": ref("Bearing"), "end_bearing": ref("Bearing"), "turns": {"enum": ["left", "right"]}}, ("kind", "center", "radius", "start_bearing", "end_bearing", "turns"))
     defs["Geometry_polyarc"] = obj({"kind": {"const": "polyarc"}, "segments": array({"oneOf": [line, arc]}, 2)}, ("kind", "segments"))
+    defs.update(geojson_definitions())
     defs["Geometry"] = {"oneOf": [ref("Geometry_" + name) for name in GEOMETRY_NAMES]}
+    defs["Geometry"]["oneOf"].extend(ref("Geometry_geojson_" + shape) for shape in GEOJSON_SHAPES)
     drawing_shapes = dcs_geometry_definitions(COMMON)
     defs.update(drawing_shapes)
     defs["Geometry"]["oneOf"].extend(ref(name) for name in drawing_shapes)
@@ -136,6 +144,27 @@ def common_schema(source):
     defs["MeasureCatalogue"] = {"type": "object", "propertyNames": ref("Identifier"), "additionalProperties": ref("ControlMeasure")}
     defs.update(spatial_definitions(COMMON))
     return {"$schema": DIALECT, "$id": COMMON, "title": "openAIX common resources", "$defs": defs}
+
+
+def geojson_definitions():
+    """GeoJSON positions, the four GeoJSON geometry types of openAIX and one `geojson` geometry for each openAIX shape."""
+    def ref(name):
+        return {"$ref": "#/$defs/" + name}
+
+    position = {"type": "array", "minItems": 2, "maxItems": 3, "items": False,
+                "prefixItems": [{"type": "number", "minimum": -180, "maximum": 180}, {"type": "number", "minimum": -90, "maximum": 90},
+                                {"type": "number"}]}
+    ring = array(ref("GeoJSONPosition"), 4)
+    bbox = {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 6}
+    coordinates = {"Point": ref("GeoJSONPosition"), "LineString": array(ref("GeoJSONPosition"), 2),
+                   "Polygon": array(ref("GeoJSONLinearRing"), 1), "MultiPolygon": array(array(ref("GeoJSONLinearRing"), 1), 1)}
+    defs = {"GeoJSONPosition": position, "GeoJSONLinearRing": ring}
+    for name, value in coordinates.items():
+        defs["GeoJSON" + name] = obj({"type": {"const": name}, "coordinates": value, "bbox": deepcopy(bbox)}, ("type", "coordinates"))
+    for shape, types in GEOJSON_SHAPES.items():
+        geometry = ref("GeoJSON" + types[0]) if len(types) == 1 else {"oneOf": [ref("GeoJSON" + name) for name in types]}
+        defs["Geometry_geojson_" + shape] = obj({"kind": {"const": "geojson"}, "geometry": geometry}, ("kind", "geometry"))
+    return defs
 
 
 def date_time_references(node):

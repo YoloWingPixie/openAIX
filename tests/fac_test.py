@@ -35,23 +35,15 @@ class FacTests(unittest.TestCase):
         document.update({"coordinate_source": "lrf", "default_laser_code": "1688", "smoke_color": "white",
                          "equipment": [{"id": "lrf-1", "kind": "laser_rangefinder", "quantity": 1, "available": True,
                                         "max_range": {"value": 8, "unit": "km"}, "horizontal_accuracy": {"value": 10, "unit": "m"}}],
-                         "extensions": {"org.vox-bellica.jtac": {"search_range_m": 10000, "laser_range_m": 8000,
-                            "voice_id": "training-controller", "memory_file": "Axeman.json", "readback_timeout_s": 60,
-                            "impact_window_s": 120, "precise_coords_delay_s": 10, "last_call_on_loss": False, "town_ips": True,
-                            "stack": {"concurrent": False, "radius_m": 3000, "block_ft": 2000, "helo_block_ft": 1000, "separation_ft": 2000,
-                                      "helo_floor_ft": 1000, "slow_floor_ft": 12000, "fast_floor_ft": 16000},
-                            "launch_warnings": {"enabled": True, "range_m": 8000, "delay_min": "2.5s", "delay_max": "6s", "coalesce": "5s"},
-                            "night": {"mode": "auto", "sun_deg": -6, "start_hour": 20, "end_hour": 5, "utc_offset_h": 3, "ir_mark": True, "snake_amplitude_m": 15, "snake_period": "500ms"},
-                            "fah": {"laser_cone": True, "laser_cone_deg": 60, "laser_prefer_deg": 45, "observer_buffer_m": 500, "friendly_parallel_reds": 3,
-                                    "valley_min_depth_m": 50, "road_max_m": 150, "terrain": True}, "danger_close": {"initials": "JD"}}}})
+                         "extensions": {"org.example.jtac": {"search_range_m": 10000, "laser_range_m": 8000}}})
         self.assertEqual(import_document(export_document(document)), document)
         changed = json.loads(json.dumps(document))
         changed["coordinate_source"] = "gps"
         with self.assertRaises(ContractError):
             validate_document(changed)
 
-    def test_target_location_error_name_and_vox_tuning_are_not_portable_fields(self):
-        # DOCTRINE-06: `tle` held a coordinate source, not a CAT I-VI target location error; ORDERS-05: Vox tuning is namespaced.
+    def test_target_location_error_name_and_application_tuning_are_not_portable_fields(self):
+        # DOCTRINE-06: `tle` held a coordinate source, not a CAT I-VI target location error; ORDERS-05: application tuning is namespaced.
         document = json.loads((ROOT / "examples/fac.json").read_text())
         resources = json.loads((ROOT / "examples/resources.json").read_text())
         validate_document(document, resource_document=resources)
@@ -77,7 +69,7 @@ class FacTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             validate_document(changed, resource_document=resources)
 
-    def test_supplied_equipment_and_vox_observers_are_validated(self):
+    def test_supplied_equipment_and_dcs_observers_are_validated(self):
         document = json.loads((ROOT / "examples/fac.json").read_text())
         for field in ("resources_ref", "channels", "initial_points", "egress_points"):
             document.pop(field, None)
@@ -85,11 +77,22 @@ class FacTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             validate_document(document)
         document.pop("equipment")
-        document["extensions"]["org.vox-bellica.jtac"]["observers"] = [{"kind": "unit", "name": "Not-a-name"}]
-        with self.assertRaises(ContractError):
-            validate_document(document)
-        # The observers of the Vox Bellica JTAC are application settings, not DCS data.
-        document["extensions"]["org.vox-bellica.jtac"]["observers"] = ["OIR Axeman OP"]
+        # Observers are not DCS data of the controller; an application keeps them in its own namespace.
         document["extensions"]["sim"]["dcs"]["observers"] = [{"kind": "unit", "name": "OIR Axeman OP"}]
         with self.assertRaises(ContractError):
             validate_document(document)
+
+    def test_coalition_is_dcs_data_not_a_core_field(self):
+        document = json.loads((ROOT / "examples/fac.json").read_text())
+        resources = json.loads((ROOT / "examples/resources.json").read_text())
+        self.assertEqual(document["extensions"]["sim"]["dcs"]["coalition"], "blue")
+        changed = json.loads(json.dumps(document))
+        changed["coalition"] = "blue"
+        with self.assertRaises(ContractError) as error:
+            validate_document(changed, resource_document=resources)
+        self.assertEqual(error.exception.code, "schema constraint: additionalProperties")
+
+    def test_schema_has_no_application_settings(self):
+        schema = json.loads((ROOT / "schemas/fac.schema.json").read_text())
+        self.assertNotIn("VoxJTACSettings", schema.get("$defs", {}))
+        self.assertNotIn("vox", json.dumps(schema).lower())

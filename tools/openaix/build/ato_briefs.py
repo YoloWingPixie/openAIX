@@ -107,7 +107,8 @@ def enrich_briefs(artifacts, common):
         return node
 
     # ---- Shared pieces ---------------------------------------------------------------------------
-    defs["ControllerContact"] = obj({"agency": ident("agencies"), "channel": ident("channels"),
+    # A controller is a command and control agency or a forward air controller (check/orders.py `controllers`).
+    defs["ControllerContact"] = obj({"agency": ident("controllers"), "channel": ident("channels"),
                                      "alternate_channel": ident("channels")}, ("agency",))
     defs["ReportingPlan"] = obj({"reports": idents("reports"), "recipient": ident("agencies"), "channel": ident("channels"),
                                  "method": enum(REPORT_METHODS), "deadline": c("DateTime")})

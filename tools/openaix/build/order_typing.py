@@ -62,7 +62,7 @@ def type_orders(artifacts, common):
         "radar_roles": {"type": "array", "items": {"enum": list(RADAR_ROLES)}, "uniqueItems": True},
         "rwr_symbol": dict(text),
         "position": c("GeoPoint"), "status": {"enum": list(EMITTER_STATUS)}, "last_seen": c("DateTime"),
-        "mobility": {"enum": list(MOBILITY)}, "side": c("Coalition"),
+        "mobility": {"enum": list(MOBILITY)},
         "max_engagement_range": dict(length), "min_engagement_range": dict(length), "detection_range": dict(length),
         "engagement_floor": c("VerticalLimit"), "engagement_ceiling": c("VerticalLimit"),
         "measures": {"type": "array", "uniqueItems": True,
@@ -76,3 +76,5 @@ def type_orders(artifacts, common):
     data = resources["ResourceData"]["properties"]
     data["emitters"] = {"type": "object", "additionalProperties": {"$ref": "#/$defs/Emitter"}, "propertyNames": c("Identifier")}
     resources["Threat"]["properties"]["emitters"] = {"type": "array", "uniqueItems": True, "items": ident("emitters")}
+    # The operating location from which an air threat operates: intelligence names the base of enemy aircraft.
+    resources["Threat"]["properties"]["airfield"] = ident("places")

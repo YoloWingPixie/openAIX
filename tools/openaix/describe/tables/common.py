@@ -131,6 +131,7 @@ MEASURE_SUBJECTS = {
     "measures/kb": "kill box", "measures/mez": "missile engagement zone", "measures/cl": "coordination level or coordinating altitude",
     "measures/tl": "traverse level", "measures/aca": "airspace coordination area", "measures/isr": "identification safety range",
     "measures/misarc": "missile arc", "measures/orbit": "orbit", "measures/airspace": "airspace", "measures/point": "point",
+    "measures/territory": "territory",
 }
 GEOMETRY_SUBJECTS = {"Geometry_" + name: name.replace("_", " ") + " geometry" for name in (
     "point", "line", "polygon", "circle", "corridor", "racetrack", "track_racetrack", "sector", "polyarc", "figure_eight",
@@ -181,6 +182,8 @@ def _root(code, *notes):
 
 
 SHARED = ("$schema", "id", "name", "notes", "description", "extensions", "resources_ref", "active")
+# Note of a geometry field that also takes the GeoJSON geometry of its shapes (build/measures.py extend_area_geometry).
+GEOJSON = "A `geojson` geometry (RFC 7946) of the same shape is also correct"
 COORDINATED = SHARED + ("coordination_instructions",)
 CONTROLLED = COORDINATED + ("channels", "controlling_agency", "purpose", "restrictions")
 
@@ -207,7 +210,7 @@ MEASURES.update(_measure_entries("measures/route", "route", CONTROLLED, {
                  "It also gives the area that the route is for: a rear area, a forward area, a maritime force or a base defence zone",
                  "Aircraft can fly a corridor in the two directions, but not when its geometry has the `one_way` flag"),
     "altitude": d.altitude_block("the route or corridor"),
-    "geometry": d.geometry("the route", "a centreline, or a corridor with its total lateral width",
+    "geometry": d.geometry("the route", "a centreline, or a corridor with its total lateral width", GEOJSON,
                            d.enforced("When doctrine gives a code as a corridor, the code shall use the corridor geometry", "schema:then")),
     "type": MEASURE_TYPE,
 }))
@@ -217,7 +220,9 @@ MEASURES.update(_measure_entries("measures/line", "line", COORDINATED + ("establ
                  "The line is the FLOT, the FEBA or a ground manoeuvre graphic",
                  "These graphics are the phase line, the boundary, the LOA, the LD and the LC",
                  "Other lines show where friendly aircraft set their IFF equipment to off or on"),
-    "geometry": d.geometry("the line", "geographic positions in sequence"),
+    "geometry": d.geometry("the line", "geographic positions in sequence", GEOJSON),
+    "hostile_side": d.enum("side of the line on which the enemy is",
+                           "The side is to the left or to the right of the line when it is followed from its first point to its last point"),
     "type": MEASURE_TYPE,
 }))
 MEASURES.update(_measure_entries("measures/fire-support-line", "line", COORDINATED + ("establishing_authority",), {
@@ -231,7 +236,7 @@ MEASURES.update(_measure_entries("measures/fire-support-line", "line", COORDINAT
                  "Between a BCL and the FSCL, Marine aircraft can attack surface targets without approval from the "
                  "GCE commander"),
     "establishing_authority": d.reference("headquarters", "set the line"),
-    "geometry": d.geometry("the line", "geographic positions in sequence"),
+    "geometry": d.geometry("the line", "geographic positions in sequence", GEOJSON),
     "type": MEASURE_TYPE,
 }))
 MEASURES.update(_measure_entries("measures/area", "area", COORDINATED + ("restrictions",), {
@@ -244,7 +249,7 @@ MEASURES.update(_measure_entries("measures/area", "area", COORDINATED + ("restri
                  "The codes `OBJ`, `BP`, `AA`, `NAI` and `TAI` identify ground manoeuvre graphics",
                  "The code `FSA` identifies a sea area for fire support ships"),
     "establishing_authority": d.reference("headquarters", "set the area"),
-    "geometry": d.geometry("the area on the ground or at sea", "a polygon, or a radius from a centre point",
+    "geometry": d.geometry("the area on the ground or at sea", "a polygon, or a radius from a centre point", GEOJSON,
                            "The boundary follows terrain features that are easy to identify"),
     "restrictions": d.list_of("restrictions on fires or tasks", None,
                               d.enforced("An RFA shall give them", "schema:then")),
@@ -253,7 +258,7 @@ MEASURES.update(_measure_entries("measures/area", "area", COORDINATED + ("restri
 MEASURES.update(_measure_entries("measures/aor", "area", SHARED, {
     None: _root("AOR", "The `responsible_agency` and `gates` fields are openAIX planning fields"),
     "gates": d.references("entry and exit gates of this area"),
-    "geometry": d.geometry("the area of responsibility", "a polygon, a circle, a rectangle or an ellipse"),
+    "geometry": d.geometry("the area of responsibility", "a polygon, a circle, a rectangle, an ellipse or a GeoJSON polygon"),
     "responsible_agency": d.reference("agency", "controls this area"),
     "type": _kind("an area of responsibility"),
 }))
@@ -348,7 +353,8 @@ MEASURES.update(_measure_entries("measures/orbit", "orbit", CONTROLLED, {
     "altitude": d.altitude_block("the orbit", "The block gives the altitudes that aircraft can use"),
     "geometry": d.geometry("the flight pattern", None,
                            "A racetrack has an anchor, a radial, a turn direction and a straight-leg length",
-                           "A point, a line or a text geometry can record a pattern, but more data is necessary to fly it"),
+                           "A point, a line or a text geometry can record a pattern, but more data is necessary to fly it",
+                           GEOJSON),
     "purpose": d.text("general task of the orbit"),
     "type": d.discriminator("an orbit", "The value is the same for all orbits, and the mission of an assignment does not change it"),
 }))
@@ -375,7 +381,9 @@ MEASURES.update(_measure_entries("measures/point", "point", COORDINATED + ("chan
                  "point and handover",
                  "The air reference points of Annex B (`ACP`, `CP`, `EG`, `HG`, `MG`, `ISP`) are points with the applicable role",
                  "The initial point, the bullseye, a target reference point and a fire support station are also points with "
-                 "the applicable role"),
+                 "the applicable role",
+                 "A charted reporting point for VFR flights is a point with the role `visual_reporting`"),
+    "altitude": d.altitude_block("the point", "An example is the altitude block of an entry or exit gate in an ACO"),
     "aor": d.reference("area of responsibility", "this gate is for"),
     "contact_agency": d.reference("agency", "aircraft speak to at this point"),
     "handover_agency": d.reference("agency", "controls the aircraft after this gate"),
@@ -388,10 +396,53 @@ MEASURES.update(_measure_entries("measures/point", "point", COORDINATED + ("chan
 }))
 
 
+MEASURES.update(_measure_entries("measures/territory", "area", SHARED, {
+    None: d.root("territory", None, "a land area with an affiliation: friendly, hostile or neutral",
+                 "The required shape gives the boundary, and it has priority over the country codes",
+                 "Thus a territory can be in a real, a historic or a fictional world",
+                 "A territory has no vertical limits"),
+    "affiliation": d.enum("affiliation of the territory",
+                          "The values are the standard identities friend, hostile and neutral of `MIL-STD-2525` and `APP-6`"),
+    "countries": d.list_of("country codes of the territory, as ISO 3166-1 alpha-3 codes such as `SYR`", None,
+                           "The codes are labels for maps of the real world", "The geometry gives the boundary"),
+    "geometry": d.geometry("the territory", "a polygon or a GeoJSON polygon or multipolygon (RFC 7946)"),
+    "type": d.discriminator("a territory", "The value is the same for all territories"),
+}))
+
+
 # ---- Common primitives ---------------------------------------------------------------------------
 WINDOW_LIMIT = "The value is an absolute date-time or an offset from the period of the order that contains it"
 ABSOLUTE = "The value is an absolute date-time"
 NO_LIMIT = "an altitude with its reference, or no limit"
+
+GEOJSON_DESCRIPTIONS = {
+    ("GeoJSONPosition", None): d.entity("GeoJSON position", "a longitude and a latitude in WGS 84 decimal degrees, in this sequence",
+                                        "A third number, the height, is optional", "This sequence is the opposite of a geographic point"),
+    ("GeoJSONLinearRing", None): d.entity("GeoJSON linear ring", "a closed sequence of four or more positions",
+                                          d.enforced("The first position and the last position shall be the same",
+                                                     "validator:openaix.check.validate.geojson_errors")),
+    **{("GeoJSON" + name, None): d.entity("GeoJSON " + text, "a GeoJSON geometry object of the type `" + name + "`, as in RFC 7946")
+       for name, text in (("Point", "point"), ("LineString", "line string"), ("Polygon", "polygon"), ("MultiPolygon", "multipolygon"))},
+    **{("GeoJSON" + name, "type"): d.discriminator("a GeoJSON `" + name + "`") for name in ("Point", "LineString", "Polygon", "MultiPolygon")},
+    ("GeoJSONPoint", "coordinates"): d.statement("This field gives the GeoJSON position of the point: longitude first, then latitude"),
+    ("GeoJSONLineString", "coordinates"): d.list_of("positions of the line string", None, "Each item is a GeoJSON position", ordered=True),
+    ("GeoJSONPolygon", "coordinates"): d.list_of("linear rings of the polygon", None,
+                                                 "The first ring is the outer boundary; the other rings are holes"),
+    ("GeoJSONMultiPolygon", "coordinates"): d.list_of("polygons of the multipolygon", None,
+                                                      "Each polygon is a list of linear rings, as in a GeoJSON polygon"),
+    **{("GeoJSON" + name, "bbox"): d.list_of("limits of the bounding box of the geometry, as in RFC 7946 section 5")
+       for name in ("Point", "LineString", "Polygon", "MultiPolygon")},
+    **{("Geometry_geojson_" + shape, None): d.entity("GeoJSON " + text + " geometry",
+                                                      "a " + text + " as a GeoJSON geometry object (RFC 7946), unchanged",
+                                                      "Shapes from a GIS tool go in as they are",
+                                                      "GeoJSON has no curves: circles, arcs and racetracks use their openAIX kinds")
+       for shape, text in (("point", "point"), ("line", "line"), ("polygon", "polygon or multipolygon"))},
+    **{("Geometry_geojson_" + shape, "kind"): d.discriminator("a GeoJSON geometry", "The value is `geojson`")
+       for shape in ("point", "line", "polygon")},
+    ("Geometry_geojson_point", "geometry"): d.statement("This field contains the GeoJSON `Point` object"),
+    ("Geometry_geojson_line", "geometry"): d.statement("This field contains the GeoJSON `LineString` object"),
+    ("Geometry_geojson_polygon", "geometry"): d.statement("This field contains the GeoJSON `Polygon` or `MultiPolygon` object"),
+}
 
 COMMON = {
     ("common", None): d.root("definitions for all openAIX documents", None,
@@ -411,7 +462,7 @@ COMMON = {
     ("AirspaceComponent", "active"): d.window("this component is available, in the time interval of the parent control "
                                               "measure", "This field is optional"),
     ("AirspaceComponent", "geometry"): d.geometry("this component", "points, distances and bearings in a format for a simulator",
-                                                  part="Horizontal boundary"),
+                                                  GEOJSON, part="Horizontal boundary"),
     ("AirspaceComponent", "id"): d.identifier("component", "its parent airspace"),
     ("AirspaceComponent", "lower_limit"): d.vertical_limit("floor", "this component"),
     ("AirspaceComponent", "upper_limit"): d.vertical_limit("ceiling", "this component", NO_LIMIT),
@@ -447,7 +498,8 @@ COMMON = {
     ("ControlMeasure", "description"): GENERIC["description"]("extension control measure"),
     ("ControlMeasure", "extensions"): GENERIC["extensions"]("extension control measure"),
     ("ControlMeasure", "geometry"): d.geometry("the extension control measure", "a position or a boundary",
-                                               "The geometry uses points, distances and bearings in a format for a simulator"),
+                                               "The geometry uses points, distances and bearings in a format for a simulator,"
+                                               " or a GeoJSON geometry (RFC 7946)"),
     ("ControlMeasure", "id"): GENERIC["id"]("extension control measure"),
     ("ControlMeasure", "name"): GENERIC["name"]("extension control measure"),
     ("ControlMeasure", "notes"): GENERIC["notes"]("extension control measure"),
@@ -486,6 +538,8 @@ COMMON = {
     ("DCSData", "angle_deg"): d.quantity("drawing angle from the DCS mission", None, "degrees",
                                          "This angle is not a true bearing or a magnetic bearing",
                                          "Only a consumer with a correct adapter for DCS should use this angle to turn the shape"),
+    ("DCSData", "coalition"): d.enum("DCS coalition of the record: `blue`, `red` or `neutral`",
+                                     "The coalition is the side of the record in the DCS mission"),
     ("DCSData", "projection"): d.reference("theatre projection of DCS", "gives the dimensions and the drawing angle"),
     ("DCSObjectRef", None): d.entity("DCS object reference", "a link to one object in a DCS mission",
                                      "The record that contains this reference keeps its geometry in latitude and longitude, "
@@ -518,7 +572,8 @@ COMMON = {
     ("DocumentRef", "id"): d.reference("document", "the record refers to"),
     ("Frequency", None): d.entity("Frequency", "a radio frequency in kilohertz or megahertz",
                                   "The modulation is AM or FM", "The modulation and the radio band are optional"),
-    ("Coalition", None): d.entity("Coalition", "the side of a record in the simulation: `blue`, `red` or `neutral`"),
+    ("Coalition", None): d.entity("Coalition", "the side of a record in the simulation: `blue`, `red` or `neutral`",
+                                  "It is simulator data, not real-world data"),
     ("GeoPoint", None): d.entity("Geographic point", "a position in WGS 84 decimal degrees",
                                  "An adapter is necessary for the Cartesian coordinates of a simulator"),
     ("GeoPoint", "latitude"): d.quantity("latitude north of the equator", None, "decimal degrees",
@@ -552,6 +607,7 @@ COMMON = {
     ("Geometry_figure_eight", "leg_length"): d.quantity("length of each straight leg, without the turns", "Length"),
     ("Geometry_figure_eight", "turn_radius"): d.quantity("radius of the turns of the flight pattern, when given", "Length"),
     ("Geometry_line", None): d.entity("Line geometry", "a sequence of geographic positions that makes an open line"),
+    **GEOJSON_DESCRIPTIONS,
     ("Geometry_point", None): d.entity("Point geometry", "One geographic position"),
     ("Geometry_point", "position"): d.position("the point"),
     ("Geometry_polyarc", None): d.entity("Polyarc geometry",
@@ -690,7 +746,6 @@ PRIMITIVE_FIELDS = {
 
     ("Metadata", "author"): d.statement("This field gives the name of the author of the document"),
     ("Metadata", "classification"): d.enum("security classification of the document"),
-    ("Metadata", "coalition"): d.enum("coalition of the document: `blue`, `red` or `neutral`"),
     ("Metadata", "distribution"): d.list_of("addressees that receive the document"),
     ("Metadata", "issued_at"): d.time("issue of the document"),
     ("Metadata", "issuing_unit"): d.statement("This field gives the name of the unit that publishes the document"),
@@ -829,6 +884,15 @@ ENUMS = {
         "high": "A HIMEZ, in which high-altitude surface-to-air missiles usually engage the aircraft",
         "low": "A LOMEZ, in which surface-to-air missiles for low and moderate altitudes usually engage the aircraft",
         "short_range": "A SHORADEZ, in which SHORAD weapons usually engage the aircraft",
+    }),
+    ("measures/line", "hostile_side"): d.values({
+        "left": d.value_sentence("The enemy is on the left side of the line, from its first point to its last point."),
+        "right": d.value_sentence("The enemy is on the right side of the line, from its first point to its last point."),
+    }),
+    ("measures/territory", "affiliation"): d.values({
+        "friend": "land that friendly forces hold or that is friendly to them",
+        "hostile": "land that enemy forces hold or that is hostile",
+        "neutral": "land that is neither friendly nor hostile, for example a neutral country",
     }),
     ("measures/kb", "killbox_kind"): {key: d.value_sentence(text) for key, text in measure_definition("KB")["kinds"]["values"].items()},
     ("measures/airspace", "airspace_type"): dict(AIRSPACE_TYPE_VALUES),

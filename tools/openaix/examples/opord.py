@@ -99,7 +99,7 @@ def order_channels():
 
 def task_organization():
     def unit(name, echelon, unit_type, callsign=None, parent=None, **extra):
-        value = {"name": name, "echelon": echelon, "unit_type": unit_type, "coalition": "blue", **extra}
+        value = {"name": name, "echelon": echelon, "unit_type": unit_type, "extensions": {"sim": {"dcs": {"coalition": "blue"}}}, **extra}
         if callsign:
             value["callsign"] = callsign
         if parent:
@@ -468,7 +468,7 @@ def jamming_window():
 def opord(version):
     return {"$schema": f"urn:openaix:schema:opord:{version}", "kind": "opord", "schema_version": version,
             "meta": {"id": "oir-opord", "revision": "1", "title": "OIR OPORD 26-01", "issued_at": at("1130"),
-                     "issuing_unit": "CJTF-OIR CAOC", "operation": "INHERENT RESOLVE", "classification": "UNCLASSIFIED", "coalition": "blue"},
+                     "issuing_unit": "CJTF-OIR CAOC", "operation": "INHERENT RESOLVE", "classification": "UNCLASSIFIED"},
             "order_number": "26-01", "operation_name": "INHERENT RESOLVE", "issuing_headquarters": "CJTF-OIR CAOC",
             "date_time": at("1130"), "time_zone": "Z", "effective_time": at("1200"), "period": deepcopy(PERIOD),
             "orders": deepcopy(ORDERS), "resources_ref": deepcopy(RESOURCES_REF),
@@ -481,7 +481,7 @@ def opord(version):
             "execution": execution(), "sustainment": sustainment(), "command_and_signal": command_and_signal(),
             "acknowledgement": {"acknowledge": True, "instructions": "Acknowledge on Bastion command by 1200Z."},
             "authentication": {"commander_name": "Reyes", "commander_rank": "Colonel", "authenticator_name": "Major Lin", "authenticator_position": "CAOC operations officer"},
-            "annexes": annexes(), "extensions": {**deepcopy(EXERCISE), **deepcopy(PRINT)}}
+            "annexes": annexes(), "extensions": {**deepcopy(EXERCISE), **deepcopy(PRINT), "sim": {"dcs": {"coalition": "blue"}}}}
 
 
 # ---------------------------------------------------------------------------------------------
@@ -617,8 +617,8 @@ def spins_sections():
                             {"altitude": block(11000, 13000), "use": "working", "ato_missions": ["cas-cobalt"]}],
                  "remarks": "Below 11000 feet MSL the CA applies; contact Warhawk before descent."}],
             "laser_codes": [
-                {"code": "1688", "use": "marking", "units": ["tacp-axeman"], "agencies": ["axeman"], "window": cas_window},
-                {"code": "1511", "use": "designation", "units": ["tacp-axeman"], "agencies": ["axeman"], "window": cas_window},
+                {"code": "1688", "use": "marking", "units": ["tacp-axeman"], "window": cas_window},
+                {"code": "1511", "use": "designation", "units": ["tacp-axeman"], "window": cas_window},
                 {"code": "1522", "use": "designation", "flights": ["hawg"], "window": cas_window},
                 {"code": "1611", "use": "designation", "flights": ["rage"], "window": window(at("1320"), at("1350"))},
                 {"code": "1622", "use": "designation", "flights": ["dude"], "window": deepcopy(PERIOD)},

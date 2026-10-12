@@ -90,7 +90,7 @@
       "x-catalog": "control_measures"
     },
     "geometry": {
-      "description": "This field gives the horizontal geometry of the area of responsibility: a polygon, a circle, a rectangle or an ellipse.",
+      "description": "This field gives the horizontal geometry of the area of responsibility: a polygon, a circle, a rectangle, an ellipse or a GeoJSON polygon.",
       "oneOf": [
         {
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_polygon"
@@ -103,6 +103,9 @@
         },
         {
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_ellipse"
+        },
+        {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_geojson_polygon"
         }
       ]
     },

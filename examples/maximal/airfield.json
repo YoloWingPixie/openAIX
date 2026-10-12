@@ -17,7 +17,6 @@
     }
   },
   "calm_wind_runway": "13",
-  "coalition": "blue",
   "controlling_agency": "salti-tower",
   "elevation": {
     "reference": "MSL",
@@ -34,7 +33,8 @@
             "name": "Muwaffaq Salti",
             "object_id": 44
           }
-        ]
+        ],
+        "coalition": "blue"
       }
     }
   },
@@ -70,6 +70,7 @@
       "role": "tower"
     }
   ],
+  "hung_ordnance_runway": "31",
   "id": "ojms",
   "ident": "OJMS",
   "kind": "airfield",
@@ -104,11 +105,15 @@
   },
   "pads": [
     {
-      "name": "Pad 1",
+      "name": "EOR 31",
       "position": {
-        "latitude": 34.73527,
-        "longitude": 40.225
-      }
+        "latitude": 31.826633,
+        "longitude": 36.795642
+      },
+      "use": [
+        "arm_dearm",
+        "hot_brake"
+      ]
     }
   ],
   "parking": [
@@ -429,9 +434,9 @@
           },
           "traffic_pattern": {
             "altitude": {
-              "reference": "AGL",
+              "reference": "MSL",
               "unit": "ft",
-              "value": 500
+              "value": 3600
             },
             "break_point": "approach_end",
             "categories": {
@@ -442,7 +447,23 @@
                   "value": 1500
                 },
                 "break_point": "approach_end",
+                "departure_ceiling": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 1000
+                },
                 "direction": "right",
+                "go_around": {
+                  "altitude": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 4600
+                  },
+                  "heading": {
+                    "reference": "magnetic",
+                    "value": 306
+                  }
+                },
                 "initial": [
                   {
                     "bearing": {
@@ -460,6 +481,44 @@
                   "reference": "AGL",
                   "unit": "ft",
                   "value": 2500
+                },
+                "reentry": {
+                  "altitude": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 3600
+                  },
+                  "name": "40",
+                  "point": {
+                    "id": "vrp-salti-dam",
+                    "kind": "control_measure"
+                  }
+                },
+                "sfo": {
+                  "high_key": {
+                    "lower": {
+                      "reference": "AGL",
+                      "unit": "ft",
+                      "value": 7000
+                    },
+                    "upper": {
+                      "reference": "AGL",
+                      "unit": "ft",
+                      "value": 9000
+                    }
+                  },
+                  "low_key": {
+                    "lower": {
+                      "reference": "AGL",
+                      "unit": "ft",
+                      "value": 3000
+                    },
+                    "upper": {
+                      "reference": "AGL",
+                      "unit": "ft",
+                      "value": 5000
+                    }
+                  }
                 }
               },
               "heavy": {
@@ -489,7 +548,38 @@
                 }
               }
             },
-            "direction": "right"
+            "departure_ceiling": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 1000
+            },
+            "direction": "right",
+            "sfo": {
+              "high_key": {
+                "lower": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 7000
+                },
+                "upper": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 9000
+                }
+              },
+              "low_key": {
+                "lower": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 3000
+                },
+                "upper": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 5000
+                }
+              }
+            }
           }
         }
       ],
@@ -597,6 +687,17 @@
     ]
   },
   "traffic_pattern": {
+    "go_around": {
+      "altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 4600
+      },
+      "heading": {
+        "reference": "magnetic",
+        "value": 306
+      }
+    },
     "initial": [
       {
         "distance": {
@@ -610,11 +711,23 @@
       "unit": "ft",
       "value": 3600
     },
-    "profile": "usaf-standard"
+    "profile": "usaf-standard",
+    "reentry": {
+      "altitude": {
+        "reference": "MSL",
+        "unit": "ft",
+        "value": 3600
+      },
+      "point": {
+        "id": "vrp-salti-dam",
+        "kind": "control_measure"
+      }
+    }
   },
   "transition_altitude": {
     "reference": "MSL",
     "unit": "ft",
     "value": 13000
-  }
+  },
+  "use": "military"
 }

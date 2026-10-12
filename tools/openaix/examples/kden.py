@@ -2,7 +2,7 @@
 
 The records are curated seed data in sources/kden-navigation.json; generation reads them and does not decode
 source data. The authored scenario fields (frequencies, ATIS content, the calm-wind runway, the traffic pattern,
-the coalition, the illustrative taxi subgraph and the on-field navigation aid) are plausible for a simulator;
+the DCS coalition, the illustrative taxi subgraph and the on-field navigation aid) are plausible for a simulator;
 they are not FAA publications, and the airfield extension names them.
 """
 import json
@@ -14,7 +14,7 @@ PROVENANCE = "FAA CIFP cycle 2610"
 # The KDEN examples link to one resource catalogue (examples/resources-kden.json) that holds the airfield, its
 # localizer, its instrument procedure and its navigation aid, so that the airfield links resolve offline.
 CATALOGUE_REF = {"id": "kden-navigation", "revision": "2610"}
-SCENARIO_FIELDS = {"airfield": ("coalition", "frequencies", "atis", "calm_wind_runway", "traffic_pattern", "navaids", "taxi", "extensions"),
+SCENARIO_FIELDS = {"airfield": ("frequencies", "atis", "calm_wind_runway", "traffic_pattern", "navaids", "taxi", "extensions"),
                    "navaid": ("airfield",)}
 LINKED = ("airfield", "runway", "localizer", "procedure", "msa", "path-point", "navaid")
 CATALOGUE_RECORDS = {"places": "airfield", "localizers": "localizer", "instrument_procedures": "procedure", "control_measures": "navaid"}

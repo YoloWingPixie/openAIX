@@ -113,6 +113,49 @@
       ],
       "type": "object"
     },
+    "GoAround": {
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "altitude"
+          ]
+        },
+        {
+          "required": [
+            "heading"
+          ]
+        }
+      ],
+      "description": "A go-around is the local climb-out instructions for a go-around. When the record has no heading, aircraft fly the runway heading.",
+      "properties": {
+        "altitude": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Altitude"
+            },
+            {
+              "properties": {
+                "reference": {
+                  "description": "This field gives the reference of the go-around altitude: above ground level (`AGL`) or mean sea level (`MSL`).",
+                  "enum": [
+                    "MSL",
+                    "AGL"
+                  ]
+                }
+              }
+            }
+          ],
+          "description": "This field gives the altitude to which aircraft climb on a go-around, as an altitude with its unit and reference. The reference is above ground level or mean sea level."
+        },
+        "heading": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Bearing",
+          "description": "This field gives the heading that aircraft fly on a go-around, as a bearing with its unit and reference."
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
     "InitialPoint": {
       "description": "An initial point is the start of the initial leg of an overhead pattern. It is a point with a name, or a distance and a bearing from the runway threshold.",
       "oneOf": [
@@ -156,16 +199,34 @@
     },
     "Pad": {
       "additionalProperties": false,
-      "description": "A landing pad is one helicopter or vertical landing pad.",
+      "description": "A pad is one prepared surface of the operating location: a helicopter or vertical landing pad, or a ground pad for aircraft with live ordnance or hot brakes. A pad without a use is a landing pad.",
       "properties": {
         "name": {
-          "description": "This field gives the name of this landing pad, for display.",
+          "description": "This field gives the name of this pad, for display.",
           "minLength": 1,
           "type": "string"
         },
         "position": {
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",
-          "description": "This field gives the geographic position of the centre of the landing pad, as latitude and longitude."
+          "description": "This field gives the geographic position of the centre of the pad, as latitude and longitude."
+        },
+        "use": {
+          "description": "This list contains the uses of the ground pad. One pad can have more than one use.",
+          "items": {
+            "enum": [
+              "hot_brake",
+              "hung_ordnance",
+              "arm_dearm"
+            ]
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true,
+          "x-enum-descriptions": {
+            "arm_dearm": "This value identifies an arming and disarming area at the end of the runway, where ground crews arm aircraft before take-off and disarm them after landing.",
+            "hot_brake": "This value identifies a hot brake area, where aircraft with hot brakes stop until the brakes are cool.",
+            "hung_ordnance": "This value identifies a hung ordnance area, where ground crews make safe the ordnance that did not release."
+          }
         }
       },
       "required": [
@@ -209,6 +270,25 @@
             "midfield": "The overhead break starts above the middle of the runway."
           }
         },
+        "departure_ceiling": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Altitude"
+            },
+            {
+              "properties": {
+                "reference": {
+                  "description": "This field gives the reference of the departure ceiling: above ground level (`AGL`) or mean sea level (`MSL`).",
+                  "enum": [
+                    "MSL",
+                    "AGL"
+                  ]
+                }
+              }
+            }
+          ],
+          "description": "This field gives the highest altitude for departures while aircraft use the overhead pattern, as an altitude with its unit and reference. The reference is above ground level or mean sea level."
+        },
         "direction": {
           "description": "This field gives the direction of the turns in the traffic pattern, as one of the enumerated values.",
           "enum": [
@@ -219,6 +299,10 @@
             "left": "Each turn in the pattern is a left turn.",
             "right": "Each turn in the pattern is a right turn."
           }
+        },
+        "go_around": {
+          "$ref": "#/$defs/GoAround",
+          "description": "This field gives the go-around instructions of the pattern."
         },
         "initial": {
           "description": "This list contains the initial points of the overhead pattern.",
@@ -246,9 +330,107 @@
             }
           ],
           "description": "This field gives the altitude of the initial leg and of the overhead break, as an altitude with its unit and reference. The reference is above ground level or mean sea level."
+        },
+        "reentry": {
+          "$ref": "#/$defs/Reentry",
+          "description": "This field gives the re-entry procedure of the overhead pattern."
+        },
+        "sfo": {
+          "$ref": "#/$defs/SimulatedFlameout",
+          "description": "This field gives the simulated flameout (SFO) pattern. When the record has no SFO pattern, the pattern values do not give one."
         }
       },
       "required": [],
+      "type": "object"
+    },
+    "Reentry": {
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "point"
+          ]
+        },
+        {
+          "required": [
+            "name"
+          ]
+        }
+      ],
+      "description": "A re-entry is the procedure that aircraft use to enter the overhead pattern again. It has the point or the name of the re-entry point, and its altitude.",
+      "properties": {
+        "altitude": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Altitude"
+            },
+            {
+              "properties": {
+                "reference": {
+                  "description": "This field gives the reference of the re-entry altitude: above ground level (`AGL`) or mean sea level (`MSL`).",
+                  "enum": [
+                    "MSL",
+                    "AGL"
+                  ]
+                }
+              }
+            }
+          ],
+          "description": "This field gives the altitude of the re-entry, as an altitude with its unit and reference. The reference is above ground level or mean sea level."
+        },
+        "name": {
+          "description": "This field gives the name of the re-entry point, when no point record identifies it, as free text.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "point": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection",
+          "description": "This field identifies the point at which aircraft start the re-entry.",
+          "x-measure-kinds": [
+            "POINT"
+          ]
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "SimulatedFlameout": {
+      "additionalProperties": false,
+      "description": "A simulated flameout pattern is the altitudes of the high key and the low key of a simulated flameout (SFO) pattern. The base publishes them.",
+      "properties": {
+        "high_key": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/AltitudeBlock"
+            },
+            {
+              "required": [
+                "lower",
+                "upper"
+              ]
+            }
+          ],
+          "description": "This field gives the vertical limits of the high key, as an altitude block with a floor and a ceiling. The block gives the altitudes that aircraft can use at the high key."
+        },
+        "low_key": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/AltitudeBlock"
+            },
+            {
+              "required": [
+                "lower",
+                "upper"
+              ]
+            }
+          ],
+          "description": "This field gives the vertical limits of the low key, as an altitude block with a floor and a ceiling. The block gives the altitudes that aircraft can use at the low key."
+        }
+      },
+      "required": [
+        "high_key",
+        "low_key"
+      ],
       "type": "object"
     },
     "Stand": {
@@ -398,13 +580,15 @@
             "ops",
             "pmsv",
             "unicom",
-            "marshal"
+            "marshal",
+            "final"
           ],
           "x-enum-descriptions": {
             "approach": "This value identifies the approach control. On a military airfield, it is the radar approach control (RAPCON).",
             "atis": "This value identifies the automatic terminal information service (ATIS) broadcast, which gives the weather, the active runway and other airfield information all the time.",
             "clearance_delivery": "This value identifies the clearance delivery for instrument flight rules (IFR) clearances before taxi.",
             "departure": "This value identifies the departure control. It controls instrument flight rules (IFR) flights after they take off, until the en-route centre controls them.",
+            "final": "This value identifies the final controller of a precision approach radar (PAR) approach. The final controller gives the azimuth and glide path corrections.",
             "ground": "This value identifies the ground control for the movement area.",
             "marshal": "This value identifies the carrier marshal control for recovery.",
             "ops": "This value identifies the operations desk of the unit or of the forward arming and refuelling point (FARP).",
@@ -644,6 +828,25 @@
           "required": [],
           "type": "object"
         },
+        "departure_ceiling": {
+          "allOf": [
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Altitude"
+            },
+            {
+              "properties": {
+                "reference": {
+                  "description": "This field gives the reference of the departure ceiling: above ground level (`AGL`) or mean sea level (`MSL`).",
+                  "enum": [
+                    "MSL",
+                    "AGL"
+                  ]
+                }
+              }
+            }
+          ],
+          "description": "This field gives the highest altitude for departures while aircraft use the overhead pattern, as an altitude with its unit and reference. The reference is above ground level or mean sea level."
+        },
         "direction": {
           "description": "This field gives the direction of the turns in the traffic pattern, as one of the enumerated values.",
           "enum": [
@@ -654,6 +857,10 @@
             "left": "Each turn in the pattern is a left turn.",
             "right": "Each turn in the pattern is a right turn."
           }
+        },
+        "go_around": {
+          "$ref": "#/$defs/GoAround",
+          "description": "This field gives the go-around instructions of the pattern."
         },
         "initial": {
           "description": "This list contains the initial points of the overhead pattern.",
@@ -686,6 +893,14 @@
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
           "description": "This field identifies the traffic pattern profile that gives the values that this pattern does not give.",
           "x-catalog": "pattern_profiles"
+        },
+        "reentry": {
+          "$ref": "#/$defs/Reentry",
+          "description": "This field gives the re-entry procedure of the overhead pattern."
+        },
+        "sfo": {
+          "$ref": "#/$defs/SimulatedFlameout",
+          "description": "This field gives the simulated flameout (SFO) pattern. When the record has no SFO pattern, the pattern values do not give one."
         }
       },
       "required": [],
@@ -742,7 +957,8 @@
                     },
                     "propertyNames": {
                       "enum": [
-                        "bindings"
+                        "bindings",
+                        "coalition"
                       ]
                     }
                   }
@@ -813,7 +1029,8 @@
                     },
                     "propertyNames": {
                       "enum": [
-                        "bindings"
+                        "bindings",
+                        "coalition"
                       ]
                     }
                   }
@@ -858,6 +1075,11 @@
               "required": [
                 "calm_wind_runway"
               ]
+            },
+            {
+              "required": [
+                "hung_ordnance_runway"
+              ]
             }
           ]
         },
@@ -885,7 +1107,8 @@
                     },
                     "propertyNames": {
                       "enum": [
-                        "bindings"
+                        "bindings",
+                        "coalition"
                       ]
                     }
                   }
@@ -928,10 +1151,6 @@
       "$ref": "#/$defs/Carrier",
       "description": "This field gives the data of an aircraft carrier. The data are the hull number, the Tactical Air Navigation (TACAN), the instrument carrier landing system (ICLS) channel and the case recovery data. A record with a different `kind` shall not have this field."
     },
-    "coalition": {
-      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Coalition",
-      "description": "This field gives the coalition that controls the operating location, as one of the enumerated values."
-    },
     "controlling_agency": {
       "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies the agency that controls the air traffic at the airfield.",
@@ -968,7 +1187,8 @@
                   },
                   "propertyNames": {
                     "enum": [
-                      "bindings"
+                      "bindings",
+                      "coalition"
                     ]
                   }
                 }
@@ -986,6 +1206,10 @@
       },
       "minItems": 1,
       "type": "array"
+    },
+    "hung_ordnance_runway": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/RunwayDesignator",
+      "description": "This field gives the designator of the runway end that aircraft with hung ordnance use for landing. A base publishes it in its local emergency procedures. The value shall be the designator of an end of a runway of this airfield. A `carrier` record shall not have this field."
     },
     "id": {
       "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
@@ -1105,6 +1329,19 @@
     "transition_altitude": {
       "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Altitude",
       "description": "This field gives the transition altitude, as an altitude with its unit and reference. At or below this altitude, the vertical position of an aircraft is its altitude above mean sea level."
+    },
+    "use": {
+      "description": "This field gives the use of the operating location: civil, military, or joint civil and military use, as one of the enumerated values. Aerodrome data publish it.",
+      "enum": [
+        "civil",
+        "military",
+        "joint"
+      ],
+      "x-enum-descriptions": {
+        "civil": "This value identifies an operating location for civil aviation.",
+        "joint": "This value identifies an operating location that civil aviation and armed forces use together.",
+        "military": "This value identifies an operating location of armed forces."
+      }
     }
   },
   "required": [

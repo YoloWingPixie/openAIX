@@ -244,11 +244,12 @@ define("Unit", d.entity("Unit", "one unit of the task organization of the order"
     "unit_type": (string(), d.text("type of the unit, such as `armoured infantry` or `F-16C squadron`")),
     "callsign": (string(), d.text("call sign of the unit")),
     "parent": unit_ref("is the parent of this unit in the task organization"),
-    "coalition": (common("Coalition"), d.enum("coalition of the unit")),
     "agency": agency_ref("this unit operates"),
     "position": position("the unit at the time of issue"),
     "commander": (string(), d.text("name of the commander of the unit")),
     "remarks": remarks("this unit"),
+    # The coalition of the unit is a DCS side: `extensions.sim.dcs.coalition`.
+    "extensions": (common("Extensions"), d.extension()),
 }, ("name",))
 
 define("Priority", d.entity("Priority entry", "one entry of a priority list, with a rank and the unit, area, phase or asset that it is for"), {

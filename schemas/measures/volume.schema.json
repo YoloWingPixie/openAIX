@@ -174,13 +174,15 @@
         "ALTRV",
         "RCA",
         "BZ",
-        "JEZ"
+        "JEZ",
+        "ADS"
       ],
       "x-enum-descriptions": {
         "AARA": "An air-to-air refuelling area (AARA) is airspace of defined dimensions for air-to-air refuelling operations. Other airspace users stay out of it, unless they coordinate with its controlling authority.",
         "ACAR": "An airspace control area (ACAR) is airspace with lateral limits that follow the boundaries of the area of operations. It is the basic geographic element of airspace control. It can contain airspace control sub-areas.",
         "ACCA": "An airborne command and control area (ACCA) is airspace of defined dimensions, only for aircraft that do battlefield command and control.",
         "ADIZ": "An air defence identification zone (ADIZ) is airspace of defined dimensions in which the identification, location and control of aircraft is immediately necessary.",
+        "ADS": "An air defence sector (ADS) is a geographical subdivision of an air defence region. An air defence region is a geographical subdivision of an air defence area.",
         "AEWA": "An airborne early warning area (AEWA) is airspace of defined dimensions, only for aircraft that do airborne early warning.",
         "ALTRV": "An altitude reservation (ALTRV) is a block of altitude for aircraft to transit or loiter. The altitude reservation is moving or stationary. It always has an upper and a lower limit, and it can also have lateral limits.",
         "BDZ": "A base defence zone (BDZ) is airspace around a base that increases the effectiveness of its air defence systems. Transit routes should avoid it.",

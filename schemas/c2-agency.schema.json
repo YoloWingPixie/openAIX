@@ -1,4 +1,21 @@
 {
+  "$defs": {
+    "AgencyArea": {
+      "additionalProperties": false,
+      "description": "An area selection is a reference to one planning area of the resource catalogue.",
+      "properties": {
+        "area": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
+          "description": "This field identifies the planning area that the agency covers.",
+          "x-catalog": "areas"
+        }
+      },
+      "required": [
+        "area"
+      ],
+      "type": "object"
+    }
+  },
   "$id": "urn:openaix:schema:c2-agency:0.1.0-draft.2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
@@ -9,6 +26,33 @@
       "format": "uri",
       "minLength": 1,
       "type": "string"
+    },
+    "areas": {
+      "description": "This list contains the areas that the agency covers. Each item is a polygon (an openAIX polygon or a GeoJSON polygon), a planning area or a control measure.",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_polygon"
+          },
+          {
+            "$ref": "#/$defs/AgencyArea"
+          },
+          {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/ControlMeasureSelection"
+          },
+          {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_rectangle"
+          },
+          {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_ellipse"
+          },
+          {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_geojson_polygon"
+          }
+        ]
+      },
+      "minItems": 1,
+      "type": "array"
     },
     "callsign": {
       "description": "This field gives the radio call sign of the agency, as free text.",
@@ -51,7 +95,8 @@
                   },
                   "propertyNames": {
                     "enum": [
-                      "bindings"
+                      "bindings",
+                      "coalition"
                     ]
                   }
                 }
@@ -69,6 +114,13 @@
     "kind": {
       "const": "c2-agency",
       "description": "The value identifies this record as a command and control agency."
+    },
+    "platform": {
+      "description": "This field gives the platform of the agency: on the ground (`ground`) or in an aircraft (`airborne`), as one of the enumerated values.",
+      "enum": [
+        "ground",
+        "airborne"
+      ]
     },
     "position": {
       "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/GeoPoint",

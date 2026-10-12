@@ -173,6 +173,14 @@
     "format": "pdf",
     "role": "Glossary page 12, civil search and rescue in a permissive environment; official indexed excerpt inspected"
   },
+  "dod-mil-std-2525d-2014": {
+    "publisher": "United States Department of Defense",
+    "title": "Joint Military Symbology",
+    "edition": "MIL-STD-2525D, 10 June 2014",
+    "url": "https://quicksearch.dla.mil/",
+    "format": "pdf",
+    "role": "Standard identity values friend, hostile and neutral of the territory `affiliation` (Section 5, standard identity). NATO APP-6 uses the same standard identities. No copy was downloaded or pinned"
+  },
   "ecfr-14-cfr-91-215-2026": {
     "publisher": "Office of the Federal Register",
     "title": "14 CFR 91.215, ATC transponder and altitude reporting equipment and use",
@@ -297,6 +305,22 @@
     "sha256": "432e918cf5b642baf4c8439c5602108d6b9e773319832a629d877eadf51dbc8f",
     "role": "Checked for RMZ and TMZ: Chapter 1 has no such definitions. Paragraph 2.27, page 2-17, makes States set transponder carriage requirements in defined portions of airspace. Copy published by the Swiss Federal Office of Civil Aviation"
   },
+  "icao-annex-15-2018": {
+    "publisher": "International Civil Aviation Organization",
+    "title": "Annex 15 to the Convention on International Civil Aviation: Aeronautical Information Services",
+    "edition": "Sixteenth edition, July 2018",
+    "url": "https://store.icao.int/en/annex-15-aeronautical-information-services",
+    "format": "pdf",
+    "role": "NOTAM as an aeronautical information product (Chapter 6). Cited by locator for the NOTAM contract; no copy was downloaded or pinned"
+  },
+  "icao-doc-8126": {
+    "publisher": "International Civil Aviation Organization",
+    "title": "Aeronautical Information Services Manual",
+    "edition": "Doc 8126, sixth edition, 2003",
+    "url": "https://store.icao.int/",
+    "format": "pdf",
+    "role": "NOTAM format items and the NOTAM Code of item Q (Chapter 6 and its appendices). Cited by locator for the NOTAM contract; no copy was downloaded or pinned"
+  },
   "icao-doc-8168-v2-2014": {
     "publisher": "International Civil Aviation Organization",
     "title": "Procedures for Air Navigation Services, Aircraft Operations, Volume II: Construction of Visual and Instrument Flight Procedures",
@@ -314,6 +338,22 @@
     "format": "pdf",
     "sha256": "d06e3fdd7cc2c24adcd174f997aace1b860eea6c64fbd5410be4ab2ccddae8e4",
     "role": "Path terminator names CA, CF, DF, FA, FM, RF, TF, VA, VI and VM (Abbreviations and acronyms, pages xxiii to xxv); RNAV 1 and RNAV 2 leg transitions (Volume II, Part B, Chapter 3, page II-B-3-16, item g). Copy posted by the EUROCONTROL PBN portal"
+  },
+  "ietf-rfc-7946": {
+    "publisher": "Internet Engineering Task Force",
+    "title": "The GeoJSON Format",
+    "edition": "RFC 7946, August 2016",
+    "url": "https://www.rfc-editor.org/rfc/rfc7946",
+    "format": "html",
+    "role": "GeoJSON geometry objects (section 3.1), positions with longitude first (section 3.1.1), linear rings (section 3.1.6) and bounding boxes (section 5) of the `geojson` geometry kind. No copy was downloaded or pinned"
+  },
+  "iso-3166-1-2020": {
+    "publisher": "International Organization for Standardization",
+    "title": "Codes for the representation of names of countries and their subdivisions, Part 1: Country code",
+    "edition": "ISO 3166-1:2020",
+    "url": "https://www.iso.org/standard/72482.html",
+    "format": "html",
+    "role": "Alpha-3 country codes of a territory (`countries`). Cited by name; the code list itself is not vendored"
   },
   "joint-dod-dictionary-2021": {
     "publisher": "Joint Chiefs of Staff",

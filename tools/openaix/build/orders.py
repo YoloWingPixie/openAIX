@@ -30,6 +30,9 @@ C2_AGENCY = BASE + "c2-agency:" + VERSION
 # Air Support Operations Center, Direct Air Support Center, Tactical Air Control Party, Airborne
 # Warning and Control System, Joint Terminal Attack Controller and Air Traffic Control.
 C2_ROLES = ("AOC", "CRC", "ASOC", "DASC", "TACP", "AWACS", "JTAC", "ATC")
+PLATFORMS = ("ground", "airborne")
+NOTAM = BASE + "notam:" + VERSION
+FAC = BASE + "fac:" + VERSION
 # Inline catalogue or a linked shared catalogue, never both (PLAN-04).
 INLINE_OR_LINKED = [{"required": ["resources"], "not": {"required": ["resources_ref"]}},
                     {"required": ["resources_ref"], "not": {"required": ["resources"]}}]
@@ -98,11 +101,16 @@ def canonical_ato(source):
 def c2_agency_schema():
     """One command-and-control agency definition, used directly and by resources.agencies."""
     channels = array(external("Identifier"), 1) | {"x-catalog": "channels"}
+    # An area that the agency covers: a polygon (openAIX or GeoJSON, inline), or a planning area or a control measure
+    # selected as in an ATO area selection.
+    area = {"oneOf": [external("Geometry_polygon"), {"$ref": "#/$defs/AgencyArea"}, external("ControlMeasureSelection")]}
     return {"$schema": DIALECT, "$id": C2_AGENCY, "title": "Command and control agency",
             **obj({"$schema": text(format="uri"), "id": external("Identifier"), "kind": {"const": "c2-agency"},
-                   "callsign": text(), "role": {"enum": list(C2_ROLES)}, "channels": channels,
-                   "position": external("GeoPoint"), "resources_ref": external("ResourceRef"), "extensions": external("Extensions")},
-                  ("id", "kind", "callsign", "role"))}
+                   "callsign": text(), "role": {"enum": list(C2_ROLES)}, "platform": {"enum": list(PLATFORMS)}, "channels": channels,
+                   "position": external("GeoPoint"), "areas": array(area, 1),
+                   "resources_ref": external("ResourceRef"), "extensions": external("Extensions")},
+                  ("id", "kind", "callsign", "role")),
+            "$defs": {"AgencyArea": obj({"area": external("Identifier") | {"x-catalog": "areas"}}, ("area",))}}
 
 
 def fac_schema():
@@ -112,7 +120,8 @@ def fac_schema():
     fac["properties"]["kind"] = {"const": "fac"}
     fac["properties"]["role"] = {"enum": ["fac", "jtac", "fac_a"]}
     fac["properties"]["terminal_control"] = array({"enum": ["type_1", "type_2", "type_3"]}, 1)
-    fac["properties"]["platform"] = {"enum": ["ground", "airborne"]}
+    fac["properties"].pop("areas")
+    fac.pop("$defs")
     fac["properties"]["laser_codes"] = array(external("LaserCode"))
     enrich_fac(fac, COMMON)
     return fac
@@ -157,6 +166,9 @@ def resource_schema(source):
     resource_data["properties"]["instrument_procedures"] = {"type": "object", "additionalProperties": {"$ref": BASE + "procedure:" + VERSION}}
     resource_data["properties"]["pattern_profiles"] = {"type": "object", "additionalProperties": {"$ref": AIRFIELD + "#/$defs/TrafficPattern"}}
     resource_data["properties"]["agencies"] = {"type": "object", "additionalProperties": {"$ref": C2_AGENCY}}
+    # Forward air controllers, for an ATO controller contact; an identifier is in `agencies` or in `facs`, not in both.
+    resource_data["properties"]["facs"] = {"type": "object", "additionalProperties": {"$ref": FAC}}
+    resource_data["properties"]["notams"] = {"type": "object", "additionalProperties": {"$ref": NOTAM}}
     definitions["FixedTarget"]["properties"]["aimpoints"]["additionalProperties"] = False
     for collection in resource_data["properties"].values():
         if "patternProperties" in collection:

@@ -103,18 +103,16 @@
   "Altitude": {
     "reference": "FL",
     "unit": "flight_level",
-    "value": 220
+    "value": 180
   },
   "AltitudeBlock": {
     "lower": {
-      "reference": "FL",
-      "unit": "flight_level",
-      "value": 220
+      "surface": true
     },
     "upper": {
-      "reference": "FL",
-      "unit": "flight_level",
-      "value": 260
+      "reference": "MSL",
+      "unit": "ft",
+      "value": 8000
     }
   },
   "Bearing": {
@@ -262,6 +260,7 @@
     "clsids": [
       "ALQ_184"
     ],
+    "coalition": "red",
     "label": "1",
     "payload": {
       "name": "93rd WW01 (2A88.4A.WW.2)",
@@ -319,17 +318,17 @@
         "angle_deg": 0,
         "bindings": [
           {
-            "kind": "unit",
+            "kind": "stand",
             "mission_id": "oir-syria",
-            "name": "OIR Axeman",
-            "object_id": 42,
-            "unit_type": "Hummer"
+            "name": "40",
+            "object_id": 44
           }
         ],
         "clsid": "ALQ_184",
         "clsids": [
           "ALQ_184"
         ],
+        "coalition": "blue",
         "label": "1",
         "payload": {
           "name": "93rd WW01 (2A88.4A.WW.2)",
@@ -360,6 +359,158 @@
     "unit": "MHz",
     "value": 308.475
   },
+  "GeoJSONLineString": {
+    "bbox": [
+      40.17,
+      35.21,
+      40.17,
+      35.21
+    ],
+    "coordinates": [
+      [
+        39.724,
+        34.835
+      ],
+      [
+        40.025,
+        34.855,
+        210.0
+      ]
+    ],
+    "type": "LineString"
+  },
+  "GeoJSONLinearRing": [
+    [
+      39.7,
+      34.85
+    ],
+    [
+      40.75,
+      34.85
+    ],
+    [
+      40.75,
+      35.6
+    ],
+    [
+      39.7,
+      35.6
+    ],
+    [
+      39.7,
+      34.85
+    ]
+  ],
+  "GeoJSONMultiPolygon": {
+    "bbox": [
+      40.17,
+      35.21,
+      40.17,
+      35.21
+    ],
+    "coordinates": [
+      [
+        [
+          [
+            39.7,
+            34.85
+          ],
+          [
+            40.75,
+            34.85
+          ],
+          [
+            40.75,
+            35.6
+          ],
+          [
+            39.7,
+            35.6
+          ],
+          [
+            39.7,
+            34.85
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            40.8,
+            34.4
+          ],
+          [
+            41.0,
+            34.4
+          ],
+          [
+            41.0,
+            34.6
+          ],
+          [
+            40.8,
+            34.6
+          ],
+          [
+            40.8,
+            34.4
+          ]
+        ]
+      ]
+    ],
+    "type": "MultiPolygon"
+  },
+  "GeoJSONPoint": {
+    "bbox": [
+      40.17,
+      35.21,
+      40.17,
+      35.21
+    ],
+    "coordinates": [
+      40.17,
+      35.21
+    ],
+    "type": "Point"
+  },
+  "GeoJSONPolygon": {
+    "bbox": [
+      40.17,
+      35.21,
+      40.17,
+      35.21
+    ],
+    "coordinates": [
+      [
+        [
+          37.8,
+          33.2
+        ],
+        [
+          41.0,
+          33.2
+        ],
+        [
+          41.0,
+          36.4
+        ],
+        [
+          37.8,
+          36.4
+        ],
+        [
+          37.8,
+          33.2
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "GeoJSONPosition": [
+    40.025,
+    34.855,
+    210.0
+  ],
   "GeoPoint": {
     "latitude": 31.825431,
     "longitude": 36.781257
@@ -476,6 +627,107 @@
       "unit": "nm",
       "value": 5
     }
+  },
+  "Geometry_geojson_line": {
+    "geometry": {
+      "bbox": [
+        40.17,
+        35.21,
+        40.17,
+        35.21
+      ],
+      "coordinates": [
+        [
+          39.724,
+          34.835
+        ],
+        [
+          40.025,
+          34.855,
+          210.0
+        ]
+      ],
+      "type": "LineString"
+    },
+    "kind": "geojson"
+  },
+  "Geometry_geojson_point": {
+    "geometry": {
+      "bbox": [
+        40.17,
+        35.21,
+        40.17,
+        35.21
+      ],
+      "coordinates": [
+        40.17,
+        35.21
+      ],
+      "type": "Point"
+    },
+    "kind": "geojson"
+  },
+  "Geometry_geojson_polygon": {
+    "geometry": {
+      "bbox": [
+        40.17,
+        35.21,
+        40.17,
+        35.21
+      ],
+      "coordinates": [
+        [
+          [
+            [
+              39.7,
+              34.85
+            ],
+            [
+              40.75,
+              34.85
+            ],
+            [
+              40.75,
+              35.6
+            ],
+            [
+              39.7,
+              35.6
+            ],
+            [
+              39.7,
+              34.85
+            ]
+          ]
+        ],
+        [
+          [
+            [
+              40.8,
+              34.4
+            ],
+            [
+              41.0,
+              34.4
+            ],
+            [
+              41.0,
+              34.6
+            ],
+            [
+              40.8,
+              34.6
+            ],
+            [
+              40.8,
+              34.4
+            ]
+          ]
+        ]
+      ],
+      "type": "MultiPolygon"
+    },
+    "kind": "geojson"
   },
   "Geometry_line": {
     "kind": "line",
@@ -666,6 +918,60 @@
     "value": 10000
   },
   "MeasureCatalogue": {
+    "ads-north": {
+      "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "channels": [
+        "control-uhf"
+      ],
+      "components": [
+        {
+          "geometry": {
+            "kind": "polygon",
+            "rings": [
+              [
+                {
+                  "latitude": 34.6,
+                  "longitude": 39.2
+                },
+                {
+                  "latitude": 34.6,
+                  "longitude": 41.0
+                },
+                {
+                  "latitude": 36.0,
+                  "longitude": 41.0
+                },
+                {
+                  "latitude": 36.0,
+                  "longitude": 39.2
+                },
+                {
+                  "latitude": 34.6,
+                  "longitude": 39.2
+                }
+              ]
+            ]
+          },
+          "id": "ads-north-1",
+          "lower_limit": {
+            "surface": true
+          },
+          "operation": "add",
+          "upper_limit": {
+            "unlimited": true
+          }
+        }
+      ],
+      "controlling_agency": "darkstar",
+      "description": "Northern air defence sector of the OIR air defence region, along the Euphrates valley.",
+      "id": "ads-north",
+      "name": "North sector",
+      "type": "ADS"
+    },
     "bastion-bullseye": {
       "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
       "active": {
@@ -1081,11 +1387,110 @@
       },
       "type": "NAVAID"
     },
+    "isis-held": {
+      "$schema": "urn:openaix:schema:territory:0.1.0-draft.2",
+      "active": {
+        "end": "2026-10-02T15:00:00Z",
+        "start": "2026-10-02T13:00:00Z"
+      },
+      "affiliation": "hostile",
+      "countries": [
+        "SYR"
+      ],
+      "description": "Land that ISIS holds north of the FLOT, drawn in a GIS tool: a GeoJSON multipolygon (longitude first).",
+      "extensions": {
+        "org.cjtf-oir.ato": {
+          "ato_day": "214"
+        }
+      },
+      "geometry": {
+        "geometry": {
+          "bbox": [
+            40.17,
+            35.21,
+            40.17,
+            35.21
+          ],
+          "coordinates": [
+            [
+              [
+                [
+                  39.7,
+                  34.85
+                ],
+                [
+                  40.75,
+                  34.85
+                ],
+                [
+                  40.75,
+                  35.6
+                ],
+                [
+                  39.7,
+                  35.6
+                ],
+                [
+                  39.7,
+                  34.85
+                ]
+              ]
+            ],
+            [
+              [
+                [
+                  40.8,
+                  34.4
+                ],
+                [
+                  41.0,
+                  34.4
+                ],
+                [
+                  41.0,
+                  34.6
+                ],
+                [
+                  40.8,
+                  34.6
+                ],
+                [
+                  40.8,
+                  34.4
+                ]
+              ]
+            ]
+          ],
+          "type": "MultiPolygon"
+        },
+        "kind": "geojson"
+      },
+      "id": "isis-held",
+      "name": "ISIS-held Euphrates valley",
+      "notes": "The boundary follows the FLOT; it moves when the FLOT moves.",
+      "resources_ref": {
+        "id": "oir-resources",
+        "revision": "1"
+      },
+      "type": "TERRITORY"
+    },
     "juniper": {
       "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
       "active": {
         "end": "2026-10-02T15:00:00Z",
         "start": "2026-10-02T13:00:00Z"
+      },
+      "altitude": {
+        "lower": {
+          "reference": "FL",
+          "unit": "flight_level",
+          "value": 180
+        },
+        "upper": {
+          "reference": "FL",
+          "unit": "flight_level",
+          "value": 240
+        }
       },
       "aor": "oir-aor",
       "channels": [
@@ -1252,6 +1657,7 @@
           }
         ]
       },
+      "hostile_side": "left",
       "id": "pl-brass",
       "name": "PL BRASS",
       "notes": "VHF 120.5 is the same position.",
@@ -1542,6 +1948,75 @@
       ],
       "type": "POINT"
     },
+    "vfr-salti-north": {
+      "$schema": "urn:openaix:schema:airway:0.1.0-draft.2",
+      "airway_type": "vfr",
+      "extensions": {
+        "org.cjtf-oir.ato": {
+          "ato_day": "214"
+        }
+      },
+      "id": "vfr-salti-north",
+      "ident": "SALTI NORTH",
+      "level": "low",
+      "name": "Salti north VFR route",
+      "provenance": {
+        "airac_cycle": "2610",
+        "authority": "CJTF-OIR airspace control cell",
+        "derivation": "authored"
+      },
+      "resources_ref": {
+        "id": "oir-resources",
+        "revision": "1"
+      },
+      "segments": [
+        {
+          "directional_restriction": "forward",
+          "distance": {
+            "unit": "nm",
+            "value": 5
+          },
+          "fix": {
+            "ident": "DAM",
+            "position": {
+              "latitude": 31.950627,
+              "longitude": 36.834965
+            }
+          },
+          "inbound_course": {
+            "declination_deg": 5.0,
+            "reference": "magnetic",
+            "value": 38.6
+          },
+          "maximum_altitude": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 4500
+          },
+          "minimum_altitude": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 3500
+          },
+          "outbound_course": {
+            "declination_deg": 5.0,
+            "reference": "magnetic",
+            "value": 38.6
+          }
+        },
+        {
+          "fix": {
+            "ident": "OJMS",
+            "position": {
+              "latitude": 31.825431,
+              "longitude": 36.781257
+            }
+          }
+        }
+      ],
+      "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+      "type": "AIRWAY"
+    },
     "zinc-mez": {
       "$schema": "urn:openaix:schema:measure-mez:0.1.0-draft.2",
       "active": {
@@ -1622,7 +2097,6 @@
   "Metadata": {
     "author": "CAOC airspace cell",
     "classification": "UNCLASSIFIED",
-    "coalition": "blue",
     "distribution": [
       "Darkstar",
       "Banshee",
@@ -1713,6 +2187,7 @@
       "clsids": [
         "ALQ_184"
       ],
+      "coalition": "red",
       "label": "1",
       "payload": {
         "name": "93rd WW01 (2A88.4A.WW.2)",
@@ -1748,7 +2223,7 @@
   "VerticalLimit": {
     "reference": "FL",
     "unit": "flight_level",
-    "value": 220
+    "value": 180
   },
   "WeeklyPeriod": {
     "end_day_offset": 1,

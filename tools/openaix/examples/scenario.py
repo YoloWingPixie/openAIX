@@ -10,7 +10,8 @@ from copy import deepcopy
 
 from openaix.examples.aco import (MISSION_ID, START, agencies, build_aco_example, channels, frequency, point, position,
                                   window)
-from openaix.examples.airfields import carrier, prince_hassan, farp, ojms, ojms_navigation, ojms_procedures, tacans, h4, usaf_standard
+from openaix.examples.airfields import (carrier, prince_hassan, farp, ojms, ojms_navigation, ojms_procedures, salti_vfr, tacans, h4,
+                                       tiyas, usaf_standard)
 from openaix.examples.briefs import add_briefs, brief_resources, role_missions
 from openaix.examples.measures import measures as measure_examples
 from openaix.examples.opord import order_channels, order_examples, order_measures, spins_measures
@@ -68,12 +69,16 @@ def base_resources(version):
     ip["position_description"] = "Desert road bend south-west of the Cobalt compound."
     localizers, procedure = ojms_navigation(version)
     return {
-        "places": {"ojms": ojms(), "prince-hassan": prince_hassan(), "h4": h4(), "farp-sage": farp()},
+        "places": {"ojms": ojms(), "prince-hassan": prince_hassan(), "h4": h4(), "farp-sage": farp(), "tiyas": tiyas()},
         "localizers": {localizer["id"]: localizer for localizer in localizers},
         "instrument_procedures": {record["id"]: record for record in (procedure, *ojms_procedures(version))},
         "pattern_profiles": {"usaf-standard": usaf_standard()},
         "agencies": {**agencies(), "warhawk": {"id": "warhawk", "kind": "c2-agency", "callsign": "Warhawk", "role": "ASOC",
-                                                "channels": ["cas-uhf"], "position": position(32.965, 37.794)}},
+                                                "platform": "ground", "channels": ["cas-uhf"], "position": position(32.965, 37.794),
+                                                "areas": [{"kind": "control_measure", "id": "oir-aor"}, {"area": "range-sweep"}]}},
+        # The JTAC that the CAS controller contacts name: one record, used by the ATO and by the FAC example.
+        "facs": {"axeman": fac_record()},
+        "notams": notams(),
         "channels": {**channels(),
             "tanker-uhf": {"name": "Shell boom", "frequency": frequency(276.1), "usage": "Tanker rendezvous and boom operations", "notes": "Primary tanker for the eastern stack; expect 15 minutes on the boom per two-ship."},
             "cas-uhf": {"name": "Warhawk CAS", "frequency": frequency(309.2), "usage": "CAS check-in and terminal control with Axeman", "notes": "Check in 10 nm before Dagger; Warhawk stacks CAS from 15000 feet."},
@@ -81,7 +86,8 @@ def base_resources(version):
             "strike-vhf": {"name": "Anvil package", "frequency": {"value": 138.75, "unit": "MHz", "modulation": "AM"}, "usage": "Strike package inter-flight"},
             **order_channels()},
         "routes": deepcopy(aco["routes"]),
-        "control_measures": {**deepcopy(aco["control_measures"]), "ip-silver": ip, **tacans(), **ground_measures(version)},
+        "control_measures": {**deepcopy(aco["control_measures"]), "ip-silver": ip, **tacans(), **ground_measures(version),
+                             **salti_vfr(version), **air_defense(version)},
         "areas": {
             "sweep-north": {"name": "North sweep area", "geometry": {"kind": "polygon", "rings": [[
                 position(35.235, 39.925), position(35.235, 40.525), position(35.435, 40.525), position(35.435, 39.925), position(35.235, 39.925)]]},
@@ -147,10 +153,47 @@ def base_resources(version):
         "threats": {
             "sa-6": {"kind": "air_defense", "name": "SA-6 Gainful", "system": "2K12 Kub", "area": area("recce-box"), "emitters": ["sa6-gainful"],
                      "expected_activity": "Radar emits when strike aircraft approach Cobalt.", "as_of": at("1200")},
-            "red-air-fighters": {"kind": "air", "name": "Third-party fighters", "system": "MiG-29", "area": area("red-air"),
+            "red-air-fighters": {"kind": "air", "name": "Third-party fighters", "system": "MiG-29", "area": area("red-air"), "airfield": "tiyas",
                                  "expected_activity": "Two to four aircraft can approach from the north-west between 1310Z and 1400Z."},
         },
     }
+
+
+def air_defense(version):
+    """The northern air defence sector of Darkstar and the friendly and hostile territories of the OIR picture."""
+    sector = {"$schema": f"urn:openaix:schema:measure-volume:{version}", "id": "ads-north", "name": "North sector", "type": "ADS",
+              "description": "Northern air defence sector of the OIR air defence region, along the Euphrates valley.",
+              "components": [{"id": "ads-north-1", "operation": "add",
+                              "geometry": {"kind": "polygon", "rings": [[position(34.6, 39.2), position(34.6, 41.0), position(36.0, 41.0),
+                                                                         position(36.0, 39.2), position(34.6, 39.2)]]},
+                              "lower_limit": {"surface": True}, "upper_limit": {"unlimited": True}}],
+              "controlling_agency": "darkstar", "channels": ["control-uhf"], "active": deepcopy(PERIOD)}
+    hostile = {"$schema": f"urn:openaix:schema:territory:{version}", "id": "isis-held", "name": "ISIS-held Euphrates valley",
+               "type": "TERRITORY", "affiliation": "hostile",
+               "description": "Land that ISIS holds north of the FLOT, drawn in a GIS tool: a GeoJSON multipolygon (longitude first).",
+               "geometry": {"kind": "geojson", "geometry": {"type": "MultiPolygon", "coordinates": [
+                   [[[39.7, 34.85], [40.75, 34.85], [40.75, 35.6], [39.7, 35.6], [39.7, 34.85]]],
+                   [[[40.8, 34.4], [41.0, 34.4], [41.0, 34.6], [40.8, 34.6], [40.8, 34.4]]]]}},
+               "countries": ["SYR"], "active": deepcopy(PERIOD),
+               "notes": "The boundary follows the FLOT; it moves when the FLOT moves."}
+    friendly = {"$schema": f"urn:openaix:schema:territory:{version}", "id": "jordan", "name": "Jordan", "type": "TERRITORY",
+                "affiliation": "friend", "geometry": {"kind": "polygon", "rings": [[
+                    position(31.0, 36.0), position(31.0, 38.9), position(32.3, 38.9), position(32.6, 36.0), position(31.0, 36.0)]]},
+                "countries": ["JOR"]}
+    return {"ads-north": sector, "isis-held": hostile, "jordan": friendly}
+
+
+def notams():
+    """The NOTAMs for Muwaffaq Salti that the CAOC published for the ATO day."""
+    return {"ojms-a0214": {"id": "ojms-a0214", "kind": "notam", "number": {"series": "A", "number": 214, "year": 2026}, "location": "ojms",
+                           "code": "QMRLC", "effective": window(at("1300"), at("1400")), "text": "RWY 13/31 CLSD DUE TO BAK-12 MAINT",
+                           "affects": [{"kind": "runway", "designator": "13"}, {"kind": "runway", "designator": "31"},
+                                       {"kind": "instrument_procedure", "id": "ojms-i31"}]},
+            "ojms-a0215": {"id": "ojms-a0215", "kind": "notam", "number": {"series": "A", "number": 215, "year": 2026}, "location": "ojms",
+                           "code": "QRTCA", "effective": window(at("1330"), at("1500")),
+                           "text": "TEMPO RESTRICTED AREA ACT FOR LIVE FIRING WI 5NM OF GHI", "lower": {"surface": True},
+                           "upper": {"value": 8000, "unit": "ft", "reference": "MSL"},
+                           "affects": [{"kind": "control_measure", "id": "ghi"}]}}
 
 
 # Task Force Bastion graphics and the fire support and airspace measures around it (examples/measures.py).
@@ -336,13 +379,13 @@ def ato(version):
                  "coordination": ["Push from Juniper at 1315Z.", "Weasel and Grizzly on station before Rage crosses Silver."]}]
     return {"$schema": f"urn:openaix:schema:ato:{version}", "kind": "ato", "schema_version": version,
             "meta": {"id": "oir-ato", "revision": "1", "title": "OIR Air Tasking Order", "issued_at": at("1100"),
-                     "issuing_unit": "CJTF-OIR CAOC", "operation": "INHERENT RESOLVE", "coalition": "blue", "classification": "UNCLASSIFIED"},
+                     "issuing_unit": "CJTF-OIR CAOC", "operation": "INHERENT RESOLVE", "classification": "UNCLASSIFIED"},
             "period": deepcopy(PERIOD), "resources_ref": deepcopy(RESOURCES_REF),
             "aco": {"id": "oir-aco", "revision": "2", "title": "OIR ACO"},
             "spins": {"id": "oir-spins", "revision": "1", "path": "spins.json"},
             "general_instructions": ["All times are UTC. Coalition ROE apply; positive identification before every release.",
                                      "Airspace, holding and kill-box status follow the OIR ACO; procedures follow the OIR SPINS."],
-            "packages": packages, "missions": missions, "extensions": deepcopy(EXERCISE)}
+            "packages": packages, "missions": missions, "extensions": {**deepcopy(EXERCISE), **dcs(coalition="blue")}}
 
 
 # ---------------------------------------------------------------------------------------------
@@ -393,8 +436,12 @@ def c2_agency(version):
 
 
 def fac(version):
-    return {"$schema": f"urn:openaix:schema:fac:{version}", "id": "axeman", "kind": "fac", "callsign": "Axeman 1-1", "role": "jtac",
-            "platform": "ground", "coalition": "blue", "channels": ["cas-uhf"], "position": position(35.005, 40.265),
+    return {"$schema": f"urn:openaix:schema:fac:{version}", **fac_record(), "resources_ref": deepcopy(RESOURCES_REF)}
+
+
+def fac_record():
+    return {"id": "axeman", "kind": "fac", "callsign": "Axeman 1-1", "role": "jtac",
+            "platform": "ground", "channels": ["cas-uhf"], "position": position(35.005, 40.265),
             "terminal_control": ["type_1", "type_2", "type_3"], "laser_codes": ["1688", "1511"], "default_laser_code": "1688",
             "coordinate_source": "lrf", "initial_points": [measure("ip-silver")], "egress_points": [measure("cedar")], "smoke_color": "white",
             "equipment": [
@@ -403,12 +450,8 @@ def fac(version):
                 {"id": "rangefinder", "kind": "laser_rangefinder", "name": "Handheld laser rangefinder", "quantity": 1, "available": True,
                  "max_range": {"value": 8, "unit": "km"}, "horizontal_accuracy": {"value": 10, "unit": "m"}, "vertical_accuracy": {"value": 5, "unit": "m"}},
                 {"id": "radio", "kind": "radio", "name": "Multiband manpack radio", "quantity": 2, "available": True}],
-            "resources_ref": deepcopy(RESOURCES_REF),
-            "extensions": {**dcs([{"kind": "unit", "name": "OIR Axeman", "object_id": 42, "unit_type": "Hummer", "mission_id": MISSION_ID}]),
-                           "org.vox-bellica.jtac": {"source_unit": "OIR Axeman", "group": "OIR Axeman team", "observers": ["OIR Axeman OP"],
-                                                    "search_range_m": 10000, "laser_range_m": 8000, "readback_timeout_s": 60,
-                                                    "stack": {"concurrent": False, "radius_m": 3000, "block_ft": 2000, "separation_ft": 1000,
-                                                              "slow_floor_ft": 12000, "fast_floor_ft": 16000}}}}
+            "extensions": dcs([{"kind": "unit", "name": "OIR Axeman", "object_id": 42, "unit_type": "Hummer", "mission_id": MISSION_ID}],
+                              coalition="blue")}
 
 
 def scenario_examples(version):

@@ -266,6 +266,9 @@
             },
             {
               "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_ellipse"
+            },
+            {
+              "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_geojson_polygon"
             }
           ]
         },
@@ -667,7 +670,8 @@
                       "propertyNames": {
                         "enum": [
                           "bindings",
-                          "alic_code"
+                          "alic_code",
+                          "coalition"
                         ]
                       }
                     }
@@ -779,10 +783,6 @@
           "description": "This field gives the symbol that the radar warning receiver (RWR) shows for the radar, for display, as free text.",
           "minLength": 1,
           "type": "string"
-        },
-        "side": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Coalition",
-          "description": "This field gives the coalition of the emitter, as one of the enumerated values."
         },
         "status": {
           "description": "This field gives the condition of the emitter from the last report, as one of the enumerated values.",
@@ -1319,6 +1319,16 @@
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
           "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
         },
+        "facs": {
+          "additionalProperties": {
+            "$ref": "urn:openaix:schema:fac:0.1.0-draft.2"
+          },
+          "description": "This map contains the forward air controllers. The key of each item is its identifier. A controller contact of an air tasking order (ATO) can identify a forward air controller of this map. An identifier shall not be in `agencies` and in `facs`.",
+          "propertyNames": {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier"
+          },
+          "type": "object"
+        },
         "instrument_procedures": {
           "additionalProperties": {
             "$ref": "urn:openaix:schema:procedure:0.1.0-draft.2"
@@ -1334,6 +1344,16 @@
             "$ref": "urn:openaix:schema:localizer:0.1.0-draft.2"
           },
           "description": "This map contains the localizers to which airfields and the ends of runways refer. The key of each item is its identifier.",
+          "propertyNames": {
+            "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier"
+          },
+          "type": "object"
+        },
+        "notams": {
+          "additionalProperties": {
+            "$ref": "urn:openaix:schema:notam:0.1.0-draft.2"
+          },
+          "description": "This map contains the notice to air missionses (NOTAMs) that planners write before the operation. The key of each item is its identifier.",
           "propertyNames": {
             "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier"
           },
@@ -1754,6 +1774,11 @@
     "Threat": {
       "additionalProperties": false,
       "properties": {
+        "airfield": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
+          "description": "This field identifies the operating location that is the base of the threat, for example the airfield of enemy aircraft.",
+          "x-catalog": "places"
+        },
         "area": {
           "anyOf": [
             {

@@ -114,7 +114,7 @@
       "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
     },
     "geometry": {
-      "description": "This field gives the horizontal geometry of the area on the ground or at sea: a polygon, or a radius from a centre point. The boundary follows terrain features that are easy to identify.",
+      "description": "This field gives the horizontal geometry of the area on the ground or at sea: a polygon, or a radius from a centre point. A `geojson` geometry (RFC 7946) of the same shape is also correct. The boundary follows terrain features that are easy to identify.",
       "oneOf": [
         {
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_polygon"
@@ -130,6 +130,9 @@
         },
         {
           "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_ellipse"
+        },
+        {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Geometry_geojson_polygon"
         }
       ]
     },

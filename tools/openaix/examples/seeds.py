@@ -175,6 +175,11 @@ def field_values():
     """OIR values by field name, for the fields that no curated OIR record gives."""
     return [
         {"geometry": {"kind": "point", "position": position(35.21, 40.17)}},
+        # GeoJSON geometries (RFC 7946, longitude first) from a GIS tool, with a bounding box.
+        {"geometry": {"kind": "geojson", "geometry": {"type": "Point", "coordinates": [40.17, 35.21], "bbox": [40.17, 35.21, 40.17, 35.21]}}},
+        {"geometry": {"kind": "geojson", "geometry": {"type": "LineString", "coordinates": [[39.724, 34.835], [40.025, 34.855, 210.0]]}}},
+        {"geometry": {"kind": "geojson", "geometry": {"type": "Polygon", "coordinates": [
+            [[40.1, 35.1], [40.3, 35.1], [40.3, 35.3], [40.1, 35.3], [40.1, 35.1]]]}}},
         {"geometry": {"kind": "description", "text": "Euphrates west bank from the Deir ez-Zor bridge to the Al Busayrah ferry"}},
         {"geometry": {"kind": "rectangle", "center": position(35.21, 40.17), "projection": "Syria", "dcs_angle_deg": 30,
                       "width_m": 4000, "height_m": 2000}},
@@ -278,17 +283,6 @@ def complete(name, seed, resources):
         for target in seed["targets"]:
             for location in target.get("expected_locations", []):
                 location["mgrs"] = mgrs(location["position"])
-    if name == "fac":
-        vox = seed["extensions"]["org.vox-bellica.jtac"]
-        vox.update({"voice_id": "jtac-axeman", "memory_file": "local/axeman-memory.json", "impact_window_s": 20,
-                    "precise_coords_delay_s": 30, "last_call_on_loss": True, "town_ips": True,
-                    "night": {"mode": "auto", "sun_deg": -6, "start_hour": 18, "end_hour": 5, "utc_offset_h": 3,
-                              "ir_mark": True, "snake_amplitude_m": 50, "snake_period": "4s"},
-                    "launch_warnings": {"enabled": True, "range_m": 15000, "delay_min": "2.5s", "delay_max": "6s", "coalesce": "5s"},
-                    "fah": {"laser_cone": True, "laser_cone_deg": 10, "laser_prefer_deg": 45, "observer_buffer_m": 500,
-                            "friendly_parallel_reds": 2, "valley_min_depth_m": 30, "road_max_m": 200, "terrain": True},
-                    "danger_close": {"initials": "AX"}})
-        vox["stack"].update({"helo_block_ft": 500, "helo_floor_ft": 1000})
     if name == "ato":
         flights = {flight["id"]: flight for mission in seed["missions"] for flight in mission["flights"]}
         # Rage (F-15E strike): a SCAR load as the secondary load. Weasel 2 has no serviceable Sniper pod and flies the
@@ -326,11 +320,17 @@ def complete(name, seed, resources):
         catalogue = seed.setdefault("resources", {})
         for group, keys in (("places", ("ojms",)), ("localizers", ("ojms-ils-31", "ojms-ils-26")),
                             ("instrument_procedures", tuple(ojms()["procedures"])), ("pattern_profiles", ("usaf-standard",)),
-                            ("control_measures", ("ghi", "gainful-misarc", "zinc-mez")), ("emitters", ("sa6-gainful", "sa3-zinc"))):
+                            ("control_measures", ("ghi", "gainful-misarc", "zinc-mez", "vrp-salti-dam")), ("emitters", ("sa6-gainful", "sa3-zinc"))):
             for key in keys:
                 catalogue.setdefault(group, {}).setdefault(key, deepcopy(source[group][key]))
         for key in source["agencies"]:
             catalogue.setdefault("agencies", {}).setdefault(key, deepcopy(source["agencies"][key]))
+            # The control measures and planning areas that an agency covers.
+            for area in source["agencies"][key].get("areas", []):
+                if area.get("kind") == "control_measure":
+                    catalogue["control_measures"].setdefault(area["id"], deepcopy(source["control_measures"][area["id"]]))
+                elif "area" in area:
+                    catalogue.setdefault("areas", {}).setdefault(area["area"], deepcopy(source["areas"][area["area"]]))
         for key in source["channels"]:
             catalogue.setdefault("channels", {}).setdefault(key, deepcopy(source["channels"][key]))
     return seed

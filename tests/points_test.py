@@ -10,7 +10,7 @@ from referencing import Resource
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 from openaix.build.points import build_point, point_location
-from openaix.check.validate import schemas
+from openaix.check.validate import ContractError, schemas, validate_document
 
 
 class PointTests(unittest.TestCase):
@@ -85,3 +85,24 @@ class PointTests(unittest.TestCase):
         document["position"] = {"latitude": 37.1, "longitude": -115.5}
         document["roles"] = ["gate"]
         self.assertFalse(validator.is_valid(document))
+
+    def test_visual_reporting_point_and_gate_altitude(self):
+        resources = json.loads((ROOT / "examples/resources.json").read_text())
+        vrp = resources["resources"]["control_measures"]["vrp-salti-dam"]
+        self.assertEqual(vrp["roles"], ["visual_reporting"])
+        validate_document(vrp)
+        gate = deepcopy(resources["resources"]["control_measures"]["juniper"])
+        gate["resources_ref"] = {"id": resources["meta"]["id"], "revision": resources["meta"]["revision"]}
+        self.assertIn("altitude", gate)
+        validate_document(gate, resource_document=resources)
+        gate["altitude"] = {"lower": {"value": 240, "unit": "flight_level", "reference": "FL"},
+                            "upper": {"value": 180, "unit": "flight_level", "reference": "FL"}}
+        with self.assertRaises(ContractError):
+            validate_document(gate, resource_document=resources)
+
+    def test_vfr_route_is_an_airway_type(self):
+        resources = json.loads((ROOT / "examples/resources.json").read_text())
+        route = resources["resources"]["control_measures"]["vfr-salti-north"]
+        self.assertEqual(route["airway_type"], "vfr")
+        validate_document(route)
+

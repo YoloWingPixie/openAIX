@@ -72,7 +72,9 @@ class ContractTests(unittest.TestCase):
                     "SCL", "SummaryPayload", "StationPayload", "CleanPayload"}
         # DCS-only object names became simulator bindings: `sim_bindings` and `sim_objects` (SimObjectRef).
         removed = {"Flight": {"refueling_method", "dcs_group"}, "Mission": {"briefing"}, "CargoItem": {"mass_each"},
-                   "AircraftOverride": {"dcs_unit"}, "Aimpoint": {"dcs_objects"}, "Store": {"dcs_clsid"}}
+                   "AircraftOverride": {"dcs_unit"}, "Aimpoint": {"dcs_objects"}, "Store": {"dcs_clsid"},
+                   # The coalition is a DCS side: documents carry it in `extensions.sim.dcs.coalition`.
+                   "Metadata": {"coalition"}}
         for name, definition in typed["$defs"].items():
             if name in replaced:
                 continue

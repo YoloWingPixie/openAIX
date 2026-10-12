@@ -1182,7 +1182,7 @@
     "procedures": [
       "kden-i16r"
     ],
-    "coalition": "blue",
+    "use": "civil",
     "frequencies": [
       {
         "role": "atis",
@@ -1333,14 +1333,19 @@
     "extensions": {
       "org.openaix.examples": {
         "scenario_fields": [
-          "coalition",
           "frequencies",
           "atis",
           "calm_wind_runway",
           "traffic_pattern",
           "navaids",
-          "taxi"
+          "taxi",
+          "extensions.sim.dcs.coalition"
         ]
+      },
+      "sim": {
+        "dcs": {
+          "coalition": "blue"
+        }
       }
     },
     "resources_ref": {

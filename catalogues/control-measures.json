@@ -66,7 +66,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Assembly Area",
@@ -87,7 +89,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Air-to-Air Refuelling Area",
@@ -109,7 +113,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Airspace Coordination Area",
@@ -130,7 +136,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Airspace Control Area",
@@ -151,7 +159,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Airborne Command and Control Area",
@@ -189,10 +199,42 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Air Defence Identification Zone",
+      "schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2"
+    },
+    {
+      "category": "adm",
+      "code": "ADS",
+      "definition": "An air defence sector (ADS) is a geographical subdivision of an air defence region. An air defence region is a geographical subdivision of an air defence area.",
+      "definition_source": {
+        "locator": "Glossary, Part II, page GL-7",
+        "references": [
+          {
+            "locator": "Entry air defense sector, page 11; acronym ADS, page 240",
+            "note": "The DOD Dictionary gives the same definition, with JP 3-01 as its source. An air defense region is a geographical subdivision of an air defense area (JP 3-01, page GL-7).",
+            "source": "joint-dod-dictionary-2021"
+          }
+        ],
+        "source": "joint-jp-3-01-2017"
+      },
+      "geometries": [
+        "polygon",
+        "circle",
+        "corridor",
+        "sector",
+        "polyarc",
+        "rectangle",
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
+      ],
+      "geometry_path": "components/geometry",
+      "name": "Air Defense Sector",
       "schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2"
     },
     {
@@ -225,7 +267,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Airborne Early Warning Area",
@@ -257,7 +301,8 @@
       },
       "geometries": [
         "line",
-        "corridor"
+        "corridor",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Air Route",
@@ -278,7 +323,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Altitude Reservation",
@@ -297,7 +344,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Amphibious Objective Area",
@@ -316,7 +365,9 @@
         "polygon",
         "circle",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Area of Responsibility",
@@ -384,7 +435,8 @@
         "source": "joint-jp-3-09-2019"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Battlefield Coordination Line",
@@ -405,7 +457,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Base Defence Zone",
@@ -432,7 +486,8 @@
         "source": "army-fm-3-90-2023"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Boundary",
@@ -462,7 +517,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Battle Position",
@@ -508,7 +565,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Buffer Zone",
@@ -556,7 +615,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Coordinated Air Defence Area",
@@ -577,7 +638,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Cross-Border Area",
@@ -598,7 +661,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Carrier Control Zone",
@@ -628,7 +693,8 @@
         "source": "nato-ajp-3-3-5"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Coordinated Fire Line",
@@ -664,7 +730,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Class A Airspace",
@@ -689,7 +757,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Class B Airspace",
@@ -714,7 +784,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Class C Airspace",
@@ -739,7 +811,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Class D Airspace",
@@ -765,7 +839,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Class E Airspace",
@@ -790,7 +866,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Class F Airspace",
@@ -815,7 +893,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Class G Airspace",
@@ -840,7 +920,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Crossover Zone",
@@ -878,7 +960,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Control Area",
@@ -903,7 +987,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Control Zone",
@@ -928,7 +1014,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Danger Area",
@@ -953,7 +1041,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Drop Zone",
@@ -973,7 +1063,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Engagement Area",
@@ -994,7 +1086,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Electromagnetic Combat",
@@ -1032,7 +1126,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Force Air Coordination Area",
@@ -1047,7 +1143,8 @@
         "source": "nato-ajp-3-3-5"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Forward Edge of the Battle Area",
@@ -1068,7 +1165,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Fighter Engagement Zone",
@@ -1088,7 +1187,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Free-Fire Area",
@@ -1109,7 +1210,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Flight Information Region",
@@ -1128,7 +1231,8 @@
         "source": "nato-ajp-3-3-5"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Forward Line of Own Troops",
@@ -1158,7 +1262,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Fire Support Area",
@@ -1173,7 +1279,8 @@
         "source": "nato-ajp-3-3-5"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Fire Support Coordination Line",
@@ -1241,7 +1348,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "High-Density Airspace Control Zone",
@@ -1256,7 +1365,8 @@
         "source": "nato-ajp-3-3-5"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Identification, Friend or Foe (IFF) Switch-Off Line",
@@ -1271,7 +1381,8 @@
         "source": "nato-ajp-3-3-5"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Identification, Friend or Foe (IFF) Switch-On Line",
@@ -1360,7 +1471,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Joint Engagement Zone",
@@ -1409,7 +1522,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Kill Box",
@@ -1435,7 +1550,8 @@
         "source": "army-adp-3-90-2019"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Line of Contact",
@@ -1461,7 +1577,8 @@
         "source": "army-adp-3-90-2019"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Line of Departure",
@@ -1502,7 +1619,8 @@
         "source": "army-adp-3-90-2019"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Limit of Advance",
@@ -1523,7 +1641,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Landing Zone",
@@ -1552,7 +1672,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Missile Engagement Zone",
@@ -1623,7 +1745,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Named Area of Interest",
@@ -1658,7 +1782,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "No-Fire Area",
@@ -1679,7 +1805,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "No-Fly Zone",
@@ -1710,7 +1838,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Objective",
@@ -1737,7 +1867,8 @@
         "source": "army-fm-3-90-2023"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Phase Line",
@@ -1758,7 +1889,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Prohibited Area",
@@ -1783,7 +1916,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Pickup Zone",
@@ -1804,7 +1939,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Restricted Area",
@@ -1829,7 +1966,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Reduced Coordination",
@@ -1850,7 +1989,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Reconnaissance Area",
@@ -1870,7 +2011,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Restrictive Fire Area",
@@ -1897,7 +2040,8 @@
         "source": "joint-jp-3-09-2019"
       },
       "geometries": [
-        "line"
+        "line",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Restrictive Fire Line",
@@ -1918,7 +2062,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Restricted Operating Zone",
@@ -1949,7 +2095,8 @@
       ],
       "geometries": [
         "line",
-        "corridor"
+        "corridor",
+        "geojson:LineString"
       ],
       "geometry_path": "geometry",
       "name": "Slow Aviation Assets Flight Route",
@@ -1970,7 +2117,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Safety Sector",
@@ -1992,7 +2141,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Surface-to-Air Missile Engagement Zone",
@@ -2031,7 +2182,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Ship Control Zone",
@@ -2067,7 +2220,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Surface-to-Surface Missile System",
@@ -2093,7 +2248,9 @@
         "circle",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "geometry",
       "name": "Target Area of Interest",
@@ -2129,7 +2286,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Terminal Control Area",
@@ -2199,7 +2358,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Temporary Reserved Area",
@@ -2220,7 +2381,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Training Area",
@@ -2270,7 +2433,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Temporary Segregated Area",
@@ -2291,7 +2456,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Unmanned Aircraft Area",
@@ -2312,7 +2479,9 @@
         "sector",
         "polyarc",
         "rectangle",
-        "ellipse"
+        "ellipse",
+        "geojson:Polygon",
+        "geojson:MultiPolygon"
       ],
       "geometry_path": "components/geometry",
       "name": "Weapons Free Zone",

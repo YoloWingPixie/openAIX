@@ -6947,10 +6947,6 @@
           "minLength": 1,
           "type": "string"
         },
-        "coalition": {
-          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Coalition",
-          "description": "This field gives the coalition of the unit, as one of the enumerated values."
-        },
         "commander": {
           "description": "This field gives the name of the commander of the unit, as free text.",
           "minLength": 1,
@@ -6976,6 +6972,28 @@
             "wing"
           ],
           "type": "string"
+        },
+        "extensions": {
+          "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Extensions",
+          "allOf": [
+            {
+              "properties": {
+                "sim": {
+                  "properties": {
+                    "dcs": {
+                      "properties": {},
+                      "propertyNames": {
+                        "enum": [
+                          "coalition"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "description": "This field contains extension data in groups. The namespace of each group identifies the application or standard that supplies its data. The group `sim` contains the simulator data of the record."
         },
         "name": {
           "description": "This field gives the name of this unit, for display.",

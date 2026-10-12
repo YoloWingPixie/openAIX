@@ -784,7 +784,6 @@
           }
         },
         "calm_wind_runway": "16R",
-        "coalition": "blue",
         "elevation": {
           "reference": "MSL",
           "unit": "ft",
@@ -793,14 +792,19 @@
         "extensions": {
           "org.openaix.examples": {
             "scenario_fields": [
-              "coalition",
               "frequencies",
               "atis",
               "calm_wind_runway",
               "traffic_pattern",
               "navaids",
-              "taxi"
+              "taxi",
+              "extensions.sim.dcs.coalition"
             ]
+          },
+          "sim": {
+            "dcs": {
+              "coalition": "blue"
+            }
           }
         },
         "frequencies": [
@@ -1315,7 +1319,8 @@
           "reference": "MSL",
           "unit": "ft",
           "value": 18000
-        }
+        },
+        "use": "civil"
       }
     }
   },

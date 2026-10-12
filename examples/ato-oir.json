@@ -8,6 +8,11 @@
   "extensions": {
     "org.cjtf-oir.ato": {
       "ato_day": "214"
+    },
+    "sim": {
+      "dcs": {
+        "coalition": "blue"
+      }
     }
   },
   "general_instructions": [
@@ -17,7 +22,6 @@
   "kind": "ato",
   "meta": {
     "classification": "UNCLASSIFIED",
-    "coalition": "blue",
     "id": "oir-ato",
     "issued_at": "2026-10-02T11:00:00Z",
     "issuing_unit": "CJTF-OIR CAOC",

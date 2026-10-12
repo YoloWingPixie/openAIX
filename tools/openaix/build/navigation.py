@@ -7,13 +7,16 @@ Descriptions come from describe/tables/navigation.py through describe/resolve.py
 """
 from copy import deepcopy
 
+from openaix.build.notam import schema as notam_schema
 from openaix.build.points import build_point
 from openaix.sim.bindings import sim_overlay
 
 
 AIRWAY_TYPES = {"ADVRTE": "advisory", "ARWY": "airway", "NAVRTE": "area_navigation", "ATSRTE": "air_traffic_services",
                 "CDR": "conditional"}
-ROOT_SCHEMAS = ("airfield", "runway", "localizer", "procedure", "holding", "path-point", "msa", "grid-mora")
+# Airway types without a catalogue code: a published VFR route (FAA AIM 3-5-5).
+OTHER_AIRWAY_TYPES = ("vfr",)
+ROOT_SCHEMAS = ("airfield", "runway", "localizer", "procedure", "holding", "path-point", "msa", "grid-mora", "notam")
 NAVAID_CLASSES = ("VOR", "VOR_DME", "VORTAC", "TACAN", "DME", "NDB", "ILS_DME")
 # Leg types: the 23 path terminators, named in words; sources and definitions in sources/leg-type-definitions.json.
 # The two-letter code is in each value's description, not in the data.
@@ -36,8 +39,15 @@ HOLD_LEGS = ("hold_to_altitude", "hold_to_fix", "hold_to_manual_termination")
 # to its simulator unit; a forward arming and refuelling point (FARP) has landing pads.
 AIRFIELD_KINDS = ("airfield", "carrier", "farp")
 # Station roles of an airfield frequency: the positions of FAA JO 7110.65 and openAIP airport frequency types,
-# military operations and pilot-to-metro service, and the carrier marshal of CV NATOPS.
-FREQUENCY_ROLES = ("tower", "ground", "clearance_delivery", "approach", "departure", "atis", "ops", "pmsv", "unicom", "marshal")
+# military operations and pilot-to-metro service, the carrier marshal of CV NATOPS and the final controller of a
+# precision approach radar (FAA PCG, precision approach radar).
+FREQUENCY_ROLES = ("tower", "ground", "clearance_delivery", "approach", "departure", "atis", "ops", "pmsv", "unicom", "marshal", "final")
+# Use of an operating location: civil, military, or joint civil and military use (FAA PCG, precision approach radar:
+# "joint-use civil/military locations").
+AIRFIELD_USES = ("civil", "military", "joint")
+# Uses of a ground pad: a hot brake area, a hung ordnance area and an arm and dearm area (end-of-runway) for aircraft
+# with live ordnance or hot brakes. A pad without a use is a landing pad.
+PAD_USES = ("hot_brake", "hung_ordnance", "arm_dearm")
 # Aircraft categories for traffic pattern defaults; each category has its own pattern altitudes.
 PATTERN_CATEGORIES = ("fighter", "trainer", "heavy", "helicopter")
 BREAK_POINTS = ("approach_end", "midfield", "departure_end")
@@ -125,7 +135,8 @@ def schemas(base, version, dialect, common):
 
     def schema(name, body, identifier=None):
         title = {"msa": "Minimum Safe Altitude (MSA)", "grid-mora": "Grid Minimum Off-Route Altitude (MORA)",
-                 "navaid": "Navigation aid", "path-point": "Path point"}.get(name, name.capitalize())
+                 "navaid": "Navigation aid", "path-point": "Path point",
+                 "notam": "Notice to air missions (NOTAM)"}.get(name, name.capitalize())
         # x-navigation-profile only groups these schemas under "Navigation & facilities" in the viewer.
         return {"$schema": dialect, "$id": base + (identifier or name) + ":" + version, "title": title,
                 "x-navigation-profile": name, **body}
@@ -282,7 +293,16 @@ def schemas(base, version, dialect, common):
 
     pattern_fields = {"direction": {"enum": ["left", "right"]}, "altitude": pattern_altitude(),
                       "overhead_altitude": pattern_altitude(), "break_point": {"enum": list(BREAK_POINTS)},
-                      "initial": array({"$ref": "#/$defs/InitialPoint"})}
+                      "initial": array({"$ref": "#/$defs/InitialPoint"}),
+                      # Local pattern procedures that a base publishes: re-entry, go-around, departure ceiling and the
+                      # simulated flameout (SFO) pattern with its high key and low key altitudes.
+                      "reentry": {"$ref": "#/$defs/Reentry"}, "go_around": {"$ref": "#/$defs/GoAround"},
+                      "departure_ceiling": pattern_altitude(), "sfo": {"$ref": "#/$defs/SimulatedFlameout"}}
+    reentry = obj({"point": ref("ControlMeasureSelection") | {"x-measure-kinds": ["POINT"]}, "name": text(), "altitude": pattern_altitude()},
+                  anyOf=[{"required": ["point"]}, {"required": ["name"]}])
+    go_around = obj({"altitude": pattern_altitude(), "heading": ref("Bearing")}, anyOf=[{"required": ["altitude"]}, {"required": ["heading"]}])
+    key_block = {"allOf": [ref("AltitudeBlock"), {"required": ["lower", "upper"]}]}
+    sfo = obj({"high_key": deepcopy(key_block), "low_key": deepcopy(key_block)}, ("high_key", "low_key"))
     pattern_set = obj(deepcopy(pattern_fields))
     traffic_pattern = obj({"profile": ref("Identifier", "pattern_profiles"), **deepcopy(pattern_fields),
                            "categories": obj({category: {"$ref": "#/$defs/PatternSet"} for category in PATTERN_CATEGORIES})})
@@ -301,7 +321,8 @@ def schemas(base, version, dialect, common):
     case_recovery = obj({"case": {"enum": list(RECOVERY_CASES)}, "marshal_radial": ref("Bearing"),
                          "marshal_altitude": {"allOf": [ref("Altitude"), {"properties": {"reference": {"const": "MSL"}}}]},
                          "marshal_distance": ref("Length")}, ("case",))
-    pad = obj({"name": text(), "position": ref("GeoPoint")}, ("position",))
+    pad = obj({"name": text(), "position": ref("GeoPoint"), "use": {"type": "array", "minItems": 1, "uniqueItems": True,
+                                                                   "items": {"enum": list(PAD_USES)}}}, ("position",))
     stand = obj({"id": ref("Identifier"), "name": text(), "position": ref("GeoPoint"), "heading": ref("Bearing"),
                  "category": {"enum": list(STAND_CATEGORIES)}, "helicopters": {"type": "boolean"}, "width": ref("Length"),
                  "length": ref("Length"), "shelter": {"type": "boolean"}, "ramp": text(), },
@@ -315,9 +336,10 @@ def schemas(base, version, dialect, common):
     taxi = obj({"nodes": array({"$ref": "#/$defs/TaxiNode"}, 2), "edges": array({"$ref": "#/$defs/TaxiEdge"}, 1)}, ("nodes", "edges"))
 
     airfield = root(
-        {"ident": text(), "coalition": ref("Coalition"), "operating_hours": ref("WeeklySchedule"),
+        {"ident": text(), "use": {"enum": list(AIRFIELD_USES)}, "operating_hours": ref("WeeklySchedule"),
          "position": ref("GeoPoint"), "elevation": ref("Elevation"), "magnetic_variation_deg": {"type": "number", "minimum": -180, "maximum": 180},
          "transition_altitude": ref("Altitude"), "runways": array({"$ref": base + "runway:" + version}), "calm_wind_runway": ref("RunwayDesignator"),
+         "hung_ordnance_runway": ref("RunwayDesignator"),
          "pads": array({"$ref": "#/$defs/Pad"}, 1), "parking": array({"$ref": "#/$defs/Stand"}, 1), "taxi": {"$ref": "#/$defs/TaxiGraph"}, "frequencies": array({"$ref": "#/$defs/StationFrequency"}, 1), "atis": {"$ref": "#/$defs/Atis"},
          "navaids": array(ref("ControlMeasureSelection") | {"x-measure-kinds": ["NAVAID"]}, 1),
          "localizers": array(ref("Identifier"), 1) | {"x-catalog": "localizers"},
@@ -329,17 +351,19 @@ def schemas(base, version, dialect, common):
     airfield["required"].insert(1, "kind")
     airfield["allOf"] = [
         when("kind", ["airfield"], {"required": ["position", "elevation", "runways"],
-                                    "properties": {"runways": {"minItems": 1}, "extensions": sim_overlay("fixed_airfield")},
+                                    "properties": {"runways": {"minItems": 1}, "extensions": sim_overlay("fixed_airfield", "sided")},
                                     "not": {"anyOf": [{"required": ["carrier"]}]}}),
-        when("kind", ["farp"], {"required": ["position", "elevation"], "properties": {"extensions": sim_overlay("farp")},
+        when("kind", ["farp"], {"required": ["position", "elevation"], "properties": {"extensions": sim_overlay("farp", "sided")},
                                 "not": {"anyOf": [{"required": ["carrier"]}, {"required": ["runways"]}]}}),
-        when("kind", ["carrier"], {"required": ["carrier"], "properties": {"extensions": sim_overlay("carrier")},
-                                   "not": {"anyOf": [{"required": ["runways"]}, {"required": ["pads"]}, {"required": ["calm_wind_runway"]}]}}),
+        when("kind", ["carrier"], {"required": ["carrier"], "properties": {"extensions": sim_overlay("carrier", "sided")},
+                                   "not": {"anyOf": [{"required": ["runways"]}, {"required": ["pads"]}, {"required": ["calm_wind_runway"]},
+                                                     {"required": ["hung_ordnance_runway"]}]}}),
     ]
     navigation["airfield"] = schema("airfield", {**airfield, "$defs": {
         "StationFrequency": station_frequency, "Atis": atis, "Carrier": carrier, "CaseRecovery": case_recovery, "Pad": pad,
         "Stand": stand, "TaxiGraph": taxi, "TaxiNode": taxi_node, "TaxiEdge": taxi_edge,
-        "TrafficPattern": traffic_pattern, "PatternSet": pattern_set, "InitialPoint": initial_point}})
+        "TrafficPattern": traffic_pattern, "PatternSet": pattern_set, "InitialPoint": initial_point, "Reentry": reentry,
+        "GoAround": go_around, "SimulatedFlameout": sfo}})
     navigation["localizer"] = schema("localizer", {**root(
         {"airfield": airfield_ref(), "ident": text(), "runway": ref("RunwayDesignator"), "ils_category": {"enum": list(ILS_CATEGORIES)},
          "frequency": unit("Frequency", "MHz"), "course": ref("Bearing"),
@@ -411,8 +435,9 @@ def schemas(base, version, dialect, common):
                    "directional_restriction": {"enum": ["forward", "backward"]}}, ("fix",))
     # Inline, not $defs: measure bodies are copied into the common ControlMeasure union.
     navigation["airway"] = schema("airway", root(
-        {"ident": text(), "airway_type": {"enum": list(dict.fromkeys(AIRWAY_TYPES.values()))}, "level": {"enum": ["low", "high", "both"]},
+        {"ident": text(), "airway_type": {"enum": [*dict.fromkeys(AIRWAY_TYPES.values()), *OTHER_AIRWAY_TYPES]}, "level": {"enum": ["low", "high", "both"]},
          "segments": array(segment, 2)}, ("airway_type", "segments"), measure="AIRWAY", catalogue=True))
+    navigation["notam"] = schema("notam", notam_schema(base, version, common, airfield_ref()))
     return navigation
 
 

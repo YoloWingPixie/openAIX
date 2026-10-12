@@ -63,10 +63,11 @@ ELEVATIONS = {"ojms": 1636, "prince-hassan": 2165}
 
 
 def base(identifier, name, ident, reference, elevation, frequencies, runways, **extra):
-    result = {"id": identifier, "kind": "airfield", "name": name, "ident": ident, "coalition": "blue",
+    result = {"id": identifier, "kind": "airfield", "name": name, "ident": ident, "use": "military",
               "position": reference, "elevation": feet(elevation), "magnetic_variation_deg": DECLINATION,
               "transition_altitude": feet(13000), "runways": runways, "frequencies": frequencies,
-              "extensions": dcs([{"kind": "airbase", "name": name, "mission_id": MISSION_ID}]), "source": DCS_SOURCE, **extra}
+              "extensions": dcs([{"kind": "airbase", "name": name, "mission_id": MISSION_ID}], coalition=extra.pop("coalition", "blue")),
+              "source": DCS_SOURCE, **extra}
     if identifier in NAVAIDS:
         result["navaids"] = [{"kind": "control_measure", "id": NAVAIDS[identifier]["id"]}]
     return result
@@ -88,6 +89,7 @@ BAK_12 = [{"type": "BAK_12", "distance_from_threshold": length(1500)}]
 OJMS_REFERENCE = position(31.825431, 36.781257)
 OJMS_ENDS = {"08": (31.815801, 36.766644, 79.9), "26": (31.819432, 36.790728, 259.9),
              "13": (31.841077, 36.773265, 131.1), "31": (31.825413, 36.79439, 311.1)}
+OJMS_ENDS_POSITION = {name: position(latitude, longitude) for name, (latitude, longitude, _) in OJMS_ENDS.items()}
 
 
 def ojms():
@@ -135,12 +137,18 @@ def ojms():
     return base("ojms", "Muwaffaq Salti", "OJMS", OJMS_REFERENCE, 1636,
                 [station("tower", 253.15, "Salti Tower"), station("tower", 120.5, "Salti Tower"),
                  station("ground", 253.15, "Salti Tower"), station("approach", 253.15, "Salti Tower"),
-                 station("atis", 251.85, "Salti Information"), station("pmsv", 344.6, "Salti Metro"), station("ops", 255.4, "Kingpin")],
-                runways, calm_wind_runway="13", controlling_agency="salti-tower",
+                 station("atis", 251.85, "Salti Information"), station("pmsv", 344.6, "Salti Metro"), station("ops", 255.4, "Kingpin"),
+                 station("final", 262.85, "Salti Final")],
+                runways, calm_wind_runway="13", hung_ordnance_runway="31", controlling_agency="salti-tower",
+                # End-of-runway arming and hot brake pads at the runway 31 threshold, and the hung ordnance pad.
+                pads=[{"name": "EOR 31", "position": offset(OJMS_ENDS_POSITION["31"], 41.1, 180), "use": ["arm_dearm", "hot_brake"]},
+                      {"name": "Hung ordnance pad", "position": offset(OJMS_ENDS_POSITION["31"], 221.1, 250), "use": ["hung_ordnance"]}],
                 atis={"runway_in_use": "13", "transition_level": {"value": 150, "unit": "flight_level", "reference": "FL"},
                       "remarks": ["Tower combines ground, tower and approach on 253.15 and 120.5; BAK-12 cables 1500 feet from both runway 13 and 31 thresholds.",
                                   "Transient fighters park on stands 40 and 41; shelters are at the north-west end."]},
-                traffic_pattern={"profile": "usaf-standard", "overhead_altitude": feet(3600), "initial": [{"distance": length(5, "nm")}]},
+                traffic_pattern={"profile": "usaf-standard", "overhead_altitude": feet(3600), "initial": [{"distance": length(5, "nm")}],
+                                 "reentry": {"point": {"kind": "control_measure", "id": "vrp-salti-dam"}, "altitude": feet(3600)},
+                                 "go_around": {"altitude": feet(4600), "heading": {"value": 306, "reference": "magnetic"}}},
                 localizers=["ojms-ils-31", "ojms-ils-26"],
                 procedures=["ojms-i31", "ojms-par31", "ojms-asr13", "ojms-r13", "ojms-salat1"],
                 parking=stands, taxi={"nodes": nodes, "edges": edges})
@@ -165,19 +173,44 @@ def h4():
 
 def farp():
     reference = position(34.735, 40.225)
-    return {"id": "farp-sage", "kind": "farp", "name": "Sage FARP", "coalition": "blue", "position": reference,
+    return {"id": "farp-sage", "kind": "farp", "name": "Sage FARP", "use": "military", "position": reference,
             "elevation": feet(1150), "pads": [{"name": "Pad 1", "position": offset(reference, 0, 30)},
                                               {"name": "Pad 2", "position": offset(reference, 180, 30)}],
             "frequencies": [station("ops", 41.5, "Sage Ops", "fm", "FM"), station("ops", 285.0, "Sage Ops")],
-            "controlling_agency": "banshee", "extensions": dcs([{"kind": "static", "name": "OIR Sage FARP", "mission_id": MISSION_ID}])}
+            "controlling_agency": "banshee",
+            "extensions": dcs([{"kind": "static", "name": "OIR Sage FARP", "mission_id": MISSION_ID}], coalition="blue")}
+
+
+def tiyas():
+    """Tiyas (T4), the base of the third-party fighters: a hostile airfield in the DCS Syria mission (red coalition)."""
+    ends = {"09": (34.52271, 37.6125, 89.8), "27": (34.52229, 37.6455, 269.8)}
+    return base("tiyas", "Tiyas", "OSTF", position(34.5225, 37.6297), 1797, [station("tower", 120.5, "Tiyas Tower", "vhf")],
+                [runway("tiyas", "09/27", ends, 3030, 45, 1797)], coalition="red")
+
+
+def salti_vfr(version):
+    """A visual reporting point north of Muwaffaq Salti and the published VFR route from the point to the field."""
+    dam = offset(OJMS_REFERENCE, 20, 8 * 1852)
+    vrp = {"$schema": f"urn:openaix:schema:point:{version}", "id": "vrp-salti-dam", "name": "Salti Dam", "type": "POINT",
+           "roles": ["visual_reporting"], "position": dam, "active": {"continuous": True},
+           "description": "Visual reporting point at the dam north-east of Muwaffaq Salti; the re-entry point of the overhead pattern."}
+    route = {"$schema": f"urn:openaix:schema:airway:{version}", "id": "vfr-salti-north", "type": "AIRWAY", "name": "Salti north VFR route",
+             "ident": "SALTI NORTH", "airway_type": "vfr", "level": "low",
+             "segments": [{"fix": {"ident": "DAM", "position": deepcopy(dam)}, "minimum_altitude": feet(3500), "maximum_altitude": feet(4500)},
+                          {"fix": {"ident": "OJMS", "position": deepcopy(OJMS_REFERENCE)}}]}
+    return {"vrp-salti-dam": vrp, "vfr-salti-north": route}
 
 
 def usaf_standard():
     """Named pattern profile with typical US Air Force values: overhead 500 ft above a rectangular pattern."""
     return {"direction": "left", "altitude": feet(1500, "AGL"), "overhead_altitude": feet(2000, "AGL"), "break_point": "approach_end",
             "initial": [{"distance": length(5, "nm")}],
+            "reentry": {"name": "Re-entry point", "altitude": feet(2000, "AGL")}, "go_around": {"altitude": feet(2000, "AGL")},
+            "sfo": {"high_key": {"lower": feet(7000, "AGL"), "upper": feet(9000, "AGL")},
+                    "low_key": {"lower": feet(3000, "AGL"), "upper": feet(5000, "AGL")}},
             "categories": {"trainer": {"altitude": feet(1000, "AGL"), "overhead_altitude": feet(1500, "AGL")},
-                           "helicopter": {"altitude": feet(500, "AGL")}}}
+                           "helicopter": {"altitude": feet(500, "AGL")},
+                           "heavy": {"departure_ceiling": feet(1000, "AGL"), "go_around": {"altitude": feet(2500, "AGL")}}}}
 
 
 def ojms_navigation(version):
@@ -364,10 +397,11 @@ def ojms_procedures(version):
 def carrier(version):
     """The carrier in the eastern Mediterranean: the ship unit gives the position."""
     return {"$schema": "urn:openaix:schema:airfield:" + version, "id": "cvn-72", "kind": "carrier", "name": "Abraham Lincoln",
-            "coalition": "blue", "carrier": {"hull_number": "CVN-72", "tacan": {"channel": 72, "band": "X", "identifier": "ABE"},
+            "use": "military", "carrier": {"hull_number": "CVN-72", "tacan": {"channel": 72, "band": "X", "identifier": "ABE"},
                                               "icls_channel": 12, "case_recovery": {
                 "case": "case_iii", "marshal_radial": {"value": 150, "reference": "magnetic"}, "marshal_altitude": feet(6000),
                 "marshal_distance": length(21, "nm")}},
             "frequencies": [station("tower", 308.475, "Lincoln Tower"), station("marshal", 285.675, "Lincoln Marshal"),
                             station("approach", 264.0, "Lincoln Approach"), station("departure", 254.3, "Lincoln Departure")],
-            "extensions": dcs([{"kind": "unit", "name": "OIR Abraham Lincoln", "mission_id": MISSION_ID, "unit_type": "CVN_72"}])}
+            "extensions": dcs([{"kind": "unit", "name": "OIR Abraham Lincoln", "mission_id": MISSION_ID, "unit_type": "CVN_72"}],
+                              coalition="blue")}

@@ -4,7 +4,6 @@
   "channels": [
     "cas-uhf"
   ],
-  "coalition": "blue",
   "coordinate_source": "lrf",
   "default_laser_code": "1688",
   "egress_points": [
@@ -51,62 +50,6 @@
     }
   ],
   "extensions": {
-    "org.vox-bellica.jtac": {
-      "danger_close": {
-        "initials": "AX"
-      },
-      "fah": {
-        "friendly_parallel_reds": 2,
-        "laser_cone": true,
-        "laser_cone_deg": 10,
-        "laser_prefer_deg": 45,
-        "observer_buffer_m": 500,
-        "road_max_m": 200,
-        "terrain": true,
-        "valley_min_depth_m": 30
-      },
-      "group": "OIR Axeman team",
-      "impact_window_s": 20,
-      "laser_range_m": 8000,
-      "last_call_on_loss": true,
-      "launch_warnings": {
-        "coalesce": "5s",
-        "delay_max": "6s",
-        "delay_min": "2.5s",
-        "enabled": true,
-        "range_m": 15000
-      },
-      "memory_file": "local/axeman-memory.json",
-      "night": {
-        "end_hour": 5,
-        "ir_mark": true,
-        "mode": "auto",
-        "snake_amplitude_m": 50,
-        "snake_period": "4s",
-        "start_hour": 18,
-        "sun_deg": -6,
-        "utc_offset_h": 3
-      },
-      "observers": [
-        "OIR Axeman OP"
-      ],
-      "precise_coords_delay_s": 30,
-      "readback_timeout_s": 60,
-      "search_range_m": 10000,
-      "source_unit": "OIR Axeman",
-      "stack": {
-        "block_ft": 2000,
-        "concurrent": false,
-        "fast_floor_ft": 16000,
-        "helo_block_ft": 500,
-        "helo_floor_ft": 1000,
-        "radius_m": 3000,
-        "separation_ft": 1000,
-        "slow_floor_ft": 12000
-      },
-      "town_ips": true,
-      "voice_id": "jtac-axeman"
-    },
     "sim": {
       "dcs": {
         "bindings": [
@@ -117,7 +60,8 @@
             "object_id": 42,
             "unit_type": "Hummer"
           }
-        ]
+        ],
+        "coalition": "blue"
       }
     }
   },

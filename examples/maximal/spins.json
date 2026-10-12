@@ -221,7 +221,7 @@
     "laser_codes": [
       {
         "agencies": [
-          "axeman"
+          "warhawk"
         ],
         "code": "1688",
         "units": [
@@ -672,7 +672,6 @@
   "meta": {
     "author": "CAOC airspace cell",
     "classification": "UNCLASSIFIED",
-    "coalition": "blue",
     "distribution": [
       "Darkstar",
       "Banshee",

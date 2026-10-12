@@ -43,11 +43,13 @@ POLICIES = {
     "carrier": ("unit", "airbase", *MAP_KINDS),
 }
 # DCSData keys that each kind of record can have, besides `bindings` (sim/bindings.py). Every key is a fact
-# about DCS or its mission objects; how an application uses them (for example the observers of a Vox Bellica JTAC)
-# is in the namespace of that application.
+# about DCS or its mission objects; how an application uses them is in the namespace of that application.
+# `coalition` is the DCS side of the record: a simulator fact, not real-world data.
 DATA_KEYS = {
     "aimpoint": ("bindings", "objects"),
-    "emitter": ("bindings", "alic_code"),
+    "emitter": ("bindings", "alic_code", "coalition"),
+    "sided": ("bindings", "coalition"),
+    "side": ("coalition",),
     "store": ("clsids",),
     "aircraft_type": ("type",),
     "scl": ("payload",),
@@ -151,6 +153,7 @@ def data_schema(common):
             "alic_code": {"type": "integer", "minimum": 1},
             "angle_deg": {"type": "number"},
             "projection": {"type": "string", "minLength": 1},
+            "coalition": {"$ref": common + "#/$defs/Coalition"},
         },
         "dependentRequired": {"label": ["pylon"], "clsid": ["pylon"], "settings": ["pylon"]},
     }

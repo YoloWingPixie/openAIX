@@ -434,7 +434,6 @@
         "coordinate_source",
         "laser_codes",
         "default_laser_code",
-        "observers",
         "equipment"
       ],
       "references": [
@@ -445,9 +444,66 @@
         }
       ],
       "gaps": [
-        "coordinate_source values (lrf, visual, exact) are openAIX values from the Vox Bellica coordinate model; they are not TLE categories.",
+        "coordinate_source values (lrf, visual, exact) are openAIX values for how the controller gets target coordinates; they are not TLE categories.",
         "No TLE category field is defined; no consuming application uses one.",
         "The 9-line CAS brief is the NineLineCAS definition in the OPORD and FRAGO schemas; its line order (IP or BP, heading and offset, distance, target elevation, target description, target location, mark, friendlies, egress) follows paragraph 12.c(1)-(9)."
+      ]
+    },
+    {
+      "schema": "notam",
+      "source": "icao-annex-15-2018",
+      "locator": "Chapter 6, NOTAM",
+      "evidence": "standard_format_items",
+      "verified": false,
+      "represented": [
+        "number",
+        "location",
+        "code",
+        "effective",
+        "text",
+        "lower",
+        "upper",
+        "affects"
+      ],
+      "references": [
+        {
+          "source": "icao-doc-8126",
+          "locator": "Chapter 6, NOTAM format and the NOTAM Code",
+          "note": "Item A is the location, item Q carries the NOTAM Code, items B and C the effective window, item E the text and items F and G the lower and upper limits."
+        }
+      ],
+      "gaps": [
+        "Only the basic items are represented: the NOTAM type (new, replacement, cancellation), item D schedules, the FIR, traffic, purpose and scope of item Q, and the radius are not modelled.",
+        "The locators were not re-read against a downloaded copy."
+      ]
+    },
+    {
+      "schema": "measures/territory",
+      "source": "dod-mil-std-2525d-2014",
+      "locator": "Section 5, standard identity",
+      "evidence": "standard_identity_values",
+      "verified": false,
+      "represented": [
+        "affiliation",
+        "geometry",
+        "countries"
+      ],
+      "references": [
+        {
+          "source": "iso-3166-1-2020",
+          "locator": "Alpha-3 code elements",
+          "note": "`countries` holds ISO 3166-1 alpha-3 codes, such as SYR."
+        },
+        {
+          "source": "ietf-rfc-7946",
+          "locator": "Sections 3.1.6 and 3.1.7 (Polygon, MultiPolygon)",
+          "note": "The geometry is an openAIX polygon or a GeoJSON Polygon or MultiPolygon."
+        }
+      ],
+      "gaps": [
+        "Territory is an openAIX record (owner decision): doctrine has standard identities for tracks and units, not a land-area record.",
+        "Only the identities friend, hostile and neutral are used; unknown, pending, assumed friend and suspect are not.",
+        "The locators were not re-read against a downloaded copy."
       ]
     }
   ],

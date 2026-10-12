@@ -1590,13 +1590,17 @@
       "number_of_copies": 12,
       "page_icon": "assets/oir-icon.png",
       "place_of_issue": "Muwaffaq Salti, Jordan"
+    },
+    "sim": {
+      "dcs": {
+        "coalition": "blue"
+      }
     }
   },
   "issuing_headquarters": "CJTF-OIR CAOC",
   "kind": "opord",
   "meta": {
     "classification": "UNCLASSIFIED",
-    "coalition": "blue",
     "id": "oir-opord",
     "issued_at": "2026-10-02T11:30:00Z",
     "issuing_unit": "CJTF-OIR CAOC",
@@ -2024,8 +2028,14 @@
   "task_organization": {
     "ada-btry": {
       "callsign": "Sage",
-      "coalition": "blue",
       "echelon": "platoon",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Sage SHORAD battery",
       "parent": "tf-bastion",
       "position": {
@@ -2037,8 +2047,14 @@
     "asoc-warhawk": {
       "agency": "warhawk",
       "callsign": "Warhawk",
-      "coalition": "blue",
       "echelon": "squadron",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Warhawk ASOC",
       "parent": "caoc",
       "position": {
@@ -2050,8 +2066,14 @@
     "awacs-sqn": {
       "agency": "darkstar",
       "callsign": "Darkstar",
-      "coalition": "blue",
       "echelon": "flight",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Darkstar detachment",
       "parent": "caoc",
       "unit_type": "E-3G detachment"
@@ -2059,9 +2081,15 @@
     "caoc": {
       "agency": "caoc",
       "callsign": "Kingpin",
-      "coalition": "blue",
       "commander": "Col. Reyes",
       "echelon": "wing",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "CJTF-OIR CAOC",
       "position": {
         "latitude": 31.825,
@@ -2071,48 +2099,84 @@
     },
     "cas-sqn": {
       "callsign": "Hawg",
-      "coalition": "blue",
       "echelon": "squadron",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Blue CAS squadron",
       "parent": "caoc",
       "unit_type": "A-10C squadron"
     },
     "fighter-sqn": {
       "callsign": "Dodge",
-      "coalition": "blue",
       "echelon": "squadron",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Blue fighter squadron",
       "parent": "caoc",
       "unit_type": "F-15C and F-16C squadron"
     },
     "rescue-sqn": {
       "callsign": "Pedro",
-      "coalition": "blue",
       "echelon": "squadron",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Blue rescue squadron",
       "parent": "caoc",
       "unit_type": "HH-60G squadron"
     },
     "sead-sqn": {
       "callsign": "Weasel",
-      "coalition": "blue",
       "echelon": "squadron",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Blue suppression squadron",
       "parent": "caoc",
       "unit_type": "F-16CM squadron"
     },
     "strike-sqn": {
       "callsign": "Rage",
-      "coalition": "blue",
       "echelon": "squadron",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Blue strike squadron",
       "parent": "caoc",
       "unit_type": "F-15E squadron"
     },
     "sust-det": {
       "callsign": "Sage Fuel",
-      "coalition": "blue",
       "echelon": "section",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Sage FARP detachment",
       "parent": "tf-bastion",
       "position": {
@@ -2123,8 +2187,14 @@
     },
     "tacp-axeman": {
       "callsign": "Axeman",
-      "coalition": "blue",
       "echelon": "team",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Axeman TACP",
       "parent": "tf-bastion",
       "position": {
@@ -2135,8 +2205,14 @@
     },
     "tf-basin": {
       "callsign": "Basin 6",
-      "coalition": "blue",
       "echelon": "battalion",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Task Force Basin",
       "parent": "caoc",
       "position": {
@@ -2147,8 +2223,14 @@
     },
     "tf-bastion": {
       "callsign": "Bastion 6",
-      "coalition": "blue",
       "echelon": "battalion",
+      "extensions": {
+        "sim": {
+          "dcs": {
+            "coalition": "blue"
+          }
+        }
+      },
       "name": "Task Force Bastion",
       "parent": "caoc",
       "position": {

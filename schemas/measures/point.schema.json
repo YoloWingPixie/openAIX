@@ -7,7 +7,7 @@
       "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/PointLocation"
     }
   ],
-  "description": "A point is a position with a name, for navigation or control. The roles tell how aircraft use the point, for example for ingress, egress, initial approach, contact point and handover. The air reference points of Annex B (`ACP`, `CP`, `EG`, `HG`, `MG`, `ISP`) are points with the applicable role. The initial point, the bullseye, a target reference point and a fire support station are also points with the applicable role.",
+  "description": "A point is a position with a name, for navigation or control. The roles tell how aircraft use the point, for example for ingress, egress, initial approach, contact point and handover. The air reference points of Annex B (`ACP`, `CP`, `EG`, `HG`, `MG`, `ISP`) are points with the applicable role. The initial point, the bullseye, a target reference point and a fire support station are also points with the applicable role. A charted reporting point for visual flight rules (VFR) flights is a point with the role `visual_reporting`.",
   "properties": {
     "$schema": {
       "description": "This field identifies the schema that validates this document.",
@@ -16,6 +16,10 @@
     "active": {
       "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Activation",
       "description": "This field gives the time interval during which this point is active. The value is an interval with a start and an end, a schedule for each week, or continuous activation."
+    },
+    "altitude": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/AltitudeBlock",
+      "description": "This field gives the vertical limits of the point, as an altitude block with a floor and a ceiling. An example is the altitude block of an entry or exit gate in an airspace control order (ACO)."
     },
     "aor": {
       "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
@@ -153,7 +157,8 @@
           "bullseye",
           "fix",
           "target_reference",
-          "fire_support_station"
+          "fire_support_station",
+          "visual_reporting"
         ]
       },
       "minItems": 1,

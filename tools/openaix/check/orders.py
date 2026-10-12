@@ -1,4 +1,5 @@
-"""Order semantic checks: ATO identifiers and mission numbers, ACO assignments, and the order-local catalogues of
+"""Order semantic checks: ATO identifiers and mission numbers, ACO assignments, the controllers (agencies and FACs)
+and the order-local catalogues of
 OPORD references (units, phases, requirements, decision points, command posts, organizations, enemy units and
 protected sites).
 
@@ -53,9 +54,19 @@ def order_catalogues(document):
     return result
 
 
+def controllers(resources):
+    """Command and control agencies and forward air controllers: the controllers that an ATO controller contact names.
+    An identifier is in one of the two catalogues only."""
+    agencies, facs = resources.get("agencies") or {}, resources.get("facs") or {}
+    for identifier in facs:
+        if identifier in agencies:
+            raise ContractError(pointer(("resources", "facs", identifier)), "identifier of a FAC is also an agency identifier")
+    return {**agencies, **facs}
+
+
 def catalogues(document, resources):
     """Unique ATO missions, packages and flights and the OPORD-local catalogues, used to resolve x-catalog references."""
-    result = {}
+    result = {"controllers": controllers(resources)}
     if document.get("kind") == "opord":
         result.update(order_catalogues(document))
     if document.get("kind") == "ato":

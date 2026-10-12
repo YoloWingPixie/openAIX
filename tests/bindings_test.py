@@ -246,7 +246,7 @@ class BindingTests(unittest.TestCase):
                 for key, value in node.items():
                     if key == "properties" and isinstance(value, dict):
                         yield from value
-                    if key not in ("extensions", "SimData", "DCSData", "DCSObjectRef", "VoxJTACSettings"):
+                    if key not in ("extensions", "SimData", "DCSData", "DCSObjectRef"):
                         yield from fields(value)
             elif isinstance(node, list):
                 for item in node:
@@ -264,7 +264,7 @@ class SimulatorProfileTests(unittest.TestCase):
         """Every DCSData key is a fact about DCS or a mission object; application settings are in their own namespace."""
         records, _ = schemas()
         self.assertEqual(sorted(records["common"]["$defs"]["DCSData"]["properties"]),
-                         ["alic_code", "angle_deg", "bindings", "clsid", "clsids", "label", "objects", "payload",
+                         ["alic_code", "angle_deg", "bindings", "clsid", "clsids", "coalition", "label", "objects", "payload",
                           "projection", "pylon", "settings", "type"])
         self.assertEqual(sorted(records["common"]["$defs"]["DCSObjectRef"]["properties"]),
                          ["angle_deg", "closed", "group_category", "icon", "kind", "layer", "line_mode", "mission_id", "name",

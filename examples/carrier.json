@@ -25,7 +25,6 @@
       "identifier": "ABE"
     }
   },
-  "coalition": "blue",
   "extensions": {
     "sim": {
       "dcs": {
@@ -36,7 +35,8 @@
             "name": "OIR Abraham Lincoln",
             "unit_type": "CVN_72"
           }
-        ]
+        ],
+        "coalition": "blue"
       }
     }
   },
@@ -84,5 +84,6 @@
   ],
   "id": "cvn-72",
   "kind": "carrier",
-  "name": "Abraham Lincoln"
+  "name": "Abraham Lincoln",
+  "use": "military"
 }

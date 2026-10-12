@@ -91,7 +91,19 @@
               "value": 1500
             },
             "break_point": "approach_end",
+            "departure_ceiling": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 1000
+            },
             "direction": "right",
+            "go_around": {
+              "altitude": {
+                "reference": "AGL",
+                "unit": "ft",
+                "value": 2000
+              }
+            },
             "initial": [
               {
                 "distance": {
@@ -104,6 +116,40 @@
               "reference": "AGL",
               "unit": "ft",
               "value": 2500
+            },
+            "reentry": {
+              "altitude": {
+                "reference": "AGL",
+                "unit": "ft",
+                "value": 2000
+              },
+              "name": "Re-entry point"
+            },
+            "sfo": {
+              "high_key": {
+                "lower": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 7000
+                },
+                "upper": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 9000
+                }
+              },
+              "low_key": {
+                "lower": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 3000
+                },
+                "upper": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 5000
+                }
+              }
             }
           },
           "heavy": {
@@ -133,7 +179,24 @@
             }
           }
         },
+        "departure_ceiling": {
+          "reference": "AGL",
+          "unit": "ft",
+          "value": 1000
+        },
         "direction": "right",
+        "go_around": {
+          "altitude": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 2000
+          },
+          "heading": {
+            "declination_deg": 5.0,
+            "reference": "magnetic",
+            "value": 126.1
+          }
+        },
         "initial": [
           {
             "bearing": {
@@ -152,7 +215,45 @@
           "unit": "ft",
           "value": 3600
         },
-        "profile": "usaf-standard"
+        "profile": "usaf-standard",
+        "reentry": {
+          "altitude": {
+            "reference": "AGL",
+            "unit": "ft",
+            "value": 2000
+          },
+          "name": "Re-entry point",
+          "point": {
+            "id": "vrp-salti-dam",
+            "kind": "control_measure"
+          }
+        },
+        "sfo": {
+          "high_key": {
+            "lower": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 7000
+            },
+            "upper": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 9000
+            }
+          },
+          "low_key": {
+            "lower": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 3000
+            },
+            "upper": {
+              "reference": "AGL",
+              "unit": "ft",
+              "value": 5000
+            }
+          }
+        }
       }
     }
   ],

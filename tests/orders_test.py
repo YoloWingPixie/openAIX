@@ -171,7 +171,6 @@ class OrderTests(unittest.TestCase):
         records = schemas()[0]
         for name in ("ato", "aco", "resources", "opord", "frago", "spins", "tst", "jiptl", "c2-agency", "fac"):
             schema = deepcopy(records[name])
-            schema.get("$defs", {}).pop("VoxJTACSettings", None)
             found = []
 
             def visit(node, path):
@@ -321,6 +320,105 @@ class OirGroundTests(unittest.TestCase):
         ca = self.resources["bastion-ca"]
         self.assertEqual((ca["type"], ca["geometry"]["level"]["reference"]), ("CA", "MSL"))
         self.assertEqual(self.opord["execution"]["schemes"]["airspace_control"]["coordinating_altitude"], "bastion-ca")
+
+
+
+class ControllerAndAgencyTests(unittest.TestCase):
+    def setUp(self):
+        self.resources = example("resources")
+        self.ato = example("ato-oir")
+
+    def test_controller_contact_names_a_fac_of_the_catalogue(self):
+        catalogue = self.resources["resources"]
+        self.assertIn("axeman", catalogue["facs"])
+        self.assertNotIn("axeman", catalogue["agencies"])
+        contacts = [contact["agency"] for mission in self.ato["missions"]
+                    for contact in mission["tasking"].get("brief", {}).get("controllers", [])]
+        self.assertIn("axeman", contacts)
+        validate_document(self.ato, resource_document=self.resources)
+
+    def test_identifiers_are_unique_across_agencies_and_facs(self):
+        resources = deepcopy(self.resources)
+        resources["resources"]["agencies"]["axeman"] = {"id": "axeman", "kind": "c2-agency", "callsign": "Axeman", "role": "JTAC"}
+        with self.assertRaises(ContractError) as error:
+            validate_document(resources)
+        self.assertEqual(error.exception.path, "/resources/facs/axeman")
+
+    def test_a_fac_is_not_an_agency_for_other_references(self):
+        ato = deepcopy(self.ato)
+
+        def agency_controls(node):
+            if isinstance(node, dict):
+                if node.get("kind") == "agency" and "agency" in node:
+                    yield node
+                for child in node.values():
+                    yield from agency_controls(child)
+            elif isinstance(node, list):
+                for child in node:
+                    yield from agency_controls(child)
+
+        control = next(agency_controls(ato["missions"]))
+        control["agency"] = "axeman"
+        with self.assertRaises(ContractError) as error:
+            validate_document(ato, resource_document=self.resources)
+        self.assertIn("unresolved agencies reference", error.exception.code)
+
+    def test_agency_platform_and_areas(self):
+        agencies = self.resources["resources"]["agencies"]
+        self.assertEqual(agencies["darkstar"]["platform"], "airborne")
+        self.assertEqual(agencies["darkstar"]["areas"][0]["kind"], "geojson")
+        warhawk = example("c2-agency")
+        self.assertEqual(warhawk["platform"], "ground")
+        validate_document(warhawk, resource_document=self.resources)
+        polygon = {"kind": "polygon", "rings": [[{"latitude": 34.6, "longitude": 39.2}, {"latitude": 34.6, "longitude": 41.0},
+                                                {"latitude": 36.0, "longitude": 41.0}, {"latitude": 34.6, "longitude": 39.2}]]}
+        validate_document({**warhawk, "areas": [polygon]}, resource_document=self.resources)
+        for areas in ([{"area": "no-such-area"}], [{"kind": "control_measure", "id": "no-such-measure"}], [],
+                      [{"kind": "circle", "center": {"latitude": 34.6, "longitude": 39.2}, "radius": {"value": 5, "unit": "nm"}}]):
+            with self.subTest(areas=areas), self.assertRaises(ContractError):
+                validate_document({**warhawk, "areas": areas}, resource_document=self.resources)
+        with self.assertRaises(ContractError):
+            validate_document({**warhawk, "platform": "naval"}, resource_document=self.resources)
+
+    def test_threat_names_its_airfield(self):
+        threat = self.resources["resources"]["threats"]["red-air-fighters"]
+        self.assertEqual(threat["airfield"], "tiyas")
+        self.assertEqual(self.resources["resources"]["places"]["tiyas"]["extensions"]["sim"]["dcs"]["coalition"], "red")
+        resources = deepcopy(self.resources)
+        resources["resources"]["threats"]["red-air-fighters"]["airfield"] = "mozdok"
+        with self.assertRaises(ContractError):
+            validate_document(resources)
+
+    def test_documents_carry_their_coalition_as_dcs_data(self):
+        for name in ("ato-oir", "aco-oir.maximal", "opord"):
+            document = example(name)
+            with self.subTest(document=name):
+                self.assertNotIn("coalition", document["meta"])
+                self.assertEqual(document["extensions"]["sim"]["dcs"]["coalition"], "blue")
+
+    def test_no_core_record_has_a_coalition_field(self):
+        records, _ = schemas()
+
+        def fields(node):
+            if isinstance(node, dict):
+                for key, value in node.items():
+                    if key == "properties" and isinstance(value, dict):
+                        yield from value
+                    if key not in ("DCSData", "SimData"):
+                        yield from fields(value)
+            elif isinstance(node, list):
+                for item in node:
+                    yield from fields(item)
+
+        for name, schema in records.items():
+            with self.subTest(schema=name):
+                self.assertNotIn("coalition", set(fields(schema)))
+        unit = next(iter(example("opord")["task_organization"].values()))
+        self.assertEqual(unit["extensions"]["sim"]["dcs"], {"coalition": "blue"})
+        opord = example("opord")
+        next(iter(opord["task_organization"].values()))["extensions"]["sim"]["dcs"]["bindings"] = [{"kind": "group", "name": "OIR TF"}]
+        with self.assertRaises(ContractError):
+            validate_document(opord, resource_document=example("resources"), linked={"oir-ato": example("ato-oir")})
 
 
 if __name__ == "__main__":

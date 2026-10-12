@@ -10,7 +10,8 @@ from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 from openaix.build.airspace_types import TYPES as AIRSPACE_TYPES
-from openaix.build.common import BASE, COMMON, DIALECT, GEOMETRY_NAMES, VERSION, external, geometry_example
+from openaix.build.common import (BASE, COMMON, DIALECT, GEOJSON_SHAPES, GEOMETRY_NAMES, VERSION, external,
+                                  geometry_example)
 from openaix.build.spatial import coordination_fields, root_fields
 from openaix.describe import templates as d
 from openaix.describe.resolve import schema_description
@@ -23,7 +24,7 @@ from openaix.examples.measures import measures as authored_examples
 SHARED_CODES = {
     "volume": ("AARA", "ACCA", "AEWA", "ACAR", "CBA", "DZ", "EC", "FACA", "HIDACZ", "LZ", "NFZ", "PZ", "RECCE", "ROZ",
                "SSMS", "TRA", "TSA", "TRNG", "UAA", "ADIZ", "BDZ", "CADA", "FEZ", "WFZ", "CCZONE", "COZ", "SAFES", "SCZ",
-               "ALTRV", "RCA", "BZ", "JEZ"),
+               "ALTRV", "RCA", "BZ", "JEZ", "ADS"),
     "route": ("AIRRTE", "LLTR", "SAAFR", "SC", "TMRR", "TC", "TR", "SL", "APPCOR", "MRR", "AIRCOR"),
     "line": ("FEBA", "FLOT", "IFFON", "IFFOFF", "PL", "BOUNDARY", "LOA", "LD", "LC"),
     "fire-support-line": ("FSCL", "CFL", "RFL", "BCL"),
@@ -55,7 +56,11 @@ PROJECTIONS = {
     "CDR": ("airway", {"type": "AIRWAY", "airway_type": "conditional"}),
     "SAMEZ": ("mez", {"type": "MEZ"}),
 }
-PLAIN_SCHEMAS = ("orbit", "airspace", "point", "navaid", "airway")
+PLAIN_SCHEMAS = ("orbit", "airspace", "point", "navaid", "airway", "territory")
+# Affiliations of a territory: the standard identities friend, hostile and neutral of MIL-STD-2525 and APP-6.
+AFFILIATIONS = ("friend", "hostile", "neutral")
+# ISO 3166-1 alpha-3 country code.
+COUNTRY_CODE = r"^[A-Z]{3}$"
 
 
 def schema_id(name):
@@ -134,7 +139,8 @@ def build_contracts():
         "route": ({**coordination, "geometry": geometry("line", "corridor"), "altitude": ref("AltitudeBlock")}, ["geometry", "altitude"],
                   [{"if": {"properties": {"type": {"enum": list(CORRIDOR_CODES)}}, "required": ["type"]},
                     "then": {"properties": {"geometry": ref("Geometry_corridor")}}}]),
-        "line": ({"geometry": geometry("line"), **authority}, ["geometry"], []),
+        # The hostile side is to the left or to the right of the line, in the order of its points.
+        "line": ({"geometry": geometry("line"), "hostile_side": {"enum": ["left", "right"]}, **authority}, ["geometry"], []),
         "fire-support-line": ({"geometry": geometry("line"), **authority}, ["geometry"], []),
         "area": ({"geometry": geometry("polygon", "circle", "polyarc"), **authority, "restrictions": texts()}, ["geometry"],
                  [{"if": {"properties": {"type": {"const": "RFA"}}, "required": ["type"]}, "then": {"required": ["restrictions"]}}]),
@@ -170,7 +176,19 @@ def build_contracts():
         if conditions:
             schema["allOf"] = conditions
         schemas["schemas/measures/" + name + ".schema.json"] = schema
+    schemas["schemas/measures/territory.schema.json"] = territory_contract(root)
     return schemas
+
+
+def territory_contract(root):
+    """Territory: a friendly, hostile or neutral land area with a required shape and optional country codes. It has
+    no vertical limits and no catalogue code."""
+    countries = {"type": "array", "minItems": 1, "uniqueItems": True, "items": {"type": "string", "pattern": COUNTRY_CODE}}
+    return {"$schema": DIALECT, "$id": schema_id("territory"), "title": "Territory", "description": schema_description("measures/territory"),
+            "type": "object", "additionalProperties": False,
+            "properties": {**deepcopy(root), "type": {"const": "TERRITORY"}, "affiliation": {"enum": list(AFFILIATIONS)},
+                           "geometry": {"oneOf": [external("Geometry_polygon")]}, "countries": countries},
+            "required": ["id", "name", "type", "affiliation", "geometry"]}
 
 
 def seed_measure_examples(cat):
@@ -215,16 +233,28 @@ def airspace_type_sources():
     return result
 
 
+# Geometries that a contract accepts together with an openAIX shape: the exact DCS rectangle and ellipse with a polygon,
+# and the GeoJSON geometry of each shape (build/common.py GEOJSON_SHAPES).
+EXTENDED_SHAPES = {"polygon": ("rectangle", "ellipse", "geojson_polygon"), "line": ("geojson_line",), "point": ("geojson_point",)}
+
+
 def extend_area_geometry(node):
     if isinstance(node, dict):
+        for name, child in (node.get("properties") or {}).items():
+            # A field that takes one shape becomes a choice, so that it can take the GeoJSON geometry too.
+            if isinstance(child, dict) and set(child) <= {"$ref", "description"} and any(
+                    child.get("$ref", "").endswith("#/$defs/Geometry_" + shape) for shape in EXTENDED_SHAPES):
+                node["properties"][name] = {"oneOf": [{"$ref": child["$ref"]}], **({"description": child["description"]} if "description" in child else {})}
         for keyword in ("oneOf", "anyOf"):
             branches = node.get(keyword, [])
-            if any(branch.get("$ref", "").endswith("#/$defs/Geometry_polygon") for branch in branches):
-                existing = {COMMON + branch["$ref"] if branch.get("$ref", "").startswith("#") else branch.get("$ref") for branch in branches}
-                for name in ("rectangle", "ellipse"):
-                    reference = COMMON + "#/$defs/Geometry_" + name
-                    if reference not in existing:
-                        branches.append({"$ref": reference})
+            existing = {COMMON + branch["$ref"] if branch.get("$ref", "").startswith("#") else branch.get("$ref") for branch in branches}
+            for shape, additions in EXTENDED_SHAPES.items():
+                if COMMON + "#/$defs/Geometry_" + shape in existing:
+                    for name in additions:
+                        reference = COMMON + "#/$defs/Geometry_" + name
+                        if reference not in existing:
+                            branches.append({"$ref": reference})
+                            existing.add(reference)
         for value in node.values():
             extend_area_geometry(value)
     elif isinstance(node, list):
@@ -238,7 +268,17 @@ def probe_geometries():
     center = {"latitude": 37.1, "longitude": -115.5}
     result["rectangle"] = {"kind": "rectangle", "center": center, "width_m": 2000, "height_m": 1000}
     result["ellipse"] = {"kind": "ellipse", "center": center, "north_radius_m": 1000, "east_radius_m": 500}
+    result.update(geojson_probes())
     return result
+
+
+def geojson_probes():
+    """One `geojson` geometry of each GeoJSON type, keyed `geojson:<type>`."""
+    a, b, c = [-115.5, 37.1], [-115.4, 36.9], [-115.7, 37.0]
+    ring = [a, b, c, a]
+    coordinates = {"Point": a, "LineString": [a, b], "Polygon": [ring], "MultiPolygon": [[ring]]}
+    return {"geojson:" + name: {"kind": "geojson", "geometry": {"type": name, "coordinates": deepcopy(value)}}
+            for types in GEOJSON_SHAPES.values() for name in types for value in (coordinates[name],)}
 
 
 def with_geometry(document, geometry):

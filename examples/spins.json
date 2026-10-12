@@ -247,9 +247,6 @@
   "cas": {
     "laser_codes": [
       {
-        "agencies": [
-          "axeman"
-        ],
         "code": "1688",
         "units": [
           "tacp-axeman"
@@ -261,9 +258,6 @@
         }
       },
       {
-        "agencies": [
-          "axeman"
-        ],
         "code": "1511",
         "units": [
           "tacp-axeman"

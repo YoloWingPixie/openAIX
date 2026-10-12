@@ -3,8 +3,12 @@ from copy import deepcopy
 from openaix.describe.resolve import schema_description
 
 
+# `visual_reporting`: a charted reporting point for flights under visual flight rules. A reporting point is a
+# specified geographical location in relation to which the position of an aircraft can be reported (ICAO Annex 11,
+# Chapter 1).
 POINT_ROLES = ("control", "initial", "ingress", "egress", "gate", "handover",
-               "marshalling", "identification_safety", "bullseye", "fix", "target_reference", "fire_support_station")
+               "marshalling", "identification_safety", "bullseye", "fix", "target_reference", "fire_support_station",
+               "visual_reporting")
 
 
 def point_location(common):
@@ -55,6 +59,8 @@ def build_point(skeleton, base, version, common):
     schema["required"] = ["id", "name", "type", "roles", "active"]
     properties["type"] = {"const": "POINT"}
     properties["roles"] = {"type": "array", "minItems": 1, "uniqueItems": True, "items": {"enum": list(POINT_ROLES)}}
+    # The altitude block of a point, for example of an entry or exit gate in an ACO.
+    properties["altitude"] = {"$ref": common + "#/$defs/AltitudeBlock"}
     for name, node in control_fields(common).items():
         properties.setdefault(name, node)
     return schema

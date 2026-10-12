@@ -26,6 +26,7 @@
       }
     ]
   },
+  "hostile_side": "left",
   "id": "oir-flot",
   "name": "OIR FLOT",
   "type": "FLOT"

@@ -63,6 +63,7 @@ def _record(schema, subject, kind=True, resources=True):
 
 
 AIRFIELD = d.reference("airfield of this record", None, "An example is `kden`")
+LIMIT_ANY = "an altitude with its reference, the surface or no limit"
 
 
 def _altitude_constraint(context, of):
@@ -116,7 +117,14 @@ DESCRIPTIONS = {
         "This field gives the data of an aircraft carrier.",
         "The data are the hull number, the TACAN, the ICLS channel and the case recovery data",
         d.enforced("A record with a different `kind` shall not have this field", "schema:not")),
-    ("airfield", "coalition"): d.enum("coalition that controls the operating location"),
+    ("airfield", "use"): d.enum("use of the operating location: civil, military, or joint civil and military use",
+                                "Aerodrome data publish it"),
+    ("airfield", "hung_ordnance_runway"): d.statement(
+        "This field gives the designator of the runway end that aircraft with hung ordnance use for landing.",
+        "A base publishes it in its local emergency procedures",
+        d.enforced("The value shall be the designator of an end of a runway of this airfield",
+                   "validator:openaix.check.navigation.runway_end_references"),
+        d.enforced("A `carrier` record shall not have this field", "schema:not")),
     ("airfield", "controlling_agency"): d.reference("agency", "controls the air traffic at the airfield"),
     ("airfield", "sim"): d.statement(
         "This field identifies the native object in a simulator for this operating location.",
@@ -252,9 +260,12 @@ DESCRIPTIONS = {
                    "validator:openaix.check.navigation.runway_end_references")),
     ("TaxiEdge", "width"): d.quantity("width of the taxiway of the edge", "Length"),
 
-    ("Pad", None): d.entity("Landing pad", "one helicopter or vertical landing pad"),
-    ("Pad", "name"): d.name("landing pad"),
-    ("Pad", "position"): d.position("the centre of the landing pad"),
+    ("Pad", None): d.entity("Pad", "one prepared surface of the operating location: a helicopter or vertical landing pad, "
+                            "or a ground pad for aircraft with live ordnance or hot brakes",
+                            "A pad without a use is a landing pad"),
+    ("Pad", "name"): d.name("pad"),
+    ("Pad", "position"): d.position("the centre of the pad"),
+    ("Pad", "use"): d.list_of("uses of the ground pad", None, "One pad can have more than one use"),
 
     ("TrafficPattern", None): d.entity(
         "Traffic pattern", "a set of pattern values, with more values for each aircraft category",
@@ -271,6 +282,25 @@ DESCRIPTIONS = {
         "traffic pattern profile", "gives the values that this pattern does not give"),
     ("PatternSet", None): d.entity("Pattern values", "the values of a traffic pattern for one aircraft category",
                                    "Each value is optional"),
+    ("Reentry", None): d.entity("Re-entry", "the procedure that aircraft use to enter the overhead pattern again",
+                                "It has the point or the name of the re-entry point, and its altitude"),
+    ("Reentry", "point"): d.reference("point at which aircraft start the re-entry"),
+    ("Reentry", "name"): d.text("name of the re-entry point, when no point record identifies it"),
+    ("Reentry", "altitude"): d.quantity("altitude of the re-entry", "Altitude", None,
+                                        "The reference is above ground level or mean sea level"),
+    ("Reentry.altitude", "reference"): d.statement(
+        "This field gives the reference of the re-entry altitude: above ground level (`AGL`) or mean sea level (`MSL`)"),
+    ("GoAround", None): d.entity("Go-around", "the local climb-out instructions for a go-around",
+                                 "When the record has no heading, aircraft fly the runway heading"),
+    ("GoAround", "altitude"): d.quantity("altitude to which aircraft climb on a go-around", "Altitude", None,
+                                         "The reference is above ground level or mean sea level"),
+    ("GoAround.altitude", "reference"): d.statement(
+        "This field gives the reference of the go-around altitude: above ground level (`AGL`) or mean sea level (`MSL`)"),
+    ("GoAround", "heading"): d.quantity("heading that aircraft fly on a go-around", "Bearing"),
+    ("SimulatedFlameout", None): d.entity("Simulated flameout pattern", "the altitudes of the high key and the low key of an SFO pattern",
+                                          "The base publishes them"),
+    ("SimulatedFlameout", "high_key"): d.altitude_block("the high key", "The block gives the altitudes that aircraft can use at the high key"),
+    ("SimulatedFlameout", "low_key"): d.altitude_block("the low key", "The block gives the altitudes that aircraft can use at the low key"),
 
     ("InitialPoint", None): d.entity(
         "Initial point", "the start of the initial leg of an overhead pattern",
@@ -280,6 +310,44 @@ DESCRIPTIONS = {
         "When the record does not have this field, the point is on the extended centreline of the runway"),
     ("InitialPoint", "distance"): d.quantity("distance from the runway threshold to the initial point", "Length"),
     ("InitialPoint", "point"): d.statement("This field gives the point, with its name, at the start of the initial leg"),
+    # ---- NOTAM ---------------------------------------------------------------------------------
+    ("notam", None): d.root(
+        "notice to air missions", "NOTAM",
+        "a notice about the establishment, condition or change of an aeronautical facility, service, procedure or hazard",
+        "This record has the basic items of the ICAO NOTAM format of Annex 15: the number, the location, the NOTAM Code, "
+        "the effective time interval, the text and the vertical limits",
+        "Planners write NOTAMs before the operation"),
+    ("notam", "$schema"): d.reference("schema", "validates this document"),
+    ("notam", "id"): d.identifier("NOTAM", None, "Other resources and orders use this stable identifier to refer to this NOTAM"),
+    ("notam", "kind"): d.discriminator("a NOTAM record", "The value selects this contract"),
+    ("notam", "extensions"): d.extension(),
+    ("notam", "resources_ref"): d.reference("resource catalogue", "resolves the references of this NOTAM",
+                                            "The reference gives the identifier and the revision of the catalogue"),
+    ("notam", "number"): d.statement("This field gives the NOTAM number: the series, the number in the series and the year",
+                                     "An example is `A0123/26`"),
+    ("NotamNumber", None): d.entity("NOTAM number", "the series letter, the number and the year that identify a NOTAM"),
+    ("NotamNumber", "series"): d.text("series letter of the NOTAM, for example `A`"),
+    ("NotamNumber", "number"): d.statement("This field gives the number of the NOTAM in its series and year, from 1 to 9999"),
+    ("NotamNumber", "year"): d.statement("This field gives the year of the NOTAM, with four digits",
+                                         "The NOTAM number shows its last two digits"),
+    ("notam", "location"): d.reference("operating location that the NOTAM is about", None, "It is item A of the NOTAM"),
+    ("notam", "code"): d.statement("This field gives the NOTAM Code of item Q: the letter `Q`, two letters for the subject "
+                                   "and two letters for its condition, for example `QMRLC` for a closed runway",
+                                   "ICAO Doc 8126 gives the NOTAM Code"),
+    ("notam", "effective"): d.window("the NOTAM is in effect", "It is items B and C of the NOTAM"),
+    ("notam", "text"): d.text("text of the NOTAM, in the abbreviations of the NOTAM", "It is item E of the NOTAM"),
+    ("notam", "lower"): d.vertical_limit("floor", "the area that the NOTAM is about", LIMIT_ANY, "It is item F of the NOTAM"),
+    ("notam", "upper"): d.vertical_limit("ceiling", "the area that the NOTAM is about", LIMIT_ANY, "It is item G of the NOTAM"),
+    ("notam", "affects"): d.list_of(
+        "runways, navigation aids, airspace and instrument procedures that the NOTAM is about", None,
+        "Each item is a runway end of the location, a control measure or an instrument procedure",
+        d.enforced("A runway shall be an end of a runway of the location", "validator:openaix.check.navigation.airfield_links")),
+    ("RunwaySelection", None): d.entity("Runway selection", "a reference to one runway end of the location of the NOTAM"),
+    ("RunwaySelection", "kind"): d.discriminator("a runway selection"),
+    ("RunwaySelection", "designator"): d.statement("This field gives the designator of the runway end, for example `03L`"),
+    ("ProcedureSelection", None): d.entity("Procedure selection", "a reference to one instrument procedure of the resource catalogue"),
+    ("ProcedureSelection", "kind"): d.discriminator("an instrument procedure selection"),
+    ("ProcedureSelection", "id"): d.reference("instrument procedure that the NOTAM is about"),
     # ---- runway --------------------------------------------------------------------------------
     ("runway", None): d.entity(
         "Runway", "one runway with its two ends, its dimensions and its surface",
@@ -860,6 +928,14 @@ for _context in ("TrafficPattern", "PatternSet"):
         (_context, "break_point"): d.enum("position along the runway at which aircraft start the overhead break"),
         (_context, "direction"): d.enum("direction of the turns in the traffic pattern"),
         (_context, "initial"): d.list_of("initial points of the overhead pattern"),
+        (_context, "reentry"): d.statement("This field gives the re-entry procedure of the overhead pattern"),
+        (_context, "go_around"): d.statement("This field gives the go-around instructions of the pattern"),
+        (_context, "departure_ceiling"): d.quantity("highest altitude for departures while aircraft use the overhead pattern", "Altitude",
+                                                    None, "The reference is above ground level or mean sea level"),
+        (_context + ".departure_ceiling", "reference"): d.statement(
+            "This field gives the reference of the departure ceiling: above ground level (`AGL`) or mean sea level (`MSL`)"),
+        (_context, "sfo"): d.statement("This field gives the SFO pattern",
+                                       "When the record has no SFO pattern, the pattern values do not give one"),
         (_context, "overhead_altitude"): d.quantity("altitude of the initial leg and of the overhead break", "Altitude", None,
                                                     "The reference is above ground level or mean sea level"),
         (_context + ".altitude", "reference"): d.statement(
@@ -900,6 +976,17 @@ ENUMS = {
         "intersection": "a point where two or more taxiways connect",
         "parking": "a point where the taxi graph connects to a parking stand",
     }),
+    ("airfield", "use"): d.values({
+        "civil": "an operating location for civil aviation",
+        "military": "an operating location of armed forces",
+        "joint": "an operating location that civil aviation and armed forces use together",
+    }),
+    ("Pad", "use"): d.values({
+        "hot_brake": "a hot brake area, where aircraft with hot brakes stop until the brakes are cool",
+        "hung_ordnance": "a hung ordnance area, where ground crews make safe the ordnance that did not release",
+        "arm_dearm": "an arming and disarming area at the end of the runway, where ground crews arm aircraft before take-off and "
+                     "disarm them after landing",
+    }),
     ("airfield", "kind"): d.values({
         "airfield": "a fixed airfield with one or more runways",
         "carrier": d.value("an aircraft carrier", "Its position comes from its unit in the simulator"),
@@ -917,6 +1004,7 @@ ENUMS = {
         "pmsv": "the PMSV for weather information",
         "unicom": "the UNICOM at an airfield without a control tower",
         "marshal": "the carrier marshal control for recovery",
+        "final": d.value("the final controller of a PAR approach", "The final controller gives the azimuth and glide path corrections"),
     }),
     ("CaseRecovery", "case"): d.values({
         "case_i": "the Case `I` recovery for visual conditions by day",
@@ -1130,7 +1218,9 @@ ENUMS = {
         "ILS_DME": "a `DME` that operates with the localizer of an ILS",
     }),
     ("measures/airway", "airway_type"): {
-        value: d.value(*d.sentences(MEASURE_CODES[code]["definition"])) for value, code in AIRWAY_TYPE_CODES.items()},
+        **{value: d.value(*d.sentences(MEASURE_CODES[code]["definition"])) for value, code in AIRWAY_TYPE_CODES.items()},
+        "vfr": d.value("a published route for flights under VFR, for example around, under or through complex airspace",
+                       "It has no catalogue code")},
     ("measures/airway", "level"): d.values({
         "low": "the low altitude structure",
         "high": "the high altitude structure",

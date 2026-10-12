@@ -76,7 +76,9 @@ MARK_VALUES = d.values({
 DESCRIPTIONS = {
     # ---- Shared parts ---------------------------------------------------------------------------
     ("ControllerContact", None): d.entity("Agency channel", "an agency for the aircrew, with its radio channels"),
-    ("ControllerContact", "agency"): d.reference("agency", "the aircrew speaks to", "The agency is a controller, a JTAC or a different agency of the resource catalogue"),
+    ("ControllerContact", "agency"): d.reference(
+        "agency or forward air controller", "the aircrew speaks to",
+        "The value is the identifier of a command and control agency or of a forward air controller (FAC) of the resource catalogue"),
     ("ControllerContact", "channel"): d.reference("primary " + CHANNEL, "connects the aircrew and the agency"),
     ("ControllerContact", "alternate_channel"): d.reference("alternative " + CHANNEL, "connects the aircrew and the agency when the primary channel is not available"),
     ("ReportingPlan", None): d.entity("Report plan", "the reports that an aircrew sends, with the method and the time of the reports"),
@@ -378,6 +380,7 @@ DESCRIPTIONS = {
     # ---- Emitters in the resource catalogue -----------------------------------------------------
     ("ResourceData", "emitters"): d.map_of("emitters, which are air defence radars with their systems and threat rings"),
     ("Threat", "emitters"): d.references("emitters", "are a part of this threat"),
+    ("Threat", "airfield"): d.reference("operating location", "is the base of the threat, for example the airfield of enemy aircraft"),
     ("Emitter", None): d.entity("Emitter", "an air defence radar with the system that it is a part of, its position and its threat ring",
                                 "Briefs and orders refer to the emitter by its identifier and do not copy it",
                                 "A consumer shows the threat ring as a circle around the position of the emitter",
@@ -396,7 +399,6 @@ DESCRIPTIONS = {
     ("Emitter", "status"): d.enum("condition of the emitter from the last report"),
     ("Emitter", "last_seen"): d.time("of the last report of the emitter"),
     ("Emitter", "mobility"): d.enum("mobility of the emitter"),
-    ("Emitter", "side"): d.enum("coalition of the emitter"),
     ("Emitter", "max_engagement_range"): d.quantity("largest range at which the system can engage an aircraft", "Length",
                                                     "This range is the radius of the threat ring"),
     ("Emitter", "min_engagement_range"): d.quantity("smallest range at which the system can engage an aircraft", "Length",

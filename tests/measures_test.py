@@ -340,7 +340,7 @@ class ContractTests(unittest.TestCase):
                 self.assertTrue(entry(code)["schema"].startswith("urn:openaix:schema:" + ("" if contract == "point" else "measure-") + contract + ":"))
         self.assertEqual(entry("TRP")["projection"], {"type": "POINT", "roles": ["target_reference"]})
         self.assertEqual(entry("FSS")["projection"], {"type": "POINT", "roles": ["fire_support_station"]})
-        self.assertEqual(entry("PL")["geometries"], ["line"])
+        self.assertEqual(entry("PL")["geometries"], ["line", "geojson:LineString"])
         self.assertNotIn("line", entry("OBJ")["geometries"])
 
     def test_new_codes_carry_their_doctrinal_category(self):

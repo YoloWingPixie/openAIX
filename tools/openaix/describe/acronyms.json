@@ -10,6 +10,7 @@
   "ACO": "airspace control order",
   "ACP": "air control point",
   "ADIZ": "air defence identification zone",
+  "ADS": "air defence sector",
   "ADVRTE": "advisory route",
   "AEW": "airborne early warning",
   "AEWA": "airborne early warning area",
@@ -110,6 +111,7 @@
   "FSS": "fire support station",
   "GBAS": "ground-based augmentation system",
   "GCE": "ground combat element",
+  "GIS": "geographic information system",
   "GLS": "ground-based augmentation system landing system",
   "GMRS": "ground-marked release system",
   "GNSS": "global navigation satellite system",
@@ -224,6 +226,7 @@
   "SCL": "standard conventional load",
   "SCZ": "ship control zone",
   "SEAD": "suppression of enemy air defences",
+  "SFO": "simulated flameout",
   "SFRA": "special flight rules area",
   "SHORAD": "short-range air defence",
   "SHORADEZ": "short-range air defence engagement zone",
@@ -266,5 +269,6 @@
   "VIRS": "verbally initiated release system",
   "VOR": "very high frequency omnidirectional range",
   "VORTAC": "very high frequency omnidirectional range and Tactical Air Navigation station",
+  "VRP": "visual reporting point",
   "WFZ": "weapons free zone"
 }
