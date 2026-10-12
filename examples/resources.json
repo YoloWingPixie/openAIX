@@ -41,6 +41,12 @@
         "areas": [
           {
             "geometry": {
+              "bbox": [
+                37.8,
+                33.2,
+                41.0,
+                36.4
+              ],
               "coordinates": [
                 [
                   [

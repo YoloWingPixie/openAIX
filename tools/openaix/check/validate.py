@@ -176,6 +176,31 @@ def geojson_errors(geometry):
         for index, ring in enumerate(rings):
             if ring[0] != ring[-1] or len({tuple(position) for position in ring[:-1]}) < 3:
                 yield ("coordinates", *base, index), "GeoJSON linear ring must close around three distinct positions"
+    bbox = geometry.get("bbox")
+    if isinstance(bbox, list) and len(bbox) in (4, 6):
+        dims = len(bbox) // 2
+        low, high = bbox[:dims], bbox[dims:]
+        for position in geojson_positions(geometry.get("coordinates", [])):
+            if any(not inside(axis, position[axis], low[axis], high[axis]) for axis in range(min(dims, len(position)))):
+                yield ("bbox",), "GeoJSON bounding box must contain every position of the geometry (RFC 7946 section 5)"
+                break
+
+
+def inside(axis, value, low, high):
+    """Whether value lies in [low, high]; a longitude box with west greater than east crosses the antimeridian (RFC 7946
+    section 5.2)."""
+    if axis == 0 and low > high:
+        return value >= low or value <= high
+    return low <= value <= high
+
+
+def geojson_positions(coordinates):
+    """Every position of GeoJSON coordinates, at any nesting depth."""
+    if coordinates and isinstance(coordinates[0], (int, float)):
+        yield coordinates
+        return
+    for child in coordinates:
+        yield from geojson_positions(child)
 
 
 def references(value, node, base_uri, registry, resources, path=()):

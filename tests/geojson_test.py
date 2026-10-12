@@ -45,6 +45,18 @@ class GeoJSONTests(unittest.TestCase):
                 validate_definitions({"Geometry": {"kind": "geojson", "geometry": {"type": "Polygon", "coordinates": [ring]}}})
             self.assertIn("linear ring", error.exception.code)
 
+    def test_bounding_box_contains_every_position(self):
+        ring = [[40.1, 35.1], [40.3, 35.1], [40.3, 35.3], [40.1, 35.3], [40.1, 35.1]]
+        for bbox in ([40.17, 35.21, 40.17, 35.21], [40.2, 35.0, 40.4, 35.4]):
+            with self.subTest(bbox=bbox), self.assertRaises(ContractError) as error:
+                validate_definitions({"Geometry": {"kind": "geojson", "geometry": {"type": "Polygon", "coordinates": [ring], "bbox": bbox}}})
+            self.assertIn("bounding box", error.exception.code)
+        validate_definitions({"Geometry": {"kind": "geojson", "geometry": {"type": "Polygon", "coordinates": [ring], "bbox": [40.1, 35.1, 40.3, 35.3]}}})
+
+    def test_bounding_box_may_cross_the_antimeridian(self):
+        ring = [[179.5, 10.0], [-179.5, 10.0], [-179.5, 11.0], [179.5, 11.0], [179.5, 10.0]]
+        validate_definitions({"Geometry": {"kind": "geojson", "geometry": {"type": "Polygon", "coordinates": [ring], "bbox": [179.5, 10.0, -179.5, 11.0]}}})
+
     def test_a_shape_takes_only_its_own_geojson_types(self):
         flot = example("measures/flot")
         validate_document({**flot, "geometry": deepcopy(LINE)})

@@ -84,7 +84,7 @@ def agencies():
             "channels": ["control-uhf"],
             # The surveillance area of Darkstar, drawn in a GIS tool: a GeoJSON polygon (longitude first).
             "areas": [{"kind": "geojson", "geometry": {"type": "Polygon", "coordinates": [[
-                [37.8, 33.2], [41.0, 33.2], [41.0, 36.4], [37.8, 36.4], [37.8, 33.2]]]}}],
+                [37.8, 33.2], [41.0, 33.2], [41.0, 36.4], [37.8, 36.4], [37.8, 33.2]]], "bbox": [37.8, 33.2, 41.0, 36.4]}}],
             "extensions": dcs([{"kind": "unit", "name": "OIR Darkstar E-3A", "mission_id": MISSION_ID, "object_id": 11, "unit_type": "E-3A"}],
                               coalition="blue")},
         "salti-tower": {"id": "salti-tower", "kind": "c2-agency", "callsign": "Salti Tower", "role": "ATC", "channels": ["salti-uhf"],

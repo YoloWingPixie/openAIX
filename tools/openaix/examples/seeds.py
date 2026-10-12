@@ -177,9 +177,10 @@ def field_values():
         {"geometry": {"kind": "point", "position": position(35.21, 40.17)}},
         # GeoJSON geometries (RFC 7946, longitude first) from a GIS tool, with a bounding box.
         {"geometry": {"kind": "geojson", "geometry": {"type": "Point", "coordinates": [40.17, 35.21], "bbox": [40.17, 35.21, 40.17, 35.21]}}},
-        {"geometry": {"kind": "geojson", "geometry": {"type": "LineString", "coordinates": [[39.724, 34.835], [40.025, 34.855, 210.0]]}}},
+        {"geometry": {"kind": "geojson", "geometry": {"type": "LineString", "coordinates": [[39.724, 34.835], [40.025, 34.855, 210.0]],
+                                                       "bbox": [39.724, 34.835, 40.025, 34.855]}}},
         {"geometry": {"kind": "geojson", "geometry": {"type": "Polygon", "coordinates": [
-            [[40.1, 35.1], [40.3, 35.1], [40.3, 35.3], [40.1, 35.3], [40.1, 35.1]]]}}},
+            [[40.1, 35.1], [40.3, 35.1], [40.3, 35.3], [40.1, 35.3], [40.1, 35.1]]], "bbox": [40.1, 35.1, 40.3, 35.3]}}},
         {"geometry": {"kind": "description", "text": "Euphrates west bank from the Deir ez-Zor bridge to the Al Busayrah ferry"}},
         {"geometry": {"kind": "rectangle", "center": position(35.21, 40.17), "projection": "Syria", "dcs_angle_deg": 30,
                       "width_m": 4000, "height_m": 2000}},
