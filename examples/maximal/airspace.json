@@ -94,5 +94,6 @@
   "restrictions": [
     "No entry without a clearance from Salti Tower."
   ],
+  "state": "JOR",
   "type": "AIRSPACE"
 }

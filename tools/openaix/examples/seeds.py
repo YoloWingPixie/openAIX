@@ -101,6 +101,7 @@ def airway(version):
 def airspace(version):
     return {"$schema": urn("airspace", version), "id": "salti-ctr", "type": "AIRSPACE", "name": "Salti control zone",
             "designator": "OJMS CTR", "airspace_type": "CTR", "airspace_class_code": "D", "local_type": "Military control zone",
+            "state": "JOR",
             "description": "Control zone of Muwaffaq Salti from the surface to 4,500 feet MSL.",
             "purpose": "Protect arrivals and departures at Muwaffaq Salti.",
             "components": [{"id": "salti-ctr-core", "name": "Salti CTR", "operation": "add",

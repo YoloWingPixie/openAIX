@@ -1039,7 +1039,20 @@
         "restrictions": [
           "Inbound only; outbound traffic uses Marshal to Cedar."
         ],
-        "type": "SC"
+        "serves": [
+          {
+            "airfield": "ojms",
+            "runway": "31"
+          }
+        ],
+        "type": "SC",
+        "vertices": [
+          {
+            "index": 0,
+            "name": "DAM",
+            "point": "vrp-salti-dam"
+          }
+        ]
       },
       "vrp-salti-dam": {
         "$schema": "urn:openaix:schema:point:0.1.0-draft.2",

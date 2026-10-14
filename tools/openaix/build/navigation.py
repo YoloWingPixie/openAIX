@@ -14,8 +14,6 @@ from openaix.sim.bindings import sim_overlay
 
 AIRWAY_TYPES = {"ADVRTE": "advisory", "ARWY": "airway", "NAVRTE": "area_navigation", "ATSRTE": "air_traffic_services",
                 "CDR": "conditional"}
-# Airway types without a catalogue code: a published VFR route (FAA AIM 3-5-5).
-OTHER_AIRWAY_TYPES = ("vfr",)
 ROOT_SCHEMAS = ("airfield", "runway", "localizer", "procedure", "holding", "path-point", "msa", "grid-mora", "notam")
 NAVAID_CLASSES = ("VOR", "VOR_DME", "VORTAC", "TACAN", "DME", "NDB", "ILS_DME")
 # Leg types: the 23 path terminators, named in words; sources and definitions in sources/leg-type-definitions.json.
@@ -435,7 +433,7 @@ def schemas(base, version, dialect, common):
                    "directional_restriction": {"enum": ["forward", "backward"]}}, ("fix",))
     # Inline, not $defs: measure bodies are copied into the common ControlMeasure union.
     navigation["airway"] = schema("airway", root(
-        {"ident": text(), "airway_type": {"enum": [*dict.fromkeys(AIRWAY_TYPES.values()), *OTHER_AIRWAY_TYPES]}, "level": {"enum": ["low", "high", "both"]},
+        {"ident": text(), "airway_type": {"enum": list(dict.fromkeys(AIRWAY_TYPES.values()))}, "level": {"enum": ["low", "high", "both"]},
          "segments": array(segment, 2)}, ("airway_type", "segments"), measure="AIRWAY", catalogue=True))
     navigation["notam"] = schema("notam", notam_schema(base, version, common, airfield_ref()))
     return navigation

@@ -189,16 +189,35 @@ def tiyas():
 
 
 def salti_vfr(version):
-    """A visual reporting point north of Muwaffaq Salti and the published VFR route from the point to the field."""
+    """A visual reporting point north of Muwaffaq Salti, the published VFR route from the point to the field, and the
+    published VFR arrival from the east that arcs around the field to the point and joins that route."""
     dam = offset(OJMS_REFERENCE, 20, 8 * 1852)
     vrp = {"$schema": f"urn:openaix:schema:point:{version}", "id": "vrp-salti-dam", "name": "Salti Dam", "type": "POINT",
            "roles": ["visual_reporting"], "position": dam, "active": {"continuous": True},
            "description": "Visual reporting point at the dam north-east of Muwaffaq Salti; the re-entry point of the overhead pattern."}
-    route = {"$schema": f"urn:openaix:schema:airway:{version}", "id": "vfr-salti-north", "type": "AIRWAY", "name": "Salti north VFR route",
-             "ident": "SALTI NORTH", "airway_type": "vfr", "level": "low",
-             "segments": [{"fix": {"ident": "DAM", "position": deepcopy(dam)}, "minimum_altitude": feet(3500), "maximum_altitude": feet(4500)},
-                          {"fix": {"ident": "OJMS", "position": deepcopy(OJMS_REFERENCE)}}]}
-    return {"vrp-salti-dam": vrp, "vfr-salti-north": route}
+    route = {"$schema": f"urn:openaix:schema:measure-route:{version}", "id": "vfr-salti-north", "type": "VFRRTE",
+             "name": "Salti north VFR route", "active": {"continuous": True},
+             "geometry": {"kind": "line", "points": [deepcopy(dam), deepcopy(OJMS_REFERENCE)]},
+             "altitude": {"lower": feet(3500), "upper": feet(4500)},
+             "vertices": [{"index": 0, "name": "DAM", "point": "vrp-salti-dam"}, {"index": 1, "name": "OJMS"}]}
+    east, arc_start = offset(OJMS_REFERENCE, 90, 14 * 1852), offset(OJMS_REFERENCE, 60, 8 * 1852)
+    arrival = {"$schema": f"urn:openaix:schema:measure-route:{version}", "id": "vfr-salti-east", "type": "VFRRTE",
+               "name": "Salti east VFR arrival", "active": {"continuous": True},
+               "description": "Published VFR arrival from the highway east of Muwaffaq Salti; it arcs north at 8 nm to Salti Dam.",
+               "purpose": "Keep VFR arrivals clear of the runway 31 final approach.",
+               "geometry": {"kind": "path", "segments": [
+                   {"kind": "line", "start": east, "end": arc_start},
+                   {"kind": "arc", "center": deepcopy(OJMS_REFERENCE), "radius": length(8, "nm"),
+                    "start_bearing": {"value": 60, "reference": "true"}, "end_bearing": {"value": 20, "reference": "true"}, "turns": "left"}]},
+               "altitude": {"lower": {"surface": True}, "upper": feet(4500)},
+               "vertices": [{"index": 0, "name": "HIGHWAY"}, {"index": 2, "name": "DAM", "point": "vrp-salti-dam"}],
+               "joins": [{"route": "vfr-salti-north", "vertex": 2}],
+               "serves": [{"airfield": "ojms", "runway": "31"}, {"airfield": "ojms", "runway": "26"}],
+               "controlling_agency": "salti-tower", "channels": ["salti-uhf"],
+               "restrictions": ["Remain at or below 4,500 feet MSL until Salti Dam."],
+               "coordination_instructions": ["Report HIGHWAY to Salti Tower; continue on the north route from Salti Dam."],
+               "notes": "Not sterile of other traffic; helicopters use the same highway."}
+    return {"vrp-salti-dam": vrp, "vfr-salti-north": route, "vfr-salti-east": arrival}
 
 
 def usaf_standard():

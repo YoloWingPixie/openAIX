@@ -34,7 +34,9 @@
                 "dcs": {
                   "properties": {},
                   "propertyNames": {
-                    "enum": []
+                    "enum": [
+                      "coalition"
+                    ]
                   }
                 }
               }

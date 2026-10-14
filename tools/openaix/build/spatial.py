@@ -11,6 +11,8 @@ from openaix.describe.resolve import schema_description
 
 EXAMPLE_WINDOW = {"start": "2026-10-02T06:00:00Z", "end": "2026-10-02T18:00:00Z"}
 AREA_GEOMETRIES = ("polygon", "circle", "sector", "polyarc", "corridor")
+# ISO 3166-1 alpha-3 country code: the countries of a territory and the State responsible for an airspace.
+COUNTRY_CODE = r"^[A-Z]{3}$"
 
 
 def definitions(common):
@@ -92,6 +94,8 @@ def models(base, version, dialect, common):
                        "airspace_type": airspace_type_schema(),
                        "designator": {"type": "string", "minLength": 1},
                        "local_type": {"type": "string", "minLength": 1},
+                       # The State responsible for air traffic services in the airspace (ICAO Annex 11, paragraph 2.1).
+                       "state": {"type": "string", "pattern": COUNTRY_CODE},
                        "airspace_class_code": {"enum": [*"ABCDEFG", "", " "]},
                        "components": {"type": "array", "minItems": 1, "items": ref("AirspaceComponent")}},
         "required": ["id", "name", "type", "airspace_type", "components", "active"],

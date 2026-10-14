@@ -21,7 +21,7 @@ NAMESPACE = r"^[a-z][a-z0-9-]*(\.[a-z0-9-]+)+$"
 LASER_CODE = r"^1[1-7][1-8][1-8]$"
 RUNWAY_DESIGNATOR = r"^(0[1-9]|[12][0-9]|3[0-6])[LRCWSGU]?$"
 COALITIONS = ("blue", "red", "neutral")
-GEOMETRY_NAMES = ("point", "line", "polygon", "circle", "corridor", "racetrack", "track_racetrack", "sector", "polyarc", "figure_eight", "vertical", "description")
+GEOMETRY_NAMES = ("point", "line", "polygon", "circle", "corridor", "racetrack", "track_racetrack", "sector", "polyarc", "path", "figure_eight", "vertical", "description")
 # GeoJSON geometry (IETF RFC 7946) that an openAIX geometry may carry as it is: the `geojson` kind. Each definition
 # takes the GeoJSON types of one openAIX shape, and a contract that accepts the shape also accepts its definition
 # (build/measures.py extend_area_geometry). GeoJSON has no curves: circles, arcs and racetracks keep their openAIX kinds.
@@ -134,6 +134,8 @@ def common_schema(source):
     line = obj({"kind": {"const": "line"}, "start": point, "end": point}, ("kind", "start", "end"))
     arc = obj({"kind": {"const": "arc"}, "center": point, "radius": ref("Length"), "start_bearing": ref("Bearing"), "end_bearing": ref("Bearing"), "turns": {"enum": ["left", "right"]}}, ("kind", "center", "radius", "start_bearing", "end_bearing", "turns"))
     defs["Geometry_polyarc"] = obj({"kind": {"const": "polyarc"}, "segments": array({"oneOf": [line, arc]}, 2)}, ("kind", "segments"))
+    # An open path of the same straight and arc segments, for a route: it does not close into an area.
+    defs["Geometry_path"] = obj({"kind": {"const": "path"}, "segments": array({"oneOf": [copy.deepcopy(line), copy.deepcopy(arc)]}, 1)}, ("kind", "segments"))
     defs.update(geojson_definitions())
     defs["Geometry"] = {"oneOf": [ref("Geometry_" + name) for name in GEOMETRY_NAMES]}
     defs["Geometry"]["oneOf"].extend(ref("Geometry_geojson_" + shape) for shape in GEOJSON_SHAPES)
@@ -193,6 +195,7 @@ def geometry_example(kind):
         "track_racetrack": {"kind": "track_racetrack", "a": p, "b": q, "width": {"value": 2, "unit": "nm"}, "turns": "right"},
         "sector": {"kind": "sector", "center": p, "start_bearing": {"value": 90, "reference": "true"}, "end_bearing": {"value": 180, "reference": "true"}, "outer_radius": length},
         "polyarc": {"kind": "polyarc", "segments": [{"kind": "line", "start": p, "end": q}, {"kind": "arc", "center": p, "radius": length, "start_bearing": {"value": 90, "reference": "true"}, "end_bearing": {"value": 180, "reference": "true"}, "turns": "left"}]},
+        "path": {"kind": "path", "segments": [{"kind": "line", "start": p, "end": q}, {"kind": "arc", "center": p, "radius": length, "start_bearing": {"value": 152, "reference": "true"}, "end_bearing": {"value": 100, "reference": "true"}, "turns": "left"}]},
         "figure_eight": {"kind": "figure_eight", "point": p, "axis": bearing, "leg_length": length},
         "vertical": {"kind": "vertical", "level": {"value": 5000, "unit": "ft", "reference": "MSL"}},
         "description": {"kind": "description", "text": "Retained source geographic description; no implicit position inference."},

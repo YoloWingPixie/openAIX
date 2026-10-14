@@ -503,60 +503,6 @@
         },
         "type": "NAVAID"
       },
-      "ads-north": {
-        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
-        "active": {
-          "end": "2026-10-02T15:00:00Z",
-          "start": "2026-10-02T13:00:00Z"
-        },
-        "channels": [
-          "control-uhf"
-        ],
-        "components": [
-          {
-            "geometry": {
-              "kind": "polygon",
-              "rings": [
-                [
-                  {
-                    "latitude": 34.6,
-                    "longitude": 39.2
-                  },
-                  {
-                    "latitude": 34.6,
-                    "longitude": 41.0
-                  },
-                  {
-                    "latitude": 36.0,
-                    "longitude": 41.0
-                  },
-                  {
-                    "latitude": 36.0,
-                    "longitude": 39.2
-                  },
-                  {
-                    "latitude": 34.6,
-                    "longitude": 39.2
-                  }
-                ]
-              ]
-            },
-            "id": "ads-north-1",
-            "lower_limit": {
-              "surface": true
-            },
-            "operation": "add",
-            "upper_limit": {
-              "unlimited": true
-            }
-          }
-        ],
-        "controlling_agency": "darkstar",
-        "description": "Northern air defence sector of the OIR air defence region, along the Euphrates valley.",
-        "id": "ads-north",
-        "name": "North sector",
-        "type": "ADS"
-      },
       "bastion-bullseye": {
         "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
         "active": {
@@ -907,9 +853,9 @@
             "surface": true
           },
           "upper": {
-            "reference": "AGL",
+            "reference": "MSL",
             "unit": "ft",
-            "value": 1000
+            "value": 4500
           }
         },
         "axis": {
@@ -943,7 +889,7 @@
           "revision": "1"
         },
         "restrictions": [
-          "Inbound only; outbound traffic uses Marshal to Cedar."
+          "Remain at or below 4,500 feet MSL until Salti Dam."
         ],
         "type": "MISARC",
         "width_deg": 60
@@ -1109,13 +1055,21 @@
           "kind": "geojson"
         },
         "id": "isis-held",
+        "lower_limit": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 1000
+        },
         "name": "ISIS-held Euphrates valley",
         "notes": "The boundary follows the FLOT; it moves when the FLOT moves.",
         "resources_ref": {
           "id": "oir-resources",
           "revision": "1"
         },
-        "type": "TERRITORY"
+        "type": "TERRITORY",
+        "upper_limit": {
+          "unlimited": true
+        }
       },
       "juniper": {
         "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
@@ -1502,7 +1456,7 @@
           "revision": "1"
         },
         "restrictions": [
-          "Inbound only; outbound traffic uses Marshal to Cedar."
+          "Remain at or below 4,500 feet MSL until Salti Dam."
         ],
         "type": "MEZ"
       },
@@ -1591,74 +1545,132 @@
         ],
         "type": "POINT"
       },
-      "vfr-salti-north": {
-        "$schema": "urn:openaix:schema:airway:0.1.0-draft.2",
-        "airway_type": "vfr",
-        "extensions": {
-          "org.cjtf-oir.ato": {
-            "ato_day": "214"
+      "vfr-salti-east": {
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
+        "active": {
+          "continuous": true
+        },
+        "altitude": {
+          "lower": {
+            "surface": true
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 4500
           }
         },
-        "id": "vfr-salti-north",
-        "ident": "SALTI NORTH",
-        "level": "low",
-        "name": "Salti north VFR route",
-        "provenance": {
-          "airac_cycle": "2610",
-          "authority": "CJTF-OIR airspace control cell",
-          "derivation": "authored"
-        },
-        "resources_ref": {
-          "id": "oir-resources",
-          "revision": "1"
-        },
-        "segments": [
-          {
-            "directional_restriction": "forward",
-            "distance": {
-              "unit": "nm",
-              "value": 5
-            },
-            "fix": {
-              "ident": "DAM",
-              "position": {
-                "latitude": 31.950627,
-                "longitude": 36.834965
+        "channels": [
+          "salti-uhf"
+        ],
+        "controlling_agency": "salti-tower",
+        "coordination_instructions": [
+          "Report HIGHWAY to Salti Tower; continue on the north route from Salti Dam."
+        ],
+        "description": "Published VFR arrival from the highway east of Muwaffaq Salti; it arcs north at 8 nm to Salti Dam.",
+        "geometry": {
+          "kind": "path",
+          "segments": [
+            {
+              "end": {
+                "latitude": 31.89198,
+                "longitude": 36.917165
+              },
+              "kind": "line",
+              "start": {
+                "latitude": 31.825137,
+                "longitude": 37.055691
               }
             },
-            "inbound_course": {
-              "declination_deg": 5.0,
-              "reference": "magnetic",
-              "value": 307.2
-            },
-            "maximum_altitude": {
-              "reference": "MSL",
-              "unit": "ft",
-              "value": 4500
-            },
-            "minimum_altitude": {
-              "reference": "MSL",
-              "unit": "ft",
-              "value": 3500
-            },
-            "outbound_course": {
-              "declination_deg": 5.0,
-              "reference": "magnetic",
-              "value": 38.6
-            }
-          },
-          {
-            "fix": {
-              "ident": "OJMS",
-              "position": {
+            {
+              "center": {
                 "latitude": 31.825431,
                 "longitude": 36.781257
-              }
+              },
+              "end_bearing": {
+                "reference": "true",
+                "value": 20
+              },
+              "kind": "arc",
+              "radius": {
+                "unit": "nm",
+                "value": 8
+              },
+              "start_bearing": {
+                "reference": "true",
+                "value": 60
+              },
+              "turns": "left"
             }
+          ]
+        },
+        "id": "vfr-salti-east",
+        "joins": [
+          {
+            "route": "vfr-salti-north",
+            "vertex": 2
           }
         ],
-        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
-        "type": "AIRWAY"
+        "name": "Salti east VFR arrival",
+        "notes": "Not sterile of other traffic; helicopters use the same highway.",
+        "purpose": "Keep VFR arrivals clear of the runway 31 final approach.",
+        "restrictions": [
+          "Remain at or below 4,500 feet MSL until Salti Dam."
+        ],
+        "serves": [
+          {
+            "airfield": "ojms",
+            "runway": "31"
+          }
+        ],
+        "type": "VFRRTE",
+        "vertices": [
+          {
+            "index": 0,
+            "name": "HIGHWAY"
+          }
+        ]
+      },
+      "vfr-salti-north": {
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
+        "active": {
+          "continuous": true
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 3500
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 4500
+          }
+        },
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 31.950627,
+              "longitude": 36.834965
+            },
+            {
+              "latitude": 31.825431,
+              "longitude": 36.781257
+            }
+          ]
+        },
+        "id": "vfr-salti-north",
+        "name": "Salti north VFR route",
+        "type": "VFRRTE",
+        "vertices": [
+          {
+            "index": 0,
+            "name": "DAM",
+            "point": "vrp-salti-dam"
+          }
+        ]
       },
       "vrp-salti-dam": {
         "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
@@ -6898,7 +6910,7 @@
         "kind": "fixed",
         "name": "Cobalt compound",
         "restrictions": [
-          "Inbound only; outbound traffic uses Marshal to Cedar."
+          "Remain at or below 4,500 feet MSL until Salti Dam."
         ],
         "source": {
           "id": "vcsg8-scl-data",
@@ -6939,7 +6951,7 @@
         },
         "name": "Captured SA-6 battery",
         "restrictions": [
-          "Inbound only; outbound traffic uses Marshal to Cedar."
+          "Remain at or below 4,500 feet MSL until Salti Dam."
         ],
         "search_area": {
           "area": "recce-box"

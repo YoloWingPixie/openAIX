@@ -16,16 +16,14 @@
         "airway",
         "area_navigation",
         "air_traffic_services",
-        "conditional",
-        "vfr"
+        "conditional"
       ],
       "x-enum-descriptions": {
         "advisory": "This value identifies a designated route along which air traffic advisory service is available.",
         "air_traffic_services": "This value identifies a specified route that channels the flow of traffic, as necessary to supply air traffic services.",
         "airway": "This value identifies a control area, or a part of it, in the shape of a corridor. Radio navigation aids identify the corridor.",
         "area_navigation": "This value identifies an air traffic services (ATS) route for aircraft that can do area navigation.",
-        "conditional": "This value identifies an air traffic services (ATS) route, or a part of it, that is non-permanent. Aircraft plan and use it only under stated conditions.",
-        "vfr": "This value identifies a published route for flights under visual flight rules (VFR), for example around, under or through complex airspace. It has no catalogue code."
+        "conditional": "This value identifies an air traffic services (ATS) route, or a part of it, that is non-permanent. Aircraft plan and use it only under stated conditions."
       }
     },
     "extensions": {
@@ -57,7 +55,8 @@
                   },
                   "propertyNames": {
                     "enum": [
-                      "bindings"
+                      "bindings",
+                      "coalition"
                     ]
                   }
                 }

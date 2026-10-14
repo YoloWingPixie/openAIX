@@ -1,39 +1,25 @@
 {
   "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
   "active": {
-    "end": "2026-10-02T15:00:00Z",
-    "start": "2026-10-02T13:00:00Z"
-  },
-  "altitude": {
-    "lower": {
-      "reference": "MSL",
-      "unit": "ft",
-      "value": 10000
-    },
-    "upper": {
-      "reference": "MSL",
-      "unit": "ft",
-      "value": 12000
-    }
+    "continuous": true
   },
   "geometry": {
-    "kind": "corridor",
-    "points": [
+    "kind": "path",
+    "segments": [
       {
-        "latitude": 33.59,
-        "longitude": 38.552
-      },
-      {
-        "latitude": 34.059,
-        "longitude": 39.477
+        "end": {
+          "latitude": 31.89198,
+          "longitude": 36.917165
+        },
+        "kind": "line",
+        "start": {
+          "latitude": 31.825137,
+          "longitude": 37.055691
+        }
       }
-    ],
-    "width": {
-      "unit": "nm",
-      "value": 3
-    }
+    ]
   },
-  "id": "south-transit",
-  "name": "South transit corridor",
-  "type": "SC"
+  "id": "vfr-salti-east",
+  "name": "Salti east VFR arrival",
+  "type": "VFRRTE"
 }

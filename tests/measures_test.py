@@ -185,6 +185,40 @@ class CatalogueTests(unittest.TestCase):
 
 
 class ContractTests(unittest.TestCase):
+    def test_control_measures_and_airspace_carry_a_dcs_coalition(self):
+        resources = example("resources")
+        for name in ("maximal/airspace", "maximal/route", "measures/kb", "measures/ca"):
+            document = example(name)
+            dcs = document.setdefault("extensions", {}).setdefault("sim", {}).setdefault("dcs", {})
+            dcs["coalition"] = "red"
+            with self.subTest(name=name):
+                validate_document(document, resource_document=resources)
+            dcs["coalition"] = "green-ish"
+            with self.subTest(name=name, coalition="unknown"), self.assertRaises(ContractError):
+                validate_document(document, resource_document=resources)
+        level = example("measures/ca")
+        level["extensions"] = {"sim": {"dcs": {"coalition": "blue", "bindings": []}}}
+        with self.assertRaises(ContractError):
+            validate_document(level, resource_document=resources)
+
+    def test_airspace_state_is_an_optional_iso_alpha3_code(self):
+        maximal = example("maximal/airspace")
+        self.assertEqual(maximal["state"], "JOR")
+        records, _ = schemas()
+        territory = records["measures/territory"]["properties"]["countries"]["items"]["pattern"]
+        self.assertEqual(records["measures/airspace"]["properties"]["state"]["pattern"], territory)
+        fir = {**copy.deepcopy(maximal), "airspace_type": "FIR", "designator": "EDGG", "state": "DEU"}
+        for field in ("airspace_class_code", "resources_ref", "controlling_agency", "channels"):
+            fir.pop(field)
+        without = copy.deepcopy(fir)
+        without.pop("state")
+        for document in (fir, without):
+            with self.subTest(state=document.get("state")):
+                validate_document(document)
+        for value in ("DE", "deu", "DEUT", "", 276):
+            with self.subTest(value=value), self.assertRaises(ContractError):
+                validate_document({**fir, "state": value})
+
     def test_control_measure_union_references_contracts_without_inline_copies(self):
         records, _ = schemas()
         union = records["common"]["$defs"]["ControlMeasure"]["oneOf"]
@@ -423,6 +457,85 @@ class ContractTests(unittest.TestCase):
                 shape = document.get("geometry") or document.get("position") or [part["geometry"] for part in document.get("components", [])] or document.get("center")
                 shapes.add(json.dumps(shape, sort_keys=True))
         self.assertEqual(len(shapes), len(list((ROOT / "examples/measures").glob("*.json"))))
+
+
+def vfr_route():
+    """The maximal VFR route, linked to the OIR resource catalogue."""
+    return example("maximal/route")
+
+
+def check(document):
+    """Validate a route document against the OIR resource catalogue that its references name."""
+    validate_document(document, resource_document=example("resources"))
+
+
+class VfrRouteTests(unittest.TestCase):
+    def test_vfr_route_code_cites_the_aim(self):
+        item = entry("VFRRTE")
+        self.assertEqual(item["schema"], entry("AIRRTE")["schema"])
+        self.assertEqual(item["category"], "atcm")
+        self.assertEqual(item["definition_source"]["source"], "faa-aim-2026")
+        self.assertIn("3-5-5", item["definition_source"]["locator"])
+        self.assertIn("path", item["geometries"])
+        self.assertNotIn("path", entry("SC")["geometries"])
+
+    def test_examples_are_a_vfr_route_with_and_without_its_optional_fields(self):
+        maximal, minimal = example("maximal/route"), example("minimal/route")
+        self.assertEqual((maximal["type"], minimal["type"]), ("VFRRTE", "VFRRTE"))
+        self.assertEqual(maximal["geometry"]["kind"], "path")
+        self.assertEqual([segment["kind"] for segment in maximal["geometry"]["segments"]], ["line", "arc"])
+        for field in ("vertices", "joins", "serves", "altitude"):
+            with self.subTest(field=field):
+                self.assertIn(field, maximal)
+                self.assertNotIn(field, minimal)
+        check(vfr_route())
+
+    def test_only_a_vfr_route_may_omit_its_altitude_or_give_a_ceiling_only(self):
+        document = vfr_route()
+        check(dict(document, altitude={"lower": {"surface": True}, "upper": {"value": 3000, "unit": "ft", "reference": "MSL"}}))
+        without = {key: value for key, value in document.items() if key != "altitude"}
+        check(without)
+        centreline = {"kind": "line", "points": [segment["start"] for segment in document["geometry"]["segments"][:1]]
+                      + [document["geometry"]["segments"][0]["end"]]}
+        for code in ("AIRRTE", "SAAFR"):
+            with self.subTest(code=code), self.assertRaises(ContractError):
+                check(dict(without, type=code, geometry=centreline, vertices=[{"index": 0, "name": "HIGHWAY"}],
+                                       joins=[{"route": "vfr-salti-north", "vertex": 1}]))
+        for code in ("SC", "TC"):
+            with self.subTest(code=code), self.assertRaises(ContractError):
+                check(dict(document, type=code))
+
+    def test_path_geometry_mixes_straight_and_arc_segments(self):
+        document = vfr_route()
+        line, arc = document["geometry"]["segments"]
+        tail = {"kind": "line", "start": line["end"], "end": line["start"]}
+        check(dict(document, geometry={"kind": "path", "segments": [arc]}, vertices=[{"index": 1, "name": "DAM"}],
+                               joins=[{"route": "vfr-salti-north", "vertex": 1}]))
+        check(dict(document, geometry={"kind": "path", "segments": [line, tail]}))
+        broken = {"kind": "line", "start": line["start"], "end": line["end"]}
+        for geometry in ({"kind": "path", "segments": []}, {"kind": "path", "segments": [line, broken]},
+                         {"kind": "polyarc", "segments": [line, arc]}):
+            with self.subTest(geometry=geometry), self.assertRaises(ContractError):
+                check(dict(document, geometry=geometry))
+
+    def test_vertices_and_joins_name_vertices_of_the_geometry(self):
+        document = vfr_route()
+        self.assertEqual(document["vertices"][1], {"index": 2, "name": "DAM", "point": "vrp-salti-dam"})
+        self.assertEqual(document["joins"], [{"route": "vfr-salti-north", "vertex": 2}])
+        check(dict(document, vertices=[{"index": 1, "point": "vrp-salti-dam"}]))
+        for field, value in (("vertices", [{"index": 3, "name": "BEYOND"}]), ("vertices", [{"index": 2, "name": "A"}, {"index": 0, "name": "B"}]),
+                             ("vertices", [{"index": 0}]), ("vertices", []), ("joins", [{"route": "vfr-salti-north", "vertex": 3}]),
+                             ("joins", [{"route": "vfr-salti-east", "vertex": 0}]), ("joins", [{"route": "vfr-salti-north"}])):
+            with self.subTest(field=field, value=value), self.assertRaises(ContractError):
+                check(dict(document, **{field: value}))
+
+    def test_served_runways_use_the_runway_designator(self):
+        document = vfr_route()
+        self.assertEqual(document["serves"][0], {"airfield": "ojms", "runway": "31"})
+        check(dict(document, serves=[{"airfield": "ojms", "runway": "13L"}]))
+        for value in ([{"airfield": "ojms", "runway": "13/31"}], [{"airfield": "ojms", "runway": "37"}], [{"runway": "31"}], []):
+            with self.subTest(value=value), self.assertRaises(ContractError):
+                check(dict(document, serves=value))
 
 
 if __name__ == "__main__":

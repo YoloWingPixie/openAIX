@@ -139,7 +139,8 @@
                   },
                   "propertyNames": {
                     "enum": [
-                      "bindings"
+                      "bindings",
+                      "coalition"
                     ]
                   }
                 }

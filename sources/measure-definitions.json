@@ -1350,6 +1350,17 @@
       "paraphrase": "An air defence zone protecting key assets or facilities (not airbases) where air defence weapons may fire at any target not positively identified as friendly; transit routes should avoid it.",
       "definition": "An air defence zone that gives protection to important assets or facilities, other than airbases. In it, air defence weapon systems may fire at any target without positive identification as friendly. Transit routes should avoid it.",
       "verified": true
+    },
+    "VFRRTE": {
+      "name": "Published VFR Route",
+      "category": "atcm",
+      "source": "faa-aim-2026",
+      "locator": "Paragraph 3-5-5, pages 3-5-5 to 3-5-7",
+      "source_text": "Published VFR routes for transitioning around, under and through complex airspace such as Class B airspace were developed through a number of FAA and industry initiatives.",
+      "paraphrase": "A charted route for VFR flights around, under or through complex airspace such as Class B; the AIM names VFR flyways, VFR corridors and VFR transition routes, with different ATC clearance rules.",
+      "definition": "A route on a chart for VFR flights around, under or through complex airspace, such as class B airspace. A VFR flyway is a general flight path, not a specific course, and it needs no ATC clearance. A VFR corridor goes through class B airspace with defined vertical and lateral limits, and it needs no ATC clearance. A VFR transition route is a specific flight course on a chart. On it, communication with ATC is necessary, and an ATC clearance is necessary in class B airspace.",
+      "verified": true,
+      "note": "The source uses the terms VFR flyway, VFR corridor and VFR transition route. A VFR transition route can have published altitudes or altitudes that ATC assigns."
     }
   },
   "aliases": {

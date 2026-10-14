@@ -1218,9 +1218,7 @@ ENUMS = {
         "ILS_DME": "a `DME` that operates with the localizer of an ILS",
     }),
     ("measures/airway", "airway_type"): {
-        **{value: d.value(*d.sentences(MEASURE_CODES[code]["definition"])) for value, code in AIRWAY_TYPE_CODES.items()},
-        "vfr": d.value("a published route for flights under VFR, for example around, under or through complex airspace",
-                       "It has no catalogue code")},
+        **{value: d.value(*d.sentences(MEASURE_CODES[code]["definition"])) for value, code in AIRWAY_TYPE_CODES.items()}},
     ("measures/airway", "level"): d.values({
         "low": "the low altitude structure",
         "high": "the high altitude structure",

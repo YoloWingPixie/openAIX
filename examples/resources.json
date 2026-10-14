@@ -1285,9 +1285,17 @@
           "kind": "geojson"
         },
         "id": "isis-held",
+        "lower_limit": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 1000
+        },
         "name": "ISIS-held Euphrates valley",
         "notes": "The boundary follows the FLOT; it moves when the FLOT moves.",
-        "type": "TERRITORY"
+        "type": "TERRITORY",
+        "upper_limit": {
+          "unlimited": true
+        }
       },
       "isp-tinsel": {
         "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
@@ -2450,44 +2458,145 @@
         ],
         "type": "POINT"
       },
-      "vfr-salti-north": {
-        "$schema": "urn:openaix:schema:airway:0.1.0-draft.2",
-        "airway_type": "vfr",
-        "id": "vfr-salti-north",
-        "ident": "SALTI NORTH",
-        "level": "low",
-        "name": "Salti north VFR route",
-        "segments": [
-          {
-            "fix": {
-              "ident": "DAM",
-              "position": {
-                "latitude": 31.950627,
-                "longitude": 36.834965
+      "vfr-salti-east": {
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
+        "active": {
+          "continuous": true
+        },
+        "altitude": {
+          "lower": {
+            "surface": true
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 4500
+          }
+        },
+        "channels": [
+          "salti-uhf"
+        ],
+        "controlling_agency": "salti-tower",
+        "coordination_instructions": [
+          "Report HIGHWAY to Salti Tower; continue on the north route from Salti Dam."
+        ],
+        "description": "Published VFR arrival from the highway east of Muwaffaq Salti; it arcs north at 8 nm to Salti Dam.",
+        "geometry": {
+          "kind": "path",
+          "segments": [
+            {
+              "end": {
+                "latitude": 31.89198,
+                "longitude": 36.917165
+              },
+              "kind": "line",
+              "start": {
+                "latitude": 31.825137,
+                "longitude": 37.055691
               }
             },
-            "maximum_altitude": {
-              "reference": "MSL",
-              "unit": "ft",
-              "value": 4500
-            },
-            "minimum_altitude": {
-              "reference": "MSL",
-              "unit": "ft",
-              "value": 3500
-            }
-          },
-          {
-            "fix": {
-              "ident": "OJMS",
-              "position": {
+            {
+              "center": {
                 "latitude": 31.825431,
                 "longitude": 36.781257
-              }
+              },
+              "end_bearing": {
+                "reference": "true",
+                "value": 20
+              },
+              "kind": "arc",
+              "radius": {
+                "unit": "nm",
+                "value": 8
+              },
+              "start_bearing": {
+                "reference": "true",
+                "value": 60
+              },
+              "turns": "left"
             }
+          ]
+        },
+        "id": "vfr-salti-east",
+        "joins": [
+          {
+            "route": "vfr-salti-north",
+            "vertex": 2
           }
         ],
-        "type": "AIRWAY"
+        "name": "Salti east VFR arrival",
+        "notes": "Not sterile of other traffic; helicopters use the same highway.",
+        "purpose": "Keep VFR arrivals clear of the runway 31 final approach.",
+        "restrictions": [
+          "Remain at or below 4,500 feet MSL until Salti Dam."
+        ],
+        "serves": [
+          {
+            "airfield": "ojms",
+            "runway": "31"
+          },
+          {
+            "airfield": "ojms",
+            "runway": "26"
+          }
+        ],
+        "type": "VFRRTE",
+        "vertices": [
+          {
+            "index": 0,
+            "name": "HIGHWAY"
+          },
+          {
+            "index": 2,
+            "name": "DAM",
+            "point": "vrp-salti-dam"
+          }
+        ]
+      },
+      "vfr-salti-north": {
+        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
+        "active": {
+          "continuous": true
+        },
+        "altitude": {
+          "lower": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 3500
+          },
+          "upper": {
+            "reference": "MSL",
+            "unit": "ft",
+            "value": 4500
+          }
+        },
+        "geometry": {
+          "kind": "line",
+          "points": [
+            {
+              "latitude": 31.950627,
+              "longitude": 36.834965
+            },
+            {
+              "latitude": 31.825431,
+              "longitude": 36.781257
+            }
+          ]
+        },
+        "id": "vfr-salti-north",
+        "name": "Salti north VFR route",
+        "type": "VFRRTE",
+        "vertices": [
+          {
+            "index": 0,
+            "name": "DAM",
+            "point": "vrp-salti-dam"
+          },
+          {
+            "index": 1,
+            "name": "OJMS"
+          }
+        ]
       },
       "vrp-salti-dam": {
         "$schema": "urn:openaix:schema:point:0.1.0-draft.2",

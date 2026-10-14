@@ -100,9 +100,13 @@ class PointTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             validate_document(gate, resource_document=resources)
 
-    def test_vfr_route_is_an_airway_type(self):
+    def test_vfr_route_is_a_route_measure_not_an_airway_type(self):
         resources = json.loads((ROOT / "examples/resources.json").read_text())
         route = resources["resources"]["control_measures"]["vfr-salti-north"]
-        self.assertEqual(route["airway_type"], "vfr")
-        validate_document(route)
+        self.assertEqual(route["type"], "VFRRTE")
+        self.assertEqual(route["vertices"][0]["point"], "vrp-salti-dam")
+        route["resources_ref"] = {"id": resources["meta"]["id"], "revision": resources["meta"]["revision"]}
+        validate_document(route, resource_document=resources)
+        records, _ = schemas()
+        self.assertNotIn("vfr", records["measures/airway"]["properties"]["airway_type"]["enum"])
 

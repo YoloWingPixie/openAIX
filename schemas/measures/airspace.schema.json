@@ -376,7 +376,8 @@
                   },
                   "propertyNames": {
                     "enum": [
-                      "bindings"
+                      "bindings",
+                      "coalition"
                     ]
                   }
                 }
@@ -421,6 +422,11 @@
         "type": "string"
       },
       "type": "array"
+    },
+    "state": {
+      "description": "This field gives the State responsible for the airspace, as an ISO 3166-1 alpha-3 code such as `DEU`. Under International Civil Aviation Organization (ICAO) Annex 11, paragraph 2.1, this State is responsible for the air traffic services in the airspace. An example is the State of a flight information region (FIR).",
+      "pattern": "^[A-Z]{3}$",
+      "type": "string"
     },
     "type": {
       "const": "AIRSPACE",

@@ -35,7 +35,7 @@ DEFINITION_POLICIES = {
     "Flight": "flight", "AircraftOverride": "aircraft", "Stand": "stand", "Emitter": "emitter",
 }
 # Records whose simulator data has keys other than `bindings` (dcs.DATA_KEYS), by schema or definition name. A
-# `sided` record (agency, controller, operating location) has a DCS coalition.
+# `sided` record (agency, controller, operating location, control measure) has a DCS coalition.
 DATA_ROLES = {"c2-agency": "sided", "fac": "sided", "airfield": "sided", "Unit": "side", "Aimpoint": "aimpoint", "Emitter": "emitter", "Store": "store", "AircraftType": "aircraft_type",
               "scl": "scl", "StationLoad": "station", "Geometry_rectangle": "shape", "Geometry_ellipse": "shape"}
 # Binding lists other than `bindings`, with their policy, by data role.
@@ -96,7 +96,9 @@ def attach_bindings(artifacts, common):
             contract = name.removeprefix("measures/")
             if contract not in MEASURE_POLICIES:
                 raise ValueError("control measure requires an explicit simulator binding policy: " + contract)
-            attach_policy(schema, common, MEASURE_POLICIES[contract])
+            # A control measure or an airspace has a DCS side: with bindings when its contract has a binding policy.
+            policy = MEASURE_POLICIES[contract]
+            attach_policy(schema, common, policy, "sided" if policy else "side")
         elif name in ROOT_POLICIES or name in DATA_ROLES:
             attach_policy(schema, common, ROOT_POLICIES.get(name), DATA_ROLES.get(name))
         for definition_name, definition in schema.get("$defs", {}).items():
@@ -105,5 +107,5 @@ def attach_bindings(artifacts, common):
         for branch in schema.get("$defs", {}).get("ControlMeasure", {}).get("oneOf", []):
             # Measure contracts are $ref branches with their own policy; only the namespaced extension branch is inline.
             if "properties" in branch and "pattern" in branch["properties"]["type"]:
-                attach_policy(branch, common, "area")
+                attach_policy(branch, common, "area", "sided")
 

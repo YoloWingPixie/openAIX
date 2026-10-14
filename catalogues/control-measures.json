@@ -302,6 +302,7 @@
       "geometries": [
         "line",
         "corridor",
+        "path",
         "geojson:LineString"
       ],
       "geometry_path": "geometry",
@@ -2096,6 +2097,7 @@
       "geometries": [
         "line",
         "corridor",
+        "path",
         "geojson:LineString"
       ],
       "geometry_path": "geometry",
@@ -2463,6 +2465,25 @@
       "geometry_path": "components/geometry",
       "name": "Unmanned Aircraft Area",
       "schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2"
+    },
+    {
+      "category": "atcm",
+      "code": "VFRRTE",
+      "definition": "A published visual flight rules route (VFRRTE) is a route on a chart for visual flight rules (VFR) flights around, under or through complex airspace, such as class B airspace. A VFR flyway is a general flight path, not a specific course, and it needs no air traffic control (ATC) clearance. A VFR corridor goes through class B airspace with defined vertical and lateral limits, and it needs no ATC clearance. A VFR transition route is a specific flight course on a chart. On it, communication with ATC is necessary, and an ATC clearance is necessary in class B airspace.",
+      "definition_source": {
+        "locator": "Paragraph 3-5-5, pages 3-5-5 to 3-5-7",
+        "note": "The source uses the terms visual flight rules (VFR) flyway, VFR corridor and VFR transition route. A VFR transition route can have published altitudes or altitudes that air traffic control (ATC) assigns.",
+        "source": "faa-aim-2026"
+      },
+      "geometries": [
+        "line",
+        "corridor",
+        "path",
+        "geojson:LineString"
+      ],
+      "geometry_path": "geometry",
+      "name": "Published VFR Route",
+      "schema": "urn:openaix:schema:measure-route:0.1.0-draft.2"
     },
     {
       "category": "adm",

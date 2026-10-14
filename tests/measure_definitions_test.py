@@ -168,6 +168,9 @@ DEFINING_TERMS = {
            "line of departure"],
     # United States airspace coordinating measures (JP 3-52, 2014).
     "AIRCOR": ["restricted air route", "friendly aircraft", "prevent friendly forces from firing", "coordinating altitude"],
+    # Published VFR routes (FAA AIM, 2026, paragraph 3-5-5).
+    "VFRRTE": ["complex airspace", "VFR flyway", "general flight path", "VFR corridor", "defined vertical and lateral limits",
+               "VFR transition route", "specific flight course", "needs no ATC clearance", "communication with ATC"],
     "CA": ["airspace coordinating measure", "altitude to separate users", "transition",
            "different airspace control elements", "fly or fire through"],
 }

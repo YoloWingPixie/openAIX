@@ -175,7 +175,7 @@ def air_defense(version):
                    [[[39.7, 34.85], [40.75, 34.85], [40.75, 35.6], [39.7, 35.6], [39.7, 34.85]]],
                    [[[40.8, 34.4], [41.0, 34.4], [41.0, 34.6], [40.8, 34.6], [40.8, 34.4]]]],
                    "bbox": [39.7, 34.4, 41.0, 35.6]}},
-               "countries": ["SYR"], "active": deepcopy(PERIOD),
+               "countries": ["SYR"], "lower_limit": feet(1000), "upper_limit": {"unlimited": True}, "active": deepcopy(PERIOD),
                "notes": "The boundary follows the FLOT; it moves when the FLOT moves."}
     friendly = {"$schema": f"urn:openaix:schema:territory:{version}", "id": "jordan", "name": "Jordan", "type": "TERRITORY",
                 "affiliation": "friend", "geometry": {"kind": "polygon", "rings": [[

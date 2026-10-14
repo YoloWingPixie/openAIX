@@ -486,6 +486,22 @@
       }
     ]
   },
+  "Geometry_path": {
+    "kind": "path",
+    "segments": [
+      {
+        "end": {
+          "latitude": 31.89198,
+          "longitude": 36.917165
+        },
+        "kind": "line",
+        "start": {
+          "latitude": 31.825137,
+          "longitude": 37.055691
+        }
+      }
+    ]
+  },
   "Geometry_point": {
     "kind": "point",
     "position": {

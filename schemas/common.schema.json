@@ -432,7 +432,8 @@
                           },
                           "propertyNames": {
                             "enum": [
-                              "bindings"
+                              "bindings",
+                              "coalition"
                             ]
                           }
                         }
@@ -1395,6 +1396,9 @@
           "$ref": "#/$defs/Geometry_polyarc"
         },
         {
+          "$ref": "#/$defs/Geometry_path"
+        },
+        {
           "$ref": "#/$defs/Geometry_figure_eight"
         },
         {
@@ -1667,6 +1671,94 @@
       "required": [
         "kind",
         "points"
+      ],
+      "type": "object"
+    },
+    "Geometry_path": {
+      "additionalProperties": false,
+      "description": "A path geometry is an open line of straight segments and circular-arc segments in sequence. It does not close into an area.",
+      "properties": {
+        "kind": {
+          "const": "path",
+          "description": "The value identifies this record as a path geometry. The value is `path`."
+        },
+        "segments": {
+          "description": "This list contains, in order, the straight segments and circular-arc segments that make the path. A straight segment that follows a straight segment shall start at its end.",
+          "items": {
+            "oneOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "end": {
+                    "$ref": "#/$defs/GeoPoint",
+                    "description": "This field gives the geographic position of the end of the straight segment, as latitude and longitude."
+                  },
+                  "kind": {
+                    "const": "line",
+                    "description": "The value identifies this record as a path segment. The value is `line` for a straight segment and `arc` for an arc."
+                  },
+                  "start": {
+                    "$ref": "#/$defs/GeoPoint",
+                    "description": "This field gives the geographic position of the start of the straight segment, as latitude and longitude."
+                  }
+                },
+                "required": [
+                  "kind",
+                  "start",
+                  "end"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "center": {
+                    "$ref": "#/$defs/GeoPoint",
+                    "description": "This field gives the geographic position of the centre of the arc, as latitude and longitude."
+                  },
+                  "end_bearing": {
+                    "$ref": "#/$defs/Bearing",
+                    "description": "This field gives the bearing from the centre to the end of the arc, as a bearing with its unit and reference."
+                  },
+                  "kind": {
+                    "const": "arc",
+                    "description": "The value identifies this record as a path segment. The value is `line` for a straight segment and `arc` for an arc."
+                  },
+                  "radius": {
+                    "$ref": "#/$defs/Length",
+                    "description": "This field gives the radius of the arc, as a length with its unit."
+                  },
+                  "start_bearing": {
+                    "$ref": "#/$defs/Bearing",
+                    "description": "This field gives the bearing from the centre to the start of the arc, as a bearing with its unit and reference."
+                  },
+                  "turns": {
+                    "description": "This field gives the direction of the arc from its start to its end, as one of the enumerated values. With the value `left`, the arc turns to the left side, and with `right`, it turns to the right side.",
+                    "enum": [
+                      "left",
+                      "right"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind",
+                  "center",
+                  "radius",
+                  "start_bearing",
+                  "end_bearing",
+                  "turns"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "segments"
       ],
       "type": "object"
     },

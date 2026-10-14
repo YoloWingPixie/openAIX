@@ -1,4 +1,4 @@
-"""Territory records and air defense sectors: affiliation, required shape, country codes and no vertical limits."""
+"""Territory records and air defense sectors: affiliation, required shape, country codes and optional vertical limits."""
 from copy import deepcopy
 import json
 from pathlib import Path
@@ -41,13 +41,32 @@ class TerritoryTests(unittest.TestCase):
             with self.subTest(field=field, value=value), self.assertRaises(ContractError):
                 validate_document(document)
 
-    def test_territory_has_no_vertical_limits_or_curves(self):
+    def test_territory_vertical_limits_are_optional(self):
+        hostile = territory("isis-held")
+        self.assertEqual(hostile["lower_limit"], {"value": 1000, "unit": "ft", "reference": "MSL"})
+        self.assertEqual(hostile["upper_limit"], {"unlimited": True})
+        friendly = territory("jordan")
+        self.assertNotIn("lower_limit", friendly)
+        self.assertNotIn("upper_limit", friendly)
+        for limits in ({}, {"lower_limit": {"surface": True}}, {"upper_limit": {"value": 10000, "unit": "ft", "reference": "MSL"}},
+                       {"lower_limit": {"value": 500, "unit": "ft", "reference": "AGL"}, "upper_limit": {"unlimited": True}}):
+            with self.subTest(limits=limits):
+                validate_document({**territory("jordan"), **limits})
+
+    def test_territory_rejects_bad_limits_altitude_block_and_curves(self):
         for field, value in (("altitude", {"lower": {"surface": True}, "upper": {"unlimited": True}}),
+                             ("lower_limit", {"value": 1000}), ("upper_limit", {"unlimited": False}),
                              ("geometry", {"kind": "circle", "center": {"latitude": 31.5, "longitude": 37.0}, "radius": {"value": 20, "unit": "nm"}})):
             document = territory("jordan")
             document[field] = value
             with self.subTest(field=field), self.assertRaises(ContractError):
                 validate_document(document)
+
+    def test_territory_floor_must_be_below_its_ceiling(self):
+        document = territory("isis-held")
+        document["upper_limit"] = {"value": 500, "unit": "ft", "reference": "MSL"}
+        with self.assertRaises(ContractError):
+            validate_document(document)
 
     def test_coalition_is_not_a_territory_field(self):
         document = territory("isis-held")

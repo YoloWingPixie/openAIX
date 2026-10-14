@@ -1,29 +1,26 @@
 {
   "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
   "active": {
-    "end": "2026-10-02T15:00:00Z",
-    "start": "2026-10-02T13:00:00Z"
+    "continuous": true
   },
   "altitude": {
     "lower": {
-      "reference": "MSL",
-      "unit": "ft",
-      "value": 10000
+      "surface": true
     },
     "upper": {
       "reference": "MSL",
       "unit": "ft",
-      "value": 12000
+      "value": 4500
     }
   },
   "channels": [
-    "control-uhf"
+    "salti-uhf"
   ],
-  "controlling_agency": "darkstar",
+  "controlling_agency": "salti-tower",
   "coordination_instructions": [
-    "Request climb at Marshal; do not climb into the stack without clearance."
+    "Report HIGHWAY to Salti Tower; continue on the north route from Salti Dam."
   ],
-  "description": "Special Corridor (SC) for the inbound route from Juniper to Marshal, below Mesa holding.",
+  "description": "Published VFR arrival from the highway east of Muwaffaq Salti; it arcs north at 8 nm to Salti Dam.",
   "extensions": {
     "sim": {
       "dcs": {
@@ -49,33 +46,75 @@
     }
   },
   "geometry": {
-    "kind": "corridor",
-    "one_way": true,
-    "points": [
+    "kind": "path",
+    "segments": [
       {
-        "latitude": 33.59,
-        "longitude": 38.552
+        "end": {
+          "latitude": 31.89198,
+          "longitude": 36.917165
+        },
+        "kind": "line",
+        "start": {
+          "latitude": 31.825137,
+          "longitude": 37.055691
+        }
       },
       {
-        "latitude": 34.059,
-        "longitude": 39.477
+        "center": {
+          "latitude": 31.825431,
+          "longitude": 36.781257
+        },
+        "end_bearing": {
+          "reference": "true",
+          "value": 20
+        },
+        "kind": "arc",
+        "radius": {
+          "unit": "nm",
+          "value": 8
+        },
+        "start_bearing": {
+          "declination_deg": 5.0,
+          "reference": "true",
+          "value": 60
+        },
+        "turns": "left"
       }
-    ],
-    "width": {
-      "unit": "nm",
-      "value": 3
-    }
+    ]
   },
-  "id": "south-transit",
-  "name": "South transit corridor",
-  "notes": "Maximum 300 knots indicated; outside the period the published Jordanian routes apply.",
-  "purpose": "Keep inbound traffic below the holding stack.",
+  "id": "vfr-salti-east",
+  "joins": [
+    {
+      "route": "vfr-salti-north",
+      "vertex": 2
+    }
+  ],
+  "name": "Salti east VFR arrival",
+  "notes": "Not sterile of other traffic; helicopters use the same highway.",
+  "purpose": "Keep VFR arrivals clear of the runway 31 final approach.",
   "resources_ref": {
     "id": "oir-resources",
     "revision": "1"
   },
   "restrictions": [
-    "Inbound only; outbound traffic uses Marshal to Cedar."
+    "Remain at or below 4,500 feet MSL until Salti Dam."
   ],
-  "type": "SC"
+  "serves": [
+    {
+      "airfield": "ojms",
+      "runway": "31"
+    }
+  ],
+  "type": "VFRRTE",
+  "vertices": [
+    {
+      "index": 0,
+      "name": "HIGHWAY"
+    },
+    {
+      "index": 2,
+      "name": "DAM",
+      "point": "vrp-salti-dam"
+    }
+  ]
 }

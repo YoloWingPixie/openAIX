@@ -77,11 +77,19 @@
     "kind": "geojson"
   },
   "id": "isis-held",
+  "lower_limit": {
+    "reference": "MSL",
+    "unit": "ft",
+    "value": 1000
+  },
   "name": "ISIS-held Euphrates valley",
   "notes": "The boundary follows the FLOT; it moves when the FLOT moves.",
   "resources_ref": {
     "id": "oir-resources",
     "revision": "1"
   },
-  "type": "TERRITORY"
+  "type": "TERRITORY",
+  "upper_limit": {
+    "unlimited": true
+  }
 }

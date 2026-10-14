@@ -2,7 +2,7 @@
   "$id": "urn:openaix:schema:territory:0.1.0-draft.2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
-  "description": "A territory is a land area with an affiliation: friendly, hostile or neutral. The required shape gives the boundary, and it has priority over the country codes. Thus a territory can be in a real, a historic or a fictional world. A territory has no vertical limits.",
+  "description": "A territory is a land area with an affiliation: friendly, hostile or neutral. The required shape gives the boundary, and it has priority over the country codes. Thus a territory can be in a real, a historic or a fictional world. Without vertical limits, a territory runs from the surface with no upper limit.",
   "properties": {
     "$schema": {
       "description": "This field identifies the schema that validates this document.",
@@ -93,7 +93,8 @@
                   },
                   "propertyNames": {
                     "enum": [
-                      "bindings"
+                      "bindings",
+                      "coalition"
                     ]
                   }
                 }
@@ -125,6 +126,10 @@
       "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/Identifier",
       "description": "This field identifies this territory. Other records and orders use it to refer to this territory."
     },
+    "lower_limit": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/VerticalLimit",
+      "description": "This field gives the floor of the territory: an altitude with its reference, or the surface. This field is optional; without it, the floor is the surface."
+    },
     "name": {
       "description": "This field gives the name of this territory, for display.",
       "minLength": 1,
@@ -141,6 +146,10 @@
     "type": {
       "const": "TERRITORY",
       "description": "The value identifies this record as a territory. The value is the same for all territories."
+    },
+    "upper_limit": {
+      "$ref": "urn:openaix:schema:common:0.1.0-draft.2#/$defs/VerticalLimit",
+      "description": "This field gives the ceiling of the territory: an altitude with its reference, or no limit. This field is optional; without it, the territory has no upper limit."
     }
   },
   "required": [

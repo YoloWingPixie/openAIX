@@ -1,5 +1,5 @@
 {
-  "$inputs_sha256": "348fb92558d7d99af5b52742502f08213080a8b6bdaba54c09daab06a87224c7",
+  "$inputs_sha256": "25c4e654ebcc07fce7bcc96a0fe225a3e4a4f807bba71bcf9480f718ab8e97d8",
   "urn:openaix:schema:aco:0.1.0-draft.2": [
     {
       "alternatives": [
@@ -159,8 +159,13 @@
       "reason": "conditional"
     },
     {
+      "path": "resources/control_measures/*/joins",
+      "reason": "no_value"
+    },
+    {
       "alternatives": [
         "line",
+        "path",
         "geojson"
       ],
       "path": "resources/control_measures/*/geometry",
@@ -450,7 +455,7 @@
     },
     {
       "path": "extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/bindings/*/line_mode",
@@ -543,7 +548,7 @@
     },
     {
       "path": "extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
@@ -1171,6 +1176,13 @@
     },
     {
       "alternatives": [
+        "arc"
+      ],
+      "path": "Geometry_path/segments/*",
+      "selected": "line"
+    },
+    {
+      "alternatives": [
         "Polygon"
       ],
       "path": "Geometry_geojson_polygon/geometry",
@@ -1186,6 +1198,7 @@
         "racetrack",
         "track_racetrack",
         "sector",
+        "path",
         "figure_eight",
         "Geometry_vertical",
         "description",
@@ -1314,7 +1327,7 @@
     },
     {
       "path": "MeasureCatalogue/*/extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "MeasureCatalogue/*/extensions/sim/dcs/bindings/*/unit_type",
@@ -1347,6 +1360,7 @@
     {
       "alternatives": [
         "line",
+        "path",
         "geojson"
       ],
       "path": "MeasureCatalogue/*/geometry",
@@ -1409,10 +1423,10 @@
     },
     {
       "alternatives": [
-        "control_measure"
+        "arc"
       ],
-      "path": "MeasureCatalogue/*/segments/*/fix",
-      "selected": "ident + position"
+      "path": "MeasureCatalogue/*/geometry/segments/*",
+      "selected": "line"
     },
     {
       "alternatives": [
@@ -2344,7 +2358,7 @@
     },
     {
       "path": "extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/bindings/*/line_mode",
@@ -2452,7 +2466,7 @@
     },
     {
       "path": "extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
@@ -2599,7 +2613,7 @@
     },
     {
       "path": "extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
@@ -2693,7 +2707,7 @@
     },
     {
       "path": "extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/bindings/*/layer",
@@ -2925,7 +2939,7 @@
     },
     {
       "path": "extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
@@ -3024,27 +3038,35 @@
   "urn:openaix:schema:measure-route:0.1.0-draft.2": [
     {
       "alternatives": [
-        "start + end + schedule",
-        "continuous"
+        "Window",
+        "start + end + schedule"
       ],
       "path": "active",
-      "selected": "Window"
+      "selected": "continuous"
     },
     {
       "alternatives": [
         "line",
+        "corridor",
         "geojson"
       ],
       "path": "geometry",
-      "selected": "corridor"
+      "selected": "path"
     },
     {
       "alternatives": [
-        "surface",
+        "arc"
+      ],
+      "path": "geometry/segments/*",
+      "selected": "line"
+    },
+    {
+      "alternatives": [
+        "Altitude",
         "unlimited"
       ],
       "path": "altitude/lower",
-      "selected": "Altitude"
+      "selected": "surface"
     },
     {
       "path": "extensions/sim/dcs/objects",
@@ -3092,7 +3114,7 @@
     },
     {
       "path": "extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
@@ -3347,7 +3369,7 @@
     },
     {
       "path": "extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
@@ -3563,7 +3585,7 @@
     },
     {
       "path": "extensions/sim/dcs/coalition",
-      "reason": "conditional"
+      "reason": "no_value"
     },
     {
       "path": "extensions/sim/dcs/bindings/*/polygon_mode",
@@ -4015,6 +4037,7 @@
     {
       "alternatives": [
         "line",
+        "path",
         "geojson"
       ],
       "path": "resources/control_measures/*/geometry",
@@ -4074,6 +4097,13 @@
       ],
       "path": "resources/control_measures/*/geometry",
       "selected": "circle"
+    },
+    {
+      "alternatives": [
+        "arc"
+      ],
+      "path": "resources/control_measures/*/geometry/segments/*",
+      "selected": "line"
     },
     {
       "alternatives": [
@@ -4289,6 +4319,14 @@
       ],
       "path": "geometry/geometry",
       "selected": "MultiPolygon"
+    },
+    {
+      "alternatives": [
+        "surface",
+        "unlimited"
+      ],
+      "path": "lower_limit",
+      "selected": "Altitude"
     },
     {
       "alternatives": [

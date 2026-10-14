@@ -134,7 +134,7 @@ MEASURE_SUBJECTS = {
     "measures/territory": "territory",
 }
 GEOMETRY_SUBJECTS = {"Geometry_" + name: name.replace("_", " ") + " geometry" for name in (
-    "point", "line", "polygon", "circle", "corridor", "racetrack", "track_racetrack", "sector", "polyarc", "figure_eight",
+    "point", "line", "polygon", "circle", "corridor", "racetrack", "track_racetrack", "sector", "polyarc", "path", "figure_eight",
     "vertical", "rectangle", "ellipse")}
 GEOMETRY_SUBJECTS["Geometry_description"] = "`description` geometry"
 SUBJECTS = {
@@ -204,16 +204,42 @@ MEASURES.update(_measure_entries("measures/volume", "area", CONTROLLED, {
     "type": MEASURE_TYPE,
 }))
 MEASURES.update(_measure_entries("measures/route", "route", CONTROLLED, {
-    None: d.root("air route or corridor", None, "a centreline with points in sequence and with mandatory vertical limits",
+    None: d.root("air route or corridor", None, "a centreline with points in sequence and with vertical limits",
                  "Corridor codes also have a lateral width",
+                 "Only a published VFR route (`VFRRTE`) can have no vertical limits",
                  "The type code gives the task of the route, and it tells if the route has air traffic services",
                  "It also gives the area that the route is for: a rear area, a forward area, a maritime force or a base defence zone",
                  "Aircraft can fly a corridor in the two directions, but not when its geometry has the `one_way` flag"),
-    "altitude": d.altitude_block("the route or corridor"),
-    "geometry": d.geometry("the route", "a centreline, or a corridor with its total lateral width", GEOJSON,
+    "altitude": d.altitude_block("the route or corridor",
+                                 d.enforced("Each code other than `VFRRTE` shall have this field", "schema:else"),
+                                 "A floor at the surface and a ceiling give a route with a ceiling only"),
+    "geometry": d.geometry("the route", "a centreline, a corridor with its total lateral width, or a path of straight and arc "
+                           "segments", GEOJSON,
                            d.enforced("When doctrine gives a code as a corridor, the code shall use the corridor geometry", "schema:then")),
+    "joins": d.list_of("other routes that this route joins"),
+    "serves": d.list_of("runways that this route serves", None, "An example is a VFR arrival route to a runway"),
+    "vertices": d.list_of("names and points of the vertices of the route", None,
+                          "A vertex that is not in the list has no name", ordered=True),
     "type": MEASURE_TYPE,
 }))
+VERTEX_CHECK = "validator:openaix.check.measures.route_vertices"
+MEASURES.update({
+    ("measures/route.vertices", "#items"): d.entity("Route vertex", "a vertex of the route geometry with its name or its point record"),
+    ("measures/route.vertices", "index"): d.statement(
+        "This field gives the position of the vertex in the route geometry, from 0 at the start",
+        "The vertices of a path are the start of each segment and the end of the last segment",
+        d.enforced("The index shall be smaller than the number of vertices, and the indexes shall increase in the list", VERTEX_CHECK)),
+    ("measures/route.vertices", "name"): d.name("route vertex", "An example is the charted name of a visual reporting point"),
+    ("measures/route.vertices", "point"): d.reference("point record", "is at this vertex"),
+    ("measures/route.joins", "#items"): d.entity("Route join", "a vertex of this route where another route starts, ends or crosses"),
+    ("measures/route.joins", "route"): d.reference("other route"),
+    ("measures/route.joins", "vertex"): d.statement(
+        "This field gives the index of the vertex of this route that the two routes share",
+        d.enforced("The index shall be smaller than the number of vertices of this route", VERTEX_CHECK)),
+    ("measures/route.serves", "#items"): d.entity("Served runway", "a runway of an airfield that the route goes to or comes from"),
+    ("measures/route.serves", "airfield"): d.reference("airfield", "has the runway"),
+    ("measures/route.serves", "runway"): d.statement("This field gives the designator of the runway end, such as `31`"),
+})
 MEASURES.update(_measure_entries("measures/line", "line", COORDINATED + ("establishing_authority",), {
     None: d.root("coordination line", None, "a line on the ground, with points in sequence, for the coordination of manoeuvre "
                  "or identification",
@@ -373,6 +399,9 @@ MEASURES.update(_measure_entries("measures/airspace", "area", CONTROLLED, {
     "designator": d.statement("This field gives the designator that a publication or an assignment gives to the airspace",
                               "An example is the designator of a restricted area"),
     "local_type": d.text("local type name of the airspace when `airspace_type` is `Other`"),
+    "state": d.statement("This field gives the State responsible for the airspace, as an ISO 3166-1 alpha-3 code such as `DEU`",
+                         "Under ICAO Annex 11, paragraph 2.1, this State is responsible for the air traffic services in the airspace",
+                         "An example is the State of a FIR"),
     "type": d.discriminator("an airspace, which is a region made of airspace volumes"),
 }))
 MEASURES.update(_measure_entries("measures/point", "point", COORDINATED + ("channels", "restrictions"), {
@@ -400,12 +429,15 @@ MEASURES.update(_measure_entries("measures/territory", "area", SHARED, {
     None: d.root("territory", None, "a land area with an affiliation: friendly, hostile or neutral",
                  "The required shape gives the boundary, and it has priority over the country codes",
                  "Thus a territory can be in a real, a historic or a fictional world",
-                 "A territory has no vertical limits"),
+                 "Without vertical limits, a territory runs from the surface with no upper limit"),
     "affiliation": d.enum("affiliation of the territory",
                           "The values are the standard identities friend, hostile and neutral of `MIL-STD-2525` and `APP-6`"),
     "countries": d.list_of("country codes of the territory, as ISO 3166-1 alpha-3 codes such as `SYR`", None,
                            "The codes are labels for maps of the real world", "The geometry gives the boundary"),
     "geometry": d.geometry("the territory", "a polygon or a GeoJSON polygon or multipolygon (RFC 7946)"),
+    "lower_limit": d.vertical_limit("floor", "the territory", None, "This field is optional; without it, the floor is the surface"),
+    "upper_limit": d.vertical_limit("ceiling", "the territory", "an altitude with its reference, or no limit",
+                                    "This field is optional; without it, the territory has no upper limit"),
     "type": d.discriminator("a territory", "The value is the same for all territories"),
 }))
 
@@ -619,6 +651,19 @@ COMMON = {
     ("Geometry_polyarc.segments", "turns"): d.enum("direction of the arc from its start to its end",
                                                    "With the value `left`, the arc turns to the left side, and with "
                                                    "`right`, it turns to the right side"),
+    ("Geometry_path", None): d.entity("Path geometry", "an open line of straight segments and circular-arc segments in sequence",
+                                      "It does not close into an area"),
+    ("Geometry_path.segments", "start"): d.position("the start of the straight segment"),
+    ("Geometry_path.segments", "end"): d.position("the end of the straight segment"),
+    ("Geometry_path.segments", "center"): d.position("the centre of the arc"),
+    ("Geometry_path.segments", "radius"): d.quantity("radius of the arc", "Length"),
+    ("Geometry_path.segments", "turns"): d.enum("direction of the arc from its start to its end",
+                                                "With the value `left`, the arc turns to the left side, and with "
+                                                "`right`, it turns to the right side"),
+    ("Geometry_path.segments", "kind"): d.discriminator("a path segment",
+                                                        "The value is `line` for a straight segment and `arc` for an arc"),
+    ("Geometry_path.segments", "start_bearing"): d.quantity("bearing from the centre to the start of the arc", "Bearing"),
+    ("Geometry_path.segments", "end_bearing"): d.quantity("bearing from the centre to the end of the arc", "Bearing"),
     ("Geometry_polygon", None): d.entity("Polygon geometry", "A closed horizontal boundary",
                                          "The first ring is the external boundary, and the next rings are holes"),
     ("Geometry_polygon", "rings"): d.list_of("closed rings of positions", None,
@@ -786,6 +831,11 @@ PRIMITIVE_FIELDS = {
     ("Geometry_line", "points"): d.list_of("geographic positions of the open line", None, "The first position is the start",
                                            ordered=True),
     ("Geometry_point", "kind"): _geometry_kind("point", "point"),
+    ("Geometry_path", "kind"): _geometry_kind("path", "path"),
+    ("Geometry_path", "segments"): d.list_of(
+        "straight segments and circular-arc segments", "make the path",
+        d.enforced("A straight segment that follows a straight segment shall start at its end",
+                   "validator:openaix.check.measures.path_segments"), ordered=True),
     ("Geometry_polyarc", "kind"): _geometry_kind("polyarc", "polyarc"),
     ("Geometry_polyarc", "segments"): d.list_of("straight segments and circular-arc segments", "make the boundary",
                                                 ordered=True),

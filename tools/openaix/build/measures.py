@@ -12,7 +12,7 @@ from referencing import Registry, Resource
 from openaix.build.airspace_types import TYPES as AIRSPACE_TYPES
 from openaix.build.common import (BASE, COMMON, DIALECT, GEOJSON_SHAPES, GEOMETRY_NAMES, VERSION, external,
                                   geometry_example)
-from openaix.build.spatial import coordination_fields, root_fields
+from openaix.build.spatial import COUNTRY_CODE, coordination_fields, root_fields
 from openaix.describe import templates as d
 from openaix.describe.resolve import schema_description
 from openaix.describe.tables.common import (AIRSPACE_TYPE_CODES, AIRSPACE_TYPES_DESCRIPTION, MEASURE_SOURCE,
@@ -25,7 +25,7 @@ SHARED_CODES = {
     "volume": ("AARA", "ACCA", "AEWA", "ACAR", "CBA", "DZ", "EC", "FACA", "HIDACZ", "LZ", "NFZ", "PZ", "RECCE", "ROZ",
                "SSMS", "TRA", "TSA", "TRNG", "UAA", "ADIZ", "BDZ", "CADA", "FEZ", "WFZ", "CCZONE", "COZ", "SAFES", "SCZ",
                "ALTRV", "RCA", "BZ", "JEZ", "ADS"),
-    "route": ("AIRRTE", "LLTR", "SAAFR", "SC", "TMRR", "TC", "TR", "SL", "APPCOR", "MRR", "AIRCOR"),
+    "route": ("AIRRTE", "LLTR", "SAAFR", "SC", "TMRR", "TC", "TR", "SL", "APPCOR", "MRR", "AIRCOR", "VFRRTE"),
     "line": ("FEBA", "FLOT", "IFFON", "IFFOFF", "PL", "BOUNDARY", "LOA", "LD", "LC"),
     "fire-support-line": ("FSCL", "CFL", "RFL", "BCL"),
     "area": ("AOA", "EA", "NFA", "RFA", "FFA", "OBJ", "BP", "AA", "NAI", "TAI", "FSA"),
@@ -57,10 +57,10 @@ PROJECTIONS = {
     "SAMEZ": ("mez", {"type": "MEZ"}),
 }
 PLAIN_SCHEMAS = ("orbit", "airspace", "point", "navaid", "airway", "territory")
+# Route codes without a doctrinal altitude block: a published VFR route can have no vertical limits (FAA AIM 3-5-5a).
+UNLIMITED_ROUTE_CODES = ("VFRRTE",)
 # Affiliations of a territory: the standard identities friend, hostile and neutral of MIL-STD-2525 and APP-6.
 AFFILIATIONS = ("friend", "hostile", "neutral")
-# ISO 3166-1 alpha-3 country code.
-COUNTRY_CODE = r"^[A-Z]{3}$"
 
 
 def schema_id(name):
@@ -136,9 +136,24 @@ def build_contracts():
     single = {name: {"const": code} for name, code in SINGLE_CODES.items()}
     bodies = {
         "volume": ({**coordination, "components": components}, ["components"], []),
-        "route": ({**coordination, "geometry": geometry("line", "corridor"), "altitude": ref("AltitudeBlock")}, ["geometry", "altitude"],
+        "route": ({**coordination, "geometry": geometry("line", "corridor", "path"), "altitude": ref("AltitudeBlock"),
+                   "vertices": {"type": "array", "minItems": 1, "items": {
+                       "type": "object", "additionalProperties": False,
+                       "properties": {"index": {"type": "integer", "minimum": 0}, "name": text(), "point": ref("Identifier", "control_measures")},
+                       "required": ["index"], "anyOf": [{"required": ["name"]}, {"required": ["point"]}]}},
+                   "joins": {"type": "array", "minItems": 1, "items": {
+                       "type": "object", "additionalProperties": False,
+                       "properties": {"route": ref("Identifier", "control_measures"), "vertex": {"type": "integer", "minimum": 0}},
+                       "required": ["route", "vertex"]}},
+                   "serves": {"type": "array", "minItems": 1, "items": {
+                       "type": "object", "additionalProperties": False,
+                       "properties": {"airfield": ref("Identifier", "places"), "runway": ref("RunwayDesignator")},
+                       "required": ["airfield", "runway"]}}},
+                  ["geometry"],
                   [{"if": {"properties": {"type": {"enum": list(CORRIDOR_CODES)}}, "required": ["type"]},
-                    "then": {"properties": {"geometry": ref("Geometry_corridor")}}}]),
+                    "then": {"properties": {"geometry": ref("Geometry_corridor")}}},
+                   {"if": {"properties": {"type": {"enum": list(UNLIMITED_ROUTE_CODES)}}, "required": ["type"]},
+                    "else": {"required": ["altitude"]}}]),
         # The hostile side is to the left or to the right of the line, in the order of its points.
         "line": ({"geometry": geometry("line"), "hostile_side": {"enum": ["left", "right"]}, **authority}, ["geometry"], []),
         "fire-support-line": ({"geometry": geometry("line"), **authority}, ["geometry"], []),
@@ -181,13 +196,14 @@ def build_contracts():
 
 
 def territory_contract(root):
-    """Territory: a friendly, hostile or neutral land area with a required shape and optional country codes. It has
-    no vertical limits and no catalogue code."""
+    """Territory: a friendly, hostile or neutral land area with a required shape, optional country codes and optional
+    vertical limits. It has no catalogue code."""
     countries = {"type": "array", "minItems": 1, "uniqueItems": True, "items": {"type": "string", "pattern": COUNTRY_CODE}}
     return {"$schema": DIALECT, "$id": schema_id("territory"), "title": "Territory", "description": schema_description("measures/territory"),
             "type": "object", "additionalProperties": False,
             "properties": {**deepcopy(root), "type": {"const": "TERRITORY"}, "affiliation": {"enum": list(AFFILIATIONS)},
-                           "geometry": {"oneOf": [external("Geometry_polygon")]}, "countries": countries},
+                           "geometry": {"oneOf": [external("Geometry_polygon")]}, "countries": countries,
+                           "lower_limit": external("VerticalLimit"), "upper_limit": external("VerticalLimit")},
             "required": ["id", "name", "type", "affiliation", "geometry"]}
 
 

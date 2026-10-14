@@ -1,4 +1,4 @@
-"""Control-measure semantic checks: airspace components, kill box floors and measure catalogue identity.
+"""Control-measure semantic checks: airspace components, kill box floors, route vertices and measure catalogue identity.
 
 Hooks called by check/validate.py: semantic(value, path, period), catalogues(document, resources),
 document(document, resources). See check/navigation.py for the contract.
@@ -16,7 +16,50 @@ def same_altitude(limit, altitude):
     return bool(altitude) and all(limit.get(key) == altitude.get(key) for key in ("value", "unit", "reference"))
 
 
+def vertex_count(geometry):
+    """Number of vertices of a route geometry: the points of a line or a corridor, the segment ends of a path, or the
+    positions of a GeoJSON line. None for another shape."""
+    if geometry.get("kind") in {"line", "corridor"}:
+        return len(geometry.get("points", []))
+    if geometry.get("kind") == "path":
+        return len(geometry.get("segments", [])) + 1
+    if geometry.get("kind") == "geojson" and geometry.get("geometry", {}).get("type") == "LineString":
+        return len(geometry["geometry"].get("coordinates", []))
+    return None
+
+
+def path_segments(value, path):
+    """A straight segment of a path that follows a straight segment starts at its end."""
+    segments = value.get("segments", [])
+    for index in range(1, len(segments)):
+        before, segment = segments[index - 1], segments[index]
+        if before.get("kind") == "line" and segment.get("kind") == "line" and segment.get("start") != before.get("end"):
+            raise ContractError(pointer((*path, "segments", index, "start")), "path segment does not start at the end of the previous segment")
+
+
+def route_vertices(value, path):
+    """Each route vertex index and join vertex is a vertex of the route geometry; vertex indexes increase."""
+    count = vertex_count(value["geometry"]) if isinstance(value.get("geometry"), dict) else None
+    previous = -1
+    for index, vertex in enumerate(value.get("vertices", [])):
+        location = pointer((*path, "vertices", index, "index"))
+        if count is not None and vertex["index"] >= count:
+            raise ContractError(location, "route vertex index is outside the geometry")
+        if vertex["index"] <= previous:
+            raise ContractError(location, "route vertex indexes shall increase")
+        previous = vertex["index"]
+    for index, join in enumerate(value.get("joins", [])):
+        if count is not None and join["vertex"] >= count:
+            raise ContractError(pointer((*path, "joins", index, "vertex")), "join vertex is outside the geometry")
+        if join["route"] == value.get("id"):
+            raise ContractError(pointer((*path, "joins", index, "route")), "a route cannot join itself")
+
+
 def semantic(value, path, period):
+    if value.get("kind") == "path" and "segments" in value:
+        path_segments(value, path)
+    if "geometry" in value and ("vertices" in value or "joins" in value):
+        route_vertices(value, path)
     if "components" in value:
         identifiers = set()
         for index, part in enumerate(value["components"]):
