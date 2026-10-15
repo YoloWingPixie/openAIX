@@ -20,7 +20,7 @@ def comms_standard_example(version):
                 "uhf_16": {"name": "CCA TANKER", "frequency": frequency(285.0), "usage": "recovery tanker"},
                 "texaco11": {"name": "TEXACO11", "frequency": frequency(285.0)},
             },
-            "squadrons": {"vfa_81": {"name": "VFA-81", "aircraft_type": "fa_18c", "flights": ["sol"], "stn_prefix": "02", "mode_1": "02"}},
+            "squadrons": {"vfa_81": {"name": "VFA-81", "aircraft_type": "fa_18c", "flights": ["sol"], "stn_prefix": "02", "mode_1": "20"}},
             "flights": {"sol": {"callsign": "SOL", "squadron": "vfa_81", "aircraft_type": "fa_18c", "datalink_callsign": "SO",
                                 "intraflight": "uhf_03", "stn_block": "0210", "laser_block": "71", "members": members,
                                 "tacan_aa": {"lead": {"channel": 12, "band": "Y"}, "wing": {"channel": 75, "band": "Y"}}}},

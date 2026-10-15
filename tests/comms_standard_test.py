@@ -56,6 +56,11 @@ class CommsStandardTests(unittest.TestCase):
         self.rejected(lambda d: d["flights"]["sol"]["members"][0].update(stn="02181"), "pattern")
         self.rejected(lambda d: d["support"]["texaco11"].update(stn="07089"), "pattern")
 
+    def test_mode_1_second_digit_is_0_to_3(self):
+        self.rejected(lambda d: d["squadrons"]["vfa_81"].update(mode_1="14"), "pattern")
+        self.rejected(lambda d: d["support"]["texaco11"].update(mode_1="75"), "pattern")
+        validate_document(changed(lambda d: d["squadrons"]["vfa_81"].update(mode_1="73")))
+
     def test_restricted_mode_3(self):
         self.rejected(lambda d: d["support"]["texaco11"].update(mode_3="7500"), "Mode 3 is restricted")
 

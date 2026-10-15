@@ -23,6 +23,7 @@ TEAM_RULES = ("flight_members",)
 DONOR_RULES = ("awacs_and_flight_leads",)
 OCTAL4 = r"^[0-7]{4}$"
 OCTAL2 = r"^[0-7]{2}$"
+MODE_1 = r"^[0-7][0-3]$"
 
 
 def identifier(collection=None):
@@ -58,7 +59,7 @@ def comms_standard_schema():
         "RadioPlan": record({"name": text(), "aircraft_types": array(external("Identifier"), 1), "radios": array(ref("Radio"), 1)},
                             ("name", "aircraft_types", "radios")),
         "Squadron": record({"name": text(), "aircraft_type": external("Identifier"), "flights": array(identifier("flights")),
-                            "stn_prefix": text(pattern=OCTAL2), "mode_1": text(pattern=OCTAL2),
+                            "stn_prefix": text(pattern=OCTAL2), "mode_1": text(pattern=MODE_1),
                             "mids": obj({"voca": mids(), "vocb": mids()})}, ("name", "aircraft_type", "stn_prefix", "mode_1")),
         "Member": member,
         "TacanPair": obj({"lead": external("TACAN"), "wing": external("TACAN")}, ("lead", "wing")),
@@ -69,7 +70,7 @@ def comms_standard_schema():
                          ("callsign", "squadron", "aircraft_type", "datalink_callsign", "intraflight", "stn_block", "members", "tacan_aa")),
         "Support": record({"callsign": text(), "role": {"enum": list(SUPPORT_ROLES)}, "aircraft_type": external("Identifier"),
                            "refuel": {"enum": list(REFUEL_TYPES)}, "channels": array(identifier("channels"), 1), "tacan": external("TACAN"),
-                           "datalink_callsign": text(pattern=r"^[A-Z]{2}$"), "stn": external("LinkStation"), "mode_1": text(pattern=OCTAL2),
+                           "datalink_callsign": text(pattern=r"^[A-Z]{2}$"), "stn": external("LinkStation"), "mode_1": text(pattern=MODE_1),
                            "mode_3": text(pattern=OCTAL4)},
                           ("callsign", "role", "aircraft_type", "channels", "tacan", "datalink_callsign", "stn", "mode_3")),
         "Ship": record({"hull": text(pattern=r"^[A-Za-z0-9_]+$"), "name": text(), "tacan": external("TACAN"),
