@@ -8,6 +8,7 @@ COMMANDS = {
     "lint": ("openaix.describe.lint", "lint every generated description"),
     "source-audit": ("openaix.sources.audit", "check that catalogue entries cite a resolvable first-party source"),
     "fetch-authorities": ("openaix.sources.fetch", "download and verify pinned authority files into .cache/"),
+    "comms": ("openaix.comms.render", "render a communications standard as Markdown tables (comms render <file> --format md)"),
     "viewer": ("openaix.viewer", "serve the schema and example browser"),
 }
 
