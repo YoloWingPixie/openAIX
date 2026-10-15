@@ -13,6 +13,7 @@ from referencing.exceptions import NoSuchResource
 from openaix import ROOT
 from openaix.build.availability import schedule_errors
 from openaix.build.units import LENGTH_UNITS
+from openaix.check import comms_standard as comms_standard_checks
 from openaix.check import emitters as emitter_checks
 from openaix.check import measures as measure_checks
 from openaix.check import navigation as navigation_checks
@@ -27,11 +28,11 @@ if "date-time" not in FORMAT_CHECKER.checkers:
     raise SystemExit("rfc3339-validator is required: jsonschema cannot enforce date-time without it")
 # Area semantic checks. Each module provides semantic(value, path, period), catalogues(document, resources)
 # and document(document, resources); areas add checks there without editing this engine.
-AREAS = (navigation_checks, measure_checks, order_checks, emitter_checks, scl_checks)
+AREAS = (navigation_checks, measure_checks, order_checks, emitter_checks, scl_checks, comms_standard_checks)
 
 
 # Record kinds that one schema validates under another name: carriers and FARPs are airfield records.
-KIND_SCHEMAS = {"carrier": "airfield", "farp": "airfield"}
+KIND_SCHEMAS = {"carrier": "airfield", "farp": "airfield", "comms_standard": "comms-standard"}
 
 
 def unavailable(uri):
@@ -390,7 +391,17 @@ def run():
         except ContractError as error:
             raise SystemExit(str(path.relative_to(ROOT)) + ": " + str(error))
         count += 1
-    print(f"Validated {len(records)} schemas and {count} examples offline.")
+    # Hand-authored standards (standards/) are not generated; each is validated like an example, and its warnings are printed.
+    standards = sorted((ROOT / "standards").rglob("*.json"))
+    for path in standards:
+        try:
+            document = json.loads(path.read_text())
+            validate_document(document)
+        except ContractError as error:
+            raise SystemExit(str(path.relative_to(ROOT)) + ": " + str(error))
+        for location, warning in comms_standard_checks.warnings(document):
+            print(f"warning: {path.relative_to(ROOT)}{location}: {warning}")
+    print(f"Validated {len(records)} schemas, {count} examples and {len(standards)} standards offline.")
 
 
 def main():

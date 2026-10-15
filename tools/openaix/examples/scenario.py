@@ -13,6 +13,7 @@ from openaix.examples.aco import (MISSION_ID, START, agencies, build_aco_example
 from openaix.examples.airfields import (carrier, prince_hassan, farp, ojms, ojms_navigation, ojms_procedures, salti_vfr, tacans, h4,
                                        tiyas, usaf_standard)
 from openaix.examples.briefs import add_briefs, brief_resources, role_missions
+from openaix.examples.comms_standard import comms_standard_example
 from openaix.examples.measures import measures as measure_examples
 from openaix.examples.opord import order_channels, order_examples, order_measures, spins_measures
 from openaix.examples.scls import aircraft_type, aircraft_types, scl_example, scls, stores
@@ -484,6 +485,7 @@ def scenario_examples(version):
         "examples/c2-agency.json": c2_agency(version),
         "examples/fac.json": fac(version),
         "examples/scl.json": scl_example(version, RESOURCES_REF),
+        **comms_standard_example(version),
         "examples/carrier.json": carrier(version),
         "examples/farp.json": {"$schema": f"urn:openaix:schema:airfield:{version}", **farp(), "resources_ref": deepcopy(RESOURCES_REF)},
     }

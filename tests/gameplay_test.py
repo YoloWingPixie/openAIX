@@ -80,7 +80,7 @@ class GameplayTests(unittest.TestCase):
         self.valid_ato(self.ato)
 
     def test_laser_codes_outside_1111_to_1788_are_rejected(self):
-        for code in ("1099", "1088", "1189", "1811", "1789", "0111", "168", "16880", "abcd", 1688):
+        for code in ("1099", "1088", "1189", "1911", "1789", "0111", "168", "16880", "abcd", 1688):
             with self.subTest(code=code):
                 document = deepcopy(self.ato)
                 self.flight(document, "weasel")["configuration"]["member_overrides"][0]["laser_code"] = code

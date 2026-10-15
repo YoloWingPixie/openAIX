@@ -103,6 +103,7 @@ def common_definitions(schema, catalogue, ato):
     common_id = schema["$id"]
     fscm = sorted(entry["code"] for entry in catalogue["types"] if entry["category"] == "fscm") + ["ACA"]
     defs["Pressure"] = obj({"value": {"type": "number", "exclusiveMinimum": 0}, "unit": {"enum": list(PRESSURE_UNITS)}}, ("value", "unit"))
+    defs["LinkStation"] = {"type": "string", "pattern": STN}
     defs["TargetMark"] = {"type": "string", "enum": list(TARGET_MARKS)}
     defs["FriendlyMarking"] = {"type": "string", "enum": list(FRIENDLY_MARKINGS)}
     defs["BearingRange"] = obj({"start_bearing": c("Bearing"), "end_bearing": c("Bearing")}, ("start_bearing", "end_bearing"))
@@ -177,12 +178,11 @@ def enrich_gameplay(artifacts, common):
         "crew": array({"$ref": "#/$defs/CrewMember"}, 1, unique=False),
         "laser_code": c("LaserCode"),
     })
-    defs["LinkStation"] = {"type": "string", "pattern": STN}
     channel = {"type": "integer", "minimum": MIDS_CHANNELS[0], "maximum": MIDS_CHANNELS[1]}
     defs["Link16"] = obj({
-        "stn": {"$ref": "#/$defs/LinkStation"}, "fighter_channel": dict(channel), "mission_channel": dict(channel),
-        "special_channel": dict(channel), "donors": array({"$ref": "#/$defs/LinkStation"}),
-        "team": array({"$ref": "#/$defs/LinkStation"}),
+        "stn": c("LinkStation"), "fighter_channel": dict(channel), "mission_channel": dict(channel),
+        "special_channel": dict(channel), "donors": array(c("LinkStation")),
+        "team": array(c("LinkStation")),
     })
     defs["Identification"]["properties"]["link16"] = {"$ref": "#/$defs/Link16"}
 

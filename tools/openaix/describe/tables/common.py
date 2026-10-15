@@ -688,8 +688,9 @@ COMMON = {
                                           "above mean sea level"),
     ("Geometry_vertical", "altitude"): d.quantity("altitude of the traverse level above mean sea level", "Altitude"),
 
-    ("LaserCode", None): d.entity("Laser code", "a code of four digits for the PRF of a laser, from `1111` to `1788`",
-                                  "The second digit is 1 to 7, and the last two digits are 1 to 8"),
+    ("LaserCode", None): d.entity("Laser code", "a code of four digits for the PRF of a laser, from `1111` to `1888`",
+                                  "The digits after the first are 1 to 8",
+                                  "Most DCS aircraft and weapons accept only codes up to `1788`; the comms standard check warns above it"),
     ("Length", None): d.entity("Length", "A horizontal distance or dimension with its unit: metres, feet, nautical miles or kilometres"),
     ("Metadata", "id"): GENERIC["id"]("document"),
     ("Offset", None): d.entity("Offset", "a number of minutes from the start of the period of the ATO that contains it",

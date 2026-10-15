@@ -18,6 +18,7 @@ from openaix.build.opord import schema as opord_schema
 from openaix.build.opord.documents import order_document_schemas
 from openaix.build.order_typing import type_orders
 from openaix.build.planning_fields import enrich_planning
+from openaix.build.comms_standard import comms_standard_schema
 from openaix.build.scl import enrich_scl, scl_schema
 from openaix.build.targeting import target_list
 from openaix.examples.aco import build_aco_example, build_minimal_aco_example
@@ -190,7 +191,8 @@ def order_schemas(source, documents):
     artifacts = {"schemas/ato.schema.json": canonical_ato(source), "schemas/aco.schema.json": aco_schema(),
                  "schemas/resources.schema.json": resource_schema(source),
                  "schemas/c2-agency.schema.json": c2_agency_schema(), "schemas/fac.schema.json": fac_schema(),
-                 "schemas/scl.schema.json": scl_schema()}
+                 "schemas/scl.schema.json": scl_schema(),
+                 "schemas/comms-standard.schema.json": comms_standard_schema()}
     for name, model in documents.items():
         artifacts["schemas/" + name + ".schema.json"] = document_schema(name, model)
     # OPORD, FRAGO and SPINS are authored contracts (build/opord/), not imported models.
@@ -207,7 +209,7 @@ def order_examples(artifacts):
     artifacts["examples/aco-oir.minimal.json"] = build_minimal_aco_example(VERSION)
 
 
-ORDER_SCHEMAS = ("ato", "aco", "resources", "c2-agency", "fac", "scl", "opord", "frago", "spins", *DOCUMENT_MODELS)
+ORDER_SCHEMAS = ("ato", "aco", "resources", "c2-agency", "fac", "scl", "comms-standard", "opord", "frago", "spins", *DOCUMENT_MODELS)
 
 
 def enrich_orders(artifacts):

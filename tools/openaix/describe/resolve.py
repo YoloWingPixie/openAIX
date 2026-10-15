@@ -28,13 +28,14 @@ from openaix.build.opord import documents as opord_table
 from openaix.describe import templates as d
 from openaix.describe.tables import ato as ato_table
 from openaix.describe.tables import common as common_table
+from openaix.describe.tables import comms_standard as comms_standard_table
 from openaix.describe.tables import gameplay as gameplay_table
 from openaix.describe.tables import navigation as navigation_table
 from openaix.describe.tables import order_fields as order_fields_table
 from openaix.describe.tables import orders as orders_table
 
 
-TABLE_MODULES = (common_table, orders_table, order_fields_table, ato_table, gameplay_table, opord_table, navigation_table)
+TABLE_MODULES = (common_table, comms_standard_table, orders_table, order_fields_table, ato_table, gameplay_table, opord_table, navigation_table)
 DESCRIPTIONS, ENUMS, SUBJECTS = {}, {}, {}
 for _module in TABLE_MODULES:
     for _name, _target in (("DESCRIPTIONS", DESCRIPTIONS), ("ENUMS", ENUMS), ("SUBJECTS", SUBJECTS)):

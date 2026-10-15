@@ -72,7 +72,7 @@ class CodedValueTests(unittest.TestCase):
         store = document["resources"]["scls"]["a10-cas"]["stores"][0]
         store["laser_code"] = "1688"
         validate_document(document)
-        for code in ("8888", "1811", "1190", "1111X"):
+        for code in ("8888", "1911", "1190", "1111X"):
             with self.subTest(code=code):
                 store["laser_code"] = code
                 with self.assertRaises(ContractError):
