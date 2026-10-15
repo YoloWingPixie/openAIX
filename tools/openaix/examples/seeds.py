@@ -292,8 +292,9 @@ def complete(name, seed, resources):
         flights["rage"]["configuration"].update({
             "secondary_scl": "f15e-scar", "secondary_purpose": "SCAR on the Cobalt vehicle park when the strike target is closed."})
         weasel = flights["weasel"]
-        weasel["configuration"]["member_overrides"] = [{"member": 2, "scl": "f16-sead-pre2015", "fuel": deepcopy(weasel["fuel"]),
-                                                        "identification": {"mode_3": "4106"}}]
+        second = weasel["configuration"]["member_overrides"][1]
+        second.update({"scl": "f16-sead-pre2015", "fuel": deepcopy(weasel["fuel"])})
+        second["identification"]["mode_3"] = "4106"
         flights["dodge"]["identification"]["tacan"] = {"channel": 37, "band": "Y", "identifier": "DDG"}
     if name == "scl":
         seed["source"]["path"] = "scl/f-16c-viper"

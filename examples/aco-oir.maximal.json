@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:aco:0.1.0-draft.2",
+  "$schema": "urn:openaix:schema:aco:0.2.0-draft.1",
   "assignments": [
     {
       "control_points": [
@@ -460,7 +460,7 @@
     },
     "control_measures": {
       "cedar": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
+        "$schema": "urn:openaix:schema:point:0.2.0-draft.1",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -499,7 +499,7 @@
         "type": "POINT"
       },
       "cobalt-box": {
-        "$schema": "urn:openaix:schema:measure-kb:0.1.0-draft.2",
+        "$schema": "urn:openaix:schema:measure-kb:0.2.0-draft.1",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -594,7 +594,7 @@
         "type": "KB"
       },
       "falcon": {
-        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.2",
+        "$schema": "urn:openaix:schema:orbit:0.2.0-draft.1",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -671,7 +671,7 @@
         "type": "ORBIT"
       },
       "juniper": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
+        "$schema": "urn:openaix:schema:point:0.2.0-draft.1",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -716,13 +716,15 @@
         "roles": [
           "control",
           "ingress",
-          "gate"
+          "gate",
+          "push",
+          "rendezvous"
         ],
         "route": "marshal-entry",
         "type": "POINT"
       },
       "marshal": {
-        "$schema": "urn:openaix:schema:point:0.1.0-draft.2",
+        "$schema": "urn:openaix:schema:point:0.2.0-draft.1",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -754,13 +756,15 @@
         ],
         "roles": [
           "control",
-          "marshalling"
+          "marshalling",
+          "hold",
+          "anchor"
         ],
         "route": "marshal-entry",
         "type": "POINT"
       },
       "mesa": {
-        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.2",
+        "$schema": "urn:openaix:schema:orbit:0.2.0-draft.1",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -814,7 +818,7 @@
         "type": "ORBIT"
       },
       "rescue-reservation": {
-        "$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2",
+        "$schema": "urn:openaix:schema:measure-volume:0.2.0-draft.1",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -882,7 +886,7 @@
         "type": "ROZ"
       },
       "sentinel": {
-        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.2",
+        "$schema": "urn:openaix:schema:orbit:0.2.0-draft.1",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -936,7 +940,7 @@
         "type": "ORBIT"
       },
       "shell": {
-        "$schema": "urn:openaix:schema:orbit:0.1.0-draft.2",
+        "$schema": "urn:openaix:schema:orbit:0.2.0-draft.1",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -990,7 +994,7 @@
         "type": "ORBIT"
       },
       "south-transit": {
-        "$schema": "urn:openaix:schema:measure-route:0.1.0-draft.2",
+        "$schema": "urn:openaix:schema:measure-route:0.2.0-draft.1",
         "active": {
           "end": "2026-10-02T15:00:00Z",
           "start": "2026-10-02T13:00:00Z"
@@ -1065,6 +1069,7 @@
               "Check in with Darkstar before entering the corridor."
             ],
             "name": "Juniper",
+            "number": 1,
             "position": {
               "latitude": 33.59,
               "longitude": 38.552
@@ -1093,6 +1098,7 @@
               "Request a climb to the assigned Mesa holding level."
             ],
             "name": "Marshal",
+            "number": 2,
             "position": {
               "latitude": 34.059,
               "longitude": 39.477
@@ -1129,6 +1135,7 @@
               "Descend only after Darkstar releases the holding level."
             ],
             "name": "Marshal",
+            "number": 1,
             "position": {
               "latitude": 34.059,
               "longitude": 39.477
@@ -1157,6 +1164,7 @@
               "Contact Banshee after handover."
             ],
             "name": "Cedar",
+            "number": 2,
             "position": {
               "latitude": 33.59,
               "longitude": 39.002
@@ -1181,5 +1189,5 @@
     "targets": {},
     "threats": {}
   },
-  "schema_version": "0.1.0-draft.2"
+  "schema_version": "0.2.0-draft.1"
 }

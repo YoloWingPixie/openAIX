@@ -315,7 +315,11 @@ def schemas(base, version, dialect, common):
                 "transition_level": {"allOf": [ref("Altitude"), {"properties": {"reference": {"const": "FL"}}}]},
                 "remarks": array(text())})
     carrier = obj({"hull_number": text(), "tacan": ref("TACAN"), "icls_channel": {"type": "integer", "minimum": 1, "maximum": 20},
-                   "case_recovery": {"$ref": "#/$defs/CaseRecovery"}}, ("hull_number",))
+                   "case_recovery": {"$ref": "#/$defs/CaseRecovery"},
+                   "link4": {"allOf": [ref("Frequency"), {"properties": {"unit": {"const": "MHz"}}}]},
+                   "acls": {"type": "boolean"},
+                   "recovery_windows": array({"$ref": "#/$defs/RecoveryWindow"}, 1)}, ("hull_number",))
+    recovery_window = obj({"window": ref("Window"), "case": {"enum": list(RECOVERY_CASES)}, "brc": ref("Bearing")}, ("window", "case"))
     case_recovery = obj({"case": {"enum": list(RECOVERY_CASES)}, "marshal_radial": ref("Bearing"),
                          "marshal_altitude": {"allOf": [ref("Altitude"), {"properties": {"reference": {"const": "MSL"}}}]},
                          "marshal_distance": ref("Length")}, ("case",))
@@ -358,7 +362,7 @@ def schemas(base, version, dialect, common):
                                                      {"required": ["hung_ordnance_runway"]}]}}),
     ]
     navigation["airfield"] = schema("airfield", {**airfield, "$defs": {
-        "StationFrequency": station_frequency, "Atis": atis, "Carrier": carrier, "CaseRecovery": case_recovery, "Pad": pad,
+        "StationFrequency": station_frequency, "Atis": atis, "Carrier": carrier, "CaseRecovery": case_recovery, "RecoveryWindow": recovery_window, "Pad": pad,
         "Stand": stand, "TaxiGraph": taxi, "TaxiNode": taxi_node, "TaxiEdge": taxi_edge,
         "TrafficPattern": traffic_pattern, "PatternSet": pattern_set, "InitialPoint": initial_point, "Reentry": reentry,
         "GoAround": go_around, "SimulatedFlameout": sfo}})

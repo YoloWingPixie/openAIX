@@ -15,7 +15,7 @@ REF = {"id": RESOURCES["meta"]["id"], "revision": RESOURCES["meta"]["revision"]}
 
 
 def notam(identifier="ojms-a0214"):
-    return {"$schema": "urn:openaix:schema:notam:0.1.0-draft.2", **deepcopy(RESOURCES["resources"]["notams"][identifier]),
+    return {"$schema": "urn:openaix:schema:notam:0.2.0-draft.1", **deepcopy(RESOURCES["resources"]["notams"][identifier]),
             "resources_ref": deepcopy(REF)}
 
 

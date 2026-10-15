@@ -16,9 +16,6 @@ from copy import deepcopy
 # JP 3-09.3 (2014) Figure V-4, CAS check-in briefing (MNPOPCA).
 CHECK_IN_ITEMS = ("mission_number", "aircraft_number_and_type", "position_and_altitude", "ordnance",
                   "time_on_station", "capabilities", "abort_code")
-# JP 3-09.3 (2014) Chapter III, paragraph on marks (page III-77): laser, infrared pointer, smoke, indirect fire,
-# tracer and talk-on.
-MARKS = ("laser", "infrared_pointer", "smoke", "indirect_fire", "tracer", "talk_on")
 TERMINAL_CONTROL = ("type_1", "type_2", "type_3")
 # openAIX planning values for SCAR target priorities; no doctrinal code list.
 TARGET_CATEGORIES = ("armor", "artillery", "air_defense", "missile_launcher", "logistics_vehicle", "command_post",
@@ -133,7 +130,7 @@ def enrich_briefs(artifacts, common):
         "friendly_lines": sels(FRIENDLY_LINES),
         "ground_scheme_summary": text(),
         "laser_codes": array(c("LaserCode")),
-        "marks": enums(MARKS),
+        "marks": array(c("TargetMark")),
         "remarks": text(),
     }
     defs["CASBrief"] = obj({**deepcopy(cas_fields), "check_in": local("CheckIn")})

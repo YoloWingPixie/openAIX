@@ -297,7 +297,7 @@ def flag(condition, otherwise=None, *notes):
 
 
 QUANTITIES = {"Length": "a length", "Altitude": "an altitude", "Elevation": "an elevation", "Speed": "a speed",
-              "Frequency": "a frequency", "Bearing": "a bearing", "Offset": "an offset", "LaserCode": "a laser code"}
+              "Frequency": "a frequency", "Pressure": "a pressure", "Bearing": "a bearing", "Offset": "an offset", "LaserCode": "a laser code"}
 
 
 def quantity(subject, primitive=None, unit=None, *notes):

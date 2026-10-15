@@ -9,7 +9,7 @@ from openaix.describe.tables.order_fields import (abort_criteria, agency_ref, ob
 
 
 SUBJECTS = {
-    "CASBrief": "CAS brief", "FACABrief": "FAC(A) brief", "SCARBrief": "SCAR brief", "AttackBrief": "attack brief",
+    "FACABrief": "FAC(A) brief", "SCARBrief": "SCAR brief", "AttackBrief": "attack brief",
     "AirToAirBrief": "air-to-air brief", "RefuelingBrief": "refuelling brief", "AirborneControlBrief": "airborne control brief",
     "ReconnaissanceBrief": "reconnaissance brief", "ElectromagneticBrief": "electromagnetic brief", "TransportBrief": "transport brief",
     "AirdropBrief": "airdrop brief", "AirAssaultBrief": "air assault brief", "PersonnelRecoveryBrief": "personnel recovery brief",
@@ -61,16 +61,6 @@ def cas_fields(context, subject):
                                       "JP 3-09.3 (2014) gives these marks"),
         (context, "remarks"): d.text(REMARKS),
     }
-
-
-MARK_VALUES = d.values({
-    "laser": "a mark from a laser target designator",
-    "infrared_pointer": "a mark from an infrared pointer. Aircrew with night vision devices can see it on the target",
-    "smoke": "a mark from smoke ammunition at or near the target",
-    "indirect_fire": "a mark from artillery, mortar or naval gun fire",
-    "tracer": "a mark from tracer ammunition",
-    "talk_on": "a talk-on, in which the controller tells the aircrew how to find the target by voice",
-})
 
 
 DESCRIPTIONS = {
@@ -144,11 +134,6 @@ DESCRIPTIONS = {
     ("Training", "brief"): brief_field("training task"),
     ("CustomTask", "brief"): brief_field("custom task"),
     ("CounterlandControl", "brief"): brief_field("counterland control task"),
-
-    ("CASBrief", None): d.entity("CAS brief", "the data that CAS aircrews get before an on-call or scheduled CAS mission",
-                                 "JP 3-09.3 (2014) Chapter V gives the check-in briefing and the CAS brief"),
-    ("CASBrief", "check_in"): d.statement("This field gives the check-in data for the controller"),
-    **cas_fields("CASBrief", "CAS mission"),
 
     ("AttackBrief", None): d.entity("Attack brief", "the data that aircrews get before a preplanned attack", "The role of the tasking gives the type of attack",
                                     "The attack assignments of the tasking give the targets, the effects, the times on target and the weapons"),
@@ -438,8 +423,6 @@ ENUMS = {
         "scar": d.value("SCAR", "Aircraft find targets in a specified area and coordinate the attacks of other flights on them"),
         "fac_a": d.value("a FAC(A) mission", "A FAC(A) gives terminal attack control to CAS aircraft from the air"),
     }),
-    ("CASBrief", "marks"): MARK_VALUES,
-    ("FACABrief", "marks"): MARK_VALUES,
     ("CheckIn", "items"): d.values({
         "mission_number": "the mission number of the flight in the ATO",
         "aircraft_number_and_type": "the quantity of aircraft in the flight and their aircraft type",

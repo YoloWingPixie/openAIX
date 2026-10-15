@@ -406,11 +406,11 @@ ENUMS = {
     }),
     ("AttackAssignment", "desired_effect"): d.values({
         value: d.value_sentence(meaning, "This is an openAIX value with no doctrinal source")
-        for value, meaning in {"DESTROY": "The attack destroys the target", "NEUTRALIZE": "The attack neutralizes the target",
-                               "SUPPRESS": "The attack suppresses the target", "DISRUPT": "The attack disrupts the target",
-                               "DEGRADE": "The attack degrades the target",
-                               "DENY": "After the attack, the enemy cannot use the target",
-                               "DIVERT": "The attack diverts the target or its resources"}.items()}),
+        for value, meaning in {"destroy": "The attack destroys the target", "neutralize": "The attack neutralizes the target",
+                               "suppress": "The attack suppresses the target", "disrupt": "The attack disrupts the target",
+                               "degrade": "The attack degrades the target",
+                               "deny": "After the attack, the enemy cannot use the target",
+                               "divert": "The attack diverts the target or its resources"}.items()}),
     ("aco.assignments", "usage"): d.values({
         "aar": "airspace for AAR, in which tankers give fuel to other aircraft in flight",
         "aew": "airspace for airborne early warning and control aircraft, which find air tracks at long range and control "

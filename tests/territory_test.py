@@ -15,7 +15,7 @@ MEASURES = RESOURCES["resources"]["control_measures"]
 
 
 def territory(identifier):
-    return {"$schema": "urn:openaix:schema:territory:0.1.0-draft.2", **deepcopy(MEASURES[identifier])}
+    return {"$schema": "urn:openaix:schema:territory:0.2.0-draft.1", **deepcopy(MEASURES[identifier])}
 
 
 class TerritoryTests(unittest.TestCase):
@@ -79,13 +79,13 @@ class AirDefenseSectorTests(unittest.TestCase):
     def test_air_defense_sector_is_a_volume_code_from_jp_3_01(self):
         catalogue = json.loads((ROOT / "catalogues/control-measures.json").read_text())
         entry = next(item for item in catalogue["types"] if item["code"] == "ADS")
-        self.assertEqual(entry["schema"], "urn:openaix:schema:measure-volume:0.1.0-draft.2")
+        self.assertEqual(entry["schema"], "urn:openaix:schema:measure-volume:0.2.0-draft.1")
         self.assertEqual(entry["category"], "adm")
         self.assertEqual(entry["definition_source"]["source"], "joint-jp-3-01-2017")
         self.assertIn("air defence region", entry["definition"])
 
     def test_sector_from_the_surface_without_upper_limit_validates(self):
-        document = {"$schema": "urn:openaix:schema:measure-volume:0.1.0-draft.2", **deepcopy(MEASURES["ads-north"]),
+        document = {"$schema": "urn:openaix:schema:measure-volume:0.2.0-draft.1", **deepcopy(MEASURES["ads-north"]),
                     "resources_ref": {"id": RESOURCES["meta"]["id"], "revision": RESOURCES["meta"]["revision"]}}
         self.assertEqual(document["components"][0]["lower_limit"], {"surface": True})
         self.assertEqual(document["components"][0]["upper_limit"], {"unlimited": True})

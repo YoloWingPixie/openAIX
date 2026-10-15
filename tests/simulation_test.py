@@ -82,7 +82,7 @@ class SimulationTests(unittest.TestCase):
                 validate_document(document)
 
     def test_standalone_hpt_is_removed_while_embedded_hvt_round_trips(self):
-        retired = {"$schema": "urn:openaix:schema:hpt:0.1.0-draft.2", "kind": "hpt", "targets": []}
+        retired = {"$schema": "urn:openaix:schema:hpt:0.2.0-draft.1", "kind": "hpt", "targets": []}
         with self.assertRaises(ContractError):
             validate_document(retired)
         document = example("opord")

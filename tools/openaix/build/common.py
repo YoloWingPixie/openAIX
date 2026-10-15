@@ -11,7 +11,7 @@ from openaix.sim.bindings import EXTENSION, profile_definitions
 from openaix.sim.dcs import geometry_definitions as dcs_geometry_definitions
 
 
-VERSION = "0.1.0-draft.2"
+VERSION = "0.2.0-draft.1"
 DIALECT = "https://json-schema.org/draft/2020-12/schema"
 BASE = "urn:openaix:schema:"
 COMMON = BASE + "common:" + VERSION

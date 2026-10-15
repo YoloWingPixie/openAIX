@@ -6,6 +6,7 @@
   "ACA": "airspace coordination area",
   "ACAR": "airspace control area",
   "ACCA": "airborne command and control area",
+  "ACLS": "automatic carrier landing system",
   "ACMREQ": "airspace control means request",
   "ACO": "airspace control order",
   "ACP": "air control point",
@@ -167,6 +168,7 @@
   "MEZ": "missile engagement zone",
   "MG": "marshalling gate",
   "MGRS": "Military Grid Reference System",
+  "MIDS": "Multifunction Information Distribution System",
   "MISARC": "missile arc",
   "MISREP": "mission report",
   "MOA": "military operations area",
@@ -209,6 +211,7 @@
   "RESCORT": "rescue escort",
   "RFA": "restrictive fire area",
   "RFL": "restrictive fire line",
+  "RIO": "radar intercept officer",
   "RMZ": "radio mandatory zone",
   "RNAV": "area navigation",
   "RNP": "required navigation performance",
@@ -237,6 +240,7 @@
   "SPINS": "special instructions",
   "SSMS": "surface-to-surface missile system",
   "STAR": "standard terminal arrival route",
+  "STN": "station number",
   "STOL": "short take-off and landing",
   "TACAN": "Tactical Air Navigation",
   "TACP": "tactical air control party",
@@ -271,5 +275,6 @@
   "VOR": "very high frequency omnidirectional range",
   "VORTAC": "very high frequency omnidirectional range and Tactical Air Navigation station",
   "VRP": "visual reporting point",
-  "WFZ": "weapons free zone"
+  "WFZ": "weapons free zone",
+  "WSO": "weapon systems officer"
 }

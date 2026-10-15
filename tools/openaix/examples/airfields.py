@@ -419,7 +419,11 @@ def carrier(version):
             "use": "military", "carrier": {"hull_number": "CVN-72", "tacan": {"channel": 72, "band": "X", "identifier": "ABE"},
                                               "icls_channel": 12, "case_recovery": {
                 "case": "case_iii", "marshal_radial": {"value": 150, "reference": "magnetic"}, "marshal_altitude": feet(6000),
-                "marshal_distance": length(21, "nm")}},
+                "marshal_distance": length(21, "nm")},
+                                              "link4": {"value": 336.0, "unit": "MHz", "modulation": "AM", "band": "uhf"}, "acls": True,
+                                              "recovery_windows": [{
+                "window": {"start": "2026-10-02T13:30:00Z", "end": "2026-10-02T14:15:00Z"}, "case": "case_iii",
+                "brc": {"value": 330, "reference": "magnetic"}}]},
             "frequencies": [station("tower", 308.475, "Lincoln Tower"), station("marshal", 285.675, "Lincoln Marshal"),
                             station("approach", 264.0, "Lincoln Approach"), station("departure", 254.3, "Lincoln Departure")],
             "extensions": dcs([{"kind": "unit", "name": "OIR Abraham Lincoln", "mission_id": MISSION_ID, "unit_type": "CVN_72"}],

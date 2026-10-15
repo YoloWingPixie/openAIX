@@ -91,7 +91,26 @@ def catalogues(document, resources):
     return result
 
 
+def activity_references(document, resources):
+    """A radio assignment names only operations (`activities`) of its own flight, in the flight or in its communication plan."""
+    plans = resources.get("comm_plans", {})
+    for mission_index, mission in enumerate(document["missions"]):
+        for flight_index, flight in enumerate(mission["flights"]):
+            known = {activity["id"] for activity in flight.get("activities", [])}
+            path = ("missions", mission_index, "flights", flight_index)
+            assignments = [(("communications", index), item) for index, item in enumerate(flight.get("communications", []))]
+            if flight.get("comm_plan") in plans:
+                assignments += [(("comm_plan",), item) for item in plans[flight["comm_plan"]]["assignments"]]
+            for where, assignment in assignments:
+                for index, activity in enumerate(assignment.get("activities", [])):
+                    if activity not in known:
+                        raise ContractError(pointer((*path, *where, "activities", index) if where[0] == "communications" else (*path, *where)),
+                                            "unresolved flight activity reference")
+
+
 def document(document, resources):
+    if document.get("kind") == "ato":
+        activity_references(document, resources)
     if document.get("kind") == "aco":
         for index, assignment in enumerate(document["assignments"]):
             measure = resources["control_measures"][assignment["measure"]]

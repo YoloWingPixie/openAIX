@@ -18,6 +18,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 from referencing import Registry, Resource
 
 from openaix import ROOT
+from openaix.check import orders as order_checks
 from openaix.check import validate
 from openaix.check.contract import ContractError, pointer
 from openaix.examples.seeds import complete, field_values, navigation_seeds, seed_fields
@@ -28,7 +29,7 @@ CANDIDATE_LIMIT = 12
 # Fields that belong to one record: a value from another record would not describe this one. Simulator data
 # (`extensions`) links one record to its own simulator objects.
 OWN_FIELDS = {"extensions", "name", "description", "notes", "remarks", "purpose", "callsign", "title", "path"}
-COMMON_ID = "urn:openaix:schema:common:0.1.0-draft.2"
+COMMON_ID = "urn:openaix:schema:common:0.2.0-draft.1"
 FORMAT_CHECKER = FormatChecker()
 
 
@@ -306,7 +307,8 @@ class Engine:
             for error in validator.iter_errors(value):
                 raise ContractError(pointer(error.absolute_path), "schema constraint: " + str(error.validator))
             validate.semantic(value, self.resources["resources"], None)
-            validate.references(value, node, COMMON_ID, self.registry, self.resources["resources"])
+            catalogues = {**self.resources["resources"], "controllers": order_checks.controllers(self.resources["resources"])}
+            validate.references(value, node, COMMON_ID, self.registry, catalogues)
             return
         validate.validate_document(value, name, self.resources, self.linked)
 

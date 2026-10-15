@@ -470,6 +470,14 @@
     "format": "pdf",
     "role": "Published navigation attribute meanings, sections 6.27 and 6.32; CDB encoding and geometry are not adopted"
   },
+  "opord-builder-fscm": {
+    "publisher": "opord-builder",
+    "title": "opord-builder OPORD schema (FSCM and airspace zone enumerations)",
+    "edition": "revision e717394, snapshot sources/opord-builder/opord.model.json",
+    "url": "https://github.com/opord-builder/opord-builder/schemas/opord.schema.json",
+    "format": "json",
+    "role": "Source of the RFZ and SAR code names that openAIX maps to RFA and SARDOT; not a doctrinal definition"
+  },
   "rcaf-shape-ch5": {
     "publisher": "Royal Canadian Air Force",
     "title": "Canadian Forces Aerospace Shape Doctrine, Chapter 5: Command and Control",

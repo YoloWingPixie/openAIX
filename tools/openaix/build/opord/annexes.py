@@ -2,9 +2,9 @@
 annex; FM 6-0 puts air and missile defence in Annex D (Fires)."""
 from openaix.build.opord.schema import (agencies_ref, agency_ref, airfield_ref, AIRSPACE_CATEGORIES, ANNEXES,
                                         ATO_MISSIONS, boolean, channel_ref, channels_ref, choice, common, define,
-                                        DIRECTIONS, EFFECTS, ident, integer, local, many, measure_ref, measures_ref,
+                                        EFFECTS, ident, integer, items, local, many, measure_ref, measures_ref,
                                         missions_ref, name, number, ORDER_ENEMY_UNITS, ORDER_ORGANIZATIONS,
-                                        ORDER_REQUIREMENTS, phase_ref, point_ref, points_ref, position, rank, ref,
+                                        ORDER_REQUIREMENTS, phase_ref, points_ref, position, rank, ref,
                                         refs, RELATIONSHIPS, remarks, RISK_LEVELS, string, summary, SUPPLY_CLASSES,
                                         texts, unit_ref, units_ref, when, window)
 from openaix.describe import templates as d
@@ -152,31 +152,10 @@ define("CasAllocation", d.entity("CAS allocation", "the CAS for one supported un
     "ato_missions": missions_ref("give the CAS"),
     "phase": phase_ref("the allocation is applicable to"),
 }, ("unit",))
-define("CasBrief", d.entity("CAS brief", "one 9-line CAS brief of JP 3-09.3"), {
-    "id": ident("brief", "the order"),
-    "ato_mission": (ref(ATO_MISSIONS), d.reference("mission of the ATO", "receives the brief", "The `orders` field identifies the ATO")),
-    "controller": agency_ref("gives the brief"),
-    "control_type": (choice("type_1", "type_2", "type_3"), d.enum("type of terminal attack control")),
-    "method_of_attack": (choice("bomb_on_target", "bomb_on_coordinate"), d.enum("method of attack")),
-    "initial_point": point_ref("is the initial point", ["initial"]),
-    "heading": (common("Bearing"), d.quantity("heading from the initial point to the target", "Bearing")),
-    "distance": (common("Length"), d.quantity("distance from the initial point to the target", "Length")),
-    "target_elevation": (common("Elevation"), d.quantity("elevation of the target", "Elevation")),
-    "target_description": (string(), d.text("target description")),
-    "target_position": position("the target"),
-    "target": (ref("targets"), d.reference("target of the resource catalogue", "the brief is for")),
-    "mark": (choice("none", "laser", "infrared", "white_phosphorus", "smoke", "illumination"), d.enum("type of mark")),
-    "laser_code": (common("LaserCode"), d.quantity("code of the laser mark", "LaserCode")),
-    "laser_target_line": (common("Bearing"), d.quantity("laser target line", "Bearing")),
-    "friendly_direction": (choice(*DIRECTIONS), d.enum("direction from the target to the nearest friendly forces")),
-    "friendly_distance": (common("Length"), d.quantity("distance from the target to the nearest friendly forces", "Length")),
-    "egress_point": point_ref("is the egress point", ["egress"]),
-    "time_on_target": when("the TOT"),
-    "remarks": remarks("the brief"),
-}, ("id", "target_position", "target_description"))
 define("AirSupportAppendix", d.entity("Air support appendix", "`Appendix 5 (Air Support)` of Annex D"), {
     "cas_allocations": (many("CasAllocation"), d.list_of("CAS allocations")),
-    "cas_briefs": (many("CasBrief"), d.list_of("CAS briefs that the staff writes before the mission")),
+    "cas_briefs": (items(common("CasBrief", required=["id", "target_position", "target_description"])),
+                   d.list_of("CAS briefs that the staff writes before the mission", None, "Each brief has the 9-line data of JP 3-09.3")),
     "agencies": agencies_ref("control air support"),
     "points": points_ref("are contact points, initial points and holding points for air support", ["control", "initial", "marshalling"]),
     "ato_missions": missions_ref("give air interdiction and air reconnaissance"),

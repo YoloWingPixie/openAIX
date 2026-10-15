@@ -12,9 +12,9 @@ ORDERS = {"ato": {"id": "oir-ato", "revision": "1"}, "aco": {"id": "oir-aco", "r
           "spins": {"id": "oir-spins", "revision": "1"}}
 EXERCISE = {"org.cjtf-oir.ato": {"ato_day": "214"}}
 PRINT = {"org.opord-builder.print": {
-    "classification_banner": "UNCLASSIFIED", "caveats": ["REL TO CJTF-OIR"], "copy_number": 1,
+    "classification_banner": "UNCLASSIFIED", "classification_caveat": "REL TO CJTF-OIR", "copy_number": 1,
     "number_of_copies": 12, "place_of_issue": "Muwaffaq Salti, Jordan", "message_reference_number": "IR-26-01",
-    "logo": "assets/oir.png", "page_icon": "assets/oir-icon.png"}}
+    "logo": "assets/oir.png", "page_icon": "assets/oir-icon.png", "watermark": "EXERCISE"}}
 
 
 def at(hhmm, day=2):
@@ -62,7 +62,7 @@ def order_measures():
 def spins_measures():
     """Safe lane, IFF lines, minimum-risk route, identification safety point and jettison area of the SPINS."""
     def base(identifier, code, name, schema, description, **fields):
-        return {"$schema": "urn:openaix:schema:" + schema + ":0.1.0-draft.2", "id": identifier, "type": code, "name": name,
+        return {"$schema": "urn:openaix:schema:" + schema + ":0.2.0-draft.1", "id": identifier, "type": code, "name": name,
                 "active": deepcopy(PERIOD), "description": description, **fields}
 
     def line(west, east):
@@ -143,6 +143,11 @@ def situation():
                 "forecasts": [{"window": window(at("1200"), at("1600")), "ceiling": feet(25000), "visibility": {"value": 10, "unit": "km"},
                                "wind_direction": {"value": 230, "reference": "true"}, "wind_speed": {"value": 12, "unit": "kt"},
                                "temperature": {"value": 24, "unit": "C"}, "precipitation": "none",
+                               "altimeter": {"value": 29.92, "unit": "inHg"},
+                               "clouds": [{"coverage": "few", "base": feet(9000, "AGL"), "tops": feet(11000)},
+                                          {"coverage": "scattered", "base": feet(25000)}],
+                               "winds_aloft": [{"altitude": feet(10000), "direction": {"value": 250, "reference": "true"}, "speed": {"value": 25, "unit": "kt"}},
+                                               {"altitude": feet(20000), "direction": {"value": 270, "reference": "true"}, "speed": {"value": 45, "unit": "kt"}}],
                                "effects": "No restrictions on medium-altitude attacks or laser designation."}],
                 "light_data": [{"date": "2026-10-02", "begin_morning_nautical_twilight": at("0225"), "sunrise": at("0315"),
                                 "sunset": at("1505"), "end_evening_nautical_twilight": at("1555"), "moonrise": at("1640"),
@@ -357,7 +362,10 @@ def annexes():
                                   "target_description": "Revetted vehicle park, four trucks.", "target_position": point(35.093, 40.314),
                                   "target": "cobalt-array", "mark": "laser", "laser_code": "1688", "laser_target_line": {"value": 13, "reference": "magnetic"},
                                   "friendly_direction": "south_west", "friendly_distance": {"value": 10.7, "unit": "km"}, "egress_point": "cedar",
-                                  "time_on_target": at("1340"), "remarks": "Friendlies are south of PL ZINC. No attack headings over the Lantern village."}],
+                                  "time_on_target": at("1340"), "time_to_target_seconds": 300, "offset_direction": "left", "danger_close": False,
+                                  "friendly_marking": "panel", "final_attack_headings": [{"start_bearing": {"value": 330, "reference": "magnetic"}, "end_bearing": {"value": 60, "reference": "magnetic"}}],
+                                  "threats": ["sa-6"], "hazards": [{"kind": "wires", "description": "Power lines across the wadi south of the target."}],
+                                  "remarks": "Friendlies are south of PL ZINC. No attack headings over the Lantern village."}],
                               "agencies": ["warhawk"], "points": ["ip-silver", "cedar", "marshal"], "ato_missions": ["strike-cobalt", "recce-gainful"]},
               "naval_fire_support": {"units": [], "fire_support_areas": []},
               "air_and_missile_defense": {"weapons_control": [{"status": "tight", "measure": "sage-shoradez", "window": deepcopy(PERIOD)}],

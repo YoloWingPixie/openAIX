@@ -37,6 +37,17 @@ define("Temperature", d.entity("Temperature", "a temperature with its unit"), {
     "value": (number(), d.statement("This field gives the value of the temperature, in the unit of `unit`")),
     "unit": (choice("C", "F"), d.enum("unit of the temperature, `C` or `F`")),
 }, ("value", "unit"))
+CLOUD_COVERAGE = ("clear", "few", "scattered", "broken", "overcast")
+define("CloudLayer", d.entity("Cloud layer", "one layer of cloud, with its coverage, its base and its tops"), {
+    "coverage": (choice(*CLOUD_COVERAGE), d.enum("part of the sky that the layer covers")),
+    "base": (common("Altitude"), d.quantity("base of the layer", "Altitude")),
+    "tops": (common("Altitude"), d.quantity("tops of the layer", "Altitude")),
+}, ("coverage", "base"))
+define("WindAloft", d.entity("Wind aloft", "the wind at one altitude above the surface"), {
+    "altitude": (common("Altitude"), d.quantity("altitude of the wind", "Altitude")),
+    "direction": (common("Bearing"), d.quantity("direction from which the wind blows", "Bearing")),
+    "speed": (common("Speed"), d.quantity("speed of the wind", "Speed")),
+}, ("altitude", "direction", "speed"))
 define("WeatherForecast", d.entity("Weather forecast", "the forecast weather for one time interval"), {
     "window": window("the forecast is applicable"),
     "ceiling": (common("Altitude"), d.quantity("lowest cloud ceiling", "Altitude")),
@@ -45,6 +56,9 @@ define("WeatherForecast", d.entity("Weather forecast", "the forecast weather for
     "wind_speed": (common("Speed"), d.quantity("speed of the wind", "Speed")),
     "temperature": (local("Temperature"), d.statement("This field gives the temperature at the surface, with its unit")),
     "precipitation": (choice("none", "rain", "drizzle", "snow", "hail", "thunderstorm"), d.enum("type of precipitation")),
+    "altimeter": (common("Pressure"), d.quantity("altimeter setting at the surface, which is the pressure reduced to mean sea level", "Pressure")),
+    "clouds": (many("CloudLayer"), d.list_of("cloud layers", None, "The layers are in order from the lowest base", ordered=True)),
+    "winds_aloft": (many("WindAloft"), d.list_of("winds at altitudes above the surface", None, ordered=True)),
     "effects": (string(), d.text("effects of the weather on the operation")),
 }, ("window",))
 define("LightData", d.entity("Light data", "the times of sunrise, sunset, moonrise and moonset for one day of the operation"), {

@@ -162,7 +162,7 @@ class OrderTests(unittest.TestCase):
                 changed["targets"][0][field] = value
                 with self.assertRaises(ContractError):
                     validate_document(changed, resource_document=example("resources"))
-        document["targets"][0]["component_tasked"] = "MARITIME"
+        document["targets"][0]["component_tasked"] = "maritime"
         validate_document(document, resource_document=example("resources"))
 
     # SCHEMA-04 -------------------------------------------------------------------------------

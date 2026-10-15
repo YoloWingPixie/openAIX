@@ -115,8 +115,8 @@ def build_aco_example(version):
     marshal = position(34.059, 39.477)
     cedar = position(33.590, 39.002)
     points = {
-        "juniper": point(version, "juniper", "Juniper", juniper, ["control", "ingress", "gate"], "marshal-entry", "banshee", "darkstar"),
-        "marshal": point(version, "marshal", "Marshal", marshal, ["control", "marshalling"], "marshal-entry", "darkstar", "darkstar"),
+        "juniper": point(version, "juniper", "Juniper", juniper, ["control", "ingress", "gate", "push", "rendezvous"], "marshal-entry", "banshee", "darkstar"),
+        "marshal": point(version, "marshal", "Marshal", marshal, ["control", "marshalling", "hold", "anchor"], "marshal-entry", "darkstar", "darkstar"),
         "cedar": point(version, "cedar", "Cedar", cedar, ["control", "egress", "gate"], "marshal-exit", "darkstar", "banshee"),
     }
     for identifier, description in {
@@ -217,6 +217,9 @@ def build_aco_example(version):
         "control_measures": {**points, **orbits, "south-transit": corridor, "rescue-reservation": roz, "cobalt-box": box},
         "areas": {}, "places": {}, "procedures": {}, "reports": {}, "scls": {}, "stores": {}, "targets": {}, "threats": {},
     }
+    for route in resources["routes"].values():
+        for number, route_stop in enumerate(route["points"], 1):
+            route_stop["number"] = number
     assignments = [
         assignment("falcon", "darkstar", "marshal", "Combat Air Patrol (CAP) north of the support orbits.", "Enter Falcon at flight level 220 or the flight level assigned by Darkstar.",
             "Do not pursue south of the Cobalt kill box while it is open.", role="cap", usage="cap"),

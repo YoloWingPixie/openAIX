@@ -13,7 +13,7 @@ TST_FIELDS = ("tst_number", "target_description", "expected_locations", "activit
               "engagement_authority", "roe_constraints", "expiration_criteria")
 # Joint force components that can be tasked with a target; information operations is a staff
 # capability, not a joint force component (DOCTRINE-07).
-JOINT_COMPONENTS = ("LAND", "AIR", "MARITIME", "SOF", "CYBER", "SPACE")
+JOINT_COMPONENTS = ("land", "air", "maritime", "sof", "cyber", "space")
 
 
 def normalize_targeting(schema, common):

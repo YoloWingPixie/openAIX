@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:resources:0.1.0-draft.2",
+  "$schema": "urn:openaix:schema:resources:0.2.0-draft.1",
   "kind": "resources",
   "meta": {
     "id": "kden-navigation",
@@ -1324,5 +1324,5 @@
       }
     }
   },
-  "schema_version": "0.1.0-draft.2"
+  "schema_version": "0.2.0-draft.1"
 }

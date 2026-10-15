@@ -1,6 +1,7 @@
 {
-  "$schema": "urn:openaix:schema:airfield:0.1.0-draft.2",
+  "$schema": "urn:openaix:schema:airfield:0.2.0-draft.1",
   "carrier": {
+    "acls": true,
     "case_recovery": {
       "case": "case_iii",
       "marshal_altitude": {
@@ -19,6 +20,25 @@
     },
     "hull_number": "CVN-72",
     "icls_channel": 12,
+    "link4": {
+      "band": "uhf",
+      "modulation": "AM",
+      "unit": "MHz",
+      "value": 336.0
+    },
+    "recovery_windows": [
+      {
+        "brc": {
+          "reference": "magnetic",
+          "value": 330
+        },
+        "case": "case_iii",
+        "window": {
+          "end": "2026-10-02T14:15:00Z",
+          "start": "2026-10-02T13:30:00Z"
+        }
+      }
+    ],
     "tacan": {
       "band": "X",
       "channel": 72,

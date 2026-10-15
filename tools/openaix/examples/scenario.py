@@ -59,6 +59,9 @@ def resources(version):
     result = base_resources(version)
     for collection, records in brief_resources(version).items():
         result[collection] = {**result.get(collection, {}), **records}
+    result["comm_plans"] = {"anvil-comms": {"name": "Anvil package communications", "assignments": [
+        {"channel": "strike-vhf", "preset": 1, "radio": "VHF", "purpose": "Package common"},
+        {"channel": "control-uhf", "preset": 2, "radio": "UHF", "purpose": "Darkstar control"}]}}
     return result
 
 
@@ -124,11 +127,11 @@ def base_resources(version):
             "range-debrief": {"title": "Mission debrief", "steps": [{"action": "Debrief at Muwaffaq Salti 1700Z with weapons-system video and the JTAC log."}]},
         },
         "reports": {
-            "misrep": {"name": "Mission report (MISREP)", "precedence": "PRIORITY", "recipient": "caoc", "trigger": "Within 30 minutes of landing",
+            "misrep": {"name": "Mission report (MISREP)", "precedence": "priority", "recipient": "caoc", "trigger": "Within 30 minutes of landing",
                        "medium": "voice", "channel": "ops-uhf"},
-            "inflightrep": {"name": "In-flight report (INFLIGHTREP)", "precedence": "IMMEDIATE", "recipient": "darkstar", "trigger": "Time-sensitive observation airborne",
+            "inflightrep": {"name": "In-flight report (INFLIGHTREP)", "precedence": "immediate", "recipient": "darkstar", "trigger": "Time-sensitive observation airborne",
                             "medium": "voice", "channel": "control-uhf"},
-            "bda": {"name": "Battle damage assessment", "precedence": "PRIORITY", "recipient": "caoc", "trigger": "After each attack",
+            "bda": {"name": "Battle damage assessment", "precedence": "priority", "recipient": "caoc", "trigger": "After each attack",
                     "medium": "voice", "channel": "ops-uhf", "classification": "UNCLASSIFIED"},
         },
         "aircraft_types": aircraft_types(),
@@ -279,11 +282,11 @@ def ato(version):
         mission("strike-cobalt", "1104", {"kind": "preplanned_attack", "role": "strike", "objective": "Destroy the Cobalt command post and vehicle park.",
             "assignments": [
                 {"id": "bunker", "target": {"kind": "fixed", "target": "cobalt-array", "aimpoints": ["bunker-north"]},
-                 "assigned_to": [{"flight": "rage", "members": [1]}], "desired_effect": "DESTROY", "required_stores": ["gbu-31v3"],
+                 "assigned_to": [{"flight": "rage", "members": [1]}], "desired_effect": "destroy", "required_stores": ["gbu-31v3"],
                  "timing": {"kind": "window", "window": window(at("1325"), at("1330"))}, "priority": 1, "role": "primary",
                  "restrictions": ["Attack only while the Cobalt kill box is open."]},
                 {"id": "vehicles", "target": {"kind": "fixed", "target": "cobalt-array", "aimpoints": ["vehicle-park"]},
-                 "assigned_to": [{"flight": "rage", "members": [2]}], "desired_effect": "DESTROY", "required_stores": ["gbu-12"],
+                 "assigned_to": [{"flight": "rage", "members": [2]}], "desired_effect": "destroy", "required_stores": ["gbu-12"],
                  "timing": {"kind": "window", "window": window(at("1325"), at("1330"))}, "priority": 2, "role": "primary"}],
             "success_criteria": "Both aimpoints struck inside the time-on-target window.", "report_refs": ["bda", "misrep"]},
             [flight("rage", "Rage 1", "F-15E", 2, "f15e-strike", 23000, 9000, 6500, "1245",
@@ -293,7 +296,7 @@ def ato(version):
             support=[{"role": "escort", "flight": "chevy"}, {"role": "suppression", "flight": "weasel"}, {"role": "tanker", "flight": "shell", "window": window(at("1350"), at("1410"))}]),
         mission("sead-cobalt", "1105", {"kind": "preplanned_attack", "role": "sead", "objective": "Suppress the SA-6 during the Anvil attack window.",
             "assignments": [{"id": "gainful", "target": {"kind": "mobile", "target": "gainful-battery"}, "assigned_to": [{"flight": "weasel"}],
-                             "desired_effect": "SUPPRESS", "required_stores": ["agm-88c"], "timing": {"kind": "window", "window": window(at("1320"), at("1335"))}}]},
+                             "desired_effect": "suppress", "required_stores": ["agm-88c"], "timing": {"kind": "window", "window": window(at("1320"), at("1335"))}}]},
             [flight("weasel", "Weasel 1", "F-16C", 2, "f16-sead", 12000, 5000, 3500, "1240",
                     [("strike-vhf", "Anvil package"), ("control-uhf", "Darkstar control")], ("12", "4105"), "Blue fighter squadron", route="marshal-entry",
                     configuration={"primary_scl": "f16-sead", "alternatives": [{"scl": "f16-sead-pre2015", "authority": "caoc",
@@ -374,9 +377,24 @@ def ato(version):
     missions.extend(role_missions(mission, flight, lambda place, takeoff: {
         "kind": "scheduled", "departure": place, "startup": at(minus(takeoff, 30)), "taxi": at(minus(takeoff, 15)), "takeoff": at(takeoff)}))
     add_briefs(missions)
+    flights = {item["id"]: item for entry in missions for item in entry["flights"]}
+    # Viper uses one radio assignment on station and a different one at the tanker; Chevy uses the Anvil communication plan.
+    flights["viper"]["communications"][0]["activities"] = ["viper-station"]
+    flights["viper"]["communications"][1]["activities"] = ["viper-refuel"]
+    flights["viper"]["fuel"].update({"mission_required": pounds(8200), "burn_rate": {"value": 4800, "unit": "lb/h"}})
+    flights["chevy"]["comm_plan"] = "anvil-comms"
+    flights["weasel"]["configuration"]["member_overrides"] = [
+        {"member": 1, "board_number": "301", "laser_code": "1688",
+         "crew": [{"name": "Capt. Ruiz", "role": "pilot"}],
+         "identification": {"link16": {"stn": "03401", "fighter_channel": 12, "mission_channel": 14, "special_channel": 20,
+                                       "donors": ["03001"], "team": ["03402"]}}},
+        {"member": 2, "board_number": "302", "crew": [{"name": "Lt. Okafor", "role": "pilot"}],
+         "identification": {"link16": {"stn": "03402"}}}]
     packages = [{"id": "anvil", "name": "Anvil strike package", "objective": "Strike the Cobalt compound with suppression and escort.",
                  "commander": {"flight": "rage", "members": [1]}, "rendezvous": "juniper",
                  "rendezvous_time": {"kind": "window", "window": window(at("1310"), at("1315"))},
+                 "push_time": {"kind": "at", "at": at("1315"), "tolerance_seconds": 30}, "push_point": "juniper",
+                 "time_on_target": {"kind": "window", "window": window(at("1340"), at("1345"))},
                  "coordination": ["Push from Juniper at 1315Z.", "Weasel and Grizzly on station before Rage crosses Silver."]}]
     return {"$schema": f"urn:openaix:schema:ato:{version}", "kind": "ato", "schema_version": version,
             "meta": {"id": "oir-ato", "revision": "1", "title": "OIR Air Tasking Order", "issued_at": at("1100"),
@@ -417,17 +435,17 @@ def jiptl(version):
             "targets": [
                 {"target_number": "IR-0001", "target": "cobalt-array", "priority_rank": 1, "target_name": "Cobalt compound",
                  "target_description": "ISIS command post and vehicle park.", "location": position(35.100, 40.300),
-                 "desired_effect": "DESTROY", "component_tasked": "AIR",
-                 "authorized_engagement_means": [{"system": "F-15E", "scl": "f15e-strike", "store": "gbu-31v3"}], "status": "APPROVED"},
+                 "desired_effect": "destroy", "component_tasked": "air",
+                 "authorized_engagement_means": [{"system": "F-15E", "scl": "f15e-strike", "store": "gbu-31v3"}], "status": "approved"},
                 {"target_number": "IR-0002", "target": "gainful-battery", "priority_rank": 2, "target_name": "SA-6 battery",
                  "target_description": "Mobile surface-to-air missile battery.",
-                 "location": position(35.215, 40.265), "desired_effect": "SUPPRESS", "component_tasked": "AIR",
+                 "location": position(35.215, 40.265), "desired_effect": "suppress", "component_tasked": "air",
                  "authorized_engagement_means": [{"system": "F-16C", "scl": "f16-sead", "store": "agm-88c"}, {"system": "EA-18G", "scl": "ea18g-ea"}],
-                 "status": "APPROVED"},
+                 "status": "approved"},
                 {"target_number": "IR-0004", "target": "zinc-depot", "priority_rank": 3, "target_name": "Zinc supply depot",
                  "target_description": "Fuel and ammunition depot that supplies the northern enemy force.",
-                 "location": position(35.216, 39.874), "desired_effect": "DESTROY", "component_tasked": "AIR",
-                 "authorized_engagement_means": [{"system": "F-16C", "scl": "f16-ai", "store": "gbu-12"}], "status": "APPROVED"},
+                 "location": position(35.216, 39.874), "desired_effect": "destroy", "component_tasked": "air",
+                 "authorized_engagement_means": [{"system": "F-16C", "scl": "f16-ai", "store": "gbu-12"}], "status": "approved"},
             ]}
 
 

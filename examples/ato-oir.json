@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:ato:0.1.0-draft.2",
+  "$schema": "urn:openaix:schema:ato:0.2.0-draft.1",
   "aco": {
     "id": "oir-aco",
     "revision": "2",
@@ -336,12 +336,18 @@
           "callsign": "Viper 1",
           "communications": [
             {
+              "activities": [
+                "viper-station"
+              ],
               "channel": "control-uhf",
               "preset": 1,
               "purpose": "Darkstar control",
               "radio": "UHF"
             },
             {
+              "activities": [
+                "viper-refuel"
+              ],
               "channel": "tanker-uhf",
               "preset": 2,
               "purpose": "Shell boom",
@@ -370,6 +376,10 @@
               "unit": "lb",
               "value": 3500
             },
+            "burn_rate": {
+              "unit": "lb/h",
+              "value": 4800
+            },
             "initial": {
               "unit": "lb",
               "value": 12000
@@ -377,6 +387,10 @@
             "joker": {
               "unit": "lb",
               "value": 5000
+            },
+            "mission_required": {
+              "unit": "lb",
+              "value": 8200
             }
           },
           "id": "viper",
@@ -599,7 +613,7 @@
                 ]
               }
             ],
-            "desired_effect": "DESTROY",
+            "desired_effect": "destroy",
             "id": "bunker",
             "priority": 1,
             "required_stores": [
@@ -657,7 +671,7 @@
                 ]
               }
             ],
-            "desired_effect": "DESTROY",
+            "desired_effect": "destroy",
             "id": "vehicles",
             "priority": 2,
             "required_stores": [
@@ -773,6 +787,48 @@
                 "scl": "f16-sead-pre2015"
               }
             ],
+            "member_overrides": [
+              {
+                "board_number": "301",
+                "crew": [
+                  {
+                    "name": "Capt. Ruiz",
+                    "role": "pilot"
+                  }
+                ],
+                "identification": {
+                  "link16": {
+                    "donors": [
+                      "03001"
+                    ],
+                    "fighter_channel": 12,
+                    "mission_channel": 14,
+                    "special_channel": 20,
+                    "stn": "03401",
+                    "team": [
+                      "03402"
+                    ]
+                  }
+                },
+                "laser_code": "1688",
+                "member": 1
+              },
+              {
+                "board_number": "302",
+                "crew": [
+                  {
+                    "name": "Lt. Okafor",
+                    "role": "pilot"
+                  }
+                ],
+                "identification": {
+                  "link16": {
+                    "stn": "03402"
+                  }
+                },
+                "member": 2
+              }
+            ],
             "primary_scl": "f16-sead"
           },
           "count": 2,
@@ -840,7 +896,7 @@
                 "flight": "weasel"
               }
             ],
-            "desired_effect": "SUPPRESS",
+            "desired_effect": "suppress",
             "id": "gainful",
             "required_stores": [
               "agm-88c"
@@ -913,6 +969,7 @@
         {
           "aircraft_type": "f-16c-50",
           "callsign": "Chevy 1",
+          "comm_plan": "anvil-comms",
           "communications": [
             {
               "channel": "strike-vhf",
@@ -1269,6 +1326,19 @@
               "channel": "cas-uhf"
             }
           ],
+          "danger_close": false,
+          "final_attack_headings": [
+            {
+              "end_bearing": {
+                "reference": "magnetic",
+                "value": 60
+              },
+              "start_bearing": {
+                "reference": "magnetic",
+                "value": 330
+              }
+            }
+          ],
           "fire_support_measures": [
             {
               "id": "oir-fscl",
@@ -1297,7 +1367,22 @@
               "kind": "control_measure"
             }
           ],
+          "friendly_marking": "panel",
           "ground_scheme_summary": "Task Force Bastion attacks north from PL BRASS to PL ZINC; friendlies report the last phase line crossed.",
+          "hazards": [
+            {
+              "description": "Power lines across the wadi south of the target.",
+              "kind": "wires",
+              "position": {
+                "latitude": 35.101,
+                "longitude": 40.288
+              }
+            },
+            {
+              "description": "Rotary-wing traffic below 1,500 feet AGL between PL ZINC and PL NICKEL.",
+              "kind": "friendly_aircraft"
+            }
+          ],
           "holding": [
             {
               "id": "mesa",
@@ -1329,7 +1414,12 @@
           "marks": [
             "laser",
             "smoke"
-          ]
+          ],
+          "offset_direction": "left",
+          "threats": [
+            "sa-6"
+          ],
+          "time_to_target_seconds": 300
         },
         "check_in_procedure": "cas-check-in",
         "kind": "on_call_cas",
@@ -2337,7 +2427,7 @@
                 ]
               }
             ],
-            "desired_effect": "DESTROY",
+            "desired_effect": "destroy",
             "id": "tanks",
             "priority": 1,
             "required_stores": [
@@ -2391,7 +2481,7 @@
                 ]
               }
             ],
-            "desired_effect": "DESTROY",
+            "desired_effect": "destroy",
             "id": "shed",
             "priority": 2,
             "required_stores": [
@@ -3226,12 +3316,25 @@
       "id": "anvil",
       "name": "Anvil strike package",
       "objective": "Strike the Cobalt compound with suppression and escort.",
+      "push_point": "juniper",
+      "push_time": {
+        "at": "2026-10-02T13:15:00Z",
+        "kind": "at",
+        "tolerance_seconds": 30
+      },
       "rendezvous": "juniper",
       "rendezvous_time": {
         "kind": "window",
         "window": {
           "end": "2026-10-02T13:15:00Z",
           "start": "2026-10-02T13:10:00Z"
+        }
+      },
+      "time_on_target": {
+        "kind": "window",
+        "window": {
+          "end": "2026-10-02T13:45:00Z",
+          "start": "2026-10-02T13:40:00Z"
         }
       }
     }
@@ -3244,7 +3347,7 @@
     "id": "oir-resources",
     "revision": "1"
   },
-  "schema_version": "0.1.0-draft.2",
+  "schema_version": "0.2.0-draft.1",
   "spins": {
     "id": "oir-spins",
     "path": "spins.json",

@@ -40,7 +40,7 @@ class PointTests(unittest.TestCase):
 
     def test_point_rejects_missing_location_and_unsupported_or_duplicate_roles(self):
         mutations = [lambda doc: doc.pop("position"), lambda doc: doc.update(roles=[]),
-                     lambda doc: doc.update(roles=["ingress", "ingress"]), lambda doc: doc.update(roles=["anchor"]),
+                     lambda doc: doc.update(roles=["ingress", "ingress"]), lambda doc: doc.update(roles=["lighthouse"]),
                      lambda doc: doc["position"].update(latitude=91)]
         for mutate in mutations:
             document = self.point_document()

@@ -14,6 +14,7 @@ Table modules, each exporting DESCRIPTIONS {(context, property): Text} and optio
 - tables/orders.py: ATO, ACO, SPINS, TST, JIPTL, resources, agencies and controllers;
 - tables/order_fields.py: the order fields that have no description in the source models;
 - tables/ato.py: ATO mission briefs, the counterland control tasking and typed target-list fields;
+- tables/gameplay.py: per-aircraft, package, communication, fuel, CAS brief and carrier fields;
 - build/opord/documents.py: OPORD, FRAGO and SPINS fields, with the texts kept beside each field;
 - tables/navigation.py: navigation records;
 
@@ -27,12 +28,13 @@ from openaix.build.opord import documents as opord_table
 from openaix.describe import templates as d
 from openaix.describe.tables import ato as ato_table
 from openaix.describe.tables import common as common_table
+from openaix.describe.tables import gameplay as gameplay_table
 from openaix.describe.tables import navigation as navigation_table
 from openaix.describe.tables import order_fields as order_fields_table
 from openaix.describe.tables import orders as orders_table
 
 
-TABLE_MODULES = (common_table, orders_table, order_fields_table, ato_table, opord_table, navigation_table)
+TABLE_MODULES = (common_table, orders_table, order_fields_table, ato_table, gameplay_table, opord_table, navigation_table)
 DESCRIPTIONS, ENUMS, SUBJECTS = {}, {}, {}
 for _module in TABLE_MODULES:
     for _name, _target in (("DESCRIPTIONS", DESCRIPTIONS), ("ENUMS", ENUMS), ("SUBJECTS", SUBJECTS)):
@@ -104,7 +106,7 @@ def describe_artifacts(artifacts, strict=True):
             node["description"] = text
         elif "description" in node and not _registered(node["description"]):
             MISSING.append((schema, context, field, pointer, str(node["description"])))
-        if field is not None and not field.startswith("#"):
+        if field is None or not field.startswith("#"):
             enums = _enum_lookup(schema, context, field)
             if enums is not None:
                 node["x-enum-descriptions"] = dict(enums)

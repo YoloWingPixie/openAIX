@@ -28,7 +28,7 @@ SHARED_CODES = {
     "route": ("AIRRTE", "LLTR", "SAAFR", "SC", "TMRR", "TC", "TR", "SL", "APPCOR", "MRR", "AIRCOR", "VFRRTE"),
     "line": ("FEBA", "FLOT", "IFFON", "IFFOFF", "PL", "BOUNDARY", "LOA", "LD", "LC"),
     "fire-support-line": ("FSCL", "CFL", "RFL", "BCL"),
-    "area": ("AOA", "EA", "NFA", "RFA", "FFA", "OBJ", "BP", "AA", "NAI", "TAI", "FSA"),
+    "area": ("AOA", "EA", "NFA", "RFA", "FFA", "OBJ", "BP", "AA", "NAI", "TAI", "FSA", "AXIS", "CFZ"),
     "cl": ("CL", "CA"),
 }
 SINGLE_CODES = {"aor": "AOR", "kb": "KB", "mez": "MEZ", "tl": "TL", "aca": "ACA", "isr": "ISR", "misarc": "MISARC"}
@@ -50,6 +50,7 @@ PROJECTIONS = {
     "ISP": ("point", {"type": "POINT", "roles": ["identification_safety"]}), "BULLSEYE": ("point", {"type": "POINT", "roles": ["bullseye"]}),
     "TRP": ("point", {"type": "POINT", "roles": ["target_reference"]}),
     "FSS": ("point", {"type": "POINT", "roles": ["fire_support_station"]}),
+    "SARDOT": ("point", {"type": "POINT", "roles": ["search_and_rescue"]}),
     "ADVRTE": ("airway", {"type": "AIRWAY", "airway_type": "advisory"}), "ARWY": ("airway", {"type": "AIRWAY", "airway_type": "airway"}),
     "NAVRTE": ("airway", {"type": "AIRWAY", "airway_type": "area_navigation"}),
     "ATSRTE": ("airway", {"type": "AIRWAY", "airway_type": "air_traffic_services"}),
@@ -111,7 +112,8 @@ def catalogue():
         if "note" in alias:
             source["note"] = d.statement(alias["note"])
         aliases[name] = {"code": alias["code"], "name": alias["name"], "values": deepcopy(alias["values"]), "definition_source": source}
-    return {"schema_version": VERSION, "types": types, "aliases": aliases}
+    mappings = deepcopy(MEASURE_SOURCE["code_mappings"])
+    return {"schema_version": VERSION, "types": types, "aliases": aliases, "code_mappings": mappings}
 
 
 def build_contracts():

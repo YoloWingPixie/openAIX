@@ -8,7 +8,7 @@ from openaix.describe.resolve import schema_description
 # Chapter 1).
 POINT_ROLES = ("control", "initial", "ingress", "egress", "gate", "handover",
                "marshalling", "identification_safety", "bullseye", "fix", "target_reference", "fire_support_station",
-               "visual_reporting")
+               "visual_reporting", "search_and_rescue", "push", "rendezvous", "anchor", "hold")
 
 
 def point_location(common):

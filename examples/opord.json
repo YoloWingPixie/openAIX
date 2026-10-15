@@ -1,5 +1,5 @@
 {
-  "$schema": "urn:openaix:schema:opord:0.1.0-draft.2",
+  "$schema": "urn:openaix:schema:opord:0.2.0-draft.1",
   "acknowledgement": {
     "acknowledge": true,
     "instructions": "Acknowledge on Bastion command by 1200Z."
@@ -281,16 +281,36 @@
             "ato_mission": "cas-cobalt",
             "control_type": "type_2",
             "controller": "warhawk",
+            "danger_close": false,
             "distance": {
               "unit": "nm",
               "value": 15.3
             },
             "egress_point": "cedar",
+            "final_attack_headings": [
+              {
+                "end_bearing": {
+                  "reference": "magnetic",
+                  "value": 60
+                },
+                "start_bearing": {
+                  "reference": "magnetic",
+                  "value": 330
+                }
+              }
+            ],
             "friendly_direction": "south_west",
             "friendly_distance": {
               "unit": "km",
               "value": 10.7
             },
+            "friendly_marking": "panel",
+            "hazards": [
+              {
+                "description": "Power lines across the wadi south of the target.",
+                "kind": "wires"
+              }
+            ],
             "heading": {
               "reference": "magnetic",
               "value": 46
@@ -304,6 +324,7 @@
             },
             "mark": "laser",
             "method_of_attack": "bomb_on_target",
+            "offset_direction": "left",
             "remarks": "Friendlies are south of PL ZINC. No attack headings over the Lantern village.",
             "target": "cobalt-array",
             "target_description": "Revetted vehicle park, four trucks.",
@@ -316,7 +337,11 @@
               "latitude": 35.093,
               "longitude": 40.314
             },
-            "time_on_target": "2026-10-02T13:40:00Z"
+            "threats": [
+              "sa-6"
+            ],
+            "time_on_target": "2026-10-02T13:40:00Z",
+            "time_to_target_seconds": 300
           }
         ],
         "points": [
@@ -1580,16 +1605,15 @@
       "ato_day": "214"
     },
     "org.opord-builder.print": {
-      "caveats": [
-        "REL TO CJTF-OIR"
-      ],
       "classification_banner": "UNCLASSIFIED",
+      "classification_caveat": "REL TO CJTF-OIR",
       "copy_number": 1,
       "logo": "assets/oir.png",
       "message_reference_number": "IR-26-01",
       "number_of_copies": 12,
       "page_icon": "assets/oir-icon.png",
-      "place_of_issue": "Muwaffaq Salti, Jordan"
+      "place_of_issue": "Muwaffaq Salti, Jordan",
+      "watermark": "EXERCISE"
     },
     "sim": {
       "dcs": {
@@ -1664,7 +1688,7 @@
     "id": "oir-resources",
     "revision": "1"
   },
-  "schema_version": "0.1.0-draft.2",
+  "schema_version": "0.2.0-draft.1",
   "situation": {
     "area_of_interest": {
       "measures": [
@@ -1713,11 +1737,38 @@
       "weather": {
         "forecasts": [
           {
+            "altimeter": {
+              "unit": "inHg",
+              "value": 29.92
+            },
             "ceiling": {
               "reference": "MSL",
               "unit": "ft",
               "value": 25000
             },
+            "clouds": [
+              {
+                "base": {
+                  "reference": "AGL",
+                  "unit": "ft",
+                  "value": 9000
+                },
+                "coverage": "few",
+                "tops": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 11000
+                }
+              },
+              {
+                "base": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 25000
+                },
+                "coverage": "scattered"
+              }
+            ],
             "effects": "No restrictions on medium-altitude attacks or laser designation.",
             "precipitation": "none",
             "temperature": {
@@ -1739,7 +1790,39 @@
             "window": {
               "end": "2026-10-02T16:00:00Z",
               "start": "2026-10-02T12:00:00Z"
-            }
+            },
+            "winds_aloft": [
+              {
+                "altitude": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 10000
+                },
+                "direction": {
+                  "reference": "true",
+                  "value": 250
+                },
+                "speed": {
+                  "unit": "kt",
+                  "value": 25
+                }
+              },
+              {
+                "altitude": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 20000
+                },
+                "direction": {
+                  "reference": "true",
+                  "value": 270
+                },
+                "speed": {
+                  "unit": "kt",
+                  "value": 45
+                }
+              }
+            ]
           }
         ],
         "light_data": [

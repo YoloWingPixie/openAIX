@@ -11,8 +11,8 @@ this contract.
 The definitions are in schema.py (shared entries), paragraphs.py, annexes.py and spins.py. This module builds
 the three root schemas and publishes DESCRIPTIONS, the description table for describe/resolve.py.
 """
-from openaix.build.opord.schema import (BASE, choice, common, DEFS, DIALECT, items, local, many, remarks, string,
-                                        summary, TEXTS, VERSION, when)
+from openaix.build.opord.schema import (BASE, choice, common, DEFS, define, DIALECT, integer, items, local, many, remarks,
+                                        string, summary, TEXTS, VERSION, when)
 from openaix.describe import templates as d
 
 # Importing these modules registers their definitions in DEFS; the import order is the order of `$defs`.
@@ -40,7 +40,22 @@ def header_fields(document):
 
 TIME_ZONE = (string(pattern=r"^[A-IK-Z]$"), d.statement("This field gives the letter of the time zone that the order uses for display, such as `Z`",
                                                          "Each time in the document contains an offset"))
-EXTENSIONS = (common("Extensions"), d.extension("The namespace `org.opord-builder.print` contains the data that `opord-builder` puts on each page"))
+PRINT_NAMESPACE = "org.opord-builder.print"
+define("PrintExtension", d.entity("Print extension", "the page data that `opord-builder` puts on each printed page of the order",
+                                  "The namespace is `org.opord-builder.print`, and the group is for this application only"), {
+    "classification_banner": (common("ClassificationLevel"), d.statement("This field gives the classification marking on the top and the bottom of each page")),
+    "classification_caveat": (string(), d.text("dissemination caveat after the classification marking, such as `REL TO USA, FVEY`")),
+    "copy_number": (integer(1), d.statement("This field gives the number of this copy in the distribution",
+                                            "The number should not be more than `number_of_copies`")),
+    "number_of_copies": (integer(1), d.count("copies in the distribution")),
+    "place_of_issue": (string(), d.text("place where the order is issued")),
+    "message_reference_number": (string(), d.text("message reference number that the originator gives to the order")),
+    "logo": (string(), d.statement("This field gives the path or the web address of the logo for the cover page")),
+    "page_icon": (string(), d.statement("This field gives the path or the web address of the icon for the header of each page")),
+    "watermark": (string(), d.statement("This field gives the watermark of each page: short text such as `DRAFT`, or the path or the web address of an image")),
+})
+EXTENSIONS = ({"allOf": [common("Extensions"), {"properties": {PRINT_NAMESPACE: local("PrintExtension")}}]},
+              d.extension("The namespace `org.opord-builder.print` contains the data that `opord-builder` puts on each page"))
 
 
 def opord_schema():

@@ -183,6 +183,15 @@ CAS_BRIEF = {
     "laser_codes": ["1688", "1511"], "marks": ["laser", "smoke"],
 }
 
+# The 9-line data that the CAS brief of the ATO carries beside the mission-level data.
+NINE_LINE = {
+    "friendly_marking": "panel", "danger_close": False, "offset_direction": "left",
+    "final_attack_headings": [{"start_bearing": magnetic(330), "end_bearing": magnetic(60)}],
+    "time_to_target_seconds": 300, "threats": ["sa-6"],
+    "hazards": [{"kind": "wires", "position": position(35.101, 40.288), "description": "Power lines across the wadi south of the target."},
+                {"kind": "friendly_aircraft", "description": "Rotary-wing traffic below 1,500 feet AGL between PL ZINC and PL NICKEL."}],
+}
+
 
 def briefs():
     """Brief of each OIR mission, by mission identifier."""
@@ -208,7 +217,7 @@ def briefs():
                          "protected_missions": ["strike-cobalt"]},
         "jam-anvil": {"emitters": [{"emitter": "sa6-gainful", "target": "gainful-battery", "priority": 1}],
                       "protected_channels": ["strike-vhf", "control-uhf"]},
-        "cas-cobalt": {**deepcopy(CAS_BRIEF), "check_in": {"procedure": "cas-check-in", "items": [
+        "cas-cobalt": {**deepcopy(CAS_BRIEF), **deepcopy(NINE_LINE), "check_in": {"procedure": "cas-check-in", "items": [
             "mission_number", "aircraft_number_and_type", "position_and_altitude", "ordnance", "time_on_station", "capabilities", "abort_code"],
             "abort_code": "SILVER"}},
         "shell-aar": {"anchor": ref("shell"), "rendezvous": "anchor", "rendezvous_point": ref("marshal"), "control_time": at("1340"),
@@ -269,13 +278,13 @@ def role_missions(mission, flight, launch_from):
         "objective": "Destroy the Zinc supply depot to cut fuel to the ISIS fighters in the valley.",
         "assignments": [
             {"id": "tanks", "target": {"kind": "fixed", "target": "zinc-depot", "aimpoints": ["fuel-tanks"]},
-             "assigned_to": [{"flight": "venom", "members": [1]}], "desired_effect": "DESTROY", "required_stores": ["gbu-12"],
+             "assigned_to": [{"flight": "venom", "members": [1]}], "desired_effect": "destroy", "required_stores": ["gbu-12"],
              "timing": {"kind": "window", "window": window(at("1400"), at("1410"))}, "priority": 1, "role": "primary",
              "weaponeering": [{"flight": "venom", "store": "gbu-12", "quantity": 2,
                                "release_altitude": feet(22000), "attack_heading": magnetic(300)}],
              "target_list_entry": {"document": {"id": "oir-jiptl", "revision": "1"}, "entry": "IR-0004"}},
             {"id": "shed", "target": {"kind": "fixed", "target": "zinc-depot", "aimpoints": ["vehicle-shed"]},
-             "assigned_to": [{"flight": "venom", "members": [2]}], "desired_effect": "DESTROY", "required_stores": ["gbu-12"],
+             "assigned_to": [{"flight": "venom", "members": [2]}], "desired_effect": "destroy", "required_stores": ["gbu-12"],
              "timing": {"kind": "window", "window": window(at("1400"), at("1410"))}, "priority": 2, "role": "primary",
              "weaponeering": [{"flight": "venom", "store": "gbu-12", "quantity": 2,
                                "fuze": {"function": "delay", "tail_fuze": "FMU-139", "arming_delay_s": 4, "delay_ms": 10},

@@ -325,7 +325,7 @@ class NavigationTests(unittest.TestCase):
     def test_navigation_records_carry_no_measure_or_source_record_bookkeeping(self):
         additions = {"active": {"continuous": True}, "category": "arm", "channels": ["uhf"], "coordination_instructions": ["Coordinate."],
                      "record_family": "PG", "icao_code": "K2", "customer_area_code": "USA", "raw_records": ["S" + " " * 131],
-                     "continuation_number": 0, "schema_version": "0.1.0-draft.2"}
+                     "continuation_number": 0, "schema_version": "0.2.0-draft.1"}
         for name in NAVIGATION:
             for field, value in additions.items():
                 with self.subTest(name=name, field=field):

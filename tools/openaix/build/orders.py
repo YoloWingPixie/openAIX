@@ -13,6 +13,7 @@ from openaix.build.common import (BASE, COMMON, DIALECT, RESOURCES, VERSION, arr
                                   trim_definitions)
 from openaix.build.convert import load_model
 from openaix.build.fac_profile import enrich_fac
+from openaix.build.gameplay import enrich_gameplay
 from openaix.build.opord import schema as opord_schema
 from openaix.build.opord.documents import order_document_schemas
 from openaix.build.order_typing import type_orders
@@ -213,6 +214,7 @@ def enrich_orders(artifacts):
     """Typed planning additions made after the requiredness policy and simulator bindings are applied."""
     enrich_planning(artifacts, COMMON)
     enrich_briefs(artifacts, COMMON)
+    enrich_gameplay(artifacts, COMMON)
     enrich_scl(artifacts)
     type_orders(artifacts, COMMON)
     for name in ORDER_SCHEMAS:

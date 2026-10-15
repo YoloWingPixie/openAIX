@@ -9,7 +9,7 @@ from openaix.describe import templates as d
 
 # The same values as build/common.py; this module cannot import it (common imports the description tables).
 # build/orders.py checks that the two agree.
-VERSION = "0.1.0-draft.2"
+VERSION = "0.2.0-draft.1"
 DIALECT = "https://json-schema.org/draft/2020-12/schema"
 BASE = "urn:openaix:schema:"
 COMMON = BASE + "common:" + VERSION
