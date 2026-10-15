@@ -163,9 +163,11 @@ def resource_schema(source):
     resource_data = definitions.pop("Resources")
     resource_data["properties"].pop("airspace", None)
     resource_data["properties"]["places"] = {"type": "object", "additionalProperties": {"$ref": AIRFIELD}}
-    # Navigation records that airfields link to: localizers, instrument procedures and named traffic pattern profiles.
+    # Navigation records that airfields link to: localizers, instrument procedures, holds, MSAs and named traffic pattern profiles.
     resource_data["properties"]["localizers"] = {"type": "object", "additionalProperties": {"$ref": BASE + "localizer:" + VERSION}}
     resource_data["properties"]["instrument_procedures"] = {"type": "object", "additionalProperties": {"$ref": BASE + "procedure:" + VERSION}}
+    resource_data["properties"]["holdings"] = {"type": "object", "additionalProperties": {"$ref": BASE + "holding:" + VERSION}}
+    resource_data["properties"]["msas"] = {"type": "object", "additionalProperties": {"$ref": BASE + "msa:" + VERSION}}
     resource_data["properties"]["pattern_profiles"] = {"type": "object", "additionalProperties": {"$ref": AIRFIELD + "#/$defs/TrafficPattern"}}
     resource_data["properties"]["agencies"] = {"type": "object", "additionalProperties": {"$ref": C2_AGENCY}}
     # Forward air controllers, for an ATO controller contact; an identifier is in `agencies` or in `facs`, not in both.

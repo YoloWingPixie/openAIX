@@ -264,7 +264,7 @@ class SimulatorProfileTests(unittest.TestCase):
         """Every DCSData key is a fact about DCS or a mission object; application settings are in their own namespace."""
         records, _ = schemas()
         self.assertEqual(sorted(records["common"]["$defs"]["DCSData"]["properties"]),
-                         ["alic_code", "angle_deg", "bindings", "clsid", "clsids", "coalition", "label", "objects", "payload",
+                         ["alic_code", "angle_deg", "beacon", "bindings", "clsid", "clsids", "coalition", "label", "objects", "payload",
                           "projection", "pylon", "settings", "type"])
         self.assertEqual(sorted(records["common"]["$defs"]["DCSObjectRef"]["properties"]),
                          ["angle_deg", "closed", "group_category", "icon", "kind", "layer", "line_mode", "mission_id", "name",

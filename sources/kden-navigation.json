@@ -115,6 +115,9 @@
     "airfield": "kden",
     "procedure_type": "approach",
     "ident": "I16R",
+    "runways": [
+      "16R"
+    ],
     "transitions": [
       {
         "legs": [
@@ -142,7 +145,7 @@
                 "unit": "kt"
               }
             },
-            "approach_fix": "initial_approach_fix"
+            "approach_fix": ["initial_approach_fix"]
           },
           {
             "leg_type": "track_to_fix",
@@ -212,7 +215,7 @@
                 "longitude": -104.6966194444
               }
             },
-            "approach_fix": "intermediate_fix"
+            "approach_fix": ["intermediate_fix"]
           }
         ],
         "ident": "KAILE"
@@ -243,7 +246,7 @@
                 "unit": "kt"
               }
             },
-            "approach_fix": "initial_approach_fix"
+            "approach_fix": ["initial_approach_fix"]
           },
           {
             "leg_type": "track_to_fix",
@@ -349,7 +352,7 @@
                 "longitude": -104.6966194444
               }
             },
-            "approach_fix": "intermediate_fix"
+            "approach_fix": ["intermediate_fix"]
           }
         ],
         "ident": "KIPPR"
@@ -380,7 +383,7 @@
                 "unit": "kt"
               }
             },
-            "approach_fix": "initial_approach_fix"
+            "approach_fix": ["initial_approach_fix"]
           },
           {
             "leg_type": "course_to_fix",
@@ -414,7 +417,7 @@
                 "longitude": -104.6966194444
               }
             },
-            "approach_fix": "intermediate_fix"
+            "approach_fix": ["intermediate_fix"]
           }
         ],
         "ident": "SHRED"
@@ -445,7 +448,7 @@
                 "unit": "kt"
               }
             },
-            "approach_fix": "initial_approach_fix"
+            "approach_fix": ["initial_approach_fix"]
           },
           {
             "leg_type": "track_to_fix",
@@ -533,7 +536,7 @@
                 "longitude": -104.6966194444
               }
             },
-            "approach_fix": "intermediate_fix"
+            "approach_fix": ["intermediate_fix"]
           }
         ],
         "ident": "TSHNR"
@@ -571,7 +574,7 @@
                 "longitude": -104.6966194444
               }
             },
-            "approach_fix": "final_approach_course_fix"
+            "approach_fix": ["final_approach_course_fix"]
           },
           {
             "leg_type": "course_to_fix",
@@ -671,7 +674,7 @@
                 "longitude": -104.6966194444
               }
             },
-            "approach_fix": "final_approach_fix"
+            "approach_fix": ["final_approach_fix"]
           },
           {
             "leg_type": "course_to_fix",
@@ -707,7 +710,7 @@
             },
             "vertical_angle_deg": -3.0,
             "fly_over": true,
-            "approach_fix": "missed_approach_point"
+            "approach_fix": ["missed_approach_point"]
           },
           {
             "leg_type": "course_to_altitude",

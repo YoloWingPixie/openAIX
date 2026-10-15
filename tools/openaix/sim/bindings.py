@@ -36,8 +36,10 @@ DEFINITION_POLICIES = {
 }
 # Records whose simulator data has keys other than `bindings` (dcs.DATA_KEYS), by schema or definition name. A
 # `sided` record (agency, controller, operating location, control measure) has a DCS coalition.
-DATA_ROLES = {"c2-agency": "sided", "fac": "sided", "airfield": "sided", "Unit": "side", "Aimpoint": "aimpoint", "Emitter": "emitter", "Store": "store", "AircraftType": "aircraft_type",
+DATA_ROLES = {"c2-agency": "sided", "fac": "sided", "airfield": "sided", "localizer": "beacon", "Unit": "side", "Aimpoint": "aimpoint", "Emitter": "emitter", "Store": "store", "AircraftType": "aircraft_type",
               "scl": "scl", "StationLoad": "station", "Geometry_rectangle": "shape", "Geometry_ellipse": "shape"}
+# Measure contracts whose DCS data is not only `bindings` and `coalition`: a navigation aid has a DCS beacon.
+MEASURE_ROLES = {"navaid": "sided_beacon"}
 # Binding lists other than `bindings`, with their policy, by data role.
 ROLE_LISTS = {"aimpoint": {"objects": "aimpoint_object"}}
 for _name, _profile in PROFILES.items():
@@ -98,7 +100,7 @@ def attach_bindings(artifacts, common):
                 raise ValueError("control measure requires an explicit simulator binding policy: " + contract)
             # A control measure or an airspace has a DCS side: with bindings when its contract has a binding policy.
             policy = MEASURE_POLICIES[contract]
-            attach_policy(schema, common, policy, "sided" if policy else "side")
+            attach_policy(schema, common, policy, MEASURE_ROLES.get(contract, "sided" if policy else "side"))
         elif name in ROOT_POLICIES or name in DATA_ROLES:
             attach_policy(schema, common, ROOT_POLICIES.get(name), DATA_ROLES.get(name))
         for definition_name, definition in schema.get("$defs", {}).items():

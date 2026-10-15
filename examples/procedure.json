@@ -10,6 +10,9 @@
     "id": "kden-navigation",
     "revision": "2610"
   },
+  "runways": [
+    "16R"
+  ],
   "source": "FAA CIFP cycle 2610",
   "transitions": [
     {
@@ -24,7 +27,9 @@
               "value": 11000
             }
           },
-          "approach_fix": "initial_approach_fix",
+          "approach_fix": [
+            "initial_approach_fix"
+          ],
           "fix": {
             "ident": "KAILE",
             "position": {
@@ -86,7 +91,9 @@
               "value": 10000
             }
           },
-          "approach_fix": "intermediate_fix",
+          "approach_fix": [
+            "intermediate_fix"
+          ],
           "course": {
             "reference": "magnetic",
             "value": 172.5
@@ -125,7 +132,9 @@
               "value": 12000
             }
           },
-          "approach_fix": "initial_approach_fix",
+          "approach_fix": [
+            "initial_approach_fix"
+          ],
           "fix": {
             "ident": "KIPPR",
             "position": {
@@ -223,7 +232,9 @@
               "value": 10000
             }
           },
-          "approach_fix": "intermediate_fix",
+          "approach_fix": [
+            "intermediate_fix"
+          ],
           "course": {
             "reference": "magnetic",
             "value": 172.5
@@ -262,7 +273,9 @@
               "value": 10000
             }
           },
-          "approach_fix": "initial_approach_fix",
+          "approach_fix": [
+            "initial_approach_fix"
+          ],
           "fix": {
             "ident": "SHRED",
             "position": {
@@ -288,7 +301,9 @@
               "value": 10000
             }
           },
-          "approach_fix": "intermediate_fix",
+          "approach_fix": [
+            "intermediate_fix"
+          ],
           "course": {
             "reference": "magnetic",
             "value": 172.5
@@ -327,7 +342,9 @@
               "value": 13000
             }
           },
-          "approach_fix": "initial_approach_fix",
+          "approach_fix": [
+            "initial_approach_fix"
+          ],
           "fix": {
             "ident": "TSHNR",
             "position": {
@@ -407,7 +424,9 @@
               "value": 10000
             }
           },
-          "approach_fix": "intermediate_fix",
+          "approach_fix": [
+            "intermediate_fix"
+          ],
           "course": {
             "reference": "magnetic",
             "value": 172.5
@@ -445,7 +464,9 @@
               "value": 10000
             }
           },
-          "approach_fix": "final_approach_course_fix",
+          "approach_fix": [
+            "final_approach_course_fix"
+          ],
           "fix": {
             "ident": "SAKIC",
             "position": {
@@ -544,7 +565,9 @@
               "value": 7000
             }
           },
-          "approach_fix": "final_approach_fix",
+          "approach_fix": [
+            "final_approach_fix"
+          ],
           "course": {
             "reference": "magnetic",
             "value": 173.0
@@ -578,7 +601,9 @@
               "value": 5377
             }
           },
-          "approach_fix": "missed_approach_point",
+          "approach_fix": [
+            "missed_approach_point"
+          ],
           "course": {
             "reference": "magnetic",
             "value": 173.0

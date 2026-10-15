@@ -1,5 +1,6 @@
 {
   "$schema": "urn:openaix:schema:holding:0.2.0-draft.1",
+  "airfield": "ojms",
   "extensions": {
     "sim": {
       "dcs": {

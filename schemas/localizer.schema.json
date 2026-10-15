@@ -15,12 +15,11 @@
         },
         "position": {
           "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/GeoPoint",
-          "description": "This field gives the geographic position of the glide slope antenna, as latitude and longitude."
+          "description": "This field gives the geographic position of the glide slope antenna, as latitude and longitude. A source that does not publish the position of the antenna leaves this field out."
         }
       },
       "required": [
-        "angle_deg",
-        "position"
+        "angle_deg"
       ],
       "type": "object"
     }
@@ -71,7 +70,8 @@
                   },
                   "propertyNames": {
                     "enum": [
-                      "bindings"
+                      "bindings",
+                      "beacon"
                     ]
                   }
                 }
@@ -153,6 +153,17 @@
       "description": "This field gives the source of this record. The value gives the authority that publishes the data, and the cycle, for example `FAA CIFP cycle 2610`. A record that an author writes does not have this field. The field `provenance` gives the same facts as structured data.",
       "minLength": 1,
       "type": "string"
+    },
+    "system": {
+      "description": "This field gives the landing system that the localizer belongs to, as one of the enumerated values. A record without this field is the localizer of an instrument landing system (ILS).",
+      "enum": [
+        "ils",
+        "prmg"
+      ],
+      "x-enum-descriptions": {
+        "ils": "This value identifies the instrument landing system (ILS) of International Civil Aviation Organization (ICAO) Annex 10: a localizer with an optional glide slope.",
+        "prmg": "This value identifies the landing radio beacon group (PRMG): the landing system of the Soviet Union and Russia. It gives a front course and a glide slope to a runway as an instrument landing system (ILS) does, with its own signals and its own channel numbers."
+      }
     },
     "threshold_crossing_height": {
       "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Length",

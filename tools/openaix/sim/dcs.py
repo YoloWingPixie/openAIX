@@ -3,7 +3,7 @@ binding policies and map conversion.
 
 DCSData holds every DCS value of a record: `bindings` link the record to objects placed in a DCS mission; the other
 keys are DCS data that is not a mission object (aircraft type name, store class identifiers, pylons, Mission Editor
-settings, UnitPayloads load, ALIC code, drawing angle). Native field names follow Vox Bellica's mission reader,
+settings, UnitPayloads load, ALIC code, drawing angle, radio beacon). Native field names follow Vox Bellica's mission reader,
 including the `verticies` spelling of DCS.
 """
 from copy import deepcopy
@@ -55,6 +55,8 @@ DATA_KEYS = {
     "scl": ("payload",),
     "station": ("pylon", "label", "clsid", "settings"),
     "shape": ("angle_deg", "projection"),
+    "beacon": ("bindings", "beacon"),
+    "sided_beacon": ("bindings", "coalition", "beacon"),
 }
 
 
@@ -151,6 +153,9 @@ def data_schema(common):
             "clsid": {"type": "string", "minLength": 1},
             "settings": {"type": "object"},
             "alic_code": {"type": "integer", "minimum": 1},
+            "beacon": {"type": "object", "additionalProperties": False, "minProperties": 1, "properties": {
+                "ident": {"type": "string", "minLength": 1}, "frequency": {"$ref": common + "#/$defs/Frequency"},
+                "channel": {"type": "integer", "minimum": 1}}},
             "angle_deg": {"type": "number"},
             "projection": {"type": "string", "minLength": 1},
             "coalition": {"$ref": common + "#/$defs/Coalition"},

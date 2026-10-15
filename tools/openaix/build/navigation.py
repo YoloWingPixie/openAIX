@@ -15,7 +15,13 @@ from openaix.sim.bindings import sim_overlay
 AIRWAY_TYPES = {"ADVRTE": "advisory", "ARWY": "airway", "NAVRTE": "area_navigation", "ATSRTE": "air_traffic_services",
                 "CDR": "conditional"}
 ROOT_SCHEMAS = ("airfield", "runway", "localizer", "procedure", "holding", "path-point", "msa", "grid-mora", "notam")
-NAVAID_CLASSES = ("VOR", "VOR_DME", "VORTAC", "TACAN", "DME", "NDB", "ILS_DME")
+# Navigation aid classes. NDB_DME is an NDB with a DME at one site (as VOR_DME is a VOR with a DME); a MARKER is a marker
+# beacon; RSBN is the Russian short-range radio navigation system, the azimuth and distance counterpart of TACAN.
+NAVAID_CLASSES = ("VOR", "VOR_DME", "VORTAC", "TACAN", "DME", "NDB", "NDB_DME", "ILS_DME", "MARKER", "RSBN")
+# Landing systems of a localizer record: the ILS of ICAO Annex 10 and the Russian PRMG, a localizer and glide slope
+# pair of the same function. PRMG is a variant of the localizer, not a navigation aid class: it has a runway, a front
+# course and a glide slope, which the localizer record holds and a navigation aid record does not.
+LANDING_SYSTEMS = ("ils", "prmg")
 # Leg types: the 23 path terminators, named in words; sources and definitions in sources/leg-type-definitions.json.
 # The two-letter code is in each value's description, not in the data.
 LEG_TYPES = ("initial_fix", "track_to_fix", "course_to_fix", "direct_to_fix", "fix_to_altitude",
@@ -32,6 +38,7 @@ COURSE_LEGS = ("course_to_altitude", "course_to_dme_distance", "course_to_fix", 
                "heading_to_altitude", "heading_to_dme_distance", "heading_to_intercept", "heading_to_manual_termination",
                "heading_to_radial", "procedure_turn")
 ALTITUDE_LEGS = ("course_to_altitude", "fix_to_altitude", "heading_to_altitude")
+RADIAL_LEGS = ("course_to_radial", "heading_to_radial")
 HOLD_LEGS = ("hold_to_altitude", "hold_to_fix", "hold_to_manual_termination")
 # Operating locations that one Airfield record describes. A fixed airfield has runways; a carrier moves and binds
 # to its simulator unit; a forward arming and refuelling point (FARP) has landing pads.
@@ -84,6 +91,14 @@ PROCEDURE_TURN_TYPES = ("turn_45_180", "turn_80_260", "base_turn")
 ASSESSED_SEGMENTS = ("departure", "arrival", "feeder", "initial", "intermediate", "final", "missed_approach", "circling", "holding")
 OBSTACLE_TYPES = ("terrain", "structure", "vegetation")
 ASSESSMENT_CRITERIA = ("pans_ops", "terps", "other")
+# Approach functions of a fix: the segment fixes of FAA Order 8260.3G and ICAO Doc 8168, the stepdown fix (FAA PCG,
+# ICAO Doc 8168 Volume II 2.7.3) and the fix of the missed approach holding pattern. One fix can have several functions.
+APPROACH_FIXES = ("initial_approach_fix", "intermediate_fix", "final_approach_course_fix", "final_approach_fix",
+                  "missed_approach_point", "stepdown_fix", "missed_approach_holding_fix")
+# Altitude constraint kinds. The first four apply to legs and holds; the last two to legs only (ARINC 424 altitude
+# descriptions G, H, I, J and V: glide slope intercept and stepdown altitudes).
+ALTITUDE_KINDS = ("at", "at_or_above", "at_or_below", "between")
+LEG_ALTITUDE_KINDS = (*ALTITUDE_KINDS, "glide_slope_intercept", "stepdown")
 DERIVATIONS = ("published", "derived", "synthesized", "authored")
 AIRAC_CYCLE = r"^[0-9]{2}(0[1-9]|1[0-4])$"
 
@@ -141,12 +156,12 @@ def schemas(base, version, dialect, common):
 
     fix = obj({"ident": text(), "position": ref("GeoPoint")}, ("ident", "position"))
 
-    def altitude_constraint():
+    def altitude_constraint(kinds=ALTITUDE_KINDS):
         # Inline (not $defs): review examples would build an invalid `between` variant from a single-limit seed.
-        node = obj({"kind": {"enum": ["at", "at_or_above", "at_or_below", "between"]}, "lower": ref("Altitude"), "upper": ref("Altitude")},
+        node = obj({"kind": {"enum": list(kinds)}, "lower": ref("Altitude"), "upper": ref("Altitude")},
             ("kind",), allOf=[
                 when("kind", ["between"], {"required": ["lower", "upper"]}),
-                when("kind", ["at", "at_or_above"], {"required": ["lower"], "not": {"required": ["upper"]}}),
+                when("kind", ["at", "at_or_above", "glide_slope_intercept", "stepdown"], {"required": ["lower"], "not": {"required": ["upper"]}}),
                 when("kind", ["at_or_below"], {"required": ["upper"], "not": {"required": ["lower"]}})])
         return node
 
@@ -160,8 +175,9 @@ def schemas(base, version, dialect, common):
         return {"allOf": [ref("Length"), {"properties": {"unit": {"enum": ["ft", "m"]}}}]}
 
     definitions = {
-        "Fix": {"oneOf": [fix, ref("ControlMeasureSelection") | {"x-measure-kinds": ["POINT", "NAVAID"]}]},
-        "NavaidRef": {"oneOf": [deepcopy(fix), ref("ControlMeasureSelection") | {"x-measure-kinds": ["NAVAID"]}]},
+        "Fix": {"oneOf": [fix, ref("ControlMeasureSelection") | {"x-measure-kinds": ["POINT", "NAVAID"]}, {"$ref": "#/$defs/LocalizerSelection"}]},
+        "NavaidRef": {"oneOf": [deepcopy(fix), ref("ControlMeasureSelection") | {"x-measure-kinds": ["NAVAID"]}, {"$ref": "#/$defs/LocalizerSelection"}]},
+        "LocalizerSelection": obj({"kind": {"const": "localizer"}, "id": ref("Identifier", "localizers")}, ("kind", "id")),
         "SpeedConstraint": obj({"kind": {"enum": ["at", "at_or_below", "at_or_above"]}, "value": ref("Speed")}, ("kind", "value")),
         "Duration": obj({"value": {"type": "number", "exclusiveMinimum": 0}, "unit": {"const": "min"}}, ("value", "unit")),
         "Hold": obj({"fix": {"$ref": "#/$defs/Fix"}, "inbound_course": ref("Bearing"), "turn_direction": {"enum": ["left", "right"]},
@@ -172,16 +188,20 @@ def schemas(base, version, dialect, common):
                     allOf=[{"if": {"required": ["leg_length"]}, "then": {"not": {"required": ["leg_time"]}}}]),
         "Leg": obj({"leg_type": {"enum": list(LEG_TYPES)}, "fix": {"$ref": "#/$defs/Fix"},
                     "recommended_navaid": {"$ref": "#/$defs/NavaidRef"}, "turn_direction": {"enum": ["left", "right", "either"]},
-                    "course": ref("Bearing"), "distance": ref("Length"), "time": {"$ref": "#/$defs/Duration"},
-                    "altitude": altitude_constraint(), "speed": {"$ref": "#/$defs/SpeedConstraint"},
+                    "course": ref("Bearing"), "theta": ref("Bearing"), "rho": ref("Length"), "distance": ref("Length"),
+                    "time": {"$ref": "#/$defs/Duration"},
+                    "altitude": altitude_constraint(LEG_ALTITUDE_KINDS), "speed": {"$ref": "#/$defs/SpeedConstraint"},
                     "vertical_angle_deg": {"type": "number", "minimum": -90, "maximum": 90},
                     "arc_center": {"$ref": "#/$defs/Fix"}, "arc_radius": ref("Length"), "hold": {"$ref": "#/$defs/Hold"},
                     "fly_over": {"type": "boolean"},
-                    "approach_fix": {"enum": ["initial_approach_fix", "intermediate_fix", "final_approach_course_fix", "final_approach_fix", "missed_approach_point"]},
+                    "approach_fix": {**array({"enum": list(APPROACH_FIXES)}, 1), "uniqueItems": True},
                     "missed_approach": {"type": "boolean"}, "rnp_value": rnp(),
                     "procedure_turn": {"$ref": "#/$defs/ProcedureTurn"}},
-                   ("leg_type",), allOf=[
+                   ("leg_type",), dependentRequired={"theta": ["recommended_navaid"], "rho": ["recommended_navaid"]}, allOf=[
                        when("leg_type", FIX_LEGS, {"required": ["fix"]}),
+                       # ARINC 424 sections 5.24 and 5.25: the radial (theta) that ends a CR or VR leg and the arc radius (rho) of an AF leg.
+                       when("leg_type", RADIAL_LEGS, {"required": ["recommended_navaid", "theta"]}),
+                       when("leg_type", ["arc_to_fix"], {"required": ["recommended_navaid", "rho"]}),
                        when("leg_type", COURSE_LEGS, {"required": ["course"]}),
                        when("leg_type", ALTITUDE_LEGS, {"required": ["altitude"]}),
                        when("leg_type", ["radius_to_fix"], {"required": ["arc_center", "arc_radius"]}),
@@ -346,6 +366,8 @@ def schemas(base, version, dialect, common):
          "navaids": array(ref("ControlMeasureSelection") | {"x-measure-kinds": ["NAVAID"]}, 1),
          "localizers": array(ref("Identifier"), 1) | {"x-catalog": "localizers"},
          "procedures": array(ref("Identifier"), 1) | {"x-catalog": "instrument_procedures"},
+         "holdings": array(ref("Identifier"), 1) | {"x-catalog": "holdings"},
+         "msas": array(ref("Identifier"), 1) | {"x-catalog": "msas"},
          "traffic_pattern": {"$ref": "#/$defs/TrafficPattern"}, "carrier": {"$ref": "#/$defs/Carrier"},
          "controlling_agency": ref("Identifier", "agencies"), "approach_instructions": array(text())},
         (), catalogue=True)
@@ -367,20 +389,23 @@ def schemas(base, version, dialect, common):
         "TrafficPattern": traffic_pattern, "PatternSet": pattern_set, "InitialPoint": initial_point, "Reentry": reentry,
         "GoAround": go_around, "SimulatedFlameout": sfo}})
     navigation["localizer"] = schema("localizer", {**root(
-        {"airfield": airfield_ref(), "ident": text(), "runway": ref("RunwayDesignator"), "ils_category": {"enum": list(ILS_CATEGORIES)},
+        {"airfield": airfield_ref(), "ident": text(), "runway": ref("RunwayDesignator"), "system": {"enum": list(LANDING_SYSTEMS)},
+         "ils_category": {"enum": list(ILS_CATEGORIES)},
          "frequency": unit("Frequency", "MHz"), "course": ref("Bearing"),
          "position": ref("GeoPoint"), "glide_slope": {"$ref": "#/$defs/GlideSlope"}, "threshold_crossing_height": ref("Length")},
         ("frequency", "course", "position"), kind="localizer", catalogue=True),
         "$defs": {"GlideSlope": obj({"angle_deg": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 90}, "position": ref("GeoPoint"),
-                                     "elevation": ref("Elevation")}, ("angle_deg", "position"))}})
+                                     "elevation": ref("Elevation")}, ("angle_deg",))}})
     procedure = root(
         {"airfield": airfield_ref(), "ident": text(), "procedure_type": {"enum": ["departure", "arrival", "approach"]},
-         "approach_type": {"enum": list(APPROACH_TYPES)},
+         "approach_type": {"enum": list(APPROACH_TYPES)}, "runways": {**array(ref("RunwayDesignator"), 1), "uniqueItems": True},
          "transitions": array({"$ref": "#/$defs/Transition"}, 1),
          "navigation_specification": {"$ref": "#/$defs/NavigationSpecification"},
          "minima": array({"$ref": "#/$defs/MinimaLine"}, 1), "radar_approach": {"$ref": "#/$defs/RadarApproach"},
          "climb_gradients": array({"$ref": "#/$defs/ClimbGradient"}, 1), "takeoff_minima": array({"$ref": "#/$defs/TakeoffMinimum"}, 1),
-         "obstacle_assessment": {"$ref": "#/$defs/ObstacleAssessment"}}, (), kind="procedure", catalogue=True)
+         "top_altitude": ref("Altitude"), "threshold_crossing_height": ref("Length"),
+         "holdings": {**array(ref("Identifier"), 1), "uniqueItems": True, "x-catalog": "holdings"}, "msa": ref("Identifier", "msas"),
+         "remarks": array(text(), 1), "obstacle_assessment": {"$ref": "#/$defs/ObstacleAssessment"}}, (), kind="procedure", catalogue=True)
     procedure["properties"]["provenance"] = {"$ref": "#/$defs/Provenance"}
 
     def excluded(*fields):
@@ -388,10 +413,12 @@ def schemas(base, version, dialect, common):
 
     procedure["allOf"] = [
         when("procedure_type", ["departure", "arrival"], excluded("approach_type", "minima", "radar_approach")),
-        when("procedure_type", ["arrival", "approach"], excluded("takeoff_minima")),
+        when("procedure_type", ["arrival", "approach"], excluded("takeoff_minima", "top_altitude")),
+        when("procedure_type", ["departure", "arrival"], excluded("threshold_crossing_height")),
         when("procedure_type", ["arrival"], excluded("climb_gradients")),
         # A radar approach can have no coded legs: the controller gives the final approach from the radar.
-        when("approach_type", RADAR_APPROACHES, {"required": ["radar_approach"]}, {**excluded("radar_approach"), "required": ["transitions"]}),
+        when("approach_type", RADAR_APPROACHES, {"required": ["radar_approach"], **excluded("threshold_crossing_height")},
+             {**excluded("radar_approach"), "required": ["transitions"]}),
         when("approach_type", ["par"], {"properties": {"radar_approach": {
             "required": ["glide_path_angle_deg"], **excluded("recommended_altitudes", "missed_approach_point_distance")}}}),
         when("approach_type", ["asr"], {"properties": {"radar_approach": {
@@ -399,7 +426,7 @@ def schemas(base, version, dialect, common):
             "properties": {"coverage": excluded("elevation_lower_deg", "elevation_upper_deg")}}}}),
     ]
     navigation["procedure"] = schema("procedure", {**procedure, "$defs": definitions})
-    navigation["holding"] = schema("holding", root({"hold": shared("Hold")}, ("hold",), kind="holding", catalogue=True))
+    navigation["holding"] = schema("holding", root({"airfield": airfield_ref(), "hold": shared("Hold")}, ("hold",), kind="holding", catalogue=True))
     navigation["path-point"] = schema("path-point", root(
         {"airfield": airfield_ref(), "approach": text(), "runway": ref("RunwayDesignator"), "approach_type": text(),
          "landing_threshold_point": ref("GeoPoint"), "landing_threshold_elevation": ref("Elevation"),
@@ -428,8 +455,10 @@ def schemas(base, version, dialect, common):
     navaid["anyOf"] = [{"required": ["position"]}, {"required": ["dme_position"]}]
     navaid["allOf"] = [
         when("class", ["TACAN", "VORTAC"], {"required": ["tacan"]}),
-        when("class", ["TACAN"], {"not": {"required": ["frequency"]}}, {"required": ["frequency"]}),
-        when("class", ["NDB"], {"properties": {"frequency": {"properties": {"unit": {"const": "kHz"}}}}}, vhf),
+        when("class", ["TACAN"], {"not": {"required": ["frequency"]}}),
+        # A marker beacon transmits on 75 MHz: its record can leave the frequency out.
+        when("class", [name for name in NAVAID_CLASSES if name not in ("TACAN", "MARKER")], {"required": ["frequency"]}),
+        when("class", ["NDB", "NDB_DME"], {"properties": {"frequency": {"properties": {"unit": {"const": "kHz"}}}}}, vhf),
     ]
     navigation["navaid"] = schema("navaid", navaid)
     segment = obj({"fix": shared("Fix"), "inbound_course": ref("Bearing"), "outbound_course": ref("Bearing"), "distance": ref("Length"),

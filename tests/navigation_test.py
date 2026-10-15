@@ -608,6 +608,251 @@ class NavigationTests(unittest.TestCase):
                 validate(document)
 
 
+def magnetic(value):
+    return {"value": value, "reference": "magnetic", "declination_deg": 5.0}
+
+
+class InterchangeGapTests(unittest.TestCase):
+    """Procedure runways, links to holds and MSA, TCH, remarks, localizer references, theta and rho, altitude kinds,
+    approach fix roles, DCS beacons, navigation aid classes and the optional glide slope position."""
+
+    def test_procedure_runways_are_runway_designators_of_the_airfield(self):
+        self.assertEqual(example("procedure")["runways"], ["16R"])
+        validate(example("procedure"))
+        cases = (
+            ("unknown designator", lambda doc: doc.update(runways=["16X"])),
+            ("no runway", lambda doc: doc.update(runways=[])),
+            ("repeated runway", lambda doc: doc.update(runways=["16R", "16R"])),
+            ("not an end of the airfield", lambda doc: doc.update(runways=["10"])),
+        )
+        for name, change in cases:
+            with self.subTest(case=name):
+                document = example("procedure")
+                change(document)
+                rejected(self, document)
+        for identifier in ("ojms-salat1", "ojms-par31"):
+            self.assertEqual(procedure(identifier)["runways"], ["31"])
+
+    def test_procedure_links_to_holds_and_the_msa_in_the_catalogues(self):
+        resources = example("resources")["resources"]
+        self.assertEqual(set(resources["holdings"]), {"ghi-hold"})
+        self.assertEqual(set(resources["msas"]), {"ojms-msa"})
+        self.assertEqual((resources["places"]["ojms"]["holdings"], resources["places"]["ojms"]["msas"]), (["ghi-hold"], ["ojms-msa"]))
+        record = procedure("ojms-i31")
+        self.assertEqual((record["holdings"], record["msa"]), (["ghi-hold"], "ojms-msa"))
+        cases = (
+            ("unresolved hold", lambda doc: doc.update(holdings=["nowhere"])),
+            ("unresolved MSA", lambda doc: doc.update(msa="nowhere")),
+            ("no hold", lambda doc: doc.update(holdings=[])),
+            ("repeated hold", lambda doc: doc.update(holdings=["ghi-hold", "ghi-hold"])),
+            ("MSA as a list", lambda doc: doc.update(msa=["ojms-msa"])),
+        )
+        for name, change in cases:
+            with self.subTest(case=name):
+                validate_procedure(self, "ojms-i31", change, valid=False)
+        for field, key in (("holdings", "ghi-hold"), ("msas", "ojms-msa")):
+            with self.subTest(list=field):
+                catalogue = example("resources")
+                catalogue["resources"][field][key]["airfield"] = "h4"
+                with self.assertRaises(ContractError):
+                    validate_document(procedure("ojms-i31"), resource_document=catalogue)
+                catalogue = example("resources")
+                catalogue["resources"]["places"]["ojms"][field] = ["other"]
+                catalogue["resources"][field]["other"] = deepcopy(catalogue["resources"][field][key]) | {"id": "other"}
+                with self.assertRaises(ContractError):
+                    validate_document(catalogue, "resources")
+
+    def test_hold_record_names_its_airfield(self):
+        record = deepcopy(example("resources")["resources"]["holdings"]["ghi-hold"])
+        self.assertEqual(record["airfield"], "ojms")
+        record["resources_ref"] = {"id": "oir-resources", "revision": example("resources")["meta"]["revision"]}
+        validate_document(record, resource_document=example("resources"))
+        catalogue = example("resources")
+        catalogue["resources"]["places"]["ojms"]["holdings"] = ["other"]
+        catalogue["resources"]["holdings"]["other"] = deepcopy(record) | {"id": "other"}
+        del catalogue["resources"]["holdings"]["other"]["resources_ref"]
+        with self.assertRaisesRegex(ContractError, "does not list"):
+            validate_document(record, resource_document=catalogue)
+
+    def test_top_altitude_belongs_to_a_departure(self):
+        self.assertEqual(procedure("ojms-salat1")["top_altitude"], feet(6000))
+        validate_procedure(self, "ojms-salat1", lambda doc: doc.update(top_altitude={"value": 150, "unit": "flight_level", "reference": "FL"}))
+        for identifier in ("ojms-i31", "ojms-r13"):
+            with self.subTest(procedure=identifier):
+                validate_procedure(self, identifier, lambda doc: doc.update(top_altitude=feet(6000)), valid=False)
+        validate_procedure(self, "ojms-salat1", lambda doc: doc.update(top_altitude={"value": 6000, "unit": "ft"}), valid=False)
+
+    def test_procedure_remarks_are_free_text(self):
+        self.assertEqual(len(procedure("ojms-i31")["remarks"]), 2)
+        validate_procedure(self, "ojms-salat1", lambda doc: doc.update(remarks=["Departure end of runway 31 is not usable at night."]))
+        for value in ([], [""], "Remark"):
+            with self.subTest(value=value):
+                validate_procedure(self, "ojms-salat1", lambda doc: doc.update(remarks=value), valid=False)
+
+    def test_threshold_crossing_height_belongs_to_a_non_radar_approach(self):
+        self.assertEqual(procedure("ojms-r13")["threshold_crossing_height"], {"value": 50, "unit": "ft"})
+        validate_procedure(self, "ojms-i31", lambda doc: doc.update(threshold_crossing_height={"value": 54, "unit": "ft"}))
+        for identifier in ("ojms-salat1", "ojms-par31", "ojms-asr13"):
+            with self.subTest(procedure=identifier):
+                validate_procedure(self, identifier, lambda doc: doc.update(threshold_crossing_height={"value": 50, "unit": "ft"}), valid=False)
+        validate_procedure(self, "ojms-r13", lambda doc: doc.update(threshold_crossing_height={"value": 0, "unit": "ft"}), valid=False)
+
+    def test_a_localizer_can_be_a_recommended_navaid_or_a_fix(self):
+        leg = next(leg for leg in legs(procedure("ojms-i31")) if leg.get("recommended_navaid", {}).get("kind") == "localizer")
+        self.assertEqual(leg["recommended_navaid"], {"kind": "localizer", "id": "ojms-ils-31"})
+
+        def fix_on_localizer(document):
+            target = next(item for item in legs(document) if item["leg_type"] == "track_to_fix")
+            target["fix"] = {"kind": "localizer", "id": "ojms-ils-26"}
+
+        validate_procedure(self, "ojms-i31", fix_on_localizer)
+        cases = (
+            ("unresolved localizer", lambda doc: legs(doc)[3].update(recommended_navaid={"kind": "localizer", "id": "nowhere"})),
+            ("unresolved localizer fix", lambda doc: legs(doc)[1].update(fix={"kind": "localizer", "id": "nowhere"})),
+            ("localizer selection without an identifier", lambda doc: legs(doc)[3].update(recommended_navaid={"kind": "localizer"})),
+            ("an airfield as a navaid", lambda doc: legs(doc)[3].update(recommended_navaid={"kind": "airfield", "id": "ojms"})),
+        )
+        for name, change in cases:
+            with self.subTest(case=name):
+                validate_procedure(self, "ojms-i31", change, valid=False)
+
+    def test_theta_and_rho_need_the_recommended_navaid(self):
+        departure = procedure("ojms-salat1")
+        radial = next(leg for leg in legs(departure) if leg["leg_type"] == "course_to_radial")
+        self.assertEqual((radial["theta"], radial["recommended_navaid"]["id"]), (magnetic(355.0), "ghi"))
+        navaid = {"kind": "control_measure", "id": "ghi"}
+        cases = (
+            ("radial leg without theta", lambda doc: legs(doc)[1].pop("theta"), False),
+            ("radial leg without a navaid", lambda doc: legs(doc)[1].pop("recommended_navaid"), False),
+            ("heading to a radial", lambda doc: legs(doc)[1].update(leg_type="heading_to_radial"), True),
+            ("theta on a track to a fix", lambda doc: legs(doc)[3].update(theta=magnetic(38.6), recommended_navaid=navaid), True),
+            ("theta without a navaid", lambda doc: legs(doc)[3].update(theta=magnetic(38.6)), False),
+            ("rho on a track to a fix", lambda doc: legs(doc)[3].update(rho={"value": 13.6, "unit": "nm"}, recommended_navaid=navaid), True),
+            ("rho without a navaid", lambda doc: legs(doc)[3].update(rho={"value": 13.6, "unit": "nm"}), False),
+            ("rho of zero", lambda doc: legs(doc)[3].update(rho={"value": 0, "unit": "nm"}, recommended_navaid=navaid), False),
+            ("theta of 360 degrees", lambda doc: legs(doc)[1].update(theta={"value": 360, "reference": "magnetic"}), False),
+        )
+        for name, change, valid in cases:
+            with self.subTest(case=name):
+                validate_procedure(self, "ojms-salat1", change, valid=valid)
+
+        def arc(document):
+            target = legs(document)[3]
+            target.update(leg_type="arc_to_fix", turn_direction="right")
+            return target
+
+        validate_procedure(self, "ojms-salat1", lambda doc: arc(doc).update(recommended_navaid=navaid, rho={"value": 13.6, "unit": "nm"}))
+        validate_procedure(self, "ojms-salat1", lambda doc: arc(doc).update(recommended_navaid=navaid), valid=False)
+        validate_procedure(self, "ojms-salat1", lambda doc: arc(doc).update(rho={"value": 13.6, "unit": "nm"}), valid=False)
+
+    def test_glide_slope_intercept_and_stepdown_altitudes_have_one_limit(self):
+        kinds = {leg["altitude"]["kind"] for identifier in ("ojms-i31", "ojms-asr13") for leg in legs(procedure(identifier)) if "altitude" in leg}
+        self.assertLessEqual({"glide_slope_intercept", "stepdown"}, kinds)
+        for kind in ("glide_slope_intercept", "stepdown"):
+            for name, altitude, valid in (
+                    ("lower limit", {"kind": kind, "lower": feet(3300)}, True),
+                    ("no limit", {"kind": kind}, False),
+                    ("upper limit only", {"kind": kind, "upper": feet(3300)}, False),
+                    ("both limits", {"kind": kind, "lower": feet(3300), "upper": feet(3600)}, False)):
+                with self.subTest(kind=kind, case=name):
+                    validate_procedure(self, "ojms-i31", lambda doc: legs(doc)[1].update(altitude=altitude), valid=valid)
+
+            def hold(document):
+                target = next(leg for leg in legs(document) if leg["leg_type"] == "hold_to_fix")
+                target["hold"]["altitude"] = {"kind": kind, "lower": feet(5000)}
+
+            with self.subTest(kind=kind, case="hold altitude"):
+                validate_procedure(self, "ojms-i31", hold, valid=False)
+
+    def test_approach_fix_is_a_list_of_roles(self):
+        roles = {role for identifier in ("ojms-i31", "ojms-asr13", "ojms-r13") for leg in legs(procedure(identifier)) for role in leg.get("approach_fix", [])}
+        self.assertLessEqual({"stepdown_fix", "missed_approach_holding_fix", "initial_approach_fix", "intermediate_fix"}, roles)
+        self.assertEqual(legs(procedure("ojms-r13"))[0]["approach_fix"], ["initial_approach_fix", "intermediate_fix"])
+        for name, value, valid in (
+                ("one role", ["stepdown_fix"], True),
+                ("a role as a string", "stepdown_fix", False),
+                ("no role", [], False),
+                ("repeated role", ["stepdown_fix", "stepdown_fix"], False),
+                ("unknown role", ["alternate_fix"], False)):
+            with self.subTest(case=name):
+                validate_procedure(self, "ojms-i31", lambda doc: legs(doc)[1].update(approach_fix=value), valid=valid)
+        self.assertTrue(all(isinstance(leg.get("approach_fix", []), list) for leg in legs(example("procedure"))))
+
+    def test_dcs_beacon_is_dcs_data_of_a_navaid_or_a_localizer(self):
+        beacon = {"ident": "IDQQ", "frequency": {"value": 111.1, "unit": "MHz"}, "channel": 3}
+        for name in ("navaid", "localizer"):
+            for case, value, valid in (
+                    ("full beacon", beacon, True),
+                    ("ident only", {"ident": "IDQQ"}, True),
+                    ("empty beacon", {}, False),
+                    ("channel of zero", {"channel": 0}, False),
+                    ("unknown key", {"ident": "IDQQ", "type": "ILS"}, False),
+                    ("frequency without a unit", {"frequency": {"value": 111.1}}, False)):
+                with self.subTest(record=name, case=case):
+                    document = example(name)
+                    document["extensions"] = {"sim": {"dcs": {"beacon": value}}}
+                    if valid:
+                        validate(document)
+                    else:
+                        rejected(self, document)
+        for name in ("airfield", "procedure", "msa"):
+            with self.subTest(record=name):
+                document = example(name)
+                document["extensions"] = {"sim": {"dcs": {"beacon": beacon}}}
+                rejected(self, document)
+        self.assertNotIn("beacon", schemas()[0]["measures/navaid"]["properties"])
+
+    def test_new_navaid_classes_select_their_frequency(self):
+        def navaid(change):
+            document = example("navaid")
+            del document["tacan"]
+            change(document)
+            return document
+
+        kilohertz = {"value": 380, "unit": "kHz"}
+        for name, change, valid in (
+                ("NDB with a DME", lambda doc: doc.update({"class": "NDB_DME", "frequency": kilohertz}), True),
+                ("NDB with a DME on a VHF frequency", lambda doc: doc.update({"class": "NDB_DME", "frequency": {"value": 114.7, "unit": "MHz"}}), False),
+                ("NDB with a DME without a frequency", lambda doc: (doc.update({"class": "NDB_DME"}), doc.pop("frequency")), False),
+                ("marker beacon without a frequency", lambda doc: (doc.update({"class": "MARKER"}), doc.pop("frequency")), True),
+                ("marker beacon on 75 MHz", lambda doc: doc.update({"class": "MARKER", "frequency": {"value": 75, "unit": "MHz"}}), True),
+                ("marker beacon in kilohertz", lambda doc: doc.update({"class": "MARKER", "frequency": kilohertz}), False),
+                ("RSBN on UHF", lambda doc: doc.update({"class": "RSBN", "frequency": {"value": 870, "unit": "MHz"}}), True),
+                ("RSBN without a frequency", lambda doc: (doc.update({"class": "RSBN"}), doc.pop("frequency")), False),
+                ("RSBN in kilohertz", lambda doc: doc.update({"class": "RSBN", "frequency": kilohertz}), False)):
+            with self.subTest(case=name):
+                document = navaid(change)
+                if valid:
+                    validate(document)
+                else:
+                    rejected(self, document)
+
+    def test_prmg_is_a_landing_system_of_the_localizer_record(self):
+        localizer = example("localizer")
+        self.assertNotIn("system", localizer)
+        for value, valid in (("ils", True), ("prmg", True), ("mls", False), ("PRMG", False)):
+            with self.subTest(system=value):
+                document = example("localizer")
+                document["system"] = value
+                if valid:
+                    validate(document)
+                else:
+                    rejected(self, document)
+        self.assertNotIn("PRMG", schemas()[0]["measures/navaid"]["properties"]["class"]["enum"])
+
+    def test_glide_slope_position_is_optional(self):
+        document = example("localizer")
+        slope = document["glide_slope"]
+        self.assertIn("position", slope)
+        del slope["position"]
+        validate(document)
+        del slope["angle_deg"]
+        rejected(self, document)
+        document = example("localizer")
+        document["glide_slope"]["position"] = {"latitude": 91, "longitude": 0}
+        rejected(self, document)
+
+
 def feet(value):
     return {"value": value, "unit": "ft", "reference": "MSL"}
 

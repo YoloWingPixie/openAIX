@@ -353,11 +353,13 @@ DESCRIPTIONS = {
     ("ResourceData", "facs"): d.map_of(
         "forward air controllers", "A controller contact of an ATO can identify a forward air controller of this map",
         d.enforced("An identifier shall not be in `agencies` and in `facs`", "validator:openaix.check.orders.controllers")),
+    ("ResourceData", "msas"): d.map_of("records of a minimum safe altitude to which airfields and instrument procedures refer"),
     ("ResourceData", "notams"): d.map_of("NOTAMs that planners write before the operation"),
     ("ResourceData", "areas"): d.map_of("planning areas that are not control measures"),
     ("ResourceData", "channels"): d.map_of("radio channels"),
     ("ResourceData", "control_measures"): d.map_of("control measures"),
     ("ResourceData", "extensions"): d.extension(),
+    ("ResourceData", "holdings"): d.map_of("hold records to which airfields and instrument procedures refer"),
     ("ResourceData", "instrument_procedures"): d.map_of("instrument procedures that airfields refer to"),
     ("ResourceData", "localizers"): d.map_of("localizers to which airfields and the ends of runways refer"),
     ("ResourceData", "pattern_profiles"): d.map_of(

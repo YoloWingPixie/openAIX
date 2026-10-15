@@ -7,7 +7,7 @@ check/validate.py calls every area module's hooks:
 - document(document, resources): once per document after reference resolution.
 Altitude-constraint ordering (lower below upper) is the engine's generic lower/upper check.
 
-Airfield links go in two directions: an airfield lists its navigation aids, localizers and instrument procedures,
+Airfield links go in two directions: an airfield lists its navigation aids, localizers, instrument procedures, holds and MSAs,
 and each of those records may name its airfield. When both sides state the link, they agree. A record that a
 document does not contain (an entry of a linked resource catalogue) is checked when that catalogue is validated.
 """
@@ -17,7 +17,8 @@ from openaix.check.contract import ContractError, pointer
 
 AIRFIELD_KINDS = ("airfield", "carrier", "farp")
 # Airfield list field, resource catalogue and the record discriminator of the listed records.
-LINKS = (("navaids", "control_measures"), ("localizers", "localizers"), ("procedures", "instrument_procedures"))
+LINKS = (("navaids", "control_measures"), ("localizers", "localizers"), ("procedures", "instrument_procedures"),
+         ("holdings", "holdings"), ("msas", "msas"))
 
 
 def reciprocal(designator):
@@ -138,11 +139,12 @@ def link_errors(document, resources):
 
     airfields = entries("places")
     records = {"navaids": entries("control_measures", lambda record: record.get("type") == "NAVAID"),
-               "localizers": entries("localizers"), "procedures": entries("instrument_procedures")}
+               "localizers": entries("localizers"), "procedures": entries("instrument_procedures"),
+               "holdings": entries("holdings"), "msas": entries("msas")}
     own = document.get("id")
     if document.get("kind") in AIRFIELD_KINDS:
         airfields[own] = (document, ())
-    for field, kind in (("navaids", None), ("localizers", "localizer"), ("procedures", "procedure")):
+    for field, kind in (("navaids", None), ("localizers", "localizer"), ("procedures", "procedure"), ("holdings", "holding"), ("msas", "msa")):
         if (kind and document.get("kind") == kind) or (kind is None and document.get("type") == "NAVAID"):
             records[field][own] = (document, ())
 
@@ -179,6 +181,18 @@ def link_errors(document, resources):
                 errors.append((at(base, "airfield"), f"the airfield does not list this {field[:-1]}"))
             if field == "localizers" and "runway" in record and target[0].get("runways") and record["runway"] not in end_designators(target[0]):
                 errors.append((at(base, "runway"), "the localizer runway is not an end of a runway of its airfield"))
+            if field == "procedures" and target[0].get("runways"):
+                for index, designator in enumerate(record.get("runways", [])):
+                    if designator not in end_designators(target[0]):
+                        errors.append((at(base, "runways", index), "the procedure runway is not an end of a runway of its airfield"))
+    for identifier, (procedure, base) in records["procedures"].items():
+        # The holds and the MSA of a procedure are at the airfield of the procedure.
+        for field, kind in (("holdings", "holdings"), ("msa", "msas")):
+            listed = procedure.get(field, [])
+            for index, item in enumerate(listed if isinstance(listed, list) else [listed]):
+                record = records[kind].get(item)
+                if record and "airfield" in record[0] and "airfield" in procedure and record[0]["airfield"] != procedure["airfield"]:
+                    errors.append((at(base, field, *([index] if isinstance(listed, list) else [])), f"the {kind[:-1]} names another airfield than the procedure"))
     if document.get("kind") == "runway" and document.get("airfield") in airfields:
         target = airfields[document["airfield"]][0]
         designators = [runway.get("designator") for runway in target.get("runways", [])]

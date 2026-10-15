@@ -78,12 +78,24 @@ def _altitude_constraint(context, of):
     }
 
 
-ALTITUDE_CONSTRAINT_KINDS = d.values({
+HOLD_ALTITUDE_KINDS = {
     "at": d.value_sentence("The aircraft is at the `lower` altitude at the fix."),
     "at_or_above": d.value_sentence("The aircraft is at or above the `lower` altitude at the fix."),
     "at_or_below": d.value_sentence("The aircraft is at or below the `upper` altitude at the fix."),
     "between": d.value_sentence("The aircraft is between the `lower` altitude and the `upper` altitude at the fix."),
+}
+# The two kinds for legs only follow the glide slope intercept altitude and the stepdown fix of FAA Order 8260.3G and
+# the Pilot/Controller Glossary; the coding of ARINC 424 (altitude descriptions G, H, I, J and V) is not re-read.
+LEG_ALTITUDE_KINDS = d.values({
+    **HOLD_ALTITUDE_KINDS,
+    "glide_slope_intercept": d.value_sentence(
+        "The `lower` altitude is the published glide slope intercept altitude: the minimum altitude at which the aircraft "
+        "intercepts the glide slope or the glide path of the approach."),
+    "stepdown": d.value_sentence(
+        "The fix of the leg is a stepdown fix. The aircraft stays at or above the `lower` altitude from this fix, which "
+        "permits more descent in the segment because the aircraft has passed the controlling obstacle."),
 })
+ALTITUDE_CONSTRAINT_KINDS = d.values(HOLD_ALTITUDE_KINDS)
 
 
 def _links(items, record):
@@ -138,6 +150,10 @@ DESCRIPTIONS = {
         "Each item has the role of the station, for example tower, ground or ATIS"),
     ("airfield", "ident"): d.identifier(
         "airfield in published data", None, "Examples are the ICAO location indicator and the FAA identifier"),
+    ("airfield", "holdings"): d.references(
+        "hold records", "are for holding patterns at this airfield", _links("a hold record", "hold record")),
+    ("airfield", "msas"): d.references(
+        "records of a minimum safe altitude", "are for this airfield", _links("a record of a minimum safe altitude", "record")),
     ("airfield", "localizers"): d.references(
         "localizers", "are for the runways of this airfield", _links("a localizer", "localizer")),
     ("airfield", "magnetic_variation_deg"): d.quantity(
@@ -417,6 +433,9 @@ DESCRIPTIONS = {
         "airfield of the localizer", None,
         d.enforced("When the airfield has a list of its localizers, the list shall include this localizer",
                    "validator:openaix.check.navigation.airfield_links")),
+    ("localizer", "system"): d.enum(
+        "landing system that the localizer belongs to",
+        "A record without this field is the localizer of an ILS"),
     ("localizer", "ils_category"): d.enum(
         "ILS Category of the localizer",
         "A localizer without a glide slope does not have this field"),
@@ -435,7 +454,8 @@ DESCRIPTIONS = {
         "TCH of the glide slope", "Length", None, "It is the height of the glide slope above the landing threshold"),
     ("GlideSlope", "angle_deg"): d.quantity("angle between the glide path and a horizontal line", None, "degrees"),
     ("GlideSlope", "elevation"): d.quantity("elevation of the glide slope antenna above mean sea level", "Elevation"),
-    ("GlideSlope", "position"): d.position("the glide slope antenna"),
+    ("GlideSlope", "position"): d.position(
+        "the glide slope antenna", "A source that does not publish the position of the antenna leaves this field out"),
 
     # ---- procedure -----------------------------------------------------------------------------
     ("procedure", None): d.entity(
@@ -455,6 +475,28 @@ DESCRIPTIONS = {
     ("procedure", "navigation_specification"): d.statement(
         "This field gives the navigation specification of the procedure: conventional navigation, RNAV or RNP, "
         "and the sensors and navigation aids that it needs"),
+    ("procedure", "runways"): d.list_of(
+        "designators of the runway ends that the procedure serves", None,
+        "A SID or a STAR can serve several runways, and an approach serves the runway of its final approach course",
+        d.enforced("When the airfield has runways, each designator shall be the designator of an end of a runway of the airfield",
+                   "validator:openaix.check.navigation.airfield_links")),
+    ("procedure", "top_altitude"): d.quantity(
+        "highest altitude that the departure publishes: the altitude at which the departure ends", "Altitude", None,
+        d.enforced("Only a departure shall have this field", "schema:not")),
+    ("procedure", "threshold_crossing_height"): d.quantity(
+        "TCH of the vertical path of the approach", "Length", None,
+        "It is the height of the vertical path above the landing threshold, for an approach with vertical guidance",
+        "A PAR or ASR approach gives its TCH in `radar_approach`",
+        d.enforced("Only an approach other than a `par` or `asr` approach shall have this field", "schema:not")),
+    ("procedure", "holdings"): d.references(
+        "hold records of the procedure", "the aircraft can fly on the procedure",
+        d.enforced("When a hold record identifies an airfield, that airfield shall be the airfield of the procedure",
+                   "validator:openaix.check.navigation.airfield_links")),
+    ("procedure", "msa"): d.reference(
+        "record of a minimum safe altitude that the chart of the procedure shows", None,
+        d.enforced("When the record identifies an airfield, that airfield shall be the airfield of the procedure",
+                   "validator:openaix.check.navigation.airfield_links")),
+    ("procedure", "remarks"): d.list_of("notes of the chart of the procedure, as free text"),
     ("procedure", "minima"): d.list_of(
         "published minima lines of the approach", None, d.enforced("Only an approach shall have this field", "schema:not")),
     ("procedure", "radar_approach"): d.statement(
@@ -471,6 +513,11 @@ DESCRIPTIONS = {
         "A transition without an identifier is the common route or the final approach",
         d.enforced("A procedure shall have this field, except a `par` or `asr` approach", "schema:else")),
 
+    ("LocalizerSelection", None): d.entity(
+        "Localizer selection", "a reference to one localizer of the resource catalogue, as a fix or as a recommended navigation aid"),
+    ("LocalizerSelection", "kind"): d.discriminator("a localizer selection"),
+    ("LocalizerSelection", "id"): d.reference("localizer of this selection"),
+
     ("Transition", None): d.entity("Transition", "one transition or route segment of a procedure"),
     ("Transition", "ident"): d.identifier(
         "transition", None, "Examples are the entry fix and the runway",
@@ -482,7 +529,19 @@ DESCRIPTIONS = {
         "For each leg type, conditional rules make sure that the leg has the necessary data"),
     ("Leg", "altitude"): d.statement("This field gives the altitude constraint at the end of the leg"),
     **_altitude_constraint("Leg.altitude", "at the end of the leg"),
-    ("Leg", "approach_fix"): d.enum("approach function of the fix of the leg"),
+    ("Leg", "approach_fix"): d.list_of(
+        "approach functions of the fix of the leg", None, "A fix can have more than one function, for example the initial approach fix "
+        "and the intermediate fix"),
+    ("Leg", "theta"): d.quantity(
+        "bearing from the recommended navigation aid to the fix of the leg", "Bearing", None,
+        "On a `course_to_radial` or `heading_to_radial` leg, it is the radial that ends the leg",
+        d.enforced("A `course_to_radial` or `heading_to_radial` leg shall have this field", "schema:required"),
+        d.enforced("A leg with this field shall have `recommended_navaid`", "schema:dependentRequired")),
+    ("Leg", "rho"): d.quantity(
+        "distance from the recommended navigation aid to the fix of the leg", "Length", None,
+        "On an `arc_to_fix` leg, it is the radius of the arc around the navigation aid",
+        d.enforced("An `arc_to_fix` leg shall have this field", "schema:required"),
+        d.enforced("A leg with this field shall have `recommended_navaid`", "schema:dependentRequired")),
     ("Leg", "arc_center"): d.statement(
         "This field gives the fix at the centre of the constant-radius arc of a `radius_to_fix` leg.",
         d.enforced("A `radius_to_fix` leg shall have this field", "schema:required")),
@@ -513,7 +572,8 @@ DESCRIPTIONS = {
         "An example is `track_to_fix`, which has the code `TF`"),
     ("Leg", "recommended_navaid"): d.statement(
         "This field gives the recommended navigation aid: the navigation aid that gives the course, the radial or "
-        "the distance for the leg"),
+        "the distance for the leg.",
+        "A localizer can be the recommended navigation aid"),
     ("Leg", "speed"): d.statement("This field gives the speed constraint at the end of the leg"),
     ("Leg", "time"): d.statement("This field gives the published flight time of the leg, in minutes"),
     ("Leg", "turn_direction"): d.enum("direction of the turn onto this leg"),
@@ -769,14 +829,14 @@ DESCRIPTIONS = {
     ("Duration", "value"): d.count("minutes"),
 
     ("Fix", None): d.entity(
-        "Fix", "a navigation fix: its published identifier and position, or a reference to a point or a navigation aid "
-        "in the resource catalogue"),
+        "Fix", "a navigation fix: its published identifier and position, or a reference to a point, a navigation aid or a "
+        "localizer in the resource catalogue"),
     ("Fix", "ident"): d.identifier("fix as published", None, "An example is `ZOOKS`"),
     ("Fix", "position"): d.position("the fix"),
 
     ("NavaidRef", None): d.entity(
         "Navigation aid reference",
-        "a navigation aid: its identifier and position, or a reference to a navigation aid in the resource catalogue"),
+        "a navigation aid: its identifier and position, or a reference to a navigation aid or a localizer in the resource catalogue"),
     ("NavaidRef", "ident"): d.identifier("navigation aid"),
     ("NavaidRef", "position"): d.position("the navigation aid"),
 
@@ -785,6 +845,10 @@ DESCRIPTIONS = {
         "Hold record", "a holding pattern at a fix",
         "An author writes the hold for an ATC holding stack, or a published holding leg of a procedure gives it"),
     **_record("holding", "record of a hold"),
+    ("holding", "airfield"): d.reference(
+        "airfield of the hold", None,
+        d.enforced("When the airfield has a list of its hold records, the list shall include this hold record",
+                   "validator:openaix.check.navigation.airfield_links")),
     ("holding", "hold"): d.statement(
         "This field gives the holding pattern of this record.",
         "It has the same definition as the holding legs of a procedure"),
@@ -883,9 +947,9 @@ DESCRIPTIONS = {
         "A station with only a DME or only a TACAN does not always have a second position"),
     ("measures/navaid", "elevation"): d.quantity("elevation of the DME antenna above mean sea level", "Elevation"),
     ("measures/navaid", "frequency"): d.quantity(
-        "frequency of the station", "Frequency", None, "The unit is kilohertz for an NDB",
+        "frequency of the station", "Frequency", None, "The unit is kilohertz for an NDB or an NDB with a DME",
         "For the other classes, the unit is megahertz",
-        "A station with only a TACAN has no frequency"),
+        "A station with only a TACAN has no frequency", "A marker beacon can leave the frequency out"),
     ("measures/navaid", "ident"): d.identifier("navigation aid as the station transmits it in Morse code"),
     ("measures/navaid", "magnetic_variation_deg"): d.quantity(
         "station declination", None, "degrees",
@@ -1035,6 +1099,11 @@ ENUMS = {
         "E_5": "the `E-5` arresting gear with a chain",
         "E_28": "the `E-28` arresting gear with a cable",
     }),
+    ("localizer", "system"): d.values({
+        "ils": d.value("the ILS of ICAO Annex 10: a localizer with an optional glide slope"),
+        "prmg": d.value("the PRMG: the landing system of the Soviet Union and Russia",
+                        "It gives a front course and a glide slope to a runway as an ILS does, with its own signals and its own channel numbers"),
+    }),
     ("localizer", "ils_category"): d.values({
         "I": "an ILS for approaches with a decision height of 200 feet or more",
         "II": "an ILS for approaches with a decision height from 100 feet to less than 200 feet",
@@ -1060,6 +1129,8 @@ ENUMS = {
         "final_approach_fix": "the fix at the start of the final approach segment, where the descent to the runway starts",
         "missed_approach_point": d.value("the point at or before which the aircraft starts the missed approach procedure",
                                          "This keeps the minimum obstacle clearance"),
+        "stepdown_fix": "a fix in a segment of the approach that permits more descent because the aircraft has passed the controlling obstacle",
+        "missed_approach_holding_fix": "the fix of the holding pattern that the missed approach procedure ends in",
     }),
     ("Leg", "turn_direction"): d.values({
         "left": d.value_sentence("The aircraft makes a left turn onto the leg."),
@@ -1190,7 +1261,7 @@ ENUMS = {
         "synthesized": "data that a tool designed where no published procedure or record exists",
         "authored": "data that a person wrote for a mission or a scenario",
     }),
-    ("Leg.altitude", "kind"): ALTITUDE_CONSTRAINT_KINDS,
+    ("Leg.altitude", "kind"): LEG_ALTITUDE_KINDS,
     ("Hold.altitude", "kind"): ALTITUDE_CONSTRAINT_KINDS,
     ("Hold", "turn_direction"): d.values({
         "right": d.value_sentence("Each turn is a right turn. This is the standard holding pattern."),
@@ -1216,6 +1287,13 @@ ENUMS = {
         "NDB": d.value("an `NDB` station", "It transmits a signal in all directions",
                        "A direction finder in the aircraft shows the direction to the station"),
         "ILS_DME": "a `DME` that operates with the localizer of an ILS",
+        "NDB_DME": d.value("an `NDB` station with a `DME` at the same site",
+                           "It gives the direction to the station and the slant distance to the station",
+                           "The frequency of the record is the frequency of the `NDB`"),
+        "MARKER": d.value("a marker beacon", "It transmits a signal on 75 MHz in a vertical fan above the beacon",
+                          "It marks a point on the approach path, for example the outer marker of an ILS"),
+        "RSBN": d.value("an `RSBN` station: the short-range radio navigation system of the Soviet Union and Russia",
+                        "It gives the aircraft its azimuth and slant range from the station on UHF, as `TACAN` does"),
     }),
     ("measures/airway", "airway_type"): {
         **{value: d.value(*d.sentences(MEASURE_CODES[code]["definition"])) for value, code in AIRWAY_TYPE_CODES.items()}},

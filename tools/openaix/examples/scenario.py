@@ -10,7 +10,7 @@ from copy import deepcopy
 
 from openaix.examples.aco import (MISSION_ID, START, agencies, build_aco_example, channels, frequency, point, position,
                                   window)
-from openaix.examples.airfields import (carrier, prince_hassan, farp, ojms, ojms_navigation, ojms_procedures, salti_vfr, tacans, h4,
+from openaix.examples.airfields import (carrier, prince_hassan, farp, ojms, ojms_holding, ojms_msa, ojms_navigation, ojms_procedures, salti_vfr, tacans, h4,
                                        tiyas, usaf_standard)
 from openaix.examples.briefs import add_briefs, brief_resources, role_missions
 from openaix.examples.comms_standard import comms_standard_example
@@ -76,6 +76,8 @@ def base_resources(version):
         "places": {"ojms": ojms(), "prince-hassan": prince_hassan(), "h4": h4(), "farp-sage": farp(), "tiyas": tiyas()},
         "localizers": {localizer["id"]: localizer for localizer in localizers},
         "instrument_procedures": {record["id"]: record for record in (procedure, *ojms_procedures(version))},
+        "holdings": {record["id"]: record for record in (ojms_holding(),)},
+        "msas": {record["id"]: record for record in (ojms_msa(),)},
         "pattern_profiles": {"usaf-standard": usaf_standard()},
         "agencies": {**agencies(), "warhawk": {"id": "warhawk", "kind": "c2-agency", "callsign": "Warhawk", "role": "ASOC",
                                                 "platform": "ground", "channels": ["cas-uhf"], "position": position(32.965, 37.794),

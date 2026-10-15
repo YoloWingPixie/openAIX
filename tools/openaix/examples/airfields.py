@@ -151,6 +151,7 @@ def ojms():
                                  "go_around": {"altitude": feet(4600), "heading": {"value": 306, "reference": "magnetic"}}},
                 localizers=["ojms-ils-31", "ojms-ils-26"],
                 procedures=["ojms-i31", "ojms-par31", "ojms-asr13", "ojms-r13", "ojms-salat1"],
+                holdings=["ghi-hold"], msas=["ojms-msa"],
                 parking=stands, taxi={"nodes": nodes, "edges": edges})
 
 
@@ -249,9 +250,13 @@ def ojms_navigation(version):
     outbound = {"value": round(course["value"] - 180, 1), "reference": "magnetic", "declination_deg": DECLINATION}
     ghi = {"ident": NAVAIDS["ojms"]["ident"], "position": deepcopy(NAVAIDS["ojms"]["position"])}
     procedure = {"id": "ojms-i31", "kind": "procedure", "name": "Muwaffaq Salti ILS runway 31 approach (I31)", "airfield": "ojms",
-                 "ident": "I31", "procedure_type": "approach", "approach_type": "ils", "transitions": [
+                 "ident": "I31", "procedure_type": "approach", "approach_type": "ils", "runways": ["31"],
+                 "holdings": ["ghi-hold"], "msa": "ojms-msa",
+                 "remarks": ["Procedure turn not authorized when radar vectors to the final approach course are given.",
+                             "Missed approach: climb on the runway 31 course to 5000 feet, then hold at GHI."],
+                 "transitions": [
                      {"ident": "GHI", "legs": [
-                         {"leg_type": "initial_fix", "fix": deepcopy(ghi), "approach_fix": "initial_approach_fix",
+                         {"leg_type": "initial_fix", "fix": deepcopy(ghi), "approach_fix": ["initial_approach_fix"],
                           "altitude": {"kind": "at_or_above", "lower": feet(5000)}},
                          {"leg_type": "track_to_fix", "fix": {"ident": "FAF31", "position": deepcopy(final_fix)},
                           "altitude": {"kind": "at_or_above", "lower": feet(4000)}},
@@ -260,13 +265,15 @@ def ojms_navigation(version):
                           "procedure_turn": {"turn_type": "turn_45_180", "remain_within": length(10, "nm"),
                                              "outbound_time": {"value": 1.0, "unit": "min"}, "inbound_course": deepcopy(course)}},
                          {"leg_type": "course_to_fix", "fix": {"ident": "FAF31", "position": deepcopy(final_fix)}, "course": deepcopy(course),
-                          "altitude": {"kind": "at", "lower": feet(3300)}}]},
+                          "recommended_navaid": {"kind": "localizer", "id": "ojms-ils-31"}, "altitude": {"kind": "at", "lower": feet(3300)}}]},
                      {"legs": [
-                         {"leg_type": "initial_fix", "fix": {"ident": "FAF31", "position": final_fix}, "approach_fix": "final_approach_fix",
-                          "altitude": {"kind": "at", "lower": feet(3300)}},
-                         {"leg_type": "track_to_fix", "fix": {"ident": "RW31", "position": threshold}, "approach_fix": "missed_approach_point"},
+                         {"leg_type": "initial_fix", "fix": {"ident": "FAF31", "position": final_fix}, "approach_fix": ["final_approach_fix"],
+                          "altitude": {"kind": "glide_slope_intercept", "lower": feet(3300)}},
+                         {"leg_type": "track_to_fix", "fix": {"ident": "RW31", "position": threshold}, "approach_fix": ["missed_approach_point"]},
                          {"leg_type": "course_to_altitude", "course": course,
-                          "altitude": {"kind": "at_or_above", "lower": feet(5000)}, "missed_approach": True}]}],
+                          "altitude": {"kind": "at_or_above", "lower": feet(5000)}, "missed_approach": True},
+                         {"leg_type": "hold_to_fix", "fix": deepcopy(ghi), "hold": ojms_holding()["hold"],
+                          "approach_fix": ["missed_approach_holding_fix"], "missed_approach": True}]}],
                  "navigation_specification": {"navigation_type": "conventional", "sensors": ["ils", "vor", "dme"],
                                               "required_navaids": [{"kind": "control_measure", "id": "ghi"}],
                                               "notes": "GHI DME is necessary for the procedure turn entry from the GHI transition."},
@@ -319,6 +326,26 @@ def ojms_navigation(version):
     return localizers, procedure
 
 
+def ojms_holding():
+    """The missed approach hold of the I31 approach at GHI; the hold legs of the approach use the same definition."""
+    course = {"value": 306.0, "reference": "magnetic", "declination_deg": DECLINATION}
+    return {"id": "ghi-hold", "kind": "holding", "name": "GHI missed-approach hold, OJMS I31", "airfield": "ojms",
+            "hold": {"fix": {"ident": NAVAIDS["ojms"]["ident"], "position": deepcopy(NAVAIDS["ojms"]["position"])},
+                     "inbound_course": course, "turn_direction": "right", "altitude": {"kind": "at_or_above", "lower": feet(5000)},
+                     "leg_time": {"value": 1.0, "unit": "min"}},
+            "source": DCS_SOURCE}
+
+
+def ojms_msa():
+    """The minimum safe altitude of Muwaffaq Salti: one sector around GHI, which the I31 chart shows."""
+    return {"id": "ojms-msa", "kind": "msa", "name": "Muwaffaq Salti minimum safe altitude", "airfield": "ojms",
+            "center": {"ident": NAVAIDS["ojms"]["ident"], "position": deepcopy(NAVAIDS["ojms"]["position"])},
+            "sectors": [{"start_bearing": {"value": 0, "reference": "magnetic", "declination_deg": DECLINATION},
+                         "end_bearing": {"value": 0, "reference": "magnetic", "declination_deg": DECLINATION}, "full_circle": True,
+                         "radius": length(25, "nm"), "minimum_altitude": feet(4700)}],
+            "source": DCS_SOURCE}
+
+
 def ojms_procedures(version):
     """Radar approaches, an RNP approach and a departure at Muwaffaq Salti, with planning values that agree with the I31 approach."""
     ends = {name: position(latitude, longitude) for name, (latitude, longitude, _) in OJMS_ENDS.items()}
@@ -332,7 +359,7 @@ def ojms_procedures(version):
                            "contact Salti Tower on 253.15.",
                            "If no transmission is received for five seconds below the glide path intercept altitude, execute the missed approach."]
     par = {"id": "ojms-par31", "kind": "procedure", "name": "Muwaffaq Salti PAR runway 31", "airfield": "ojms", "ident": "PAR31",
-           "procedure_type": "approach", "approach_type": "par",
+           "procedure_type": "approach", "approach_type": "par", "runways": ["31"],
            "radar_approach": {"runway": "31", "final_approach_course": magnetic(311.1), "glide_path_angle_deg": 3.0,
                               "threshold_crossing_height": length(50), "position": position(31.826, 36.7955),
                               "coverage": {"range": length(10, "nm"), "azimuth_left_deg": 10, "azimuth_right_deg": 10,
@@ -343,11 +370,13 @@ def ojms_procedures(version):
                                             "visibility": {"value": 0.5, "unit": "sm"}, "runway_visual_range": length(2400)}]}],
            "provenance": deepcopy(authored)}
     asr = {"id": "ojms-asr13", "kind": "procedure", "name": "Muwaffaq Salti ASR runway 13", "airfield": "ojms", "ident": "ASR13",
-           "procedure_type": "approach", "approach_type": "asr", "transitions": [{"legs": [
-               {"leg_type": "initial_fix", "fix": {"ident": "FAF13", "position": final_13}, "approach_fix": "final_approach_fix",
+           "procedure_type": "approach", "approach_type": "asr", "runways": ["13"], "transitions": [{"legs": [
+               {"leg_type": "initial_fix", "fix": {"ident": "FAF13", "position": final_13}, "approach_fix": ["final_approach_fix"],
                 "altitude": {"kind": "at_or_above", "lower": feet(3200)}},
+               {"leg_type": "track_to_fix", "fix": {"ident": "STP13", "position": offset(ends["13"], 311.1, 3.0 * 1852)},
+                "approach_fix": ["stepdown_fix"], "altitude": {"kind": "stepdown", "lower": feet(2600)}},
                {"leg_type": "track_to_fix", "fix": {"ident": "MAP13", "position": offset(ends["13"], 311.1, 1852)},
-                "approach_fix": "missed_approach_point", "altitude": {"kind": "at_or_above", "lower": feet(2120)}},
+                "approach_fix": ["missed_approach_point"], "altitude": {"kind": "at_or_above", "lower": feet(2120)}},
                {"leg_type": "course_to_altitude", "course": magnetic(131.1), "altitude": {"kind": "at_or_above", "lower": feet(5000)},
                 "missed_approach": True}]}],
            "radar_approach": {"runway": "13", "final_approach_course": magnetic(131.1), "position": position(31.8297, 36.7866),
@@ -366,13 +395,15 @@ def ojms_procedures(version):
            "provenance": deepcopy(authored)}
     rf_center = offset(ends["13"], 311.1, 9.0 * 1852)
     rnp = {"id": "ojms-r13", "kind": "procedure", "name": "Muwaffaq Salti RNP runway 13 approach (R13)", "airfield": "ojms", "ident": "R13",
-           "procedure_type": "approach", "approach_type": "rnav", "transitions": [{"legs": [
+           "procedure_type": "approach", "approach_type": "rnav", "runways": ["13"], "threshold_crossing_height": length(50),
+           "transitions": [{"legs": [
                {"leg_type": "initial_fix", "fix": {"ident": "SALTI", "position": offset(rf_center, 221.1, 3 * 1852)},
-                "approach_fix": "initial_approach_fix", "altitude": {"kind": "at_or_above", "lower": feet(5000)}, "rnp_value": length(1, "nm")},
+                "approach_fix": ["initial_approach_fix", "intermediate_fix"], "altitude": {"kind": "at_or_above", "lower": feet(5000)},
+                "rnp_value": length(1, "nm")},
                {"leg_type": "radius_to_fix", "fix": {"ident": "FAF13", "position": final_13}, "arc_center": {"ident": "CTR13", "position": rf_center},
-                "arc_radius": length(3, "nm"), "turn_direction": "left", "approach_fix": "final_approach_fix",
+                "arc_radius": length(3, "nm"), "turn_direction": "left", "approach_fix": ["final_approach_fix"],
                 "altitude": {"kind": "at", "lower": feet(3200)}, "rnp_value": length(1, "nm")},
-               {"leg_type": "track_to_fix", "fix": {"ident": "RW13", "position": deepcopy(ends["13"])}, "approach_fix": "missed_approach_point",
+               {"leg_type": "track_to_fix", "fix": {"ident": "RW13", "position": deepcopy(ends["13"])}, "approach_fix": ["missed_approach_point"],
                 "vertical_angle_deg": -3.0, "rnp_value": length(0.3, "nm")},
                {"leg_type": "course_to_altitude", "course": magnetic(131.1), "altitude": {"kind": "at_or_above", "lower": feet(5000)},
                 "missed_approach": True, "rnp_value": length(1, "nm")}]}],
@@ -386,8 +417,12 @@ def ojms_procedures(version):
                           "generated_at": "2026-09-28T10:00:00Z"}}
     salat = {"ident": "SALAT", "position": offset(NAVAIDS["ojms"]["position"], 43.6, 13.6 * 1852)}
     departure = {"id": "ojms-salat1", "kind": "procedure", "name": "Muwaffaq Salti SALAT 1 departure", "airfield": "ojms",
-                 "ident": "SALAT1", "procedure_type": "departure", "transitions": [{"ident": "RW31", "legs": [
+                 "ident": "SALAT1", "procedure_type": "departure", "runways": ["31"], "top_altitude": feet(6000),
+                 "transitions": [{"ident": "RW31", "legs": [
                      {"leg_type": "course_to_altitude", "course": magnetic(311.1), "altitude": {"kind": "at_or_above", "lower": feet(2200)}},
+                     {"leg_type": "course_to_radial", "course": magnetic(60), "turn_direction": "right",
+                      "recommended_navaid": {"kind": "control_measure", "id": "ghi"}, "theta": magnetic(0),
+                      "altitude": {"kind": "at_or_above", "lower": feet(3000)}},
                      {"leg_type": "direct_to_fix", "fix": {"ident": "GHI", "position": deepcopy(NAVAIDS["ojms"]["position"])},
                       "turn_direction": "right", "altitude": {"kind": "at_or_above", "lower": feet(4000)}},
                      {"leg_type": "track_to_fix", "fix": deepcopy(salat), "altitude": {"kind": "at_or_above", "lower": feet(6000)}}]}],

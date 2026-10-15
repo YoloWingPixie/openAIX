@@ -9,7 +9,8 @@ agree with the I31 approach and the terrain of eastern Jordan.
 from copy import deepcopy
 
 from openaix.examples.aco import MISSION_ID, position
-from openaix.examples.airfields import DCS_SOURCE, DECLINATION, NAVAIDS, feet, length, offset, ojms, ojms_navigation
+from openaix.examples.airfields import (DCS_SOURCE, DECLINATION, NAVAIDS, feet, length, offset, ojms, ojms_holding, ojms_msa,
+                                        ojms_navigation)
 from openaix.sim.dcs import extension as dcs
 
 RESOURCES_REF = {"id": "oir-resources", "revision": "1"}
@@ -60,20 +61,13 @@ def path_point(version):
 
 
 def holding(version):
-    return {"$schema": urn("holding", version), "id": "ghi-hold", "kind": "holding", "name": "GHI missed-approach hold, OJMS I31",
-            "hold": {"fix": fix(GHI), "inbound_course": magnetic(306.0), "turn_direction": "right",
-                     "altitude": {"kind": "at_or_above", "lower": feet(5000)}, "leg_time": {"value": 1.0, "unit": "min"}},
-            "source": DCS_SOURCE, "extensions": dcs([drawing("GHI hold", "Line", line_mode="segments", closed=True)]),
-            "resources_ref": deepcopy(RESOURCES_REF)}
+    return {"$schema": urn("holding", version), **ojms_holding(),
+            "extensions": dcs([drawing("GHI hold", "Line", line_mode="segments", closed=True)]), "resources_ref": deepcopy(RESOURCES_REF)}
 
 
 def msa(version):
-    return {"$schema": urn("msa", version), "id": "ojms-msa", "kind": "msa", "name": "Muwaffaq Salti minimum safe altitude",
-            "airfield": "ojms", "center": fix(GHI),
-            "sectors": [{"start_bearing": magnetic(0), "end_bearing": magnetic(0), "full_circle": True,
-                         "radius": length(25, "nm"), "minimum_altitude": feet(4700)}],
-            "source": DCS_SOURCE, "extensions": dcs([drawing("Salti MSA", "Polygon", polygon_mode="circle")]),
-            "resources_ref": deepcopy(RESOURCES_REF)}
+    return {"$schema": urn("msa", version), **ojms_msa(),
+            "extensions": dcs([drawing("Salti MSA", "Polygon", polygon_mode="circle")]), "resources_ref": deepcopy(RESOURCES_REF)}
 
 
 def grid_mora(version):
@@ -120,15 +114,19 @@ def navaid(version):
             "class": "VORTAC", "airfield": "ojms", "position": deepcopy(GHI["position"]), "dme_position": position(31.83478, 36.77861),
             "elevation": feet(1636), "magnetic_variation_deg": DECLINATION, "frequency": {"value": GHI["frequency"], "unit": "MHz"},
             "tacan": {"channel": GHI["channel"], "band": "X", "identifier": GHI["ident"]}, "source": DCS_SOURCE,
-            "extensions": dcs([drawing("GHI VORTAC", "Icon", icon="P91000009.png")]), "resources_ref": deepcopy(RESOURCES_REF)}
+            "extensions": dcs([drawing("GHI VORTAC", "Icon", icon="P91000009.png")],
+                              beacon={"ident": GHI["ident"], "frequency": {"value": GHI["frequency"], "unit": "MHz"}, "channel": GHI["channel"]}),
+            "resources_ref": deepcopy(RESOURCES_REF)}
 
 
 def localizer(version):
     """The IGHI localizer of runway 31 with its glide slope and its map label."""
     record = deepcopy(next(item for item in ojms_navigation(version)[0] if item["id"] == "ojms-ils-31"))
-    return {"$schema": urn("localizer", version), **record, "glide_slope": {"angle_deg": 3.0, "position": position(31.828, 36.7905),
-                                                                           "elevation": feet(1636)},
-            "threshold_crossing_height": length(50), "extensions": dcs([drawing("IGHI localizer", "TextBox", text="IGHI 108.9")]),
+    return {"$schema": urn("localizer", version), **record, "system": "ils",
+            "glide_slope": {"angle_deg": 3.0, "position": position(31.828, 36.7905), "elevation": feet(1636)},
+            "threshold_crossing_height": length(50),
+            "extensions": dcs([drawing("IGHI localizer", "TextBox", text="IGHI 108.9")],
+                              beacon={"ident": record["ident"], "frequency": deepcopy(record["frequency"])}),
             "resources_ref": deepcopy(RESOURCES_REF)}
 
 
@@ -217,7 +215,8 @@ def field_values():
         {"hold": {"speed": {"kind": "at_or_below", "value": {"value": 230, "unit": "kt"}}}},
         # Provenance of the records that come from the DCS Syria map files.
         {"provenance": {"derivation": "derived", "authority": "Eagle Dynamics", "tool": {"name": "DCS map file reader", "version": "2.9.8"}}},
-        {"legs": [{"fly_over": True, "recommended_navaid": {"kind": "control_measure", "id": "ghi"},
+        {"legs": [{"fly_over": True, "recommended_navaid": {"kind": "control_measure", "id": "ghi"}, "theta": magnetic(38.6),
+                   "rho": length(13.6, "nm"),
                    "speed": {"kind": "at_or_below", "value": {"value": 210, "unit": "kt"}}, "time": {"value": 1.0, "unit": "min"},
                    "vertical_angle_deg": -3.0, "arc_center": {"kind": "control_measure", "id": "ghi"}, "arc_radius": length(10, "nm")}]},
         {"equipment": [{"notes": "Spare batteries for 24 hours of operation."}]},
@@ -322,7 +321,8 @@ def complete(name, seed, resources):
         source = resources["resources"]
         catalogue = seed.setdefault("resources", {})
         for group, keys in (("places", ("ojms",)), ("localizers", ("ojms-ils-31", "ojms-ils-26")),
-                            ("instrument_procedures", tuple(ojms()["procedures"])), ("pattern_profiles", ("usaf-standard",)),
+                            ("instrument_procedures", tuple(ojms()["procedures"])), ("holdings", tuple(ojms()["holdings"])),
+                            ("msas", tuple(ojms()["msas"])), ("pattern_profiles", ("usaf-standard",)),
                             ("control_measures", ("ghi", "gainful-misarc", "zinc-mez", "vrp-salti-dam")), ("emitters", ("sa6-gainful", "sa3-zinc"))):
             for key in keys:
                 catalogue.setdefault(group, {}).setdefault(key, deepcopy(source[group][key]))

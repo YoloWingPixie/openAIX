@@ -600,7 +600,7 @@ def embedded_records(resources, version):
     """Records of the OIR resource catalogue that are also standalone documents: airfields, navigation records,
     control measures, agencies, FACs and NOTAMs."""
     catalogue = resources["resources"]
-    for group in ("places", "localizers", "instrument_procedures", "control_measures", "agencies", "facs", "notams"):
+    for group in ("places", "localizers", "instrument_procedures", "holdings", "msas", "control_measures", "agencies", "facs", "notams"):
         for record in catalogue.get(group, {}).values():
             yield {**deepcopy(record), "resources_ref": {"id": resources["meta"]["id"], "revision": resources["meta"]["revision"]}}
 

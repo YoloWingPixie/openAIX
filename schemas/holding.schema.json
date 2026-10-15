@@ -9,6 +9,11 @@
       "minLength": 1,
       "type": "string"
     },
+    "airfield": {
+      "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Identifier",
+      "description": "This field identifies the airfield of the hold. When the airfield has a list of its hold records, the list shall include this hold record.",
+      "x-catalog": "places"
+    },
     "extensions": {
       "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Extensions",
       "allOf": [

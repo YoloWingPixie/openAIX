@@ -567,6 +567,16 @@ COMMON = {
                                          "The record keeps them for round trips"),
     ("DCSData", "alic_code"): d.statement("This field gives the DCS ALIC code of the radar", "The HARM of the DCS F-16C uses this code",
                                           "Appendix B of the `DCS F-16C Early Access Guide` gives the codes"),
+    ("DCSData", "beacon"): d.statement(
+        "This field gives the radio beacon of the DCS object that the record is bound to: the identification, the frequency "
+        "and the channel as the DCS database gives them",
+        "They can differ from the published values of the real station, which the core fields of the record give",
+        "The record has at least one of them"),
+    ("DCSData.beacon", "ident"): d.identifier("beacon in the DCS database, as the DCS radio transmits it in Morse code"),
+    ("DCSData.beacon", "frequency"): d.quantity("frequency of the beacon in the DCS database", "Frequency"),
+    ("DCSData.beacon", "channel"): d.statement(
+        "This field gives the channel number of the beacon in the DCS database, for a beacon that DCS tunes by channel, "
+        "for example a `TACAN`, an `RSBN` or a PRMG beacon"),
     ("DCSData", "angle_deg"): d.quantity("drawing angle from the DCS mission", None, "degrees",
                                          "This angle is not a true bearing or a magnetic bearing",
                                          "Only a consumer with a correct adapter for DCS should use this angle to turn the shape"),
