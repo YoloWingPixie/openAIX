@@ -3262,7 +3262,8 @@
                 "leg_type": "course_to_altitude",
                 "missed_approach": true
               }
-            ]
+            ],
+            "transition_type": "final_approach"
           }
         ]
       },
@@ -3708,7 +3709,8 @@
                   "kind": "localizer"
                 }
               }
-            ]
+            ],
+            "transition_type": "approach_transition"
           },
           {
             "legs": [
@@ -3804,7 +3806,8 @@
                 "leg_type": "hold_to_fix",
                 "missed_approach": true
               }
-            ]
+            ],
+            "transition_type": "final_approach"
           }
         ]
       },
@@ -4070,7 +4073,8 @@
                   "value": 1
                 }
               }
-            ]
+            ],
+            "transition_type": "final_approach"
           }
         ]
       },
@@ -4288,7 +4292,8 @@
                 },
                 "leg_type": "track_to_fix"
               }
-            ]
+            ],
+            "transition_type": "runway_transition"
           }
         ]
       }

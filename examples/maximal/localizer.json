@@ -6,6 +6,11 @@
     "reference": "magnetic",
     "value": 307.2
   },
+  "elevation": {
+    "reference": "MSL",
+    "unit": "ft",
+    "value": 1636
+  },
   "extensions": {
     "sim": {
       "dcs": {

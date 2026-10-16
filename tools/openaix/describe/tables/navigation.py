@@ -63,6 +63,8 @@ def _record(schema, subject, kind=True, resources=True):
 
 
 AIRFIELD = d.reference("airfield of this record", None, "An example is `kden`")
+# The remarks of a procedure and of a hold record share one definition (`Remarks` in the procedure schema).
+REMARKS = d.list_of("notes of the chart of the procedure or of the hold, as free text")
 LIMIT_ANY = "an altitude with its reference, the surface or no limit"
 
 
@@ -89,8 +91,8 @@ HOLD_ALTITUDE_KINDS = {
 LEG_ALTITUDE_KINDS = d.values({
     **HOLD_ALTITUDE_KINDS,
     "glide_slope_intercept": d.value_sentence(
-        "The `lower` altitude is the published glide slope intercept altitude: the minimum altitude at which the aircraft "
-        "intercepts the glide slope or the glide path of the approach."),
+        "The `lower` altitude is the published altitude at the fix. The `glide_slope_intercept_altitude` field, when present, "
+        "is the minimum altitude at which the aircraft intercepts the glide slope or the glide path of the approach."),
     "stepdown": d.value_sentence(
         "The fix of the leg is a stepdown fix. The aircraft stays at or above the `lower` altitude from this fix, which "
         "permits more descent in the segment because the aircraft has passed the controlling obstacle."),
@@ -449,6 +451,7 @@ DESCRIPTIONS = {
     ("localizer", "ident"): d.identifier(
         "localizer as the station transmits it in Morse code", None, "An example is `IDQQ`"),
     ("localizer", "position"): d.position("the localizer antenna"),
+    ("localizer", "elevation"): d.quantity("elevation of the localizer antenna above mean sea level", "Elevation"),
     ("localizer", "runway"): d.statement("This field gives the designator of the runway of the localizer"),
     ("localizer", "threshold_crossing_height"): d.quantity(
         "TCH of the glide slope", "Length", None, "It is the height of the glide slope above the landing threshold"),
@@ -496,7 +499,7 @@ DESCRIPTIONS = {
         "record of a minimum safe altitude that the chart of the procedure shows", None,
         d.enforced("When the record identifies an airfield, that airfield shall be the airfield of the procedure",
                    "validator:openaix.check.navigation.airfield_links")),
-    ("procedure", "remarks"): d.list_of("notes of the chart of the procedure, as free text"),
+    ("procedure", "remarks"): REMARKS,
     ("procedure", "minima"): d.list_of(
         "published minima lines of the approach", None, d.enforced("Only an approach shall have this field", "schema:not")),
     ("procedure", "radar_approach"): d.statement(
@@ -522,6 +525,11 @@ DESCRIPTIONS = {
     ("Transition", "ident"): d.identifier(
         "transition", None, "Examples are the entry fix and the runway",
         "The common route and the final approach do not have this field"),
+    ("Transition", "transition_type"): d.enum(
+        "role of the transition in the procedure",
+        "A runway transition joins the runway to the common route, and an en route transition joins the common route to the "
+        "enroute structure. An approach transition joins the enroute structure to the final approach, and the final approach "
+        "is the segment from the final approach course to the missed approach point"),
     ("Transition", "legs"): d.list_of("the legs of the transition, in the sequence of flight", ordered=True),
 
     ("Leg", None): d.entity(
@@ -529,6 +537,9 @@ DESCRIPTIONS = {
         "For each leg type, conditional rules make sure that the leg has the necessary data"),
     ("Leg", "altitude"): d.statement("This field gives the altitude constraint at the end of the leg"),
     **_altitude_constraint("Leg.altitude", "at the end of the leg"),
+    ("Leg.altitude", "glide_slope_intercept_altitude"): d.quantity(
+        "glide slope intercept altitude of the approach, the altitude at which the aircraft intercepts the glide slope", "Altitude",
+        None, d.enforced("Only an altitude constraint of the kind `glide_slope_intercept` shall have this field", "schema:not")),
     ("Leg", "approach_fix"): d.list_of(
         "approach functions of the fix of the leg", None, "A fix can have more than one function, for example the initial approach fix "
         "and the intermediate fix"),
@@ -849,6 +860,7 @@ DESCRIPTIONS = {
         "airfield of the hold", None,
         d.enforced("When the airfield has a list of its hold records, the list shall include this hold record",
                    "validator:openaix.check.navigation.airfield_links")),
+    ("holding", "remarks"): REMARKS,
     ("holding", "hold"): d.statement(
         "This field gives the holding pattern of this record.",
         "It has the same definition as the holding legs of a procedure"),

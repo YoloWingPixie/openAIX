@@ -662,6 +662,31 @@
                 "properties": {
                   "kind": {
                     "enum": [
+                      "at",
+                      "at_or_above",
+                      "at_or_below",
+                      "between",
+                      "stepdown"
+                    ]
+                  }
+                },
+                "required": [
+                  "kind"
+                ]
+              },
+              "then": {
+                "not": {
+                  "required": [
+                    "glide_slope_intercept_altitude"
+                  ]
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "enum": [
                       "between"
                     ]
                   }
@@ -731,6 +756,10 @@
           ],
           "description": "This field gives the altitude constraint at the end of the leg.",
           "properties": {
+            "glide_slope_intercept_altitude": {
+              "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Altitude",
+              "description": "This field gives the glide slope intercept altitude of the approach, the altitude at which the aircraft intercepts the glide slope, as an altitude with its unit and reference. Only an altitude constraint of the kind `glide_slope_intercept` shall have this field."
+            },
             "kind": {
               "description": "This field gives the type of the altitude constraint at the end of the leg, as one of the enumerated values. The type tells which of the fields `lower` and `upper` the altitude constraint has.",
               "enum": [
@@ -746,7 +775,7 @@
                 "at_or_above": "The aircraft is at or above the `lower` altitude at the fix.",
                 "at_or_below": "The aircraft is at or below the `upper` altitude at the fix.",
                 "between": "The aircraft is between the `lower` altitude and the `upper` altitude at the fix.",
-                "glide_slope_intercept": "The `lower` altitude is the published glide slope intercept altitude: the minimum altitude at which the aircraft intercepts the glide slope or the glide path of the approach.",
+                "glide_slope_intercept": "The `lower` altitude is the published altitude at the fix. The `glide_slope_intercept_altitude` field, when present, is the minimum altitude at which the aircraft intercepts the glide slope or the glide path of the approach.",
                 "stepdown": "The fix of the leg is a stepdown fix. The aircraft stays at or above the `lower` altitude from this fix, which permits more descent in the segment because the aircraft has passed the controlling obstacle."
               }
             },
@@ -1818,6 +1847,14 @@
       ],
       "type": "object"
     },
+    "Remarks": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
     "SegmentAssessment": {
       "additionalProperties": false,
       "description": "A segment assessment is the obstacle clearance result for one segment of the procedure.",
@@ -2034,6 +2071,16 @@
           },
           "minItems": 1,
           "type": "array"
+        },
+        "transition_type": {
+          "description": "This field gives the role of the transition in the procedure, as one of the enumerated values. A runway transition joins the runway to the common route, and an en route transition joins the common route to the enroute structure. An approach transition joins the enroute structure to the final approach, and the final approach is the segment from the final approach course to the missed approach point.",
+          "enum": [
+            "runway_transition",
+            "common_route",
+            "enroute_transition",
+            "approach_transition",
+            "final_approach"
+          ]
         }
       },
       "required": [
@@ -2482,13 +2529,8 @@
       "description": "This field gives the final approach of a precision approach radar (PAR) or an airport surveillance radar (ASR) approach: the runway, the course, the glide path and the radar coverage."
     },
     "remarks": {
-      "description": "This list contains the notes of the chart of the procedure, as free text.",
-      "items": {
-        "minLength": 1,
-        "type": "string"
-      },
-      "minItems": 1,
-      "type": "array"
+      "$ref": "#/$defs/Remarks",
+      "description": "This list contains the notes of the chart of the procedure or of the hold, as free text."
     },
     "resources_ref": {
       "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/ResourceRef",

@@ -196,6 +196,9 @@ def field_values():
             {"kind": "arc", "center": deepcopy(DEIR_EZ_ZOR), "radius": length(10, "nm"), "start_bearing": magnetic(120),
              "end_bearing": magnetic(240), "turns": "right"}]}},
         {"push": {"offset_minutes": 30}},
+        # The glide slope intercept altitude of the approach, with the published altitude of the same fix in `lower`.
+        {"glide_slope_intercept_altitude": feet(3300)},
+        {"remarks": ["Hold west of the fix. Expect further clearance 10 minutes after arrival."]},
         {"extensions": {"org.cjtf-oir.ato": {"ato_day": "214"}}},
         # DCS object attributes in `extensions.sim.dcs`: a mission object number and the Blue layer colours.
         {"bindings": [{"closed": False}]},

@@ -764,6 +764,49 @@ class InterchangeGapTests(unittest.TestCase):
             with self.subTest(kind=kind, case="hold altitude"):
                 validate_procedure(self, "ojms-i31", hold, valid=False)
 
+    def test_glide_slope_intercept_altitude_belongs_to_that_kind_only(self):
+        for kind, extra, valid in (
+                ("glide_slope_intercept", feet(3400), True), ("stepdown", feet(3400), False), ("at", feet(3400), False)):
+            with self.subTest(kind=kind):
+                altitude = {"kind": kind, "lower": feet(3300), "glide_slope_intercept_altitude": extra}
+                validate_procedure(self, "ojms-i31", lambda doc: legs(doc)[1].update(altitude=altitude), valid=valid)
+
+        def hold(document):
+            target = next(leg for leg in legs(document) if leg["leg_type"] == "hold_to_fix")
+            target["hold"]["altitude"] = {"kind": "at", "lower": feet(5000), "glide_slope_intercept_altitude": feet(3400)}
+
+        validate_procedure(self, "ojms-i31", hold, valid=False)
+
+    def test_holding_remarks_share_the_procedure_definition(self):
+        records, _ = schemas()
+        schema = records["procedure"]["$defs"]["Remarks"]
+        self.assertEqual(records["holding"]["properties"]["remarks"]["$ref"].rsplit("#", 1)[1], "/$defs/Remarks")
+        self.assertEqual(schema["items"], {"type": "string", "minLength": 1})
+        document = example("holding")
+        validate(document)
+        for remarks, valid in ((["Expect further clearance."], True), ([], False), ([""], False)):
+            with self.subTest(remarks=remarks):
+                changed = {**document, "remarks": remarks}
+                if valid:
+                    validate(changed)
+                else:
+                    rejected(self, changed)
+
+    def test_transition_type_names_the_role_of_the_transition(self):
+        types = {transition["transition_type"] for identifier in ("ojms-i31", "ojms-salat1") for transition in procedure(identifier)["transitions"]}
+        self.assertLessEqual({"approach_transition", "final_approach", "runway_transition"}, types)
+        for value, valid in (("common_route", True), ("enroute_transition", True), ("runway", False)):
+            with self.subTest(value=value):
+                validate_procedure(self, "ojms-i31", lambda doc: doc["transitions"][0].update(transition_type=value), valid=valid)
+
+    def test_localizer_has_an_optional_elevation(self):
+        document = example("localizer")
+        validate(document)
+        document["elevation"] = feet(5333)
+        validate(document)
+        document["elevation"] = {"value": "high", "unit": "ft"}
+        rejected(self, document)
+
     def test_approach_fix_is_a_list_of_roles(self):
         roles = {role for identifier in ("ojms-i31", "ojms-asr13", "ojms-r13") for leg in legs(procedure(identifier)) for role in leg.get("approach_fix", [])}
         self.assertLessEqual({"stepdown_fix", "missed_approach_holding_fix", "initial_approach_fix", "intermediate_fix"}, roles)

@@ -1,5 +1,5 @@
 {
-  "$inputs_sha256": "2fb12579420d96b496c4ee02a3507929e1d821bf778607d48d797042b9fb7119",
+  "$inputs_sha256": "6f4d8b5e6512a1ece948f3da878ae78534a6e39314c1416ac6362c6e82984eb1",
   "urn:openaix:schema:aco:0.2.0-draft.1": [
     {
       "alternatives": [
@@ -261,6 +261,10 @@
       ],
       "path": "resources/instrument_procedures/*/minima/*/category_minima/*",
       "selected": "decision_altitude"
+    },
+    {
+      "path": "resources/holdings/*/remarks",
+      "reason": "no_value"
     },
     {
       "alternatives": [

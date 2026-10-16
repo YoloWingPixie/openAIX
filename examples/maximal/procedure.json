@@ -439,12 +439,18 @@
             "value": 38.6
           }
         }
-      ]
+      ],
+      "transition_type": "approach_transition"
     },
     {
       "legs": [
         {
           "altitude": {
+            "glide_slope_intercept_altitude": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 3300
+            },
             "kind": "glide_slope_intercept",
             "lower": {
               "reference": "MSL",
@@ -512,7 +518,8 @@
           "leg_type": "hold_to_fix",
           "missed_approach": true
         }
-      ]
+      ],
+      "transition_type": "final_approach"
     }
   ]
 }

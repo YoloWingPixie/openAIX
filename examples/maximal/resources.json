@@ -2006,6 +2006,9 @@
           "authority": "CJTF-OIR airspace control cell",
           "derivation": "authored"
         },
+        "remarks": [
+          "Circling north-east of runway 13/31 is not authorized: the shelters are there."
+        ],
         "resources_ref": {
           "id": "oir-resources",
           "revision": "1"
@@ -2152,7 +2155,8 @@
                 },
                 "leg_type": "initial_fix"
               }
-            ]
+            ],
+            "transition_type": "final_approach"
           }
         ]
       },
@@ -2518,12 +2522,18 @@
                   "value": 13.6
                 }
               }
-            ]
+            ],
+            "transition_type": "approach_transition"
           },
           {
             "legs": [
               {
                 "altitude": {
+                  "glide_slope_intercept_altitude": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 3300
+                  },
                   "kind": "glide_slope_intercept",
                   "lower": {
                     "reference": "MSL",
@@ -2591,7 +2601,8 @@
                 "leg_type": "hold_to_fix",
                 "missed_approach": true
               }
-            ]
+            ],
+            "transition_type": "final_approach"
           }
         ]
       },
@@ -2836,7 +2847,8 @@
                 },
                 "vertical_angle_deg": -3.0
               }
-            ]
+            ],
+            "transition_type": "final_approach"
           }
         ]
       },
@@ -3017,7 +3029,8 @@
                 },
                 "turn_direction": "right"
               }
-            ]
+            ],
+            "transition_type": "runway_transition"
           }
         ]
       }
@@ -3052,6 +3065,11 @@
           "declination_deg": 5.0,
           "reference": "magnetic",
           "value": 307.2
+        },
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 690
         },
         "extensions": {
           "org.cjtf-oir.ato": {

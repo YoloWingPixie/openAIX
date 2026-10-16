@@ -43,6 +43,10 @@
       "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Bearing",
       "description": "This field gives the front course of the localizer, as a bearing with its unit and reference. A magnetic course includes the station declination, which is more than zero for east."
     },
+    "elevation": {
+      "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Elevation",
+      "description": "This field gives the elevation of the localizer antenna above mean sea level, as an elevation with its unit."
+    },
     "extensions": {
       "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Extensions",
       "allOf": [

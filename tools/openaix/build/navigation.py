@@ -99,6 +99,9 @@ APPROACH_FIXES = ("initial_approach_fix", "intermediate_fix", "final_approach_co
 # descriptions G, H, I, J and V: glide slope intercept and stepdown altitudes).
 ALTITUDE_KINDS = ("at", "at_or_above", "at_or_below", "between")
 LEG_ALTITUDE_KINDS = (*ALTITUDE_KINDS, "glide_slope_intercept", "stepdown")
+# Roles of a transition in a procedure: the transition types of FAA Order 8260.3G and the AIM (runway transition, common
+# route, en route transition, approach transition) and the final approach segment, which has no transition fix.
+TRANSITION_TYPES = ("runway_transition", "common_route", "enroute_transition", "approach_transition", "final_approach")
 DERIVATIONS = ("published", "derived", "synthesized", "authored")
 AIRAC_CYCLE = r"^[0-9]{2}(0[1-9]|1[0-4])$"
 
@@ -158,8 +161,13 @@ def schemas(base, version, dialect, common):
 
     def altitude_constraint(kinds=ALTITUDE_KINDS):
         # Inline (not $defs): review examples would build an invalid `between` variant from a single-limit seed.
-        node = obj({"kind": {"enum": list(kinds)}, "lower": ref("Altitude"), "upper": ref("Altitude")},
-            ("kind",), allOf=[
+        glide_slope = "glide_slope_intercept" in kinds
+        properties = {"kind": {"enum": list(kinds)}, "lower": ref("Altitude"), "upper": ref("Altitude")}
+        if glide_slope:
+            properties["glide_slope_intercept_altitude"] = ref("Altitude")
+        node = obj(properties, ("kind",), allOf=[
+                *([when("kind", [kind for kind in kinds if kind != "glide_slope_intercept"],
+                        {"not": {"required": ["glide_slope_intercept_altitude"]}})] if glide_slope else []),
                 when("kind", ["between"], {"required": ["lower", "upper"]}),
                 when("kind", ["at", "at_or_above", "glide_slope_intercept", "stepdown"], {"required": ["lower"], "not": {"required": ["upper"]}}),
                 when("kind", ["at_or_below"], {"required": ["upper"], "not": {"required": ["lower"]}})])
@@ -207,7 +215,8 @@ def schemas(base, version, dialect, common):
                        when("leg_type", ["radius_to_fix"], {"required": ["arc_center", "arc_radius"]}),
                        when("leg_type", HOLD_LEGS, {"required": ["hold"]}, {"not": {"required": ["hold"]}}),
                        when("leg_type", [leg for leg in LEG_TYPES if leg != "procedure_turn"], {"not": {"required": ["procedure_turn"]}})]),
-        "Transition": obj({"ident": text(), "legs": array({"$ref": "#/$defs/Leg"}, 1)}, ("legs",)),
+        "Remarks": array(text(), 1),
+        "Transition": obj({"ident": text(), "transition_type": {"enum": list(TRANSITION_TYPES)}, "legs": array({"$ref": "#/$defs/Leg"}, 1)}, ("legs",)),
         "ProcedureTurn": obj({"turn_type": {"enum": list(PROCEDURE_TURN_TYPES)}, "remain_within": ref("Length"),
                               "outbound_time": {"$ref": "#/$defs/Duration"}, "inbound_course": ref("Bearing")}, ("turn_type",)),
         "Visibility": obj({"value": {"type": "number", "exclusiveMinimum": 0}, "unit": {"enum": list(VISIBILITY_UNITS)}}, ("value", "unit")),
@@ -392,7 +401,8 @@ def schemas(base, version, dialect, common):
         {"airfield": airfield_ref(), "ident": text(), "runway": ref("RunwayDesignator"), "system": {"enum": list(LANDING_SYSTEMS)},
          "ils_category": {"enum": list(ILS_CATEGORIES)},
          "frequency": unit("Frequency", "MHz"), "course": ref("Bearing"),
-         "position": ref("GeoPoint"), "glide_slope": {"$ref": "#/$defs/GlideSlope"}, "threshold_crossing_height": ref("Length")},
+         "position": ref("GeoPoint"), "elevation": ref("Elevation"), "glide_slope": {"$ref": "#/$defs/GlideSlope"},
+         "threshold_crossing_height": ref("Length")},
         ("frequency", "course", "position"), kind="localizer", catalogue=True),
         "$defs": {"GlideSlope": obj({"angle_deg": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 90}, "position": ref("GeoPoint"),
                                      "elevation": ref("Elevation")}, ("angle_deg",))}})
@@ -405,7 +415,7 @@ def schemas(base, version, dialect, common):
          "climb_gradients": array({"$ref": "#/$defs/ClimbGradient"}, 1), "takeoff_minima": array({"$ref": "#/$defs/TakeoffMinimum"}, 1),
          "top_altitude": ref("Altitude"), "threshold_crossing_height": ref("Length"),
          "holdings": {**array(ref("Identifier"), 1), "uniqueItems": True, "x-catalog": "holdings"}, "msa": ref("Identifier", "msas"),
-         "remarks": array(text(), 1), "obstacle_assessment": {"$ref": "#/$defs/ObstacleAssessment"}}, (), kind="procedure", catalogue=True)
+         "remarks": {"$ref": "#/$defs/Remarks"}, "obstacle_assessment": {"$ref": "#/$defs/ObstacleAssessment"}}, (), kind="procedure", catalogue=True)
     procedure["properties"]["provenance"] = {"$ref": "#/$defs/Provenance"}
 
     def excluded(*fields):
@@ -426,7 +436,7 @@ def schemas(base, version, dialect, common):
             "properties": {"coverage": excluded("elevation_lower_deg", "elevation_upper_deg")}}}}),
     ]
     navigation["procedure"] = schema("procedure", {**procedure, "$defs": definitions})
-    navigation["holding"] = schema("holding", root({"airfield": airfield_ref(), "hold": shared("Hold")}, ("hold",), kind="holding", catalogue=True))
+    navigation["holding"] = schema("holding", root({"airfield": airfield_ref(), "hold": shared("Hold"), "remarks": shared("Remarks")}, ("hold",), kind="holding", catalogue=True))
     navigation["path-point"] = schema("path-point", root(
         {"airfield": airfield_ref(), "approach": text(), "runway": ref("RunwayDesignator"), "approach_type": text(),
          "landing_threshold_point": ref("GeoPoint"), "landing_threshold_elevation": ref("Elevation"),

@@ -70,6 +70,9 @@
       "version": "2.9.8"
     }
   },
+  "remarks": [
+    "Hold west of the fix. Expect further clearance 10 minutes after arrival."
+  ],
   "resources_ref": {
     "id": "oir-resources",
     "revision": "1"
