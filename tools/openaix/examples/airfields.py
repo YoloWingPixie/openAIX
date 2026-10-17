@@ -26,6 +26,18 @@ def offset(origin, bearing_deg, distance_m):
     return position(round(math.degrees(end_lat), 6), round(math.degrees(end_lon), 6))
 
 
+def radial_dme(origin, target, navaid_id, nm_digits=1):
+    """Radial (magnetic) and distance of a target from a navigation aid, as a Fix radial and distance definition."""
+    lat1, lon1 = math.radians(origin["latitude"]), math.radians(origin["longitude"])
+    lat2, lon2 = math.radians(target["latitude"]), math.radians(target["longitude"])
+    bearing = math.atan2(math.sin(lon2 - lon1) * math.cos(lat2),
+                         math.cos(lat1) * math.sin(lat2) - math.sin(lat1) * math.cos(lat2) * math.cos(lon2 - lon1))
+    arc = 2 * math.asin(math.sqrt(math.sin((lat2 - lat1) / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin((lon2 - lon1) / 2) ** 2))
+    return {"navaid": {"kind": "control_measure", "id": navaid_id},
+            "radial": {"value": round((math.degrees(bearing) - DECLINATION) % 360, 1), "reference": "magnetic", "declination_deg": DECLINATION},
+            "distance": {"value": round(arc * EARTH_RADIUS_M / 1852, nm_digits), "unit": "nm"}}
+
+
 def feet(value, reference="MSL"):
     return {"value": value, "unit": "ft", "reference": reference}
 
@@ -258,7 +270,11 @@ def ojms_navigation(version):
                      {"ident": "GHI", "transition_type": "approach_transition", "legs": [
                          {"leg_type": "initial_fix", "fix": deepcopy(ghi), "approach_fix": ["initial_approach_fix"],
                           "altitude": {"kind": "at_or_above", "lower": feet(5000)}},
-                         {"leg_type": "track_to_fix", "fix": {"ident": "FAF31", "position": deepcopy(final_fix)},
+                         {"leg_type": "track_to_fix", "fix": {"ident": "FAF31", "position": deepcopy(final_fix),
+                                                              "radial_dme": {**radial_dme(NAVAIDS["ojms"]["position"], final_fix, "ghi"),
+                                                                             "additional_radials": [{k: v for k, v in radial_dme(
+                                                                                 NAVAIDS["prince-hassan"]["position"], final_fix, "abc").items()
+                                                                                 if k != "distance"}]}},
                           "altitude": {"kind": "at_or_above", "lower": feet(4000)}},
                          {"leg_type": "procedure_turn", "fix": {"ident": "FAF31", "position": deepcopy(final_fix)}, "course": deepcopy(outbound),
                           "turn_direction": "left", "altitude": {"kind": "at_or_above", "lower": feet(4000)},

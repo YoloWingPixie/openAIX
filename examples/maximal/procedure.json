@@ -372,6 +372,52 @@
               "value": 4000
             }
           },
+          "fix": {
+            "ident": "FAF31",
+            "position": {
+              "latitude": 31.767214,
+              "longitude": 36.869855
+            },
+            "radial_dme": {
+              "additional_radials": [
+                {
+                  "navaid": {
+                    "id": "abc",
+                    "kind": "control_measure"
+                  },
+                  "radial": {
+                    "declination_deg": 5.0,
+                    "reference": "magnetic",
+                    "value": 206.1
+                  }
+                }
+              ],
+              "distance": {
+                "unit": "nm",
+                "value": 6.2
+              },
+              "navaid": {
+                "id": "ghi",
+                "kind": "control_measure"
+              },
+              "radial": {
+                "declination_deg": 5.0,
+                "reference": "magnetic",
+                "value": 126.0
+              }
+            }
+          },
+          "leg_type": "track_to_fix"
+        },
+        {
+          "altitude": {
+            "kind": "at_or_above",
+            "lower": {
+              "reference": "MSL",
+              "unit": "ft",
+              "value": 4000
+            }
+          },
           "course": {
             "declination_deg": 5.0,
             "reference": "magnetic",

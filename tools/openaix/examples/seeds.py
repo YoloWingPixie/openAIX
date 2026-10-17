@@ -323,10 +323,10 @@ def complete(name, seed, resources):
     if name == "aco":
         source = resources["resources"]
         catalogue = seed.setdefault("resources", {})
-        for group, keys in (("places", ("ojms",)), ("localizers", ("ojms-ils-31", "ojms-ils-26")),
+        for group, keys in (("places", ("ojms", "prince-hassan")), ("localizers", ("ojms-ils-31", "ojms-ils-26")),
                             ("instrument_procedures", tuple(ojms()["procedures"])), ("holdings", tuple(ojms()["holdings"])),
                             ("msas", tuple(ojms()["msas"])), ("pattern_profiles", ("usaf-standard",)),
-                            ("control_measures", ("ghi", "gainful-misarc", "zinc-mez", "vrp-salti-dam")), ("emitters", ("sa6-gainful", "sa3-zinc"))):
+                            ("control_measures", ("ghi", "abc", "gainful-misarc", "zinc-mez", "vrp-salti-dam")), ("emitters", ("sa6-gainful", "sa3-zinc"))):
             for key in keys:
                 catalogue.setdefault(group, {}).setdefault(key, deepcopy(source[group][key]))
         for key in source["agencies"]:

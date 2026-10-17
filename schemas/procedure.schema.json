@@ -202,6 +202,10 @@
             "position": {
               "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/GeoPoint",
               "description": "This field gives the geographic position of the fix, as latitude and longitude."
+            },
+            "radial_dme": {
+              "$ref": "#/$defs/RadialDme",
+              "description": "This field gives the radial and distance definition of the fix: the navigation aid, the magnetic radial from it and the distance from it, as charted in Federal Aviation Administration (FAA) Order 8260.19 and International Civil Aviation Organization (ICAO) Doc 8168. The definition describes how the fix is charted and does not replace `position`."
             }
           },
           "required": [
@@ -1292,6 +1296,25 @@
       ],
       "type": "object"
     },
+    "NavaidRadial": {
+      "additionalProperties": false,
+      "description": "A navigation aid radial is a radial from a navigation aid, without a distance.",
+      "properties": {
+        "navaid": {
+          "$ref": "#/$defs/NavaidRef",
+          "description": "This field gives the navigation aid that the radial is from."
+        },
+        "radial": {
+          "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Bearing",
+          "description": "This field gives the radial from the navigation aid, as a bearing with its unit and reference."
+        }
+      },
+      "required": [
+        "navaid",
+        "radial"
+      ],
+      "type": "object"
+    },
     "NavaidRef": {
       "description": "A navigation aid reference is a navigation aid: its identifier and position, or a reference to a navigation aid or a localizer in the resource catalogue.",
       "oneOf": [
@@ -1814,6 +1837,38 @@
       },
       "required": [
         "range"
+      ],
+      "type": "object"
+    },
+    "RadialDme": {
+      "additionalProperties": false,
+      "description": "A radial and distance definition is a fix defined by a navigation aid, a radial from it and a distance from it. An example is the fix `LSV 040/12`, at 12 nautical miles on the 040 degree radial of the navigation aid `LSV`.",
+      "properties": {
+        "additional_radials": {
+          "description": "This field gives the other radials that also define the fix, each with its navigation aid. The fix is at the intersection of these radials with the first radial.",
+          "items": {
+            "$ref": "#/$defs/NavaidRadial"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "distance": {
+          "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Length",
+          "description": "This field gives the distance from the navigation aid to the fix, as a length with its unit."
+        },
+        "navaid": {
+          "$ref": "#/$defs/NavaidRef",
+          "description": "This field gives the navigation aid that the radial and the distance are measured from."
+        },
+        "radial": {
+          "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Bearing",
+          "description": "This field gives the radial from the navigation aid to the fix, as a bearing with its unit and reference."
+        }
+      },
+      "required": [
+        "navaid",
+        "radial",
+        "distance"
       ],
       "type": "object"
     },

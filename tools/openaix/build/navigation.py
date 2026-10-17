@@ -183,8 +183,11 @@ def schemas(base, version, dialect, common):
         return {"allOf": [ref("Length"), {"properties": {"unit": {"enum": ["ft", "m"]}}}]}
 
     definitions = {
-        "Fix": {"oneOf": [fix, ref("ControlMeasureSelection") | {"x-measure-kinds": ["POINT", "NAVAID"]}, {"$ref": "#/$defs/LocalizerSelection"}]},
+        "Fix": {"oneOf": [fix | {"properties": {**fix["properties"], "radial_dme": {"$ref": "#/$defs/RadialDme"}}}, ref("ControlMeasureSelection") | {"x-measure-kinds": ["POINT", "NAVAID"]}, {"$ref": "#/$defs/LocalizerSelection"}]},
         "NavaidRef": {"oneOf": [deepcopy(fix), ref("ControlMeasureSelection") | {"x-measure-kinds": ["NAVAID"]}, {"$ref": "#/$defs/LocalizerSelection"}]},
+        "RadialDme": obj({"navaid": {"$ref": "#/$defs/NavaidRef"}, "radial": ref("Bearing"), "distance": ref("Length"),
+                          "additional_radials": array({"$ref": "#/$defs/NavaidRadial"}, 1)}, ("navaid", "radial", "distance")),
+        "NavaidRadial": obj({"navaid": {"$ref": "#/$defs/NavaidRef"}, "radial": ref("Bearing")}, ("navaid", "radial")),
         "LocalizerSelection": obj({"kind": {"const": "localizer"}, "id": ref("Identifier", "localizers")}, ("kind", "id")),
         "SpeedConstraint": obj({"kind": {"enum": ["at", "at_or_below", "at_or_above"]}, "value": ref("Speed")}, ("kind", "value")),
         "Duration": obj({"value": {"type": "number", "exclusiveMinimum": 0}, "unit": {"const": "min"}}, ("value", "unit")),

@@ -697,6 +697,35 @@ class InterchangeGapTests(unittest.TestCase):
                 validate_procedure(self, identifier, lambda doc: doc.update(threshold_crossing_height={"value": 50, "unit": "ft"}), valid=False)
         validate_procedure(self, "ojms-r13", lambda doc: doc.update(threshold_crossing_height={"value": 0, "unit": "ft"}), valid=False)
 
+    def test_a_fix_can_be_defined_by_a_radial_and_a_distance(self):
+        def defined(document):
+            return next(leg["fix"] for leg in legs(document) if leg.get("fix", {}).get("ident") == "FAF31")
+
+        definition = defined(procedure("ojms-i31"))["radial_dme"]
+        self.assertEqual(definition["navaid"], {"kind": "control_measure", "id": "ghi"})
+        self.assertEqual(len(definition["additional_radials"]), 1)
+
+        def without_extra(document):
+            del defined(document)["radial_dme"]["additional_radials"]
+
+        def without_definition(document):
+            del defined(document)["radial_dme"]
+
+        validate_procedure(self, "ojms-i31", without_extra)
+        validate_procedure(self, "ojms-i31", without_definition)
+        cases = (
+            ("unresolved navaid", lambda doc: defined(doc)["radial_dme"].update(navaid={"kind": "control_measure", "id": "nowhere"})),
+            ("an airfield as a navaid", lambda doc: defined(doc)["radial_dme"].update(navaid={"kind": "airfield", "id": "ojms"})),
+            ("no distance", lambda doc: defined(doc)["radial_dme"].pop("distance")),
+            ("no radial", lambda doc: defined(doc)["radial_dme"].pop("radial")),
+            ("distance in an extra radial", lambda doc: defined(doc)["radial_dme"]["additional_radials"][0].update(distance={"value": 5, "unit": "nm"})),
+            ("empty extra radials", lambda doc: defined(doc)["radial_dme"].update(additional_radials=[])),
+            ("no position", lambda doc: defined(doc).pop("position")),
+        )
+        for name, change in cases:
+            with self.subTest(case=name):
+                validate_procedure(self, "ojms-i31", change, valid=False)
+
     def test_a_localizer_can_be_a_recommended_navaid_or_a_fix(self):
         leg = next(leg for leg in legs(procedure("ojms-i31")) if leg.get("recommended_navaid", {}).get("kind") == "localizer")
         self.assertEqual(leg["recommended_navaid"], {"kind": "localizer", "id": "ojms-ils-31"})

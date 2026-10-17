@@ -425,6 +425,33 @@
       }
     },
     "control_measures": {
+      "abc": {
+        "airfield": "prince-hassan",
+        "class": "VORTAC",
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 2165
+        },
+        "frequency": {
+          "unit": "MHz",
+          "value": 115.9
+        },
+        "id": "abc",
+        "ident": "ABC",
+        "name": "Prince Hassan VORTAC",
+        "position": {
+          "latitude": 32.159572,
+          "longitude": 37.148259
+        },
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+        "tacan": {
+          "band": "X",
+          "channel": 106,
+          "identifier": "ABC"
+        },
+        "type": "NAVAID"
+      },
       "cobalt-box": {
         "$schema": "urn:openaix:schema:measure-kb:0.2.0-draft.1",
         "active": {
@@ -1730,6 +1757,52 @@
                     "value": 4000
                   }
                 },
+                "fix": {
+                  "ident": "FAF31",
+                  "position": {
+                    "latitude": 31.767214,
+                    "longitude": 36.869855
+                  },
+                  "radial_dme": {
+                    "additional_radials": [
+                      {
+                        "navaid": {
+                          "id": "abc",
+                          "kind": "control_measure"
+                        },
+                        "radial": {
+                          "declination_deg": 5.0,
+                          "reference": "magnetic",
+                          "value": 206.1
+                        }
+                      }
+                    ],
+                    "distance": {
+                      "unit": "nm",
+                      "value": 6.2
+                    },
+                    "navaid": {
+                      "id": "ghi",
+                      "kind": "control_measure"
+                    },
+                    "radial": {
+                      "declination_deg": 5.0,
+                      "reference": "magnetic",
+                      "value": 126.0
+                    }
+                  }
+                },
+                "leg_type": "track_to_fix"
+              },
+              {
+                "altitude": {
+                  "kind": "at_or_above",
+                  "lower": {
+                    "reference": "MSL",
+                    "unit": "ft",
+                    "value": 4000
+                  }
+                },
                 "course": {
                   "declination_deg": 5.0,
                   "reference": "magnetic",
@@ -2759,23 +2832,6 @@
             "kind": "control_measure"
           }
         ],
-        "operating_hours": {
-          "periods": [
-            {
-              "end_day_offset": 1,
-              "end_time": "01:00:00",
-              "start_time": "03:00:00",
-              "weekdays": [
-                "sun",
-                "mon",
-                "tue",
-                "wed",
-                "thu"
-              ]
-            }
-          ],
-          "time_reference": "UTC"
-        },
         "pads": [
           {
             "name": "EOR 31",
@@ -3248,6 +3304,135 @@
               "kind": "control_measure"
             }
           }
+        },
+        "transition_altitude": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 13000
+        },
+        "use": "military"
+      },
+      "prince-hassan": {
+        "calm_wind_runway": "31",
+        "elevation": {
+          "reference": "MSL",
+          "unit": "ft",
+          "value": 2165
+        },
+        "extensions": {
+          "sim": {
+            "dcs": {
+              "bindings": [
+                {
+                  "kind": "airbase",
+                  "mission_id": "oir-syria",
+                  "name": "Prince Hassan"
+                }
+              ],
+              "coalition": "blue"
+            }
+          }
+        },
+        "frequencies": [
+          {
+            "callsign": "PrinceHassan Tower",
+            "frequency": {
+              "band": "uhf",
+              "modulation": "AM",
+              "unit": "MHz",
+              "value": 252.95
+            },
+            "role": "tower"
+          }
+        ],
+        "id": "prince-hassan",
+        "ident": "OJHR",
+        "kind": "airfield",
+        "magnetic_variation_deg": 5.0,
+        "name": "Prince Hassan",
+        "navaids": [
+          {
+            "id": "abc",
+            "kind": "control_measure"
+          }
+        ],
+        "operating_hours": {
+          "periods": [
+            {
+              "end_day_offset": 1,
+              "end_time": "01:00:00",
+              "start_time": "03:00:00",
+              "weekdays": [
+                "sun",
+                "mon",
+                "tue",
+                "wed",
+                "thu"
+              ]
+            }
+          ],
+          "time_reference": "UTC"
+        },
+        "position": {
+          "latitude": 32.160735,
+          "longitude": 37.149403
+        },
+        "runways": [
+          {
+            "designator": "13/31",
+            "ends": [
+              {
+                "designator": "13",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 126.0
+                },
+                "threshold": {
+                  "latitude": 32.169103,
+                  "longitude": 37.138014
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 2165
+                }
+              },
+              {
+                "designator": "31",
+                "heading": {
+                  "declination_deg": 5.0,
+                  "reference": "magnetic",
+                  "value": 306.0
+                },
+                "threshold": {
+                  "latitude": 32.152366,
+                  "longitude": 37.160789
+                },
+                "threshold_elevation": {
+                  "reference": "MSL",
+                  "unit": "ft",
+                  "value": 2165
+                }
+              }
+            ],
+            "id": "prince-hassan-rw13-31",
+            "kind": "runway",
+            "length": {
+              "unit": "ft",
+              "value": 9314
+            },
+            "name": "13/31",
+            "surface": "hard",
+            "width": {
+              "unit": "ft",
+              "value": 197
+            }
+          }
+        ],
+        "source": "DCS World Syria map: AirfieldsTaxiways layer, radio.lua and beacons.lua",
+        "traffic_pattern": {
+          "profile": "usaf-standard"
         },
         "transition_altitude": {
           "reference": "MSL",

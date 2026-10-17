@@ -844,6 +844,22 @@ DESCRIPTIONS = {
         "localizer in the resource catalogue"),
     ("Fix", "ident"): d.identifier("fix as published", None, "An example is `ZOOKS`"),
     ("Fix", "position"): d.position("the fix"),
+    ("Fix", "radial_dme"): d.statement(
+        "This field gives the radial and distance definition of the fix: the navigation aid, the magnetic radial from it "
+        "and the distance from it, as charted in FAA Order 8260.19 and ICAO Doc 8168.",
+        "The definition describes how the fix is charted and does not replace `position`"),
+    ("RadialDme", None): d.entity(
+        "Radial and distance definition", "a fix defined by a navigation aid, a radial from it and a distance from it",
+        "An example is the fix `LSV 040/12`, at 12 nautical miles on the 040 degree radial of the navigation aid `LSV`"),
+    ("RadialDme", "navaid"): d.statement("This field gives the navigation aid that the radial and the distance are measured from"),
+    ("RadialDme", "radial"): d.quantity("radial from the navigation aid to the fix", "Bearing"),
+    ("RadialDme", "distance"): d.quantity("distance from the navigation aid to the fix", "Length"),
+    ("RadialDme", "additional_radials"): d.statement(
+        "This field gives the other radials that also define the fix, each with its navigation aid",
+        "The fix is at the intersection of these radials with the first radial"),
+    ("NavaidRadial", None): d.entity("Navigation aid radial", "a radial from a navigation aid, without a distance"),
+    ("NavaidRadial", "navaid"): d.statement("This field gives the navigation aid that the radial is from"),
+    ("NavaidRadial", "radial"): d.quantity("radial from the navigation aid", "Bearing"),
 
     ("NavaidRef", None): d.entity(
         "Navigation aid reference",
