@@ -66,7 +66,8 @@ def document(document, resources):
     for key, flight in document.get("flights", {}).items():
         for index, member in enumerate(flight["members"]):
             where = ("flights", key, "members", index)
-            unique(stns, member["stn"], where, "STN")
+            if "stn" in member:
+                unique(stns, member["stn"], where, "STN")
             unique(modes, member["mode_3"], where, "Mode 3")
             if "laser_code" in member:
                 unique(lasers, member["laser_code"], where, "laser code")

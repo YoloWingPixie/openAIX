@@ -11,7 +11,7 @@ from pathlib import Path
 
 LADDER = "uhf_"
 # Flights of the F-16 have their own table, as on the page; the other flights are in the carrier air wing table.
-WING_TABLES = {"f_16c": "AW13"}
+WING_TABLES = {"f_16c": "AW13", "f_4e": "52 TFW"}
 DEFAULT_TABLE = "CVW-1"
 
 
@@ -45,7 +45,7 @@ def comm_plan(document):
         for flight in flights:
             pair = flight["tacan_aa"]
             rows.append((flight["callsign"].title(), mhz(channels[flight["intraflight"]], 3 if name != DEFAULT_TABLE else 2),
-                         flight.get("mids_channel", "--"), tacan(pair["lead"]), tacan(pair["wing"]), flight["datalink_callsign"],
+                         flight.get("mids_channel", "--"), tacan(pair["lead"]), tacan(pair["wing"]), flight.get("datalink_callsign", "--"),
                          flight["stn_block"] + "*"))
         out += table(header, rows)
     rows = []

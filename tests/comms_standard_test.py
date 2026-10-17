@@ -74,6 +74,22 @@ class CommsStandardTests(unittest.TestCase):
         self.rejected(lambda d: d["flights"]["sol"]["members"][0].update(mode_3="2105"), "does not match rule")
         self.rejected(lambda d: d["flights"]["sol"]["members"][0].update(laser_code="1721"), "does not match rule")
 
+    def test_member_without_stn_validates(self):
+        def edit(d):
+            d["flights"]["sol"].pop("datalink_callsign")
+            for member in d["flights"]["sol"]["members"]:
+                member.pop("stn")
+        validate_document(changed(edit))
+
+    def test_nickel_values_follow_the_rules(self):
+        flight = CSG8["flights"]["nickel"]
+        self.assertNotIn("datalink_callsign", flight)
+        self.assertTrue(all("stn" not in member for member in flight["members"]))
+        self.assertEqual([m["mode_3"] for m in flight["members"]], ["5101", "5102", "5103", "5104"])
+        self.assertEqual([m["laser_code"] for m in flight["members"]], ["1661", "1662", "1663", "1664"])
+        self.assertEqual(CSG8["squadrons"]["usaf_555_tfs"]["mode_1"], "50")
+        self.assertEqual(CSG8["channels"][flight["intraflight"]]["frequency"]["value"], 278.0)
+
     def test_frequency_outside_its_band(self):
         self.rejected(lambda d: d["channels"]["uhf_03"]["frequency"].update(value=150.0), "outside the uhf band")
 

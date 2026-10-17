@@ -51,7 +51,7 @@ def comms_standard_schema():
     preset = {"oneOf": [external("RadioAssignment"), obj({"preset": {"type": "integer", "minimum": 1}, "flight_channel": {"enum": ["intraflight"]}},
                                                           ("preset", "flight_channel"))]}
     member = obj({"member": {"type": "integer", "minimum": 1, "maximum": 4}, "stn": external("LinkStation"), "laser_code": external("LaserCode"),
-                  "mode_3": text(pattern=OCTAL4), "tacan": external("TACAN")}, ("member", "stn", "mode_3"))
+                  "mode_3": text(pattern=OCTAL4), "tacan": external("TACAN")}, ("member", "mode_3"))
     defs = {
         "Status": {"enum": list(STATUSES), "default": "adopted"},
         "Radio": obj({"radio": {"enum": list(RADIOS)}, "label": text(), "start_preset": {"type": "integer", "minimum": 1},
@@ -67,7 +67,7 @@ def comms_standard_schema():
                           "datalink_callsign": text(pattern=r"^[A-Z]{2}$"), "intraflight": identifier("channels"), "mids_channel": mids(),
                           "stn_block": text(pattern=OCTAL4), "laser_block": text(pattern=r"^[1-8][1-8]$"), "members": array(ref("Member"), 1),
                           "tacan_aa": ref("TacanPair")},
-                         ("callsign", "squadron", "aircraft_type", "datalink_callsign", "intraflight", "stn_block", "members", "tacan_aa")),
+                         ("callsign", "squadron", "aircraft_type", "intraflight", "stn_block", "members", "tacan_aa")),
         "Support": record({"callsign": text(), "role": {"enum": list(SUPPORT_ROLES)}, "aircraft_type": external("Identifier"),
                            "refuel": {"enum": list(REFUEL_TYPES)}, "channels": array(identifier("channels"), 1), "tacan": external("TACAN"),
                            "datalink_callsign": text(pattern=r"^[A-Z]{2}$"), "stn": external("LinkStation"), "mode_1": text(pattern=MODE_1),

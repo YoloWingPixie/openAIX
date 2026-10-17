@@ -50,6 +50,11 @@ AW13
 | Disco | 139.350 | -- | 52Y | 115Y | DS | 0130* |
 | Rage | 139.375 | -- | 53Y | 116Y | RG | 0140* |
 
+52 TFW
+| Flight | Frequency | MIDS | Lead TACAN | Wing TACAN | TNDL Callsign | STN |
+|--------|-----------|------|------------|------------|---------------|-----|
+| Nickel | 278.000 | -- | 54Y | 117Y | -- | 0510* |
+
 ## Additional Tankers
 | Tanker | Freq | TACAN Callsign | TACAN Channel |
 |--------|------|----------------|---------------|
@@ -83,26 +88,26 @@ AW13
 # Laser Plan
 
 ## Plan
-| FLIGHT | CODE | FLIGHT | CODE | FLIGHT | CODE | FLIGHT | CODE |
-|--------|------|--------|------|--------|------|--------|------|
-| RIPPER 1 | 1511 | SPARTAN 1 | 1611 | SOL 1 | 1711 | PLASMA 1 | 1751 |
-| RIPPER 2 | 1512 | SPARTAN 2 | 1612 | SOL 2 | 1712 | PLASMA 2 | 1752 |
-| RIPPER 3 | 1513 | SPARTAN 3 | 1613 | SOL 3 | 1713 | PLASMA 3 | 1753 |
-| RIPPER 4 | 1514 | SPARTAN 4 | 1614 | SOL 4 | 1714 | PLASMA 4 | 1754 |
-| RAIDER 1 | 1521 | ARES 1 | 1621 | INFERNO 1 | 1721 | FURY 1 | 1761 |
-| RAIDER 2 | 1522 | ARES 2 | 1622 | INFERNO 2 | 1722 | FURY 2 | 1762 |
-| RAIDER 3 | 1523 | ARES 3 | 1623 | INFERNO 3 | 1723 | FURY 3 | 1763 |
-| RAIDER 4 | 1524 | ARES 4 | 1624 | INFERNO 4 | 1724 | FURY 4 | 1764 |
-| SENATOR 1 | 1531 | APOLLO 1 | 1631 | SUNDIAL 1 | 1731 | DISCO 1 | 1771 |
-| SENATOR 2 | 1532 | APOLLO 2 | 1632 | SUNDIAL 2 | 1732 | DISCO 2 | 1772 |
-| SENATOR 3 | 1533 | APOLLO 3 | 1633 | SUNDIAL 3 | 1733 | DISCO 3 | 1773 |
-| SENATOR 4 | 1534 | APOLLO 4 | 1634 | SUNDIAL 4 | 1734 | DISCO 4 | 1774 |
-| RED 1 | 1541 | ARTEMIS 1 | 1641 | LINER 1 | 1741 | RAGE 1 | 1781 |
-| RED 2 | 1542 | ARTEMIS 2 | 1642 | LINER 2 | 1742 | RAGE 2 | 1782 |
-| RED 3 | 1543 | ARTEMIS 3 | 1643 | LINER 3 | 1743 | RAGE 3 | 1783 |
-| RED 4 | 1544 | ARTEMIS 4 | 1644 | LINER 4 | 1744 | RAGE 4 | 1784 |
-| JTAC | 1776 |  |  |  |  |  |  |
-| JTAC | 1688 |  |  |  |  |  |  |
+| FLIGHT | CODE | FLIGHT | CODE | FLIGHT | CODE | FLIGHT | CODE | FLIGHT | CODE |
+|--------|------|--------|------|--------|------|--------|------|--------|------|
+| RIPPER 1 | 1511 | SPARTAN 1 | 1611 | NICKEL 1 | 1661 | SOL 1 | 1711 | PLASMA 1 | 1751 |
+| RIPPER 2 | 1512 | SPARTAN 2 | 1612 | NICKEL 2 | 1662 | SOL 2 | 1712 | PLASMA 2 | 1752 |
+| RIPPER 3 | 1513 | SPARTAN 3 | 1613 | NICKEL 3 | 1663 | SOL 3 | 1713 | PLASMA 3 | 1753 |
+| RIPPER 4 | 1514 | SPARTAN 4 | 1614 | NICKEL 4 | 1664 | SOL 4 | 1714 | PLASMA 4 | 1754 |
+| RAIDER 1 | 1521 | ARES 1 | 1621 |  |  | INFERNO 1 | 1721 | FURY 1 | 1761 |
+| RAIDER 2 | 1522 | ARES 2 | 1622 |  |  | INFERNO 2 | 1722 | FURY 2 | 1762 |
+| RAIDER 3 | 1523 | ARES 3 | 1623 |  |  | INFERNO 3 | 1723 | FURY 3 | 1763 |
+| RAIDER 4 | 1524 | ARES 4 | 1624 |  |  | INFERNO 4 | 1724 | FURY 4 | 1764 |
+| SENATOR 1 | 1531 | APOLLO 1 | 1631 |  |  | SUNDIAL 1 | 1731 | DISCO 1 | 1771 |
+| SENATOR 2 | 1532 | APOLLO 2 | 1632 |  |  | SUNDIAL 2 | 1732 | DISCO 2 | 1772 |
+| SENATOR 3 | 1533 | APOLLO 3 | 1633 |  |  | SUNDIAL 3 | 1733 | DISCO 3 | 1773 |
+| SENATOR 4 | 1534 | APOLLO 4 | 1634 |  |  | SUNDIAL 4 | 1734 | DISCO 4 | 1774 |
+| RED 1 | 1541 | ARTEMIS 1 | 1641 |  |  | LINER 1 | 1741 | RAGE 1 | 1781 |
+| RED 2 | 1542 | ARTEMIS 2 | 1642 |  |  | LINER 2 | 1742 | RAGE 2 | 1782 |
+| RED 3 | 1543 | ARTEMIS 3 | 1643 |  |  | LINER 3 | 1743 | RAGE 3 | 1783 |
+| RED 4 | 1544 | ARTEMIS 4 | 1644 |  |  | LINER 4 | 1744 | RAGE 4 | 1784 |
+| JTAC | 1776 |  |  |  |  |  |  |  |  |
+| JTAC | 1688 |  |  |  |  |  |  |  |  |
 
 ## Flight-wise Plan
 | FLIGHT | CODE |
