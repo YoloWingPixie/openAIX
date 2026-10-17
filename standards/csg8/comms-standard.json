@@ -1462,8 +1462,8 @@
         "vocb": 44
       }
     },
-    "aw13_93rd": {
-      "name": "AW13 93rd",
+    "usaf_93_tfs": {
+      "name": "93rd Tactical Fighter Squadron \"Outriders\"",
       "aircraft_type": "f_16c",
       "flights": [
         "plasma",
@@ -2152,7 +2152,7 @@
     },
     "plasma": {
       "callsign": "PLASMA",
-      "squadron": "aw13_93rd",
+      "squadron": "usaf_93_tfs",
       "aircraft_type": "f_16c",
       "datalink_callsign": "PL",
       "intraflight": "vhf_plasma",
@@ -2207,7 +2207,7 @@
     },
     "fury": {
       "callsign": "FURY",
-      "squadron": "aw13_93rd",
+      "squadron": "usaf_93_tfs",
       "aircraft_type": "f_16c",
       "datalink_callsign": "FY",
       "intraflight": "vhf_fury",
@@ -2262,7 +2262,7 @@
     },
     "disco": {
       "callsign": "DISCO",
-      "squadron": "aw13_93rd",
+      "squadron": "usaf_93_tfs",
       "aircraft_type": "f_16c",
       "datalink_callsign": "DS",
       "intraflight": "vhf_disco",
@@ -2317,7 +2317,7 @@
     },
     "rage": {
       "callsign": "RAGE",
-      "squadron": "aw13_93rd",
+      "squadron": "usaf_93_tfs",
       "aircraft_type": "f_16c",
       "datalink_callsign": "RG",
       "intraflight": "vhf_rage",
