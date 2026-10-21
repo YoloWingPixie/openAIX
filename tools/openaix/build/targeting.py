@@ -8,7 +8,7 @@ from openaix.build.common import external, obj, text
 
 # Fields kept on each target-list entry (ORDERS-05 keep lists).
 JIPTL_FIELDS = ("target_number", "target_name", "target_description", "priority_rank", "location", "location_mgrs",
-                "desired_effect", "component_tasked", "authorized_engagement_means", "status")
+                "desired_effect", "component_tasked", "authorized_engagement_means", "status", "category")
 TST_FIELDS = ("tst_number", "target_description", "expected_locations", "activity_window", "authorized_engagement_means",
               "engagement_authority", "roe_constraints", "expiration_criteria")
 # Joint force components that can be tasked with a target; information operations is a staff
@@ -60,6 +60,9 @@ def target_list(schema, name):
         entry = definitions["JPITLEntry"]
         keep(entry, JIPTL_FIELDS)
         entry["properties"]["component_tasked"]["enum"] = list(JOINT_COMPONENTS)
+        # The model's warfighting-function enum is replaced by a local value (DOCTRINE-07); `assessed` is the BDA state.
+        entry["properties"]["category"] = text()
+        entry["properties"]["status"]["enum"] = ["approved", "pending", "denied", "executed", "assessed", "expired"]
     else:
         entry = definitions["TSTEntry"]
         keep(entry, TST_FIELDS)
@@ -68,8 +71,12 @@ def target_list(schema, name):
             entry["properties"][field].pop("description", None)
         entry["properties"].update({
             "expected_locations": {"type": "array", "items": obj({
-                "name": text(), "position": external("GeoPoint"), "mgrs": text()}, ("position",))},
+                "name": text(), "position": external("GeoPoint"), "mgrs": text(), "radius": external("Length")}, ("position",))},
             "activity_window": external("Window"),
             "priority": {"type": "integer", "minimum": 1},
             "category": text(),
+            "confidence": {"enum": ["low", "medium", "high"]},
+            "reported_by": text(),
+            "reported_at": external("DateTime"),
+            "status": {"enum": ["reported", "engaged", "assessed", "expired"]},
         })

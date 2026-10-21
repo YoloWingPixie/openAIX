@@ -332,7 +332,7 @@ class GameplayTests(unittest.TestCase):
                          ["destroy", "neutralize", "suppress", "disrupt", "degrade", "deny", "divert"])
         entry = records["jiptl"]["$defs"]["JIPTLTarget"]["properties"]
         self.assertEqual(entry["component_tasked"]["enum"], ["land", "air", "maritime", "sof", "cyber", "space"])
-        self.assertEqual(entry["status"]["enum"], ["approved", "pending", "denied", "executed", "expired"])
+        self.assertEqual(entry["status"]["enum"], ["approved", "pending", "denied", "executed", "assessed", "expired"])
         self.assertEqual(records["resources"]["$defs"]["ReportDefinition"]["properties"]["precedence"]["enum"],
                          ["flash", "immediate", "priority", "routine"])
 

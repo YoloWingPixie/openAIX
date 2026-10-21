@@ -50,6 +50,7 @@
           "system": "F-15E"
         }
       ],
+      "category": "fuel",
       "component_tasked": "air",
       "desired_effect": "destroy",
       "location": {

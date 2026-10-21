@@ -36,6 +36,11 @@
           },
           "type": "array"
         },
+        "category": {
+          "description": "This field gives the type of the target, such as air defence or leadership, as free text. The types are local values and not a code list of the joint force.",
+          "minLength": 1,
+          "type": "string"
+        },
         "component_tasked": {
           "description": "This field gives the component of the joint force that has the task to prosecute this target, as one of the enumerated values.",
           "enum": [
@@ -82,6 +87,7 @@
             "pending",
             "denied",
             "executed",
+            "assessed",
             "expired"
           ],
           "type": "string"

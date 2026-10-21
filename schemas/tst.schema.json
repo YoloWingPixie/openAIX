@@ -45,6 +45,14 @@
           "minLength": 1,
           "type": "string"
         },
+        "confidence": {
+          "description": "This field gives the confidence of the report that the target is present, as one of the enumerated values.",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
         "engagement_authority": {
           "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Identifier",
           "description": "This field identifies the command and control agency that gives approval for the engagement of this target. The joint force commander has this authority and may delegate it to a component commander or to a lower level.",
@@ -68,6 +76,10 @@
               "position": {
                 "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/GeoPoint",
                 "description": "This field gives the geographic position of the possible location, as latitude and longitude."
+              },
+              "radius": {
+                "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Length",
+                "description": "This field gives the radius of the possible location around its position, as a length with its unit."
               }
             },
             "required": [
@@ -90,9 +102,27 @@
           "minimum": 1,
           "type": "integer"
         },
+        "reported_at": {
+          "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/DateTime",
+          "description": "This field gives the time at which the target was reported."
+        },
+        "reported_by": {
+          "description": "This field gives the unit, sensor or source that reported the target, as free text.",
+          "minLength": 1,
+          "type": "string"
+        },
         "roe_constraints": {
           "description": "This field gives the rules of engagement (ROE) limits for this time-sensitive target (TST), as free text. These limits add to the usual ROE.",
           "type": "string"
+        },
+        "status": {
+          "description": "This field gives the lifecycle condition of the target at this time, as one of the enumerated values.",
+          "enum": [
+            "reported",
+            "engaged",
+            "assessed",
+            "expired"
+          ]
         },
         "target": {
           "$ref": "urn:openaix:schema:common:0.2.0-draft.1#/$defs/Identifier",

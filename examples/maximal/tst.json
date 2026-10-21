@@ -55,6 +55,7 @@
         }
       ],
       "category": "air defense",
+      "confidence": "high",
       "engagement_authority": "caoc",
       "expected_locations": [
         {
@@ -63,13 +64,20 @@
           "position": {
             "latitude": 35.215,
             "longitude": 40.265
+          },
+          "radius": {
+            "unit": "km",
+            "value": 2
           }
         }
       ],
       "expiration_criteria": "Battery assessed destroyed.",
       "expires_at": "2026-10-02T14:00:00Z",
       "priority": 1,
+      "reported_at": "2026-10-02T12:15:00Z",
+      "reported_by": "Gainful ELINT cut",
       "roe_constraints": "Positive identification by two sources; no strikes within 500 m of the Lantern village.",
+      "status": "reported",
       "target": "gainful-battery",
       "target_description": "Captured SA-6 battery that relocates along the river road after it emits.",
       "tst_number": "TST-01"
